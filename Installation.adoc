@@ -1,0 +1,217 @@
+= Installation
+
+== Création de la base et des roles
+
+Liquibase est paramétré pour la mise en place des tables et séquences au premier démarrage de l’application,
+cependant avant de lancer l’application il faut créer les roles et la base correspondante.
+(Les noms de fichiers de scripts sql sont donnés au format Flyway bien que ce dernier n’est activé par défaut,
+il sera donc possible de jouer les scripts avec flyway avec les fichiers dont la version est supérieure ou égale à V1_X_X–nomdufichier.sql
+ces fichiers seront stockés dans le répertoire main/resources/db/migration).
+Le fichier V0__init_user_role_database.sql est le fichier de base quelle que soit la procédure de migration en base de données, son nom est également fourni au format Flyway.
+1 - Jouer les scripts dans le fichier V0__init_user_role_database.sql
+
+== Création des tables
+
+L’application utilise Liquibase pour la création des tables.
+Cependant les scripts SQL sont fournis et situés dans le répertoire db/migration.
+
+NOTE: Les script .sql sont fournis pour être utilisés "As is" ou avec Flyway
+
+IMPORTANT: Les noms de fichier de scripts sont au format FlyWay et sont stockés dans le répertoire de recherche par défaut de Flyway bien que celui-ci n'est pas installé par défaut.
+La procédure d’installation et d'utilisation de Flyway est fournie ci-dessous.
+
+=== Installation Flyway (Optionnel)
+
+Pour installer un plugin Flyway Maven, il faut ajouter la définition de plugin suivante dans le pom.xml :
+
+----
+<plugin>
+    <groupId>org.flywaydb</groupId>
+    <artifactId>flyway-maven-plugin</artifactId>
+    <version>4.0.3</version>
+</plugin>
+----
+
+Il faut vérifier la dernière version du plugin disponible sur Maven Central.
+Ce plugin Maven peut être configuré de quatre manières différentes.
+Consulter la documentation pour obtenir une liste de toutes les propriétés configurables.
+
+. Configuration du plugin
+
+Configurer le plugin directement via la balise <configuration> dans la définition du plugin de notre pom.xml:
+
+----
+<plugin>
+    <groupId>org.flywaydb</groupId>
+    <artifactId>flyway-maven-plugin</artifactId>
+    <version>4.0.3</version>
+    <configuration>
+        <user>databaseUser</user>
+        <password>databasePassword</password>
+        <schemas>
+            <schema>schemaName</schema>
+        </schemas>
+        ...
+    </configuration>
+</plugin>
+----
+
+. Propriétés Maven
+
+Configurer le plugin en spécifiant des propriétés configurables comme propriétés Maven dans notre pom:
+
+----
+<project>
+    ...
+    <properties>
+        <flyway.user>databaseUser</flyway.user>
+        <flyway.password>databasePassword</flyway.password>
+        <flyway.schemas>schemaName</flyway.schemas>
+        ...
+    </properties>
+    ...
+</project>
+----
+
+. Fichier de configuration externe
+
+Configuration du plugin dans un fichier.properties séparé :
+
+----
+flyway.user=databaseUser
+flyway.password=databasePassword
+flyway.schemas=schemaName
+...
+----
+
+Le nom du fichier de configuration par défaut est flyway.properties et doit résider dans le même répertoire que le fichier pom.xml.
+Le codage est spécifié par flyway.encoding (la valeur par défaut est UTF-8).
+
+Pour utiliser un autre nom (par exemple customConfig.properties) comme fichier de configuration, il doit être spécifié explicitement lors de l’appel de la commande Maven :
+
+----
+$ mvn -Dflyway.configFile=customConfig.properties
+----
+
+. Propriétés du système
+
+Toutes les propriétés de configuration peuvent également être spécifiées en tant que propriétés systèmes lors de l’appel de Maven sur la ligne de commande :
+
+----
+$ mvn -Dflyway.user=databaseUser -Dflyway.password=databasePassword
+  -Dflyway.schemas=schemaName
+----
+
+Voici un ordre de priorité lorsqu’une configuration est spécifiée de plusieurs manières :
+
+----
+Propriétés du système
+Fichier de configuration externe
+Propriétés de Maven
+Plugin configuration
+----
+
+=== Première Migration
+
+Pour définir la première migration, Flyway adhère à la convention de dénomination suivante pour les scripts de migration :
+
+----
+<Préfixe><Version> __ <Description>.sql
+----
+
+Où:
+
+----
+<Préfixe> - Le préfixe par défaut est V , qui peut être configuré dans le fichier de configuration ci-dessus à l'aide de la propriété flyway.sqlMigrationPrefix .
+<Version> - Numéro de version de la migration. Les versions majeures et mineures peuvent être séparées par un trait de soulignement . La version de migration doit toujours commencer par 1.
+<Description> - Description textuelle de la migration. La description doit être séparée des numéros de version par un double trait de soulignement.
+----
+
+Exemple :
+
+----
+V1_1_0__ma_premiere_migration.sql
+----
+
+Ensuite appeler la commande :
+
+----
+mvn clean flyway:migrate
+----
+
+=== Deuxième Migration
+
+Une deuxième migration est faite en créant un deuxième fichier de migration avec le nom :
+
+----
+V2_0_0_ma_deuxieme_migration.sql
+----
+
+Le 2 est une convention, en fait toute version supérieure à la première est considérée come une deuxième migration
+
+Pour vérifier que les deux migrations ont bien réussi il faut appeler la commande Maven suivante :
+
+----
+mvn flyway:info
+----
+
+=== Désactivation de Flyway dans Spring Boot
+
+Il faut définir la propriété spring.flyway.enabled dans le fichier application-{profile}}.properties :
+
+----
+spring.flyway.enabled=false
+----
+
+=== Comment fonctionne Flyway
+
+Pour savoir quelles migrations ont déjà été appliquées, quand et par qui,
+Flyway ajoute une table de comptabilité spéciale au schéma.
+
+Cette table de métadonnées suit également les sommes de contrôle de migration et indique si les migrations ont réussi ou non.
+
+Le framework effectue les étapes suivantes pour s'adapter aux schémas de base de données en évolution :
+
+. Il vérifie un schéma de base de données pour localiser sa table de métadonnées (SCHEMA_VERSION par défaut).
+ Si la table de métadonnées n’existe pas, elle en créera une.
+. Il analyse un chemin de classe d'application pour les migrations disponibles
+. Il compare les migrations à la table de métadonnées.
+ Si un numéro de version est inférieur ou égal à une version marquée comme actuelle,
+ il est ignoré : par conséquent il ne faut pas modifier la numérotation des scripts après la première migration.
+. Il marque toutes les migrations restantes comme des migrations en attente.
+ Ceux-ci sont triés en fonction du numéro de version et sont exécutés dans l’ordre.
+. Au fur et à mesure que chaque migration est appliquée, la table de métadonnées est mise à jour en conséquence.
+
+=== Commandes mvn
+
+Flyway prend en charge les commandes de base suivantes pour gérer les migrations de bases de données.
+
+----
+Info : imprime l'état / la version actuelle d'un schéma de base de données. Il imprime quelles migrations sont en attente, quelles migrations ont été appliquées, quel est l'état des migrations appliquées et quand elles ont été appliquées.
+Migrate : migre un schéma de base de données vers la version actuelle. Il analyse le chemin de classe pour les migrations disponibles et applique les migrations en attente.
+Baseline : Baseline une base de données existante, à l'exclusion de toutes les migrations, y compris baselineVersion . Baseline aide à démarrer avec Flyway dans une base de données existante. Les migrations plus récentes peuvent alors être appliquées normalement.
+Validate : valide le schéma de base de données actuel par rapport aux migrations disponibles.
+Repair : réparations de la table de métadonnées.
+Clean : supprime tous les objets dans un schéma configuré. Tous les objets de base de données sont supprimés. Bien sûr, vous ne devez jamais utiliser clean sur une base de données de production.
+----
+
+== Swagger
+
+Les composants front-end et back-end étant séparés, l’API expose le composant back-end pour le composant frontal ou des intégrations d’applications tierces.
+
+Les spécifications des API back-end sont exposées par l’intermédiaire de Swagger.
+
+Pour visualiser les spécifications d’API au format JSON :
+
+----
+http://localhost:8080/v2/api-docs
+----
+
+Pour visualiser les spécifications d’API avec SwaggerN :
+
+----
+http://localhost:8080/swagger-ui/index.html
+----
+
+Remplacer _localhost:8080_ par le bon _host_ et le bon _port_.
+=

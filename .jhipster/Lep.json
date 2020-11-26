@@ -1,0 +1,47 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [
+    {
+      "relationshipName": "condition",
+      "otherEntityName": "condition",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "lep"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "ean",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMinlength": "13",
+      "fieldValidateRulesMaxlength": "13"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "typeLicence",
+      "fieldType": "TypeLicence",
+      "fieldValues": "ELEVE,ENSEIGNANT,ETABLISSEMENT"
+    },
+    {
+      "fieldName": "titre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "duree",
+      "fieldType": "String"
+    }
+  ],
+  "changelogDate": "20201125162333",
+  "dto": "mapstruct",
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl",
+  "entityTableName": "lep",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": true,
+  "pagination": "pagination"
+}

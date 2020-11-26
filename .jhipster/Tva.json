@@ -1,0 +1,24 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [],
+  "fields": [
+    {
+      "fieldName": "taux",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "pourcent",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "changelogDate": "20201126092842",
+  "dto": "mapstruct",
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl",
+  "entityTableName": "tva",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": true,
+  "pagination": "pagination"
+}

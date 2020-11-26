@@ -1,0 +1,151 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [],
+  "fields": [
+    {
+      "fieldName": "technologie",
+      "fieldType": "Technologie",
+      "fieldValues": "WINDOWS,MAC_OS,IOS_TABLETTE,ANDROID_TABLETTE,SMARTPHONE,CHROME_OS"
+    },
+    {
+      "fieldName": "versionReader",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "availableHorsENT",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "availableViaENT",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "availableViaGAR",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "typeLicenceGAR",
+      "fieldType": "TypeLicenceGAR",
+      "fieldValues": "TRANSFERABLE,NON_TRANFERABLE",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "canUseOffline",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "oneClic",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "exportCleUSB",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "deploiementMasse",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "configurationMiniOS",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "needFlash",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "annotations",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "creationCours",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "nbMaxiInstall",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "nbMaxSimultConnexions",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "webAdaptatif",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "marquePage",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "captureImage",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "zoom",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "fonctionsRecherche",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "corrigesPourEnseignants",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "assignationTachesEleves",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "partageContenuEleves",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "exercicesInteractifs",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "exercicesAutoCorriges",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "exportReponsesEleves",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "importDocument",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "exportDocument",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "exportSCORM",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "personnalisationUserInterface",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "modifContenuEditorial",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "dispositifDYS",
+      "fieldType": "Boolean"
+    }
+  ],
+  "changelogDate": "20201126091754",
+  "dto": "mapstruct",
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl",
+  "entityTableName": "techno",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": true,
+  "pagination": "pagination"
+}

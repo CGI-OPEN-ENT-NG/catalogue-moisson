@@ -11,10 +11,37 @@
 
     <repositories>
         <!-- jhipster-needle-maven-repository -->
+        <repository>
+            <id>jcenter-snapshots</id>
+            <name>jcenter</name>
+            <url>https://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>jcenter-releases</id>
+            <name>jcenter</name>
+            <url>https://jcenter.bintray.com</url>
+        </repository>
+        <repository>
+            <id>spring-libs-milestone</id>
+            <url>https://repo.spring.io/libs-milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
     </repositories>
 
     <pluginRepositories>
         <!-- jhipster-needle-maven-plugin-repository -->
+        <pluginRepository>
+            <id>spring-plugins-release</id>
+            <url>https://repo.spring.io/plugins-release</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
     </pluginRepositories>
 
     <!-- jhipster-needle-distribution-management -->
@@ -22,7 +49,7 @@
     <properties>
         <!-- Build properties -->
         <maven.version>3.3.9</maven.version>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.testresult.directory>${project.build.directory}/test-results</project.testresult.directory>
@@ -86,6 +113,13 @@
         <junit.utReportFolder>${project.testresult.directory}/test</junit.utReportFolder>
         <junit.itReportFolder>${project.testresult.directory}/integrationTest</junit.itReportFolder>
         <!-- jhipster-needle-maven-property -->
+	    <gitflow-maven-plugin.version>1.15.0</gitflow-maven-plugin.version>
+        <!-- Version spécifique d'Elasticsearch supérieur à la version JHipster -->
+<!--         <elasticsearch.version>7.9.2</elasticsearch.version> -->
+<!--         <spring.data.commons.version>2.3.4.RELEASE</spring.data.commons.version> -->
+<!--         <spring.data.elasticsearch.version>4.0.4.RELEASE</spring.data.elasticsearch.version> -->
+        <start-class>fr.openent.moisson.MoissoncatalogueApp</start-class>
+
     </properties>
 
     <dependencyManagement>
@@ -345,7 +379,55 @@
             <artifactId>cucumber-spring</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-staticdocs</artifactId>
+            <version>2.6.1</version>
+            <scope>test</scope>
+        </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
+        <dependency>
+            <groupId>io.github.swagger2markup</groupId>
+            <artifactId>swagger2markup</artifactId>
+            <version>1.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctorj-pdf</artifactId>
+            <version>1.5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctorj</artifactId>
+            <version>2.4.1</version>
+        </dependency>
+        <!-- Pas d'utilisation de l'intégration elasticsearch Spring Data pour utiliser Elastic version 7 -->
+<!--         <dependency> -->
+<!--             <groupId>org.elasticsearch.client</groupId> -->
+<!--             <artifactId>elasticsearch-rest-high-level-client</artifactId> -->
+<!--             <version>${elasticsearch.version}</version> -->
+<!--         </dependency> -->
+<!--         <dependency> -->
+<!--             <groupId>org.elasticsearch</groupId> -->
+<!--             <artifactId>elasticsearch</artifactId> -->
+<!--             <version>${elasticsearch.version}</version> -->
+<!--         </dependency> -->
+<!--         <dependency> -->
+<!--             <groupId>org.elasticsearch.client</groupId> -->
+<!--             <artifactId>elasticsearch-rest-client</artifactId> -->
+<!--             <version>${elasticsearch.version}</version> -->
+<!--         </dependency> -->
+<!--         La version supportée par spring data est Elasticsearch 7.6.2 -->
+<!--         <dependency> -->
+<!--             <groupId>org.springframework.data</groupId> -->
+<!--             <artifactId>spring-data-elasticsearch</artifactId> -->
+<!--             <version>${spring.data.elasticsearch.version}</version> -->
+<!--         </dependency> -->
+<!--         <dependency> -->
+<!--             <groupId>org.springframework.data</groupId> -->
+<!--             <artifactId>spring-data-commons</artifactId> -->
+<!--             <version>${spring.data.commons.version}</version> -->
+<!--         </dependency> -->
     </dependencies>
 
     <build>
@@ -428,6 +510,11 @@
                 <artifactId>openapi-generator-maven-plugin</artifactId>
             </plugin>
             <!-- jhipster-needle-maven-add-plugin -->
+            <!-- Ajout git flow plugin -->
+            <plugin>
+                <groupId>com.amashchenko.maven.plugin</groupId>
+                <artifactId>gitflow-maven-plugin</artifactId>
+            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
@@ -518,7 +605,21 @@
                     <configuration>
                         <warSourceIncludes>WEB-INF/**,META-INF/**</warSourceIncludes>
                         <failOnMissingWebXml>false</failOnMissingWebXml>
+                        <warSourceDirectory>target/classes/static/</warSourceDirectory>
+                        <webResources>
+                            <resource>
+                                <directory>src/main/webapp</directory>
+                                <includes>
+                                    <include>WEB-INF/**</include>
+                                </includes>
+                            </resource>
+                        </webResources>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.eirslett</groupId>
+                    <artifactId>frontend-maven-plugin</artifactId>
+                    <version>${frontend-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -659,8 +760,8 @@
                         <driver>org.postgresql.Driver</driver>
                         <url>jdbc:postgresql://localhost:5432/moissoncatalogue</url>
                         <defaultSchemaName></defaultSchemaName>
-                        <username>moissoncatalogue</username>
-                        <password></password>
+                        <username>usercatalogue</username>
+                        <password>catalogue</password>
                         <referenceUrl>hibernate:spring:fr.openent.moisson.domain?dialect=io.github.jhipster.domain.util.FixedPostgreSQL10Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                         <verbose>true</verbose>
                         <logging>debug</logging>
@@ -895,6 +996,96 @@
 
                 </plugin>
                 <!-- jhipster-needle-maven-add-plugin-management -->
+                <!-- il faut au préalable générer le swagger.json dans target/swagger/swagger.json
+                avec la classe de test fr.openent.moisson.web.rest.Swagger2MarkupIntTes-->
+                <plugin>
+                    <groupId>io.github.swagger2markup</groupId>
+                    <artifactId>swagger2markup-maven-plugin</artifactId>
+                    <version>1.3.7</version>
+                    <dependencies>
+                      <dependency>
+                          <groupId>io.github.swagger2markup</groupId>
+                          <artifactId>swagger2markup-spring-restdocs-ext</artifactId>
+                          <version>1.3.3</version>
+                      </dependency>
+                    </dependencies>
+                    <configuration>
+                        <outputDir>${project.basedir}/target/docs/asciidoc</outputDir>
+                        <swaggerInput>${project.basedir}/target/swagger/swagger.json</swaggerInput>
+                        <config>
+                           <swagger2markup.pathsGroupedBy>TAGS</swagger2markup.pathsGroupedBy>
+                        </config>
+                   </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.asciidoctor</groupId>
+                    <artifactId>asciidoctor-maven-plugin</artifactId>
+                    <version>2.1.0</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.asciidoctor</groupId>
+                            <artifactId>asciidoctorj-pdf</artifactId>
+                            <version>1.5.3</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.asciidoctor</groupId>
+                            <artifactId>asciidoctorj</artifactId>
+                            <version>2.4.1</version>
+                        </dependency>
+                    </dependencies>
+                    <executions>
+                        <execution>
+                            <id>output-html</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>process-asciidoc</goal>
+                            </goals>
+                            <configuration>
+                                <backend>html5</backend>
+                                <outputDirectory>${project.basedir}/target/asciidoc/html5</outputDirectory>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>output-pdf</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>process-asciidoc</goal>
+                            </goals>
+                            <configuration>
+                                <backend>pdf</backend>
+                                <outputDirectory>${project.basedir}/target/asciidoc/pdf</outputDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <sourceDirectory>${project.basedir}/src/docs/asciidoc</sourceDirectory>
+                        <sourceDocumentName>index.adoc</sourceDocumentName>
+                        <attributes>
+                            <doctype>book</doctype>
+                            <toc>left</toc>
+                            <toclevels>3</toclevels>
+                            <generated>${project.basedir}/target/docs/asciidoc</generated>
+                        </attributes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>com.amashchenko.maven.plugin</groupId>
+                    <artifactId>gitflow-maven-plugin</artifactId>
+                    <version>${gitflow-maven-plugin.version}</version>
+                    <configuration>
+                        <!-- optional configuration -->
+                        <gitFlowConfig>
+                            <productionBranch>master</productionBranch>
+                            <developmentBranch>develop</developmentBranch>
+                            <featureBranchPrefix>feature/</featureBranchPrefix>
+                            <releaseBranchPrefix>release/</releaseBranchPrefix>
+                            <hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
+                            <supportBranchPrefix>support/</supportBranchPrefix>
+                            <versionTagPrefix></versionTagPrefix>
+                            <origin>origin</origin>
+                        </gitFlowConfig>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>

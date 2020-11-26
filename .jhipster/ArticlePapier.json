@@ -1,0 +1,80 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [],
+  "fields": [
+    {
+      "fieldName": "ean",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMinlength": "13",
+      "fieldValidateRulesMaxlength": "13"
+    },
+    {
+      "fieldName": "ark",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "titre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "editeur",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "auteur",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "referenceEditeur",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "collection",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "distributeur",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "urlCouverture",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "disponibilte",
+      "fieldType": "Disponibilite",
+      "fieldValues": "DISPONIBLE,EN_COURS_D_IMPRESSION"
+    },
+    {
+      "fieldName": "dateDisponibilte",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateParution",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "commandable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "tva",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "prixHT",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "changelogDate": "20201126095206",
+  "dto": "mapstruct",
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl",
+  "entityTableName": "article_papier",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": true,
+  "pagination": "pagination"
+}

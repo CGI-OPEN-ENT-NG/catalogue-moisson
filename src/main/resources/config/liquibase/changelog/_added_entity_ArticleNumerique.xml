@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    
+    <!--
+        Added the entity ArticleNumerique.
+    -->
+    <changeSet id="-1" author="jhipster">
+        <createTable tableName="article_numerique">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ean" type="varchar(13)">
+                <constraints nullable="true" />
+            </column>
+            <column name="ark" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="titre" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="editeur" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="auteur" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="collection" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="distributeur" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="url_couverture" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="url_demo" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="disponibilte" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_disponibilte" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_parution" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="compatible_gar" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="accessible_ent" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="article_numerique" columnName="date_disponibilte" columnDataType="datetime"/>
+        <dropDefaultValue tableName="article_numerique" columnName="date_parution" columnDataType="datetime"/>
+    </changeSet>
+
+    <changeSet id="-1-relations" author="jhipster">
+
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/article_numerique.csv"
+                  separator=";"
+                  tableName="article_numerique">
+            <column name="id" type="numeric"/>
+            <column name="ean" type="string"/>
+            <column name="ark" type="string"/>
+            <column name="titre" type="string"/>
+            <column name="editeur" type="string"/>
+            <column name="auteur" type="string"/>
+            <column name="collection" type="string"/>
+            <column name="distributeur" type="string"/>
+            <column name="url_couverture" type="string"/>
+            <column name="url_demo" type="string"/>
+            <column name="disponibilte" type="string"/>
+            <column name="date_disponibilte" type="datetime"/>
+            <column name="date_parution" type="datetime"/>
+            <column name="compatible_gar" type="boolean"/>
+            <column name="accessible_ent" type="boolean"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

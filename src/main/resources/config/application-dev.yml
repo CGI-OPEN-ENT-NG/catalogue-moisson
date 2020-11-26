@@ -18,6 +18,7 @@ logging:
     ROOT: DEBUG
     io.github.jhipster: DEBUG
     fr.openent.moisson: DEBUG
+    io.netty.util: ERROR
 
 management:
   health:
@@ -25,6 +26,8 @@ management:
       enabled: false
 
 spring:
+  banner:
+    location: image_moisson_catalogue.txt
   profiles:
     active: dev
     include:
@@ -43,8 +46,8 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/moissoncatalogue
-    username: moissoncatalogue
-    password:
+    username: usercatalogue
+    password: catalogue
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -59,6 +62,7 @@ spring:
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
+    url: jdbc:postgresql://localhost:5432/moissoncatalogue
   mail:
     host: localhost
     port: 25
@@ -68,6 +72,9 @@ spring:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   thymeleaf:
     cache: false
+  elasticsearch:
+    rest:
+      uris: dev.tech.fr:9200
 
 server:
   port: 8080
