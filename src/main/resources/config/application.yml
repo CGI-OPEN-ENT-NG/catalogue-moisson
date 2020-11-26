@@ -150,9 +150,9 @@ jhipster:
     description: moissoncatalogue API documentation
     version: 0.0.1
     terms-of-service-url:
-    contact-name:
+    contact-name: Jean-Marc LEMAITRE Développeur
     contact-url:
-    contact-email:
+    contact-email: jean-marc.lemaitre@pass-tech.fr
     license: unlicensed
     license-url:
 # ===================================================================

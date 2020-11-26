@@ -1,0 +1,75 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [
+    {
+      "relationshipName": "tva",
+      "otherEntityName": "tva",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "offre"
+    },
+    {
+      "relationshipName": "lep",
+      "otherEntityName": "lep",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "offre"
+    },
+    {
+      "relationshipName": "articleNumerique",
+      "otherEntityName": "articleNumerique",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id",
+      "otherEntityRelationshipName": "offre"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "eanLibraire",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMinlength": "13",
+      "fieldValidateRulesMaxlength": "13"
+    },
+    {
+      "fieldName": "reference",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "duree",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "adoption",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "quantiteMinimaleAchat",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "licence",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prescripteur",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prixHT",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "changelogDate": "20201126093844",
+  "dto": "mapstruct",
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl",
+  "entityTableName": "offre",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": true,
+  "pagination": "pagination"
+}

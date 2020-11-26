@@ -48,6 +48,22 @@ public class CacheConfiguration {
             createCache(cm, fr.openent.moisson.domain.User.class.getName());
             createCache(cm, fr.openent.moisson.domain.Authority.class.getName());
             createCache(cm, fr.openent.moisson.domain.User.class.getName() + ".authorities");
+            createCache(cm, fr.openent.moisson.domain.Condition.class.getName());
+            createCache(cm, fr.openent.moisson.domain.Lep.class.getName());
+            createCache(cm, fr.openent.moisson.domain.Lep.class.getName() + ".conditions");
+            createCache(cm, fr.openent.moisson.domain.Techno.class.getName());
+            createCache(cm, fr.openent.moisson.domain.Tva.class.getName());
+            createCache(cm, fr.openent.moisson.domain.Offre.class.getName());
+            createCache(cm, fr.openent.moisson.domain.Offre.class.getName() + ".tvas");
+            createCache(cm, fr.openent.moisson.domain.Offre.class.getName() + ".leps");
+            createCache(cm, fr.openent.moisson.domain.ArticlePapier.class.getName());
+            createCache(cm, fr.openent.moisson.domain.Niveau.class.getName());
+            createCache(cm, fr.openent.moisson.domain.Discipline.class.getName());
+            createCache(cm, fr.openent.moisson.domain.ArticleNumerique.class.getName());
+            createCache(cm, fr.openent.moisson.domain.ArticleNumerique.class.getName() + ".disciplines");
+            createCache(cm, fr.openent.moisson.domain.ArticleNumerique.class.getName() + ".niveaus");
+            createCache(cm, fr.openent.moisson.domain.ArticleNumerique.class.getName() + ".offres");
+            createCache(cm, fr.openent.moisson.domain.ArticleNumerique.class.getName() + ".technos");
             // jhipster-needle-ehcache-add-entry
         };
     }

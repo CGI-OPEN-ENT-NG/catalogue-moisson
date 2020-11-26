@@ -24,12 +24,20 @@ public class DomainUserDetailsService implements UserDetailsService {
 
     private final Logger log = LoggerFactory.getLogger(DomainUserDetailsService.class);
 
+    /*
+     * Pour récupérer les utilisateur à partir de la base
+     * Le champs est final car sans repository la classe n'a pas de sens
+     */
     private final UserRepository userRepository;
 
     public DomainUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Implémentation de loadUserByUsername()
+     * Recherche par mail si valide puis login
+     */
     @Override
     @Transactional
     public UserDetails loadUserByUsername(final String login) {

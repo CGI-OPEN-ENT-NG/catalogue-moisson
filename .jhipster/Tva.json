@@ -1,0 +1,32 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [
+    {
+      "relationshipName": "offre",
+      "otherEntityName": "offre",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id",
+      "otherEntityRelationshipName": "tva"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "taux",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "pourcent",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "changelogDate": "20201126092842",
+  "dto": "mapstruct",
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl",
+  "entityTableName": "tva",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": true,
+  "pagination": "pagination"
+}

@@ -1,0 +1,108 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [
+    {
+      "relationshipName": "discipline",
+      "otherEntityName": "discipline",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "articleNumerique"
+    },
+    {
+      "relationshipName": "niveau",
+      "otherEntityName": "niveau",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "articleNumerique"
+    },
+    {
+      "relationshipName": "offre",
+      "otherEntityName": "offre",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "articleNumerique"
+    },
+    {
+      "relationshipName": "techno",
+      "otherEntityName": "techno",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "articleNumerique"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "ean",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMinlength": "13",
+      "fieldValidateRulesMaxlength": "13"
+    },
+    {
+      "fieldName": "ark",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "titre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "editeur",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "auteur",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "collection",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "distributeur",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "urlCouverture",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "urlDemo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "disponibilte",
+      "fieldType": "Disponibilite",
+      "fieldValues": "DISPONIBLE,EN_COURS_D_IMPRESSION"
+    },
+    {
+      "fieldName": "dateDisponibilte",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateParution",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "compatibleGAR",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "accessibleENT",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "eanPapier",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMinlength": "13",
+      "fieldValidateRulesMaxlength": "13"
+    }
+  ],
+  "changelogDate": "20201126102500",
+  "dto": "mapstruct",
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl",
+  "entityTableName": "article_numerique",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": true,
+  "pagination": "pagination"
+}

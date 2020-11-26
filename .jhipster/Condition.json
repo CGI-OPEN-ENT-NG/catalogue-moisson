@@ -1,0 +1,32 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [
+    {
+      "relationshipName": "lep",
+      "otherEntityName": "lep",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id",
+      "otherEntityRelationshipName": "condition"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "gratuite",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "conditionGratuite",
+      "fieldType": "Integer"
+    }
+  ],
+  "changelogDate": "20201125154023",
+  "dto": "mapstruct",
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl",
+  "entityTableName": "condition",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": true,
+  "pagination": "pagination"
+}

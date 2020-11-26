@@ -1,12 +1,12 @@
 version: '2'
 services:
   moissoncatalogue-postgresql:
-    image: postgres:12.3
+    image: postgres:12.4
     # volumes:
     #     - ~/volumes/jhipster/moissoncatalogue/postgresql/:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=moissoncatalogue
-      - POSTGRES_PASSWORD=
+      - POSTGRES_USER=usercatalogue
+      - POSTGRES_PASSWORD=catalogue
       - POSTGRES_HOST_AUTH_METHOD=trust
     ports:
       - 5432:5432
