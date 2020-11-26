@@ -124,7 +124,7 @@ ALTER TABLE public.jhi_user_authority OWNER TO usercatalogue;
 
 -- DROP SEQUENCE sequence_generator
 -- Sequence globale à JHipster pour réserver des pools d'id
--- afin qu'hibernate n'ait pas à requêter à chaque incrément
+-- afin qu'Hibernate n'ait pas à requêter à chaque incrément
 
 CREATE SEQUENCE public.sequence_generator
     START WITH 1050
