@@ -14,6 +14,8 @@ public class TvaDTO implements Serializable {
 
     private BigDecimal pourcent;
 
+
+    private Long offreId;
     
     public Long getId() {
         return id;
@@ -37,6 +39,14 @@ public class TvaDTO implements Serializable {
 
     public void setPourcent(BigDecimal pourcent) {
         this.pourcent = pourcent;
+    }
+
+    public Long getOffreId() {
+        return offreId;
+    }
+
+    public void setOffreId(Long offreId) {
+        this.offreId = offreId;
     }
 
     @Override
@@ -63,6 +73,7 @@ public class TvaDTO implements Serializable {
             "id=" + getId() +
             ", taux=" + getTaux() +
             ", pourcent=" + getPourcent() +
+            ", offreId=" + getOffreId() +
             "}";
     }
 }

@@ -30,6 +30,8 @@ public class OffreDTO implements Serializable {
 
     private BigDecimal prixHT;
 
+
+    private Long articleNumeriqueId;
     
     public Long getId() {
         return id;
@@ -111,6 +113,14 @@ public class OffreDTO implements Serializable {
         this.prixHT = prixHT;
     }
 
+    public Long getArticleNumeriqueId() {
+        return articleNumeriqueId;
+    }
+
+    public void setArticleNumeriqueId(Long articleNumeriqueId) {
+        this.articleNumeriqueId = articleNumeriqueId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -142,6 +152,7 @@ public class OffreDTO implements Serializable {
             ", prescripteur='" + isPrescripteur() + "'" +
             ", libelle='" + getLibelle() + "'" +
             ", prixHT=" + getPrixHT() +
+            ", articleNumeriqueId=" + getArticleNumeriqueId() +
             "}";
     }
 }

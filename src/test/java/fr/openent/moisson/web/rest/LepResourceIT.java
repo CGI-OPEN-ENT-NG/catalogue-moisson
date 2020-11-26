@@ -3,6 +3,7 @@ package fr.openent.moisson.web.rest;
 import fr.openent.moisson.MoissoncatalogueApp;
 import fr.openent.moisson.domain.Lep;
 import fr.openent.moisson.domain.Condition;
+import fr.openent.moisson.domain.Offre;
 import fr.openent.moisson.repository.LepRepository;
 import fr.openent.moisson.repository.search.LepSearchRepository;
 import fr.openent.moisson.service.LepService;
@@ -611,6 +612,26 @@ public class LepResourceIT {
 
         // Get all the lepList where condition equals to conditionId + 1
         defaultLepShouldNotBeFound("conditionId.equals=" + (conditionId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllLepsByOffreIsEqualToSomething() throws Exception {
+        // Initialize the database
+        lepRepository.saveAndFlush(lep);
+        Offre offre = OffreResourceIT.createEntity(em);
+        em.persist(offre);
+        em.flush();
+        lep.setOffre(offre);
+        lepRepository.saveAndFlush(lep);
+        Long offreId = offre.getId();
+
+        // Get all the lepList where offre equals to offreId
+        defaultLepShouldBeFound("offreId.equals=" + offreId);
+
+        // Get all the lepList where offre equals to offreId + 1
+        defaultLepShouldNotBeFound("offreId.equals=" + (offreId + 1));
     }
 
     /**

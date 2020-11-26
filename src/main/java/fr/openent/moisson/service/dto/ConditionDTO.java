@@ -13,6 +13,8 @@ public class ConditionDTO implements Serializable {
 
     private Integer conditionGratuite;
 
+
+    private Long lepId;
     
     public Long getId() {
         return id;
@@ -36,6 +38,14 @@ public class ConditionDTO implements Serializable {
 
     public void setConditionGratuite(Integer conditionGratuite) {
         this.conditionGratuite = conditionGratuite;
+    }
+
+    public Long getLepId() {
+        return lepId;
+    }
+
+    public void setLepId(Long lepId) {
+        this.lepId = lepId;
     }
 
     @Override
@@ -62,6 +72,7 @@ public class ConditionDTO implements Serializable {
             "id=" + getId() +
             ", gratuite=" + getGratuite() +
             ", conditionGratuite=" + getConditionGratuite() +
+            ", lepId=" + getLepId() +
             "}";
     }
 }

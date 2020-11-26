@@ -114,6 +114,10 @@ public class LepQueryService extends QueryService<Lep> {
                 specification = specification.and(buildSpecification(criteria.getConditionId(),
                     root -> root.join(Lep_.conditions, JoinType.LEFT).get(Condition_.id)));
             }
+            if (criteria.getOffreId() != null) {
+                specification = specification.and(buildSpecification(criteria.getOffreId(),
+                    root -> root.join(Lep_.offre, JoinType.LEFT).get(Offre_.id)));
+            }
         }
         return specification;
     }

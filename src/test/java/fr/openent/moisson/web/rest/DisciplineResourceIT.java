@@ -2,6 +2,7 @@ package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
 import fr.openent.moisson.domain.Discipline;
+import fr.openent.moisson.domain.ArticleNumerique;
 import fr.openent.moisson.repository.DisciplineRepository;
 import fr.openent.moisson.repository.search.DisciplineSearchRepository;
 import fr.openent.moisson.service.DisciplineService;
@@ -443,6 +444,26 @@ public class DisciplineResourceIT {
 
         // Get all the disciplineList where concept does not contain UPDATED_CONCEPT
         defaultDisciplineShouldBeFound("concept.doesNotContain=" + UPDATED_CONCEPT);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllDisciplinesByArticleNumeriqueIsEqualToSomething() throws Exception {
+        // Initialize the database
+        disciplineRepository.saveAndFlush(discipline);
+        ArticleNumerique articleNumerique = ArticleNumeriqueResourceIT.createEntity(em);
+        em.persist(articleNumerique);
+        em.flush();
+        discipline.setArticleNumerique(articleNumerique);
+        disciplineRepository.saveAndFlush(discipline);
+        Long articleNumeriqueId = articleNumerique.getId();
+
+        // Get all the disciplineList where articleNumerique equals to articleNumeriqueId
+        defaultDisciplineShouldBeFound("articleNumeriqueId.equals=" + articleNumeriqueId);
+
+        // Get all the disciplineList where articleNumerique equals to articleNumeriqueId + 1
+        defaultDisciplineShouldNotBeFound("articleNumeriqueId.equals=" + (articleNumeriqueId + 1));
     }
 
     /**

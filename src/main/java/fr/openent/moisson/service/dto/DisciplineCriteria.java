@@ -32,6 +32,8 @@ public class DisciplineCriteria implements Serializable, Criteria {
 
     private StringFilter concept;
 
+    private LongFilter articleNumeriqueId;
+
     public DisciplineCriteria() {
     }
 
@@ -40,6 +42,7 @@ public class DisciplineCriteria implements Serializable, Criteria {
         this.libelle = other.libelle == null ? null : other.libelle.copy();
         this.terme = other.terme == null ? null : other.terme.copy();
         this.concept = other.concept == null ? null : other.concept.copy();
+        this.articleNumeriqueId = other.articleNumeriqueId == null ? null : other.articleNumeriqueId.copy();
     }
 
     @Override
@@ -79,6 +82,14 @@ public class DisciplineCriteria implements Serializable, Criteria {
         this.concept = concept;
     }
 
+    public LongFilter getArticleNumeriqueId() {
+        return articleNumeriqueId;
+    }
+
+    public void setArticleNumeriqueId(LongFilter articleNumeriqueId) {
+        this.articleNumeriqueId = articleNumeriqueId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -93,7 +104,8 @@ public class DisciplineCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(libelle, that.libelle) &&
             Objects.equals(terme, that.terme) &&
-            Objects.equals(concept, that.concept);
+            Objects.equals(concept, that.concept) &&
+            Objects.equals(articleNumeriqueId, that.articleNumeriqueId);
     }
 
     @Override
@@ -102,7 +114,8 @@ public class DisciplineCriteria implements Serializable, Criteria {
         id,
         libelle,
         terme,
-        concept
+        concept,
+        articleNumeriqueId
         );
     }
 
@@ -114,6 +127,7 @@ public class DisciplineCriteria implements Serializable, Criteria {
                 (libelle != null ? "libelle=" + libelle + ", " : "") +
                 (terme != null ? "terme=" + terme + ", " : "") +
                 (concept != null ? "concept=" + concept + ", " : "") +
+                (articleNumeriqueId != null ? "articleNumeriqueId=" + articleNumeriqueId + ", " : "") +
             "}";
     }
 

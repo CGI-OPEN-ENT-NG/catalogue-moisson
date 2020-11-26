@@ -1,5 +1,6 @@
 package fr.openent.moisson.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -130,6 +131,10 @@ public class Techno implements Serializable {
 
     @Column(name = "dispositif_dys")
     private Boolean dispositifDYS;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "technos", allowSetters = true)
+    private ArticleNumerique articleNumerique;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -567,6 +572,19 @@ public class Techno implements Serializable {
 
     public void setDispositifDYS(Boolean dispositifDYS) {
         this.dispositifDYS = dispositifDYS;
+    }
+
+    public ArticleNumerique getArticleNumerique() {
+        return articleNumerique;
+    }
+
+    public Techno articleNumerique(ArticleNumerique articleNumerique) {
+        this.articleNumerique = articleNumerique;
+        return this;
+    }
+
+    public void setArticleNumerique(ArticleNumerique articleNumerique) {
+        this.articleNumerique = articleNumerique;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

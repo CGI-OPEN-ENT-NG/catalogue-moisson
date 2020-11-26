@@ -2,6 +2,7 @@ package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
 import fr.openent.moisson.domain.Niveau;
+import fr.openent.moisson.domain.ArticleNumerique;
 import fr.openent.moisson.repository.NiveauRepository;
 import fr.openent.moisson.repository.search.NiveauSearchRepository;
 import fr.openent.moisson.service.NiveauService;
@@ -443,6 +444,26 @@ public class NiveauResourceIT {
 
         // Get all the niveauList where concept does not contain UPDATED_CONCEPT
         defaultNiveauShouldBeFound("concept.doesNotContain=" + UPDATED_CONCEPT);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllNiveausByArticleNumeriqueIsEqualToSomething() throws Exception {
+        // Initialize the database
+        niveauRepository.saveAndFlush(niveau);
+        ArticleNumerique articleNumerique = ArticleNumeriqueResourceIT.createEntity(em);
+        em.persist(articleNumerique);
+        em.flush();
+        niveau.setArticleNumerique(articleNumerique);
+        niveauRepository.saveAndFlush(niveau);
+        Long articleNumeriqueId = articleNumerique.getId();
+
+        // Get all the niveauList where articleNumerique equals to articleNumeriqueId
+        defaultNiveauShouldBeFound("articleNumeriqueId.equals=" + articleNumeriqueId);
+
+        // Get all the niveauList where articleNumerique equals to articleNumeriqueId + 1
+        defaultNiveauShouldNotBeFound("articleNumeriqueId.equals=" + (articleNumeriqueId + 1));
     }
 
     /**

@@ -101,6 +101,10 @@ public class TvaQueryService extends QueryService<Tva> {
             if (criteria.getPourcent() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPourcent(), Tva_.pourcent));
             }
+            if (criteria.getOffreId() != null) {
+                specification = specification.and(buildSpecification(criteria.getOffreId(),
+                    root -> root.join(Tva_.offre, JoinType.LEFT).get(Offre_.id)));
+            }
         }
         return specification;
     }

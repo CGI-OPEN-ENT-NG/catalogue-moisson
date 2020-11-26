@@ -130,6 +130,8 @@ public class TechnoCriteria implements Serializable, Criteria {
 
     private BooleanFilter dispositifDYS;
 
+    private LongFilter articleNumeriqueId;
+
     public TechnoCriteria() {
     }
 
@@ -168,6 +170,7 @@ public class TechnoCriteria implements Serializable, Criteria {
         this.personnalisationUserInterface = other.personnalisationUserInterface == null ? null : other.personnalisationUserInterface.copy();
         this.modifContenuEditorial = other.modifContenuEditorial == null ? null : other.modifContenuEditorial.copy();
         this.dispositifDYS = other.dispositifDYS == null ? null : other.dispositifDYS.copy();
+        this.articleNumeriqueId = other.articleNumeriqueId == null ? null : other.articleNumeriqueId.copy();
     }
 
     @Override
@@ -447,6 +450,14 @@ public class TechnoCriteria implements Serializable, Criteria {
         this.dispositifDYS = dispositifDYS;
     }
 
+    public LongFilter getArticleNumeriqueId() {
+        return articleNumeriqueId;
+    }
+
+    public void setArticleNumeriqueId(LongFilter articleNumeriqueId) {
+        this.articleNumeriqueId = articleNumeriqueId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -491,7 +502,8 @@ public class TechnoCriteria implements Serializable, Criteria {
             Objects.equals(exportSCORM, that.exportSCORM) &&
             Objects.equals(personnalisationUserInterface, that.personnalisationUserInterface) &&
             Objects.equals(modifContenuEditorial, that.modifContenuEditorial) &&
-            Objects.equals(dispositifDYS, that.dispositifDYS);
+            Objects.equals(dispositifDYS, that.dispositifDYS) &&
+            Objects.equals(articleNumeriqueId, that.articleNumeriqueId);
     }
 
     @Override
@@ -530,7 +542,8 @@ public class TechnoCriteria implements Serializable, Criteria {
         exportSCORM,
         personnalisationUserInterface,
         modifContenuEditorial,
-        dispositifDYS
+        dispositifDYS,
+        articleNumeriqueId
         );
     }
 
@@ -572,6 +585,7 @@ public class TechnoCriteria implements Serializable, Criteria {
                 (personnalisationUserInterface != null ? "personnalisationUserInterface=" + personnalisationUserInterface + ", " : "") +
                 (modifContenuEditorial != null ? "modifContenuEditorial=" + modifContenuEditorial + ", " : "") +
                 (dispositifDYS != null ? "dispositifDYS=" + dispositifDYS + ", " : "") +
+                (articleNumeriqueId != null ? "articleNumeriqueId=" + articleNumeriqueId + ", " : "") +
             "}";
     }
 

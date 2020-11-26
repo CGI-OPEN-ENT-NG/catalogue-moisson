@@ -1,5 +1,6 @@
 package fr.openent.moisson.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -30,6 +31,10 @@ public class Tva implements Serializable {
 
     @Column(name = "pourcent", precision = 21, scale = 2)
     private BigDecimal pourcent;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "tvas", allowSetters = true)
+    private Offre offre;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -64,6 +69,19 @@ public class Tva implements Serializable {
 
     public void setPourcent(BigDecimal pourcent) {
         this.pourcent = pourcent;
+    }
+
+    public Offre getOffre() {
+        return offre;
+    }
+
+    public Tva offre(Offre offre) {
+        this.offre = offre;
+        return this;
+    }
+
+    public void setOffre(Offre offre) {
+        this.offre = offre;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

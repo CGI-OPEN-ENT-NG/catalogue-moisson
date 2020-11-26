@@ -1,7 +1,16 @@
 {
   "fluentMethods": true,
   "clientRootFolder": "",
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipName": "articleNumerique",
+      "otherEntityName": "articleNumerique",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": [],
+      "otherEntityField": "id",
+      "otherEntityRelationshipName": "techno"
+    }
+  ],
   "fields": [
     {
       "fieldName": "technologie",

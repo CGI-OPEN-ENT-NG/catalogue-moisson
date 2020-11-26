@@ -19,6 +19,12 @@
       "otherEntityName": "offre",
       "relationshipType": "one-to-many",
       "otherEntityRelationshipName": "articleNumerique"
+    },
+    {
+      "relationshipName": "techno",
+      "otherEntityName": "techno",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "articleNumerique"
     }
   ],
   "fields": [

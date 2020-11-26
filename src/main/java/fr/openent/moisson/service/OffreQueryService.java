@@ -130,6 +130,10 @@ public class OffreQueryService extends QueryService<Offre> {
                 specification = specification.and(buildSpecification(criteria.getLepId(),
                     root -> root.join(Offre_.leps, JoinType.LEFT).get(Lep_.id)));
             }
+            if (criteria.getArticleNumeriqueId() != null) {
+                specification = specification.and(buildSpecification(criteria.getArticleNumeriqueId(),
+                    root -> root.join(Offre_.articleNumerique, JoinType.LEFT).get(ArticleNumerique_.id)));
+            }
         }
         return specification;
     }

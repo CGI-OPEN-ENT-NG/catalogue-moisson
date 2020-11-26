@@ -152,6 +152,10 @@ public class ArticleNumeriqueQueryService extends QueryService<ArticleNumerique>
                 specification = specification.and(buildSpecification(criteria.getOffreId(),
                     root -> root.join(ArticleNumerique_.offres, JoinType.LEFT).get(Offre_.id)));
             }
+            if (criteria.getTechnoId() != null) {
+                specification = specification.and(buildSpecification(criteria.getTechnoId(),
+                    root -> root.join(ArticleNumerique_.technos, JoinType.LEFT).get(Techno_.id)));
+            }
         }
         return specification;
     }

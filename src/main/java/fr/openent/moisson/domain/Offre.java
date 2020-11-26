@@ -1,5 +1,6 @@
 package fr.openent.moisson.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -63,6 +64,10 @@ public class Offre implements Serializable {
     @OneToMany(mappedBy = "offre")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Lep> leps = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "offres", allowSetters = true)
+    private ArticleNumerique articleNumerique;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -238,6 +243,19 @@ public class Offre implements Serializable {
 
     public void setLeps(Set<Lep> leps) {
         this.leps = leps;
+    }
+
+    public ArticleNumerique getArticleNumerique() {
+        return articleNumerique;
+    }
+
+    public Offre articleNumerique(ArticleNumerique articleNumerique) {
+        this.articleNumerique = articleNumerique;
+        return this;
+    }
+
+    public void setArticleNumerique(ArticleNumerique articleNumerique) {
+        this.articleNumerique = articleNumerique;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

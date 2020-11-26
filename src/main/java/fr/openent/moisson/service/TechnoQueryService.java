@@ -194,6 +194,10 @@ public class TechnoQueryService extends QueryService<Techno> {
             if (criteria.getDispositifDYS() != null) {
                 specification = specification.and(buildSpecification(criteria.getDispositifDYS(), Techno_.dispositifDYS));
             }
+            if (criteria.getArticleNumeriqueId() != null) {
+                specification = specification.and(buildSpecification(criteria.getArticleNumeriqueId(),
+                    root -> root.join(Techno_.articleNumerique, JoinType.LEFT).get(ArticleNumerique_.id)));
+            }
         }
         return specification;
     }

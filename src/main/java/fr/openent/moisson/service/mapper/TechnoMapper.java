@@ -9,10 +9,14 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Techno} and its DTO {@link TechnoDTO}.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {ArticleNumeriqueMapper.class})
 public interface TechnoMapper extends EntityMapper<TechnoDTO, Techno> {
 
+    @Mapping(source = "articleNumerique.id", target = "articleNumeriqueId")
+    TechnoDTO toDto(Techno techno);
 
+    @Mapping(source = "articleNumeriqueId", target = "articleNumerique")
+    Techno toEntity(TechnoDTO technoDTO);
 
     default Techno fromId(Long id) {
         if (id == null) {

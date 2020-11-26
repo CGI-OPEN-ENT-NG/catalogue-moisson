@@ -19,6 +19,8 @@ public interface ArticleNumeriqueMapper extends EntityMapper<ArticleNumeriqueDTO
     @Mapping(target = "removeNiveau", ignore = true)
     @Mapping(target = "offres", ignore = true)
     @Mapping(target = "removeOffre", ignore = true)
+    @Mapping(target = "technos", ignore = true)
+    @Mapping(target = "removeTechno", ignore = true)
     ArticleNumerique toEntity(ArticleNumeriqueDTO articleNumeriqueDTO);
 
     default ArticleNumerique fromId(Long id) {

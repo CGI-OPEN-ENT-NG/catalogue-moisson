@@ -22,6 +22,8 @@ public class LepDTO implements Serializable {
 
     private String duree;
 
+
+    private Long offreId;
     
     public Long getId() {
         return id;
@@ -71,6 +73,14 @@ public class LepDTO implements Serializable {
         this.duree = duree;
     }
 
+    public Long getOffreId() {
+        return offreId;
+    }
+
+    public void setOffreId(Long offreId) {
+        this.offreId = offreId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -98,6 +108,7 @@ public class LepDTO implements Serializable {
             ", typeLicence='" + getTypeLicence() + "'" +
             ", titre='" + getTitre() + "'" +
             ", duree='" + getDuree() + "'" +
+            ", offreId=" + getOffreId() +
             "}";
     }
 }

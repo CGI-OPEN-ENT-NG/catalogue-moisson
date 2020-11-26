@@ -42,6 +42,9 @@
             <column name="prix_ht" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
+            <column name="article_numerique_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>

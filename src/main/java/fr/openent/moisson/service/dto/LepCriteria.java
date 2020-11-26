@@ -57,6 +57,8 @@ public class LepCriteria implements Serializable, Criteria {
 
     private LongFilter conditionId;
 
+    private LongFilter offreId;
+
     public LepCriteria() {
     }
 
@@ -68,6 +70,7 @@ public class LepCriteria implements Serializable, Criteria {
         this.titre = other.titre == null ? null : other.titre.copy();
         this.duree = other.duree == null ? null : other.duree.copy();
         this.conditionId = other.conditionId == null ? null : other.conditionId.copy();
+        this.offreId = other.offreId == null ? null : other.offreId.copy();
     }
 
     @Override
@@ -131,6 +134,14 @@ public class LepCriteria implements Serializable, Criteria {
         this.conditionId = conditionId;
     }
 
+    public LongFilter getOffreId() {
+        return offreId;
+    }
+
+    public void setOffreId(LongFilter offreId) {
+        this.offreId = offreId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -148,7 +159,8 @@ public class LepCriteria implements Serializable, Criteria {
             Objects.equals(typeLicence, that.typeLicence) &&
             Objects.equals(titre, that.titre) &&
             Objects.equals(duree, that.duree) &&
-            Objects.equals(conditionId, that.conditionId);
+            Objects.equals(conditionId, that.conditionId) &&
+            Objects.equals(offreId, that.offreId);
     }
 
     @Override
@@ -160,7 +172,8 @@ public class LepCriteria implements Serializable, Criteria {
         typeLicence,
         titre,
         duree,
-        conditionId
+        conditionId,
+        offreId
         );
     }
 
@@ -175,6 +188,7 @@ public class LepCriteria implements Serializable, Criteria {
                 (titre != null ? "titre=" + titre + ", " : "") +
                 (duree != null ? "duree=" + duree + ", " : "") +
                 (conditionId != null ? "conditionId=" + conditionId + ", " : "") +
+                (offreId != null ? "offreId=" + offreId + ", " : "") +
             "}";
     }
 

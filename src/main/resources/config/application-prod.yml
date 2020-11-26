@@ -26,6 +26,8 @@ management:
         enabled: false
 
 spring:
+  banner:
+    locations: image_moisson_catalogue.txt
   devtools:
     restart:
       enabled: false

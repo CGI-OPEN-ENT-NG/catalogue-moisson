@@ -214,4 +214,82 @@ http://localhost:8080/swagger-ui/index.html
 ----
 
 Remplacer _localhost:8080_ par le bon _host_ et le bon _port_.
-=
+
+
+== Rest api
+
+Les apis sont fournies dans le contrat d’Api fourni.
+
+=== Authentification
+
+==== Authentification basique avec login et mot de passe (user et password)
+
+
+Il existe deux utilisateurs qui permettent de s'identifier :
+
+ . l’utilisateur "admin" avec le password "admin" par défaut qui possède les roles ROLE_USER et ROLE_ADMIN
+
+ . l’utilisateur "user" avec le password "user" par défaut qui possède le role ROLE_USER
+
+L'administrateur "admin" peut accéder aux apis en lecture écriture et suppression.
+
+L'utilisateur "user" peut accéder aux apis en lecture seule.
+
+Pour accéder aux apis il faut utiliser curl, postman ou insomnia designer
+
+1 - Avec curl pour accéder il faut préciser l’"user" et le "password" :
+
+ Pour obtenir les informations sur l'utilisateur
+ curl -v http://admin:admin@localhost:8080/api/account
+ ou
+ curl -vu admin:admin http://localhost:8080/api/account
+
+ Pour obtenir la liste des arcticles numériques :
+ curl -vu admin:admin http://localhost:8080/api/article-numeriques
+ curl -vu user:user http://localhost:8080/api/article-numeriques
+
+NOTE: -v pemet d'activer le mode verbose -vu étant équivalent à -v -u
+
+2 - Avec Postman ou Insomnia il faut saisir les url en prenant soin de bien spécifier le verbe (GET, POST, PUT etc...)
+
+Dans l'onglet authentication ou auth il faut saisir le login et le mot de passe
+
+ Le endpoint suivant retourne le login de l'utilisateur authentifié avec le verbe GET
+ http://user:user@localhost:8080/api/authenticate
+
+==== Authentification avec token JWT
+
+L’api est livrée avec une authentification par token JWT.
+
+Il faut dan un premier temps générer le token, avec le endpoint http://user:user@localhost:8080/api/authenticate et le verbe POST
+
+ curl  -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate
+ le curl génère un token.
+
+ "id_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTYwOTAwMzc2M30.bh8fQMGXawP354wGS1qG_KxSCD1_7hmthQej6DZmUWQdlW8J2Lo1j0EH27m9FJiv_o6vS6hu1iUzAi4lt8uegw"
+
+Il faut ensuite le passer en paramètre dans le header de la requête
+
+ curl -H 'Accept: application/json' -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTYwOTAwMzc2M30.bh8fQMGXawP354wGS1qG_KxSCD1_7hmthQej6DZmUWQdlW8J2Lo1j0EH27m9FJiv_o6vS6hu1iUzAi4lt8uegw" http://localhost:8080/api/account
+
+Sous linux il est possible d'automatiser il faut au préalable installer un parser Json. Par exemple après avoir installé le parser jq il est possible de stocker le token dans une variable d'environnement
+
+ TOKEN=$(curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate | jq -r '.id_token')
+
+Il suffit en suite de passer le token de la manière suivante :
+
+ curl -H 'Accept: application/json' -H "Authorization: Bearer $TOKEN" http://localhost:8080/api/account
+
+Sous postman ou insomnia il gfaut faire le POST avec l'url et ajouter dans le body ce qui correspond au --data du curl (format json):
+
+ {"username":"admin","password":"admin"}
+
+Récapitulatif :
+
+ curl  -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate
+
+ curl -H 'Accept: application/json' -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTYwNjUwMTMxOH0.5ldyoVOtvIFIt3E4GlmTcfRg82XjodEcObIJ9JRqT3OU4KY_QOYfi7ELqge8xgQsdkene0-0S8F4zamU845Auw" http://localhost:8080/api/account
+
+ TOKEN=$(curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate | jq -r '.id_token')
+
+ curl -H 'Accept: application/json' -H "Authorization: Bearer $TOKEN" http://localhost:8080/api/account

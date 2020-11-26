@@ -31,6 +31,8 @@ public class TvaCriteria implements Serializable, Criteria {
 
     private BigDecimalFilter pourcent;
 
+    private LongFilter offreId;
+
     public TvaCriteria() {
     }
 
@@ -38,6 +40,7 @@ public class TvaCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.taux = other.taux == null ? null : other.taux.copy();
         this.pourcent = other.pourcent == null ? null : other.pourcent.copy();
+        this.offreId = other.offreId == null ? null : other.offreId.copy();
     }
 
     @Override
@@ -69,6 +72,14 @@ public class TvaCriteria implements Serializable, Criteria {
         this.pourcent = pourcent;
     }
 
+    public LongFilter getOffreId() {
+        return offreId;
+    }
+
+    public void setOffreId(LongFilter offreId) {
+        this.offreId = offreId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -82,7 +93,8 @@ public class TvaCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(taux, that.taux) &&
-            Objects.equals(pourcent, that.pourcent);
+            Objects.equals(pourcent, that.pourcent) &&
+            Objects.equals(offreId, that.offreId);
     }
 
     @Override
@@ -90,7 +102,8 @@ public class TvaCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         taux,
-        pourcent
+        pourcent,
+        offreId
         );
     }
 
@@ -101,6 +114,7 @@ public class TvaCriteria implements Serializable, Criteria {
                 (id != null ? "id=" + id + ", " : "") +
                 (taux != null ? "taux=" + taux + ", " : "") +
                 (pourcent != null ? "pourcent=" + pourcent + ", " : "") +
+                (offreId != null ? "offreId=" + offreId + ", " : "") +
             "}";
     }
 

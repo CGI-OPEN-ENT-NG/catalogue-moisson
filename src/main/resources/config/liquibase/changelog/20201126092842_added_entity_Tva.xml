@@ -21,6 +21,9 @@
             <column name="pourcent" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
+            <column name="offre_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>

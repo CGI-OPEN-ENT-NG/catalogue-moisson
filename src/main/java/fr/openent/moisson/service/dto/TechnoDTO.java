@@ -79,6 +79,8 @@ public class TechnoDTO implements Serializable {
 
     private Boolean dispositifDYS;
 
+
+    private Long articleNumeriqueId;
     
     public Long getId() {
         return id;
@@ -352,6 +354,14 @@ public class TechnoDTO implements Serializable {
         this.dispositifDYS = dispositifDYS;
     }
 
+    public Long getArticleNumeriqueId() {
+        return articleNumeriqueId;
+    }
+
+    public void setArticleNumeriqueId(Long articleNumeriqueId) {
+        this.articleNumeriqueId = articleNumeriqueId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -407,6 +417,7 @@ public class TechnoDTO implements Serializable {
             ", personnalisationUserInterface='" + isPersonnalisationUserInterface() + "'" +
             ", modifContenuEditorial='" + isModifContenuEditorial() + "'" +
             ", dispositifDYS='" + isDispositifDYS() + "'" +
+            ", articleNumeriqueId=" + getArticleNumeriqueId() +
             "}";
     }
 }

@@ -2,6 +2,7 @@ package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
 import fr.openent.moisson.domain.Tva;
+import fr.openent.moisson.domain.Offre;
 import fr.openent.moisson.repository.TvaRepository;
 import fr.openent.moisson.repository.search.TvaSearchRepository;
 import fr.openent.moisson.service.TvaService;
@@ -414,6 +415,26 @@ public class TvaResourceIT {
 
         // Get all the tvaList where pourcent is greater than SMALLER_POURCENT
         defaultTvaShouldBeFound("pourcent.greaterThan=" + SMALLER_POURCENT);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllTvasByOffreIsEqualToSomething() throws Exception {
+        // Initialize the database
+        tvaRepository.saveAndFlush(tva);
+        Offre offre = OffreResourceIT.createEntity(em);
+        em.persist(offre);
+        em.flush();
+        tva.setOffre(offre);
+        tvaRepository.saveAndFlush(tva);
+        Long offreId = offre.getId();
+
+        // Get all the tvaList where offre equals to offreId
+        defaultTvaShouldBeFound("offreId.equals=" + offreId);
+
+        // Get all the tvaList where offre equals to offreId + 1
+        defaultTvaShouldNotBeFound("offreId.equals=" + (offreId + 1));
     }
 
     /**

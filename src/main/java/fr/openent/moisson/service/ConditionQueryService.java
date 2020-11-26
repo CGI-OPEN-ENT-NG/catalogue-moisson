@@ -101,6 +101,10 @@ public class ConditionQueryService extends QueryService<Condition> {
             if (criteria.getConditionGratuite() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getConditionGratuite(), Condition_.conditionGratuite));
             }
+            if (criteria.getLepId() != null) {
+                specification = specification.and(buildSpecification(criteria.getLepId(),
+                    root -> root.join(Condition_.lep, JoinType.LEFT).get(Lep_.id)));
+            }
         }
         return specification;
     }

@@ -13,6 +13,13 @@
       "otherEntityName": "lep",
       "relationshipType": "one-to-many",
       "otherEntityRelationshipName": "offre"
+    },
+    {
+      "relationshipName": "articleNumerique",
+      "otherEntityName": "articleNumerique",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id",
+      "otherEntityRelationshipName": "offre"
     }
   ],
   "fields": [

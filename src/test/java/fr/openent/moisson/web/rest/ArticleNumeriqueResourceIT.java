@@ -5,6 +5,7 @@ import fr.openent.moisson.domain.ArticleNumerique;
 import fr.openent.moisson.domain.Discipline;
 import fr.openent.moisson.domain.Niveau;
 import fr.openent.moisson.domain.Offre;
+import fr.openent.moisson.domain.Techno;
 import fr.openent.moisson.repository.ArticleNumeriqueRepository;
 import fr.openent.moisson.repository.search.ArticleNumeriqueSearchRepository;
 import fr.openent.moisson.service.ArticleNumeriqueService;
@@ -1411,6 +1412,26 @@ public class ArticleNumeriqueResourceIT {
 
         // Get all the articleNumeriqueList where offre equals to offreId + 1
         defaultArticleNumeriqueShouldNotBeFound("offreId.equals=" + (offreId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllArticleNumeriquesByTechnoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        articleNumeriqueRepository.saveAndFlush(articleNumerique);
+        Techno techno = TechnoResourceIT.createEntity(em);
+        em.persist(techno);
+        em.flush();
+        articleNumerique.addTechno(techno);
+        articleNumeriqueRepository.saveAndFlush(articleNumerique);
+        Long technoId = techno.getId();
+
+        // Get all the articleNumeriqueList where techno equals to technoId
+        defaultArticleNumeriqueShouldBeFound("technoId.equals=" + technoId);
+
+        // Get all the articleNumeriqueList where techno equals to technoId + 1
+        defaultArticleNumeriqueShouldNotBeFound("technoId.equals=" + (technoId + 1));
     }
 
     /**

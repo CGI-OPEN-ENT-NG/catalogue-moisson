@@ -90,6 +90,10 @@ public class ArticleNumerique implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Offre> offres = new HashSet<>();
 
+    @OneToMany(mappedBy = "articleNumerique")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<Techno> technos = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -367,6 +371,31 @@ public class ArticleNumerique implements Serializable {
 
     public void setOffres(Set<Offre> offres) {
         this.offres = offres;
+    }
+
+    public Set<Techno> getTechnos() {
+        return technos;
+    }
+
+    public ArticleNumerique technos(Set<Techno> technos) {
+        this.technos = technos;
+        return this;
+    }
+
+    public ArticleNumerique addTechno(Techno techno) {
+        this.technos.add(techno);
+        techno.setArticleNumerique(this);
+        return this;
+    }
+
+    public ArticleNumerique removeTechno(Techno techno) {
+        this.technos.remove(techno);
+        techno.setArticleNumerique(null);
+        return this;
+    }
+
+    public void setTechnos(Set<Techno> technos) {
+        this.technos = technos;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

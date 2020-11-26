@@ -4,6 +4,7 @@ import fr.openent.moisson.MoissoncatalogueApp;
 import fr.openent.moisson.domain.Offre;
 import fr.openent.moisson.domain.Tva;
 import fr.openent.moisson.domain.Lep;
+import fr.openent.moisson.domain.ArticleNumerique;
 import fr.openent.moisson.repository.OffreRepository;
 import fr.openent.moisson.repository.search.OffreSearchRepository;
 import fr.openent.moisson.service.OffreService;
@@ -1034,6 +1035,26 @@ public class OffreResourceIT {
 
         // Get all the offreList where lep equals to lepId + 1
         defaultOffreShouldNotBeFound("lepId.equals=" + (lepId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllOffresByArticleNumeriqueIsEqualToSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+        ArticleNumerique articleNumerique = ArticleNumeriqueResourceIT.createEntity(em);
+        em.persist(articleNumerique);
+        em.flush();
+        offre.setArticleNumerique(articleNumerique);
+        offreRepository.saveAndFlush(offre);
+        Long articleNumeriqueId = articleNumerique.getId();
+
+        // Get all the offreList where articleNumerique equals to articleNumeriqueId
+        defaultOffreShouldBeFound("articleNumeriqueId.equals=" + articleNumeriqueId);
+
+        // Get all the offreList where articleNumerique equals to articleNumeriqueId + 1
+        defaultOffreShouldNotBeFound("articleNumeriqueId.equals=" + (articleNumeriqueId + 1));
     }
 
     /**

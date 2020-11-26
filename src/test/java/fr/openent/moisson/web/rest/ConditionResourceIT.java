@@ -2,6 +2,7 @@ package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
 import fr.openent.moisson.domain.Condition;
+import fr.openent.moisson.domain.Lep;
 import fr.openent.moisson.repository.ConditionRepository;
 import fr.openent.moisson.repository.search.ConditionSearchRepository;
 import fr.openent.moisson.service.ConditionService;
@@ -413,6 +414,26 @@ public class ConditionResourceIT {
 
         // Get all the conditionList where conditionGratuite is greater than SMALLER_CONDITION_GRATUITE
         defaultConditionShouldBeFound("conditionGratuite.greaterThan=" + SMALLER_CONDITION_GRATUITE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllConditionsByLepIsEqualToSomething() throws Exception {
+        // Initialize the database
+        conditionRepository.saveAndFlush(condition);
+        Lep lep = LepResourceIT.createEntity(em);
+        em.persist(lep);
+        em.flush();
+        condition.setLep(lep);
+        conditionRepository.saveAndFlush(condition);
+        Long lepId = lep.getId();
+
+        // Get all the conditionList where lep equals to lepId
+        defaultConditionShouldBeFound("lepId.equals=" + lepId);
+
+        // Get all the conditionList where lep equals to lepId + 1
+        defaultConditionShouldNotBeFound("lepId.equals=" + (lepId + 1));
     }
 
     /**

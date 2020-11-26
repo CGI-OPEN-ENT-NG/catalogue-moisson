@@ -82,6 +82,8 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
 
     private LongFilter offreId;
 
+    private LongFilter technoId;
+
     public ArticleNumeriqueCriteria() {
     }
 
@@ -105,6 +107,7 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         this.disciplineId = other.disciplineId == null ? null : other.disciplineId.copy();
         this.niveauId = other.niveauId == null ? null : other.niveauId.copy();
         this.offreId = other.offreId == null ? null : other.offreId.copy();
+        this.technoId = other.technoId == null ? null : other.technoId.copy();
     }
 
     @Override
@@ -264,6 +267,14 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         this.offreId = offreId;
     }
 
+    public LongFilter getTechnoId() {
+        return technoId;
+    }
+
+    public void setTechnoId(LongFilter technoId) {
+        this.technoId = technoId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -293,7 +304,8 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
             Objects.equals(eanPapier, that.eanPapier) &&
             Objects.equals(disciplineId, that.disciplineId) &&
             Objects.equals(niveauId, that.niveauId) &&
-            Objects.equals(offreId, that.offreId);
+            Objects.equals(offreId, that.offreId) &&
+            Objects.equals(technoId, that.technoId);
     }
 
     @Override
@@ -317,7 +329,8 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         eanPapier,
         disciplineId,
         niveauId,
-        offreId
+        offreId,
+        technoId
         );
     }
 
@@ -344,6 +357,7 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
                 (disciplineId != null ? "disciplineId=" + disciplineId + ", " : "") +
                 (niveauId != null ? "niveauId=" + niveauId + ", " : "") +
                 (offreId != null ? "offreId=" + offreId + ", " : "") +
+                (technoId != null ? "technoId=" + technoId + ", " : "") +
             "}";
     }
 

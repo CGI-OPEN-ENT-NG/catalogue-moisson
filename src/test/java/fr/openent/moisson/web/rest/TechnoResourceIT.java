@@ -2,6 +2,7 @@ package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
 import fr.openent.moisson.domain.Techno;
+import fr.openent.moisson.domain.ArticleNumerique;
 import fr.openent.moisson.repository.TechnoRepository;
 import fr.openent.moisson.repository.search.TechnoSearchRepository;
 import fr.openent.moisson.service.TechnoService;
@@ -2349,6 +2350,26 @@ public class TechnoResourceIT {
         // Get all the technoList where dispositifDYS is null
         defaultTechnoShouldNotBeFound("dispositifDYS.specified=false");
     }
+
+    @Test
+    @Transactional
+    public void getAllTechnosByArticleNumeriqueIsEqualToSomething() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+        ArticleNumerique articleNumerique = ArticleNumeriqueResourceIT.createEntity(em);
+        em.persist(articleNumerique);
+        em.flush();
+        techno.setArticleNumerique(articleNumerique);
+        technoRepository.saveAndFlush(techno);
+        Long articleNumeriqueId = articleNumerique.getId();
+
+        // Get all the technoList where articleNumerique equals to articleNumeriqueId
+        defaultTechnoShouldBeFound("articleNumeriqueId.equals=" + articleNumeriqueId);
+
+        // Get all the technoList where articleNumerique equals to articleNumeriqueId + 1
+        defaultTechnoShouldNotBeFound("articleNumeriqueId.equals=" + (articleNumeriqueId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */

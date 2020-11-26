@@ -104,6 +104,10 @@ public class DisciplineQueryService extends QueryService<Discipline> {
             if (criteria.getConcept() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getConcept(), Discipline_.concept));
             }
+            if (criteria.getArticleNumeriqueId() != null) {
+                specification = specification.and(buildSpecification(criteria.getArticleNumeriqueId(),
+                    root -> root.join(Discipline_.articleNumerique, JoinType.LEFT).get(ArticleNumerique_.id)));
+            }
         }
         return specification;
     }

@@ -15,6 +15,8 @@ public class NiveauDTO implements Serializable {
 
     private String concept;
 
+
+    private Long articleNumeriqueId;
     
     public Long getId() {
         return id;
@@ -48,6 +50,14 @@ public class NiveauDTO implements Serializable {
         this.concept = concept;
     }
 
+    public Long getArticleNumeriqueId() {
+        return articleNumeriqueId;
+    }
+
+    public void setArticleNumeriqueId(Long articleNumeriqueId) {
+        this.articleNumeriqueId = articleNumeriqueId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -73,6 +83,7 @@ public class NiveauDTO implements Serializable {
             ", libelle='" + getLibelle() + "'" +
             ", terme='" + getTerme() + "'" +
             ", concept='" + getConcept() + "'" +
+            ", articleNumeriqueId=" + getArticleNumeriqueId() +
             "}";
     }
 }

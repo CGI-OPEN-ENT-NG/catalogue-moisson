@@ -1,5 +1,6 @@
 package fr.openent.moisson.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -29,6 +30,10 @@ public class Condition implements Serializable {
 
     @Column(name = "condition_gratuite")
     private Integer conditionGratuite;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "conditions", allowSetters = true)
+    private Lep lep;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -63,6 +68,19 @@ public class Condition implements Serializable {
 
     public void setConditionGratuite(Integer conditionGratuite) {
         this.conditionGratuite = conditionGratuite;
+    }
+
+    public Lep getLep() {
+        return lep;
+    }
+
+    public Condition lep(Lep lep) {
+        this.lep = lep;
+        return this;
+    }
+
+    public void setLep(Lep lep) {
+        this.lep = lep;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

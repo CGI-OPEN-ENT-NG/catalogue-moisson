@@ -49,6 +49,8 @@ public class OffreCriteria implements Serializable, Criteria {
 
     private LongFilter lepId;
 
+    private LongFilter articleNumeriqueId;
+
     public OffreCriteria() {
     }
 
@@ -65,6 +67,7 @@ public class OffreCriteria implements Serializable, Criteria {
         this.prixHT = other.prixHT == null ? null : other.prixHT.copy();
         this.tvaId = other.tvaId == null ? null : other.tvaId.copy();
         this.lepId = other.lepId == null ? null : other.lepId.copy();
+        this.articleNumeriqueId = other.articleNumeriqueId == null ? null : other.articleNumeriqueId.copy();
     }
 
     @Override
@@ -168,6 +171,14 @@ public class OffreCriteria implements Serializable, Criteria {
         this.lepId = lepId;
     }
 
+    public LongFilter getArticleNumeriqueId() {
+        return articleNumeriqueId;
+    }
+
+    public void setArticleNumeriqueId(LongFilter articleNumeriqueId) {
+        this.articleNumeriqueId = articleNumeriqueId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -190,7 +201,8 @@ public class OffreCriteria implements Serializable, Criteria {
             Objects.equals(libelle, that.libelle) &&
             Objects.equals(prixHT, that.prixHT) &&
             Objects.equals(tvaId, that.tvaId) &&
-            Objects.equals(lepId, that.lepId);
+            Objects.equals(lepId, that.lepId) &&
+            Objects.equals(articleNumeriqueId, that.articleNumeriqueId);
     }
 
     @Override
@@ -207,7 +219,8 @@ public class OffreCriteria implements Serializable, Criteria {
         libelle,
         prixHT,
         tvaId,
-        lepId
+        lepId,
+        articleNumeriqueId
         );
     }
 
@@ -227,6 +240,7 @@ public class OffreCriteria implements Serializable, Criteria {
                 (prixHT != null ? "prixHT=" + prixHT + ", " : "") +
                 (tvaId != null ? "tvaId=" + tvaId + ", " : "") +
                 (lepId != null ? "lepId=" + lepId + ", " : "") +
+                (articleNumeriqueId != null ? "articleNumeriqueId=" + articleNumeriqueId + ", " : "") +
             "}";
     }
 
