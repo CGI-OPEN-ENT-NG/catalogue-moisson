@@ -3,6 +3,7 @@ package fr.openent.moisson.web.rest;
 import fr.openent.moisson.MoissoncatalogueApp;
 import fr.openent.moisson.domain.Tva;
 import fr.openent.moisson.domain.Offre;
+import fr.openent.moisson.domain.ArticlePapier;
 import fr.openent.moisson.repository.TvaRepository;
 import fr.openent.moisson.repository.search.TvaSearchRepository;
 import fr.openent.moisson.service.TvaService;
@@ -435,6 +436,26 @@ public class TvaResourceIT {
 
         // Get all the tvaList where offre equals to offreId + 1
         defaultTvaShouldNotBeFound("offreId.equals=" + (offreId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllTvasByArticlePapierIsEqualToSomething() throws Exception {
+        // Initialize the database
+        tvaRepository.saveAndFlush(tva);
+        ArticlePapier articlePapier = ArticlePapierResourceIT.createEntity(em);
+        em.persist(articlePapier);
+        em.flush();
+        tva.setArticlePapier(articlePapier);
+        tvaRepository.saveAndFlush(tva);
+        Long articlePapierId = articlePapier.getId();
+
+        // Get all the tvaList where articlePapier equals to articlePapierId
+        defaultTvaShouldBeFound("articlePapierId.equals=" + articlePapierId);
+
+        // Get all the tvaList where articlePapier equals to articlePapierId + 1
+        defaultTvaShouldNotBeFound("articlePapierId.equals=" + (articlePapierId + 1));
     }
 
     /**

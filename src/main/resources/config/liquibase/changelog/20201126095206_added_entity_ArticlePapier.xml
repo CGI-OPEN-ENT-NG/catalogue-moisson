@@ -54,10 +54,7 @@
             <column name="commandable" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="tva" type="decimal(21,2)">
-                <constraints nullable="true" />
-            </column>
-            <column name="prix_ht" type="decimal(21,2)">
+            <column name="type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -98,8 +95,7 @@
             <column name="date_disponibilte" type="datetime"/>
             <column name="date_parution" type="datetime"/>
             <column name="commandable" type="boolean"/>
-            <column name="tva" type="numeric"/>
-            <column name="prix_ht" type="numeric"/>
+            <column name="type" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

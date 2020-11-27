@@ -24,9 +24,6 @@
             <column name="duree" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="adoption" type="boolean">
-                <constraints nullable="true" />
-            </column>
             <column name="quantite_minimale_achat" type="integer">
                 <constraints nullable="true" />
             </column>
@@ -40,6 +37,9 @@
                 <constraints nullable="true" />
             </column>
             <column name="prix_ht" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="adoptant" type="boolean">
                 <constraints nullable="true" />
             </column>
             <column name="article_numerique_id" type="bigint">
@@ -71,12 +71,12 @@
             <column name="ean_libraire" type="string"/>
             <column name="reference" type="string"/>
             <column name="duree" type="numeric"/>
-            <column name="adoption" type="boolean"/>
             <column name="quantite_minimale_achat" type="numeric"/>
             <column name="licence" type="string"/>
             <column name="prescripteur" type="boolean"/>
             <column name="libelle" type="string"/>
             <column name="prix_ht" type="numeric"/>
+            <column name="adoptant" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

@@ -39,9 +39,6 @@ public class Offre implements Serializable {
     @Column(name = "duree")
     private Integer duree;
 
-    @Column(name = "adoption")
-    private Boolean adoption;
-
     @Column(name = "quantite_minimale_achat")
     private Integer quantiteMinimaleAchat;
 
@@ -56,6 +53,9 @@ public class Offre implements Serializable {
 
     @Column(name = "prix_ht", precision = 21, scale = 2)
     private BigDecimal prixHT;
+
+    @Column(name = "adoptant")
+    private Boolean adoptant;
 
     @OneToMany(mappedBy = "offre")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -115,19 +115,6 @@ public class Offre implements Serializable {
 
     public void setDuree(Integer duree) {
         this.duree = duree;
-    }
-
-    public Boolean isAdoption() {
-        return adoption;
-    }
-
-    public Offre adoption(Boolean adoption) {
-        this.adoption = adoption;
-        return this;
-    }
-
-    public void setAdoption(Boolean adoption) {
-        this.adoption = adoption;
     }
 
     public Integer getQuantiteMinimaleAchat() {
@@ -193,6 +180,19 @@ public class Offre implements Serializable {
 
     public void setPrixHT(BigDecimal prixHT) {
         this.prixHT = prixHT;
+    }
+
+    public Boolean isAdoptant() {
+        return adoptant;
+    }
+
+    public Offre adoptant(Boolean adoptant) {
+        this.adoptant = adoptant;
+        return this;
+    }
+
+    public void setAdoptant(Boolean adoptant) {
+        this.adoptant = adoptant;
     }
 
     public Set<Tva> getTvas() {
@@ -283,12 +283,12 @@ public class Offre implements Serializable {
             ", eanLibraire='" + getEanLibraire() + "'" +
             ", reference='" + getReference() + "'" +
             ", duree=" + getDuree() +
-            ", adoption='" + isAdoption() + "'" +
             ", quantiteMinimaleAchat=" + getQuantiteMinimaleAchat() +
             ", licence='" + getLicence() + "'" +
             ", prescripteur='" + isPrescripteur() + "'" +
             ", libelle='" + getLibelle() + "'" +
             ", prixHT=" + getPrixHT() +
+            ", adoptant='" + isAdoptant() + "'" +
             "}";
     }
 }

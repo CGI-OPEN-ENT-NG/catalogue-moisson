@@ -134,11 +134,12 @@ public class ArticlePapierQueryService extends QueryService<ArticlePapier> {
             if (criteria.getCommandable() != null) {
                 specification = specification.and(buildSpecification(criteria.getCommandable(), ArticlePapier_.commandable));
             }
-            if (criteria.getTva() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getTva(), ArticlePapier_.tva));
+            if (criteria.getType() != null) {
+                specification = specification.and(buildSpecification(criteria.getType(), ArticlePapier_.type));
             }
-            if (criteria.getPrixHT() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getPrixHT(), ArticlePapier_.prixHT));
+            if (criteria.getTvaId() != null) {
+                specification = specification.and(buildSpecification(criteria.getTvaId(),
+                    root -> root.join(ArticlePapier_.tvas, JoinType.LEFT).get(Tva_.id)));
             }
         }
         return specification;

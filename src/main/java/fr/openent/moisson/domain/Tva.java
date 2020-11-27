@@ -36,6 +36,10 @@ public class Tva implements Serializable {
     @JsonIgnoreProperties(value = "tvas", allowSetters = true)
     private Offre offre;
 
+    @ManyToOne
+    @JsonIgnoreProperties(value = "tvas", allowSetters = true)
+    private ArticlePapier articlePapier;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -82,6 +86,19 @@ public class Tva implements Serializable {
 
     public void setOffre(Offre offre) {
         this.offre = offre;
+    }
+
+    public ArticlePapier getArticlePapier() {
+        return articlePapier;
+    }
+
+    public Tva articlePapier(ArticlePapier articlePapier) {
+        this.articlePapier = articlePapier;
+        return this;
+    }
+
+    public void setArticlePapier(ArticlePapier articlePapier) {
+        this.articlePapier = articlePapier;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

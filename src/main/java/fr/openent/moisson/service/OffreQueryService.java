@@ -104,9 +104,6 @@ public class OffreQueryService extends QueryService<Offre> {
             if (criteria.getDuree() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDuree(), Offre_.duree));
             }
-            if (criteria.getAdoption() != null) {
-                specification = specification.and(buildSpecification(criteria.getAdoption(), Offre_.adoption));
-            }
             if (criteria.getQuantiteMinimaleAchat() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getQuantiteMinimaleAchat(), Offre_.quantiteMinimaleAchat));
             }
@@ -121,6 +118,9 @@ public class OffreQueryService extends QueryService<Offre> {
             }
             if (criteria.getPrixHT() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPrixHT(), Offre_.prixHT));
+            }
+            if (criteria.getAdoptant() != null) {
+                specification = specification.and(buildSpecification(criteria.getAdoptant(), Offre_.adoptant));
             }
             if (criteria.getTvaId() != null) {
                 specification = specification.and(buildSpecification(criteria.getTvaId(),

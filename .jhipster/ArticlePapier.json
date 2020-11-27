@@ -1,7 +1,14 @@
 {
   "fluentMethods": true,
   "clientRootFolder": "",
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipName": "tva",
+      "otherEntityName": "tva",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "articlePapier"
+    }
+  ],
   "fields": [
     {
       "fieldName": "ean",
@@ -60,12 +67,9 @@
       "fieldType": "Boolean"
     },
     {
-      "fieldName": "tva",
-      "fieldType": "BigDecimal"
-    },
-    {
-      "fieldName": "prixHT",
-      "fieldType": "BigDecimal"
+      "fieldName": "type",
+      "fieldType": "TypeArticle",
+      "fieldValues": "NUMERIQUE,PAPIER"
     }
   ],
   "changelogDate": "20201126095206",

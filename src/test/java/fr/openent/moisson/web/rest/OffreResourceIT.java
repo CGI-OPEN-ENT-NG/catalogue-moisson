@@ -58,9 +58,6 @@ public class OffreResourceIT {
     private static final Integer UPDATED_DUREE = 2;
     private static final Integer SMALLER_DUREE = 1 - 1;
 
-    private static final Boolean DEFAULT_ADOPTION = false;
-    private static final Boolean UPDATED_ADOPTION = true;
-
     private static final Integer DEFAULT_QUANTITE_MINIMALE_ACHAT = 1;
     private static final Integer UPDATED_QUANTITE_MINIMALE_ACHAT = 2;
     private static final Integer SMALLER_QUANTITE_MINIMALE_ACHAT = 1 - 1;
@@ -77,6 +74,9 @@ public class OffreResourceIT {
     private static final BigDecimal DEFAULT_PRIX_HT = new BigDecimal(1);
     private static final BigDecimal UPDATED_PRIX_HT = new BigDecimal(2);
     private static final BigDecimal SMALLER_PRIX_HT = new BigDecimal(1 - 1);
+
+    private static final Boolean DEFAULT_ADOPTANT = false;
+    private static final Boolean UPDATED_ADOPTANT = true;
 
     @Autowired
     private OffreRepository offreRepository;
@@ -117,12 +117,12 @@ public class OffreResourceIT {
             .eanLibraire(DEFAULT_EAN_LIBRAIRE)
             .reference(DEFAULT_REFERENCE)
             .duree(DEFAULT_DUREE)
-            .adoption(DEFAULT_ADOPTION)
             .quantiteMinimaleAchat(DEFAULT_QUANTITE_MINIMALE_ACHAT)
             .licence(DEFAULT_LICENCE)
             .prescripteur(DEFAULT_PRESCRIPTEUR)
             .libelle(DEFAULT_LIBELLE)
-            .prixHT(DEFAULT_PRIX_HT);
+            .prixHT(DEFAULT_PRIX_HT)
+            .adoptant(DEFAULT_ADOPTANT);
         return offre;
     }
     /**
@@ -136,12 +136,12 @@ public class OffreResourceIT {
             .eanLibraire(UPDATED_EAN_LIBRAIRE)
             .reference(UPDATED_REFERENCE)
             .duree(UPDATED_DUREE)
-            .adoption(UPDATED_ADOPTION)
             .quantiteMinimaleAchat(UPDATED_QUANTITE_MINIMALE_ACHAT)
             .licence(UPDATED_LICENCE)
             .prescripteur(UPDATED_PRESCRIPTEUR)
             .libelle(UPDATED_LIBELLE)
-            .prixHT(UPDATED_PRIX_HT);
+            .prixHT(UPDATED_PRIX_HT)
+            .adoptant(UPDATED_ADOPTANT);
         return offre;
     }
 
@@ -168,12 +168,12 @@ public class OffreResourceIT {
         assertThat(testOffre.getEanLibraire()).isEqualTo(DEFAULT_EAN_LIBRAIRE);
         assertThat(testOffre.getReference()).isEqualTo(DEFAULT_REFERENCE);
         assertThat(testOffre.getDuree()).isEqualTo(DEFAULT_DUREE);
-        assertThat(testOffre.isAdoption()).isEqualTo(DEFAULT_ADOPTION);
         assertThat(testOffre.getQuantiteMinimaleAchat()).isEqualTo(DEFAULT_QUANTITE_MINIMALE_ACHAT);
         assertThat(testOffre.getLicence()).isEqualTo(DEFAULT_LICENCE);
         assertThat(testOffre.isPrescripteur()).isEqualTo(DEFAULT_PRESCRIPTEUR);
         assertThat(testOffre.getLibelle()).isEqualTo(DEFAULT_LIBELLE);
         assertThat(testOffre.getPrixHT()).isEqualTo(DEFAULT_PRIX_HT);
+        assertThat(testOffre.isAdoptant()).isEqualTo(DEFAULT_ADOPTANT);
 
         // Validate the Offre in Elasticsearch
         verify(mockOffreSearchRepository, times(1)).save(testOffre);
@@ -217,12 +217,12 @@ public class OffreResourceIT {
             .andExpect(jsonPath("$.[*].eanLibraire").value(hasItem(DEFAULT_EAN_LIBRAIRE)))
             .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE)))
             .andExpect(jsonPath("$.[*].duree").value(hasItem(DEFAULT_DUREE)))
-            .andExpect(jsonPath("$.[*].adoption").value(hasItem(DEFAULT_ADOPTION.booleanValue())))
             .andExpect(jsonPath("$.[*].quantiteMinimaleAchat").value(hasItem(DEFAULT_QUANTITE_MINIMALE_ACHAT)))
             .andExpect(jsonPath("$.[*].licence").value(hasItem(DEFAULT_LICENCE)))
             .andExpect(jsonPath("$.[*].prescripteur").value(hasItem(DEFAULT_PRESCRIPTEUR.booleanValue())))
             .andExpect(jsonPath("$.[*].libelle").value(hasItem(DEFAULT_LIBELLE)))
-            .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())));
+            .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())))
+            .andExpect(jsonPath("$.[*].adoptant").value(hasItem(DEFAULT_ADOPTANT.booleanValue())));
     }
     
     @Test
@@ -239,12 +239,12 @@ public class OffreResourceIT {
             .andExpect(jsonPath("$.eanLibraire").value(DEFAULT_EAN_LIBRAIRE))
             .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE))
             .andExpect(jsonPath("$.duree").value(DEFAULT_DUREE))
-            .andExpect(jsonPath("$.adoption").value(DEFAULT_ADOPTION.booleanValue()))
             .andExpect(jsonPath("$.quantiteMinimaleAchat").value(DEFAULT_QUANTITE_MINIMALE_ACHAT))
             .andExpect(jsonPath("$.licence").value(DEFAULT_LICENCE))
             .andExpect(jsonPath("$.prescripteur").value(DEFAULT_PRESCRIPTEUR.booleanValue()))
             .andExpect(jsonPath("$.libelle").value(DEFAULT_LIBELLE))
-            .andExpect(jsonPath("$.prixHT").value(DEFAULT_PRIX_HT.intValue()));
+            .andExpect(jsonPath("$.prixHT").value(DEFAULT_PRIX_HT.intValue()))
+            .andExpect(jsonPath("$.adoptant").value(DEFAULT_ADOPTANT.booleanValue()));
     }
 
 
@@ -527,58 +527,6 @@ public class OffreResourceIT {
         defaultOffreShouldBeFound("duree.greaterThan=" + SMALLER_DUREE);
     }
 
-
-    @Test
-    @Transactional
-    public void getAllOffresByAdoptionIsEqualToSomething() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where adoption equals to DEFAULT_ADOPTION
-        defaultOffreShouldBeFound("adoption.equals=" + DEFAULT_ADOPTION);
-
-        // Get all the offreList where adoption equals to UPDATED_ADOPTION
-        defaultOffreShouldNotBeFound("adoption.equals=" + UPDATED_ADOPTION);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByAdoptionIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where adoption not equals to DEFAULT_ADOPTION
-        defaultOffreShouldNotBeFound("adoption.notEquals=" + DEFAULT_ADOPTION);
-
-        // Get all the offreList where adoption not equals to UPDATED_ADOPTION
-        defaultOffreShouldBeFound("adoption.notEquals=" + UPDATED_ADOPTION);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByAdoptionIsInShouldWork() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where adoption in DEFAULT_ADOPTION or UPDATED_ADOPTION
-        defaultOffreShouldBeFound("adoption.in=" + DEFAULT_ADOPTION + "," + UPDATED_ADOPTION);
-
-        // Get all the offreList where adoption equals to UPDATED_ADOPTION
-        defaultOffreShouldNotBeFound("adoption.in=" + UPDATED_ADOPTION);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByAdoptionIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where adoption is not null
-        defaultOffreShouldBeFound("adoption.specified=true");
-
-        // Get all the offreList where adoption is null
-        defaultOffreShouldNotBeFound("adoption.specified=false");
-    }
 
     @Test
     @Transactional
@@ -1000,6 +948,58 @@ public class OffreResourceIT {
 
     @Test
     @Transactional
+    public void getAllOffresByAdoptantIsEqualToSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where adoptant equals to DEFAULT_ADOPTANT
+        defaultOffreShouldBeFound("adoptant.equals=" + DEFAULT_ADOPTANT);
+
+        // Get all the offreList where adoptant equals to UPDATED_ADOPTANT
+        defaultOffreShouldNotBeFound("adoptant.equals=" + UPDATED_ADOPTANT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByAdoptantIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where adoptant not equals to DEFAULT_ADOPTANT
+        defaultOffreShouldNotBeFound("adoptant.notEquals=" + DEFAULT_ADOPTANT);
+
+        // Get all the offreList where adoptant not equals to UPDATED_ADOPTANT
+        defaultOffreShouldBeFound("adoptant.notEquals=" + UPDATED_ADOPTANT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByAdoptantIsInShouldWork() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where adoptant in DEFAULT_ADOPTANT or UPDATED_ADOPTANT
+        defaultOffreShouldBeFound("adoptant.in=" + DEFAULT_ADOPTANT + "," + UPDATED_ADOPTANT);
+
+        // Get all the offreList where adoptant equals to UPDATED_ADOPTANT
+        defaultOffreShouldNotBeFound("adoptant.in=" + UPDATED_ADOPTANT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByAdoptantIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where adoptant is not null
+        defaultOffreShouldBeFound("adoptant.specified=true");
+
+        // Get all the offreList where adoptant is null
+        defaultOffreShouldNotBeFound("adoptant.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllOffresByTvaIsEqualToSomething() throws Exception {
         // Initialize the database
         offreRepository.saveAndFlush(offre);
@@ -1068,12 +1068,12 @@ public class OffreResourceIT {
             .andExpect(jsonPath("$.[*].eanLibraire").value(hasItem(DEFAULT_EAN_LIBRAIRE)))
             .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE)))
             .andExpect(jsonPath("$.[*].duree").value(hasItem(DEFAULT_DUREE)))
-            .andExpect(jsonPath("$.[*].adoption").value(hasItem(DEFAULT_ADOPTION.booleanValue())))
             .andExpect(jsonPath("$.[*].quantiteMinimaleAchat").value(hasItem(DEFAULT_QUANTITE_MINIMALE_ACHAT)))
             .andExpect(jsonPath("$.[*].licence").value(hasItem(DEFAULT_LICENCE)))
             .andExpect(jsonPath("$.[*].prescripteur").value(hasItem(DEFAULT_PRESCRIPTEUR.booleanValue())))
             .andExpect(jsonPath("$.[*].libelle").value(hasItem(DEFAULT_LIBELLE)))
-            .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())));
+            .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())))
+            .andExpect(jsonPath("$.[*].adoptant").value(hasItem(DEFAULT_ADOPTANT.booleanValue())));
 
         // Check, that the count call also returns 1
         restOffreMockMvc.perform(get("/api/offres/count?sort=id,desc&" + filter))
@@ -1123,12 +1123,12 @@ public class OffreResourceIT {
             .eanLibraire(UPDATED_EAN_LIBRAIRE)
             .reference(UPDATED_REFERENCE)
             .duree(UPDATED_DUREE)
-            .adoption(UPDATED_ADOPTION)
             .quantiteMinimaleAchat(UPDATED_QUANTITE_MINIMALE_ACHAT)
             .licence(UPDATED_LICENCE)
             .prescripteur(UPDATED_PRESCRIPTEUR)
             .libelle(UPDATED_LIBELLE)
-            .prixHT(UPDATED_PRIX_HT);
+            .prixHT(UPDATED_PRIX_HT)
+            .adoptant(UPDATED_ADOPTANT);
         OffreDTO offreDTO = offreMapper.toDto(updatedOffre);
 
         restOffreMockMvc.perform(put("/api/offres")
@@ -1143,12 +1143,12 @@ public class OffreResourceIT {
         assertThat(testOffre.getEanLibraire()).isEqualTo(UPDATED_EAN_LIBRAIRE);
         assertThat(testOffre.getReference()).isEqualTo(UPDATED_REFERENCE);
         assertThat(testOffre.getDuree()).isEqualTo(UPDATED_DUREE);
-        assertThat(testOffre.isAdoption()).isEqualTo(UPDATED_ADOPTION);
         assertThat(testOffre.getQuantiteMinimaleAchat()).isEqualTo(UPDATED_QUANTITE_MINIMALE_ACHAT);
         assertThat(testOffre.getLicence()).isEqualTo(UPDATED_LICENCE);
         assertThat(testOffre.isPrescripteur()).isEqualTo(UPDATED_PRESCRIPTEUR);
         assertThat(testOffre.getLibelle()).isEqualTo(UPDATED_LIBELLE);
         assertThat(testOffre.getPrixHT()).isEqualTo(UPDATED_PRIX_HT);
+        assertThat(testOffre.isAdoptant()).isEqualTo(UPDATED_ADOPTANT);
 
         // Validate the Offre in Elasticsearch
         verify(mockOffreSearchRepository, times(1)).save(testOffre);
@@ -1214,11 +1214,11 @@ public class OffreResourceIT {
             .andExpect(jsonPath("$.[*].eanLibraire").value(hasItem(DEFAULT_EAN_LIBRAIRE)))
             .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE)))
             .andExpect(jsonPath("$.[*].duree").value(hasItem(DEFAULT_DUREE)))
-            .andExpect(jsonPath("$.[*].adoption").value(hasItem(DEFAULT_ADOPTION.booleanValue())))
             .andExpect(jsonPath("$.[*].quantiteMinimaleAchat").value(hasItem(DEFAULT_QUANTITE_MINIMALE_ACHAT)))
             .andExpect(jsonPath("$.[*].licence").value(hasItem(DEFAULT_LICENCE)))
             .andExpect(jsonPath("$.[*].prescripteur").value(hasItem(DEFAULT_PRESCRIPTEUR.booleanValue())))
             .andExpect(jsonPath("$.[*].libelle").value(hasItem(DEFAULT_LIBELLE)))
-            .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())));
+            .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())))
+            .andExpect(jsonPath("$.[*].adoptant").value(hasItem(DEFAULT_ADOPTANT.booleanValue())));
     }
 }

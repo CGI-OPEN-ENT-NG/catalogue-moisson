@@ -13,6 +13,9 @@ import org.mapstruct.*;
 public interface ArticlePapierMapper extends EntityMapper<ArticlePapierDTO, ArticlePapier> {
 
 
+    @Mapping(target = "tvas", ignore = true)
+    @Mapping(target = "removeTva", ignore = true)
+    ArticlePapier toEntity(ArticlePapierDTO articlePapierDTO);
 
     default ArticlePapier fromId(Long id) {
         if (id == null) {

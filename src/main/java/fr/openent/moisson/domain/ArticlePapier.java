@@ -8,10 +8,13 @@ import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import fr.openent.moisson.domain.enumeration.Disponibilite;
+
+import fr.openent.moisson.domain.enumeration.TypeArticle;
 
 /**
  * A ArticlePapier.
@@ -70,11 +73,13 @@ public class ArticlePapier implements Serializable {
     @Column(name = "commandable")
     private Boolean commandable;
 
-    @Column(name = "tva", precision = 21, scale = 2)
-    private BigDecimal tva;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    private TypeArticle type;
 
-    @Column(name = "prix_ht", precision = 21, scale = 2)
-    private BigDecimal prixHT;
+    @OneToMany(mappedBy = "articlePapier")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<Tva> tvas = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -254,30 +259,42 @@ public class ArticlePapier implements Serializable {
         this.commandable = commandable;
     }
 
-    public BigDecimal getTva() {
-        return tva;
+    public TypeArticle getType() {
+        return type;
     }
 
-    public ArticlePapier tva(BigDecimal tva) {
-        this.tva = tva;
+    public ArticlePapier type(TypeArticle type) {
+        this.type = type;
         return this;
     }
 
-    public void setTva(BigDecimal tva) {
-        this.tva = tva;
+    public void setType(TypeArticle type) {
+        this.type = type;
     }
 
-    public BigDecimal getPrixHT() {
-        return prixHT;
+    public Set<Tva> getTvas() {
+        return tvas;
     }
 
-    public ArticlePapier prixHT(BigDecimal prixHT) {
-        this.prixHT = prixHT;
+    public ArticlePapier tvas(Set<Tva> tvas) {
+        this.tvas = tvas;
         return this;
     }
 
-    public void setPrixHT(BigDecimal prixHT) {
-        this.prixHT = prixHT;
+    public ArticlePapier addTva(Tva tva) {
+        this.tvas.add(tva);
+        tva.setArticlePapier(this);
+        return this;
+    }
+
+    public ArticlePapier removeTva(Tva tva) {
+        this.tvas.remove(tva);
+        tva.setArticlePapier(null);
+        return this;
+    }
+
+    public void setTvas(Set<Tva> tvas) {
+        this.tvas = tvas;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -315,8 +332,7 @@ public class ArticlePapier implements Serializable {
             ", dateDisponibilte='" + getDateDisponibilte() + "'" +
             ", dateParution='" + getDateParution() + "'" +
             ", commandable='" + isCommandable() + "'" +
-            ", tva=" + getTva() +
-            ", prixHT=" + getPrixHT() +
+            ", type='" + getType() + "'" +
             "}";
     }
 }

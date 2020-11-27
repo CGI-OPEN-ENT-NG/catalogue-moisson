@@ -33,8 +33,6 @@ public class OffreCriteria implements Serializable, Criteria {
 
     private IntegerFilter duree;
 
-    private BooleanFilter adoption;
-
     private IntegerFilter quantiteMinimaleAchat;
 
     private StringFilter licence;
@@ -44,6 +42,8 @@ public class OffreCriteria implements Serializable, Criteria {
     private StringFilter libelle;
 
     private BigDecimalFilter prixHT;
+
+    private BooleanFilter adoptant;
 
     private LongFilter tvaId;
 
@@ -59,12 +59,12 @@ public class OffreCriteria implements Serializable, Criteria {
         this.eanLibraire = other.eanLibraire == null ? null : other.eanLibraire.copy();
         this.reference = other.reference == null ? null : other.reference.copy();
         this.duree = other.duree == null ? null : other.duree.copy();
-        this.adoption = other.adoption == null ? null : other.adoption.copy();
         this.quantiteMinimaleAchat = other.quantiteMinimaleAchat == null ? null : other.quantiteMinimaleAchat.copy();
         this.licence = other.licence == null ? null : other.licence.copy();
         this.prescripteur = other.prescripteur == null ? null : other.prescripteur.copy();
         this.libelle = other.libelle == null ? null : other.libelle.copy();
         this.prixHT = other.prixHT == null ? null : other.prixHT.copy();
+        this.adoptant = other.adoptant == null ? null : other.adoptant.copy();
         this.tvaId = other.tvaId == null ? null : other.tvaId.copy();
         this.lepId = other.lepId == null ? null : other.lepId.copy();
         this.articleNumeriqueId = other.articleNumeriqueId == null ? null : other.articleNumeriqueId.copy();
@@ -107,14 +107,6 @@ public class OffreCriteria implements Serializable, Criteria {
         this.duree = duree;
     }
 
-    public BooleanFilter getAdoption() {
-        return adoption;
-    }
-
-    public void setAdoption(BooleanFilter adoption) {
-        this.adoption = adoption;
-    }
-
     public IntegerFilter getQuantiteMinimaleAchat() {
         return quantiteMinimaleAchat;
     }
@@ -153,6 +145,14 @@ public class OffreCriteria implements Serializable, Criteria {
 
     public void setPrixHT(BigDecimalFilter prixHT) {
         this.prixHT = prixHT;
+    }
+
+    public BooleanFilter getAdoptant() {
+        return adoptant;
+    }
+
+    public void setAdoptant(BooleanFilter adoptant) {
+        this.adoptant = adoptant;
     }
 
     public LongFilter getTvaId() {
@@ -194,12 +194,12 @@ public class OffreCriteria implements Serializable, Criteria {
             Objects.equals(eanLibraire, that.eanLibraire) &&
             Objects.equals(reference, that.reference) &&
             Objects.equals(duree, that.duree) &&
-            Objects.equals(adoption, that.adoption) &&
             Objects.equals(quantiteMinimaleAchat, that.quantiteMinimaleAchat) &&
             Objects.equals(licence, that.licence) &&
             Objects.equals(prescripteur, that.prescripteur) &&
             Objects.equals(libelle, that.libelle) &&
             Objects.equals(prixHT, that.prixHT) &&
+            Objects.equals(adoptant, that.adoptant) &&
             Objects.equals(tvaId, that.tvaId) &&
             Objects.equals(lepId, that.lepId) &&
             Objects.equals(articleNumeriqueId, that.articleNumeriqueId);
@@ -212,12 +212,12 @@ public class OffreCriteria implements Serializable, Criteria {
         eanLibraire,
         reference,
         duree,
-        adoption,
         quantiteMinimaleAchat,
         licence,
         prescripteur,
         libelle,
         prixHT,
+        adoptant,
         tvaId,
         lepId,
         articleNumeriqueId
@@ -232,12 +232,12 @@ public class OffreCriteria implements Serializable, Criteria {
                 (eanLibraire != null ? "eanLibraire=" + eanLibraire + ", " : "") +
                 (reference != null ? "reference=" + reference + ", " : "") +
                 (duree != null ? "duree=" + duree + ", " : "") +
-                (adoption != null ? "adoption=" + adoption + ", " : "") +
                 (quantiteMinimaleAchat != null ? "quantiteMinimaleAchat=" + quantiteMinimaleAchat + ", " : "") +
                 (licence != null ? "licence=" + licence + ", " : "") +
                 (prescripteur != null ? "prescripteur=" + prescripteur + ", " : "") +
                 (libelle != null ? "libelle=" + libelle + ", " : "") +
                 (prixHT != null ? "prixHT=" + prixHT + ", " : "") +
+                (adoptant != null ? "adoptant=" + adoptant + ", " : "") +
                 (tvaId != null ? "tvaId=" + tvaId + ", " : "") +
                 (lepId != null ? "lepId=" + lepId + ", " : "") +
                 (articleNumeriqueId != null ? "articleNumeriqueId=" + articleNumeriqueId + ", " : "") +
