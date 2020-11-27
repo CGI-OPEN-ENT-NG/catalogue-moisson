@@ -6,11 +6,11 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    
+
     <!--
         Added the entity Discipline.
     -->
-    <changeSet id="20201126102012-1" author="jhipster">
+    <changeSet id="20201126102012-1" author="moisson">
         <createTable tableName="discipline">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
@@ -31,7 +31,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="20201126102012-1-relations" author="jhipster">
+    <changeSet id="20201126102012-1-relations" author="moisson">
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

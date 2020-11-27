@@ -6,8 +6,8 @@
     <!--
         Added the constraints for entity Niveau.
     -->
-    <changeSet id="20201126101853-2" author="jhipster">
-        
+    <changeSet id="20201126101853-2" author="moisson">
+
         <addForeignKeyConstraint baseColumnNames="article_numerique_id"
                                  baseTableName="niveau"
                                  constraintName="fk_niveau_article_numerique_id"
