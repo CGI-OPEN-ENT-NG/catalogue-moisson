@@ -2,6 +2,7 @@ package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
 import fr.openent.moisson.domain.ArticlePapier;
+import fr.openent.moisson.domain.Tva;
 import fr.openent.moisson.repository.ArticlePapierRepository;
 import fr.openent.moisson.repository.search.ArticlePapierSearchRepository;
 import fr.openent.moisson.service.ArticlePapierService;
@@ -25,7 +26,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
@@ -39,6 +39,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import fr.openent.moisson.domain.enumeration.Disponibilite;
+import fr.openent.moisson.domain.enumeration.TypeArticle;
 /**
  * Integration tests for the {@link ArticlePapierResource} REST controller.
  */
@@ -87,13 +88,8 @@ public class ArticlePapierResourceIT {
     private static final Boolean DEFAULT_COMMANDABLE = false;
     private static final Boolean UPDATED_COMMANDABLE = true;
 
-    private static final BigDecimal DEFAULT_TVA = new BigDecimal(1);
-    private static final BigDecimal UPDATED_TVA = new BigDecimal(2);
-    private static final BigDecimal SMALLER_TVA = new BigDecimal(1 - 1);
-
-    private static final BigDecimal DEFAULT_PRIX_HT = new BigDecimal(1);
-    private static final BigDecimal UPDATED_PRIX_HT = new BigDecimal(2);
-    private static final BigDecimal SMALLER_PRIX_HT = new BigDecimal(1 - 1);
+    private static final TypeArticle DEFAULT_TYPE = TypeArticle.NUMERIQUE;
+    private static final TypeArticle UPDATED_TYPE = TypeArticle.PAPIER;
 
     @Autowired
     private ArticlePapierRepository articlePapierRepository;
@@ -144,8 +140,7 @@ public class ArticlePapierResourceIT {
             .dateDisponibilte(DEFAULT_DATE_DISPONIBILTE)
             .dateParution(DEFAULT_DATE_PARUTION)
             .commandable(DEFAULT_COMMANDABLE)
-            .tva(DEFAULT_TVA)
-            .prixHT(DEFAULT_PRIX_HT);
+            .type(DEFAULT_TYPE);
         return articlePapier;
     }
     /**
@@ -169,8 +164,7 @@ public class ArticlePapierResourceIT {
             .dateDisponibilte(UPDATED_DATE_DISPONIBILTE)
             .dateParution(UPDATED_DATE_PARUTION)
             .commandable(UPDATED_COMMANDABLE)
-            .tva(UPDATED_TVA)
-            .prixHT(UPDATED_PRIX_HT);
+            .type(UPDATED_TYPE);
         return articlePapier;
     }
 
@@ -207,8 +201,7 @@ public class ArticlePapierResourceIT {
         assertThat(testArticlePapier.getDateDisponibilte()).isEqualTo(DEFAULT_DATE_DISPONIBILTE);
         assertThat(testArticlePapier.getDateParution()).isEqualTo(DEFAULT_DATE_PARUTION);
         assertThat(testArticlePapier.isCommandable()).isEqualTo(DEFAULT_COMMANDABLE);
-        assertThat(testArticlePapier.getTva()).isEqualTo(DEFAULT_TVA);
-        assertThat(testArticlePapier.getPrixHT()).isEqualTo(DEFAULT_PRIX_HT);
+        assertThat(testArticlePapier.getType()).isEqualTo(DEFAULT_TYPE);
 
         // Validate the ArticlePapier in Elasticsearch
         verify(mockArticlePapierSearchRepository, times(1)).save(testArticlePapier);
@@ -262,8 +255,7 @@ public class ArticlePapierResourceIT {
             .andExpect(jsonPath("$.[*].dateDisponibilte").value(hasItem(DEFAULT_DATE_DISPONIBILTE.toString())))
             .andExpect(jsonPath("$.[*].dateParution").value(hasItem(DEFAULT_DATE_PARUTION.toString())))
             .andExpect(jsonPath("$.[*].commandable").value(hasItem(DEFAULT_COMMANDABLE.booleanValue())))
-            .andExpect(jsonPath("$.[*].tva").value(hasItem(DEFAULT_TVA.intValue())))
-            .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())));
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
     
     @Test
@@ -290,8 +282,7 @@ public class ArticlePapierResourceIT {
             .andExpect(jsonPath("$.dateDisponibilte").value(DEFAULT_DATE_DISPONIBILTE.toString()))
             .andExpect(jsonPath("$.dateParution").value(DEFAULT_DATE_PARUTION.toString()))
             .andExpect(jsonPath("$.commandable").value(DEFAULT_COMMANDABLE.booleanValue()))
-            .andExpect(jsonPath("$.tva").value(DEFAULT_TVA.intValue()))
-            .andExpect(jsonPath("$.prixHT").value(DEFAULT_PRIX_HT.intValue()));
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
     }
 
 
@@ -1226,211 +1217,73 @@ public class ArticlePapierResourceIT {
 
     @Test
     @Transactional
+    public void getAllArticlePapiersByTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        articlePapierRepository.saveAndFlush(articlePapier);
+
+        // Get all the articlePapierList where type equals to DEFAULT_TYPE
+        defaultArticlePapierShouldBeFound("type.equals=" + DEFAULT_TYPE);
+
+        // Get all the articlePapierList where type equals to UPDATED_TYPE
+        defaultArticlePapierShouldNotBeFound("type.equals=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllArticlePapiersByTypeIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        articlePapierRepository.saveAndFlush(articlePapier);
+
+        // Get all the articlePapierList where type not equals to DEFAULT_TYPE
+        defaultArticlePapierShouldNotBeFound("type.notEquals=" + DEFAULT_TYPE);
+
+        // Get all the articlePapierList where type not equals to UPDATED_TYPE
+        defaultArticlePapierShouldBeFound("type.notEquals=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllArticlePapiersByTypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        articlePapierRepository.saveAndFlush(articlePapier);
+
+        // Get all the articlePapierList where type in DEFAULT_TYPE or UPDATED_TYPE
+        defaultArticlePapierShouldBeFound("type.in=" + DEFAULT_TYPE + "," + UPDATED_TYPE);
+
+        // Get all the articlePapierList where type equals to UPDATED_TYPE
+        defaultArticlePapierShouldNotBeFound("type.in=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllArticlePapiersByTypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        articlePapierRepository.saveAndFlush(articlePapier);
+
+        // Get all the articlePapierList where type is not null
+        defaultArticlePapierShouldBeFound("type.specified=true");
+
+        // Get all the articlePapierList where type is null
+        defaultArticlePapierShouldNotBeFound("type.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllArticlePapiersByTvaIsEqualToSomething() throws Exception {
         // Initialize the database
         articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where tva equals to DEFAULT_TVA
-        defaultArticlePapierShouldBeFound("tva.equals=" + DEFAULT_TVA);
-
-        // Get all the articlePapierList where tva equals to UPDATED_TVA
-        defaultArticlePapierShouldNotBeFound("tva.equals=" + UPDATED_TVA);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByTvaIsNotEqualToSomething() throws Exception {
-        // Initialize the database
+        Tva tva = TvaResourceIT.createEntity(em);
+        em.persist(tva);
+        em.flush();
+        articlePapier.addTva(tva);
         articlePapierRepository.saveAndFlush(articlePapier);
+        Long tvaId = tva.getId();
 
-        // Get all the articlePapierList where tva not equals to DEFAULT_TVA
-        defaultArticlePapierShouldNotBeFound("tva.notEquals=" + DEFAULT_TVA);
+        // Get all the articlePapierList where tva equals to tvaId
+        defaultArticlePapierShouldBeFound("tvaId.equals=" + tvaId);
 
-        // Get all the articlePapierList where tva not equals to UPDATED_TVA
-        defaultArticlePapierShouldBeFound("tva.notEquals=" + UPDATED_TVA);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByTvaIsInShouldWork() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where tva in DEFAULT_TVA or UPDATED_TVA
-        defaultArticlePapierShouldBeFound("tva.in=" + DEFAULT_TVA + "," + UPDATED_TVA);
-
-        // Get all the articlePapierList where tva equals to UPDATED_TVA
-        defaultArticlePapierShouldNotBeFound("tva.in=" + UPDATED_TVA);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByTvaIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where tva is not null
-        defaultArticlePapierShouldBeFound("tva.specified=true");
-
-        // Get all the articlePapierList where tva is null
-        defaultArticlePapierShouldNotBeFound("tva.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByTvaIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where tva is greater than or equal to DEFAULT_TVA
-        defaultArticlePapierShouldBeFound("tva.greaterThanOrEqual=" + DEFAULT_TVA);
-
-        // Get all the articlePapierList where tva is greater than or equal to UPDATED_TVA
-        defaultArticlePapierShouldNotBeFound("tva.greaterThanOrEqual=" + UPDATED_TVA);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByTvaIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where tva is less than or equal to DEFAULT_TVA
-        defaultArticlePapierShouldBeFound("tva.lessThanOrEqual=" + DEFAULT_TVA);
-
-        // Get all the articlePapierList where tva is less than or equal to SMALLER_TVA
-        defaultArticlePapierShouldNotBeFound("tva.lessThanOrEqual=" + SMALLER_TVA);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByTvaIsLessThanSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where tva is less than DEFAULT_TVA
-        defaultArticlePapierShouldNotBeFound("tva.lessThan=" + DEFAULT_TVA);
-
-        // Get all the articlePapierList where tva is less than UPDATED_TVA
-        defaultArticlePapierShouldBeFound("tva.lessThan=" + UPDATED_TVA);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByTvaIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where tva is greater than DEFAULT_TVA
-        defaultArticlePapierShouldNotBeFound("tva.greaterThan=" + DEFAULT_TVA);
-
-        // Get all the articlePapierList where tva is greater than SMALLER_TVA
-        defaultArticlePapierShouldBeFound("tva.greaterThan=" + SMALLER_TVA);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByPrixHTIsEqualToSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where prixHT equals to DEFAULT_PRIX_HT
-        defaultArticlePapierShouldBeFound("prixHT.equals=" + DEFAULT_PRIX_HT);
-
-        // Get all the articlePapierList where prixHT equals to UPDATED_PRIX_HT
-        defaultArticlePapierShouldNotBeFound("prixHT.equals=" + UPDATED_PRIX_HT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByPrixHTIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where prixHT not equals to DEFAULT_PRIX_HT
-        defaultArticlePapierShouldNotBeFound("prixHT.notEquals=" + DEFAULT_PRIX_HT);
-
-        // Get all the articlePapierList where prixHT not equals to UPDATED_PRIX_HT
-        defaultArticlePapierShouldBeFound("prixHT.notEquals=" + UPDATED_PRIX_HT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByPrixHTIsInShouldWork() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where prixHT in DEFAULT_PRIX_HT or UPDATED_PRIX_HT
-        defaultArticlePapierShouldBeFound("prixHT.in=" + DEFAULT_PRIX_HT + "," + UPDATED_PRIX_HT);
-
-        // Get all the articlePapierList where prixHT equals to UPDATED_PRIX_HT
-        defaultArticlePapierShouldNotBeFound("prixHT.in=" + UPDATED_PRIX_HT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByPrixHTIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where prixHT is not null
-        defaultArticlePapierShouldBeFound("prixHT.specified=true");
-
-        // Get all the articlePapierList where prixHT is null
-        defaultArticlePapierShouldNotBeFound("prixHT.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByPrixHTIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where prixHT is greater than or equal to DEFAULT_PRIX_HT
-        defaultArticlePapierShouldBeFound("prixHT.greaterThanOrEqual=" + DEFAULT_PRIX_HT);
-
-        // Get all the articlePapierList where prixHT is greater than or equal to UPDATED_PRIX_HT
-        defaultArticlePapierShouldNotBeFound("prixHT.greaterThanOrEqual=" + UPDATED_PRIX_HT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByPrixHTIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where prixHT is less than or equal to DEFAULT_PRIX_HT
-        defaultArticlePapierShouldBeFound("prixHT.lessThanOrEqual=" + DEFAULT_PRIX_HT);
-
-        // Get all the articlePapierList where prixHT is less than or equal to SMALLER_PRIX_HT
-        defaultArticlePapierShouldNotBeFound("prixHT.lessThanOrEqual=" + SMALLER_PRIX_HT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByPrixHTIsLessThanSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where prixHT is less than DEFAULT_PRIX_HT
-        defaultArticlePapierShouldNotBeFound("prixHT.lessThan=" + DEFAULT_PRIX_HT);
-
-        // Get all the articlePapierList where prixHT is less than UPDATED_PRIX_HT
-        defaultArticlePapierShouldBeFound("prixHT.lessThan=" + UPDATED_PRIX_HT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByPrixHTIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where prixHT is greater than DEFAULT_PRIX_HT
-        defaultArticlePapierShouldNotBeFound("prixHT.greaterThan=" + DEFAULT_PRIX_HT);
-
-        // Get all the articlePapierList where prixHT is greater than SMALLER_PRIX_HT
-        defaultArticlePapierShouldBeFound("prixHT.greaterThan=" + SMALLER_PRIX_HT);
+        // Get all the articlePapierList where tva equals to tvaId + 1
+        defaultArticlePapierShouldNotBeFound("tvaId.equals=" + (tvaId + 1));
     }
 
     /**
@@ -1454,8 +1307,7 @@ public class ArticlePapierResourceIT {
             .andExpect(jsonPath("$.[*].dateDisponibilte").value(hasItem(DEFAULT_DATE_DISPONIBILTE.toString())))
             .andExpect(jsonPath("$.[*].dateParution").value(hasItem(DEFAULT_DATE_PARUTION.toString())))
             .andExpect(jsonPath("$.[*].commandable").value(hasItem(DEFAULT_COMMANDABLE.booleanValue())))
-            .andExpect(jsonPath("$.[*].tva").value(hasItem(DEFAULT_TVA.intValue())))
-            .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())));
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
 
         // Check, that the count call also returns 1
         restArticlePapierMockMvc.perform(get("/api/article-papiers/count?sort=id,desc&" + filter))
@@ -1515,8 +1367,7 @@ public class ArticlePapierResourceIT {
             .dateDisponibilte(UPDATED_DATE_DISPONIBILTE)
             .dateParution(UPDATED_DATE_PARUTION)
             .commandable(UPDATED_COMMANDABLE)
-            .tva(UPDATED_TVA)
-            .prixHT(UPDATED_PRIX_HT);
+            .type(UPDATED_TYPE);
         ArticlePapierDTO articlePapierDTO = articlePapierMapper.toDto(updatedArticlePapier);
 
         restArticlePapierMockMvc.perform(put("/api/article-papiers")
@@ -1541,8 +1392,7 @@ public class ArticlePapierResourceIT {
         assertThat(testArticlePapier.getDateDisponibilte()).isEqualTo(UPDATED_DATE_DISPONIBILTE);
         assertThat(testArticlePapier.getDateParution()).isEqualTo(UPDATED_DATE_PARUTION);
         assertThat(testArticlePapier.isCommandable()).isEqualTo(UPDATED_COMMANDABLE);
-        assertThat(testArticlePapier.getTva()).isEqualTo(UPDATED_TVA);
-        assertThat(testArticlePapier.getPrixHT()).isEqualTo(UPDATED_PRIX_HT);
+        assertThat(testArticlePapier.getType()).isEqualTo(UPDATED_TYPE);
 
         // Validate the ArticlePapier in Elasticsearch
         verify(mockArticlePapierSearchRepository, times(1)).save(testArticlePapier);
@@ -1618,7 +1468,6 @@ public class ArticlePapierResourceIT {
             .andExpect(jsonPath("$.[*].dateDisponibilte").value(hasItem(DEFAULT_DATE_DISPONIBILTE.toString())))
             .andExpect(jsonPath("$.[*].dateParution").value(hasItem(DEFAULT_DATE_PARUTION.toString())))
             .andExpect(jsonPath("$.[*].commandable").value(hasItem(DEFAULT_COMMANDABLE.booleanValue())))
-            .andExpect(jsonPath("$.[*].tva").value(hasItem(DEFAULT_TVA.intValue())))
-            .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())));
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
 }

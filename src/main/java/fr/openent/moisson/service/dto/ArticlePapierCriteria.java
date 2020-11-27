@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import io.github.jhipster.service.Criteria;
 import fr.openent.moisson.domain.enumeration.Disponibilite;
+import fr.openent.moisson.domain.enumeration.TypeArticle;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -11,7 +12,6 @@ import io.github.jhipster.service.filter.FloatFilter;
 import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
-import io.github.jhipster.service.filter.BigDecimalFilter;
 import io.github.jhipster.service.filter.InstantFilter;
 
 /**
@@ -39,6 +39,24 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         @Override
         public DisponibiliteFilter copy() {
             return new DisponibiliteFilter(this);
+        }
+
+    }
+    /**
+     * Class for filtering TypeArticle
+     */
+    public static class TypeArticleFilter extends Filter<TypeArticle> {
+
+        public TypeArticleFilter() {
+        }
+
+        public TypeArticleFilter(TypeArticleFilter filter) {
+            super(filter);
+        }
+
+        @Override
+        public TypeArticleFilter copy() {
+            return new TypeArticleFilter(this);
         }
 
     }
@@ -73,9 +91,9 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
 
     private BooleanFilter commandable;
 
-    private BigDecimalFilter tva;
+    private TypeArticleFilter type;
 
-    private BigDecimalFilter prixHT;
+    private LongFilter tvaId;
 
     public ArticlePapierCriteria() {
     }
@@ -95,8 +113,8 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         this.dateDisponibilte = other.dateDisponibilte == null ? null : other.dateDisponibilte.copy();
         this.dateParution = other.dateParution == null ? null : other.dateParution.copy();
         this.commandable = other.commandable == null ? null : other.commandable.copy();
-        this.tva = other.tva == null ? null : other.tva.copy();
-        this.prixHT = other.prixHT == null ? null : other.prixHT.copy();
+        this.type = other.type == null ? null : other.type.copy();
+        this.tvaId = other.tvaId == null ? null : other.tvaId.copy();
     }
 
     @Override
@@ -216,20 +234,20 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         this.commandable = commandable;
     }
 
-    public BigDecimalFilter getTva() {
-        return tva;
+    public TypeArticleFilter getType() {
+        return type;
     }
 
-    public void setTva(BigDecimalFilter tva) {
-        this.tva = tva;
+    public void setType(TypeArticleFilter type) {
+        this.type = type;
     }
 
-    public BigDecimalFilter getPrixHT() {
-        return prixHT;
+    public LongFilter getTvaId() {
+        return tvaId;
     }
 
-    public void setPrixHT(BigDecimalFilter prixHT) {
-        this.prixHT = prixHT;
+    public void setTvaId(LongFilter tvaId) {
+        this.tvaId = tvaId;
     }
 
 
@@ -257,8 +275,8 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
             Objects.equals(dateDisponibilte, that.dateDisponibilte) &&
             Objects.equals(dateParution, that.dateParution) &&
             Objects.equals(commandable, that.commandable) &&
-            Objects.equals(tva, that.tva) &&
-            Objects.equals(prixHT, that.prixHT);
+            Objects.equals(type, that.type) &&
+            Objects.equals(tvaId, that.tvaId);
     }
 
     @Override
@@ -278,8 +296,8 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         dateDisponibilte,
         dateParution,
         commandable,
-        tva,
-        prixHT
+        type,
+        tvaId
         );
     }
 
@@ -301,8 +319,8 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
                 (dateDisponibilte != null ? "dateDisponibilte=" + dateDisponibilte + ", " : "") +
                 (dateParution != null ? "dateParution=" + dateParution + ", " : "") +
                 (commandable != null ? "commandable=" + commandable + ", " : "") +
-                (tva != null ? "tva=" + tva + ", " : "") +
-                (prixHT != null ? "prixHT=" + prixHT + ", " : "") +
+                (type != null ? "type=" + type + ", " : "") +
+                (tvaId != null ? "tvaId=" + tvaId + ", " : "") +
             "}";
     }
 

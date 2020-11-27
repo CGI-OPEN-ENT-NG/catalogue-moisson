@@ -105,6 +105,10 @@ public class TvaQueryService extends QueryService<Tva> {
                 specification = specification.and(buildSpecification(criteria.getOffreId(),
                     root -> root.join(Tva_.offre, JoinType.LEFT).get(Offre_.id)));
             }
+            if (criteria.getArticlePapierId() != null) {
+                specification = specification.and(buildSpecification(criteria.getArticlePapierId(),
+                    root -> root.join(Tva_.articlePapier, JoinType.LEFT).get(ArticlePapier_.id)));
+            }
         }
         return specification;
     }

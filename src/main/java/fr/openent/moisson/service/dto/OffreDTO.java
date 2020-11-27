@@ -18,8 +18,6 @@ public class OffreDTO implements Serializable {
 
     private Integer duree;
 
-    private Boolean adoption;
-
     private Integer quantiteMinimaleAchat;
 
     private String licence;
@@ -29,6 +27,8 @@ public class OffreDTO implements Serializable {
     private String libelle;
 
     private BigDecimal prixHT;
+
+    private Boolean adoptant;
 
 
     private Long articleNumeriqueId;
@@ -63,14 +63,6 @@ public class OffreDTO implements Serializable {
 
     public void setDuree(Integer duree) {
         this.duree = duree;
-    }
-
-    public Boolean isAdoption() {
-        return adoption;
-    }
-
-    public void setAdoption(Boolean adoption) {
-        this.adoption = adoption;
     }
 
     public Integer getQuantiteMinimaleAchat() {
@@ -113,6 +105,14 @@ public class OffreDTO implements Serializable {
         this.prixHT = prixHT;
     }
 
+    public Boolean isAdoptant() {
+        return adoptant;
+    }
+
+    public void setAdoptant(Boolean adoptant) {
+        this.adoptant = adoptant;
+    }
+
     public Long getArticleNumeriqueId() {
         return articleNumeriqueId;
     }
@@ -146,12 +146,12 @@ public class OffreDTO implements Serializable {
             ", eanLibraire='" + getEanLibraire() + "'" +
             ", reference='" + getReference() + "'" +
             ", duree=" + getDuree() +
-            ", adoption='" + isAdoption() + "'" +
             ", quantiteMinimaleAchat=" + getQuantiteMinimaleAchat() +
             ", licence='" + getLicence() + "'" +
             ", prescripteur='" + isPrescripteur() + "'" +
             ", libelle='" + getLibelle() + "'" +
             ", prixHT=" + getPrixHT() +
+            ", adoptant='" + isAdoptant() + "'" +
             ", articleNumeriqueId=" + getArticleNumeriqueId() +
             "}";
     }

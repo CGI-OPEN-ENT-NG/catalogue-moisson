@@ -16,6 +16,8 @@ public class TvaDTO implements Serializable {
 
 
     private Long offreId;
+
+    private Long articlePapierId;
     
     public Long getId() {
         return id;
@@ -49,6 +51,14 @@ public class TvaDTO implements Serializable {
         this.offreId = offreId;
     }
 
+    public Long getArticlePapierId() {
+        return articlePapierId;
+    }
+
+    public void setArticlePapierId(Long articlePapierId) {
+        this.articlePapierId = articlePapierId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -74,6 +84,7 @@ public class TvaDTO implements Serializable {
             ", taux=" + getTaux() +
             ", pourcent=" + getPourcent() +
             ", offreId=" + getOffreId() +
+            ", articlePapierId=" + getArticlePapierId() +
             "}";
     }
 }

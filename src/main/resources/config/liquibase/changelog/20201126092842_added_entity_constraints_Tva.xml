@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="offre"/>
 
+        <addForeignKeyConstraint baseColumnNames="article_papier_id"
+                                 baseTableName="tva"
+                                 constraintName="fk_tva_article_papier_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="article_papier"/>
+
     </changeSet>
 </databaseChangeLog>

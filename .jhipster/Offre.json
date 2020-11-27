@@ -39,10 +39,6 @@
       "fieldType": "Integer"
     },
     {
-      "fieldName": "adoption",
-      "fieldType": "Boolean"
-    },
-    {
       "fieldName": "quantiteMinimaleAchat",
       "fieldType": "Integer"
     },
@@ -61,6 +57,10 @@
     {
       "fieldName": "prixHT",
       "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "adoptant",
+      "fieldType": "Boolean"
     }
   ],
   "changelogDate": "20201126093844",

@@ -8,6 +8,13 @@
       "relationshipType": "many-to-one",
       "otherEntityField": "id",
       "otherEntityRelationshipName": "tva"
+    },
+    {
+      "relationshipName": "articlePapier",
+      "otherEntityName": "articlePapier",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id",
+      "otherEntityRelationshipName": "tva"
     }
   ],
   "fields": [

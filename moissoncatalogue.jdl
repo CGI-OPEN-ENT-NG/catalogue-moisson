@@ -1,0 +1,188 @@
+application {
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName moissoncatalogue
+    blueprints []
+    buildTool maven
+    cacheProvider ehcache
+    clientFramework angularX
+    clientPackageManager npm
+    clientTheme none
+    creationTimestamp 1606316099697
+    databaseType sql
+    devDatabaseType postgresql
+    dtoSuffix DTO
+    embeddableLaunchScript false
+    enableHibernateCache true
+    enableSwaggerCodegen true
+    enableTranslation true
+    jhiPrefix moisson
+    jhipsterVersion "6.10.5"
+    jwtSecretKey "Y2Q0MTg2OGI2NDk0NDhkNmQyNWQ3MzdjZWY1YmNmNmEyYzg4YTcyMjNjYjczYjM2MGZhMWM1ZDcxZjg3OTI2YjEwYjAzMWNiYTk3NjU5ZDJkNzFlNDQ1ZmMyMTljZWEyZDcxNTBlZTI4MmFhYjkyNTlmY2NkYjM0YzVkYmEwYmY="
+    languages [fr, en]
+    messageBroker false
+    nativeLanguage fr
+    otherModules [[object Object], [object Object], [object Object]]
+    packageName fr.openent.moisson
+    prodDatabaseType postgresql
+    searchEngine elasticsearch
+    serverPort 8080
+    serviceDiscoveryType false
+    skipClient true
+    skipServer false
+    skipUserManagement false
+    testFrameworks [gatling, cucumber, protractor]
+    useSass true
+    websocket false
+  }
+
+  entities ArticleNumerique, ArticlePapier, Condition, Discipline, Lep, Niveau, Offre, Techno, Tva
+}
+
+entity ArticleNumerique {
+  ean String minlength(13) maxlength(13),
+  ark String,
+  titre String,
+  editeur String,
+  auteur String,
+  collection String,
+  distributeur String,
+  urlCouverture String,
+  urlDemo String,
+  disponibilte Disponibilite,
+  dateDisponibilte Instant,
+  dateParution Instant,
+  compatibleGAR Boolean,
+  accessibleENT Boolean,
+  eanPapier String minlength(13) maxlength(13)
+}
+entity ArticlePapier {
+  ean String minlength(13) maxlength(13),
+  ark String,
+  titre String,
+  editeur String,
+  auteur String,
+  referenceEditeur String,
+  collection String,
+  distributeur String,
+  urlCouverture String,
+  disponibilte Disponibilite,
+  dateDisponibilte Instant,
+  dateParution Instant,
+  commandable Boolean,
+  type TypeArticle
+}
+entity Condition {
+  gratuite Integer,
+  conditionGratuite Integer
+}
+entity Discipline {
+  libelle String,
+  terme String,
+  concept String
+}
+entity Lep {
+  ean String minlength(13) maxlength(13),
+  description String,
+  typeLicence TypeLicence,
+  titre String,
+  duree String
+}
+entity Niveau {
+  libelle String,
+  terme String,
+  concept String
+}
+entity Offre {
+  eanLibraire String minlength(13) maxlength(13),
+  reference String,
+  duree Integer,
+  quantiteMinimaleAchat Integer,
+  licence String,
+  prescripteur Boolean,
+  libelle String,
+  prixHT BigDecimal,
+  adoptant Boolean
+}
+entity Techno {
+  technologie Technologie,
+  versionReader String,
+  availableHorsENT Boolean,
+  availableViaENT Boolean,
+  availableViaGAR Boolean,
+  typeLicenceGAR TypeLicenceGAR required,
+  canUseOffline Boolean,
+  oneClic Boolean,
+  exportCleUSB Boolean,
+  deploiementMasse Boolean,
+  configurationMiniOS String,
+  needFlash Boolean,
+  annotations Boolean,
+  creationCours Boolean,
+  nbMaxiInstall Integer,
+  nbMaxSimultConnexions Integer,
+  webAdaptatif Boolean,
+  marquePage Boolean,
+  captureImage Boolean,
+  zoom Boolean,
+  fonctionsRecherche Boolean,
+  corrigesPourEnseignants Boolean,
+  assignationTachesEleves Boolean,
+  partageContenuEleves Boolean,
+  exercicesInteractifs Boolean,
+  exercicesAutoCorriges Boolean,
+  exportReponsesEleves Boolean,
+  importDocument Boolean,
+  exportDocument Boolean,
+  exportSCORM Boolean,
+  personnalisationUserInterface Boolean,
+  modifContenuEditorial Boolean,
+  dispositifDYS Boolean
+}
+entity Tva {
+  taux BigDecimal,
+  pourcent BigDecimal
+}
+enum Disponibilite {
+  DISPONIBLE,
+  EN_COURS_D_IMPRESSION
+}
+enum TypeArticle {
+  NUMERIQUE,
+  PAPIER
+}
+enum TypeLicence {
+  ELEVE,
+  ENSEIGNANT,
+  ETABLISSEMENT
+}
+enum Technologie {
+  WINDOWS,
+  MAC_OS,
+  IOS_TABLETTE,
+  ANDROID_TABLETTE,
+  SMARTPHONE,
+  CHROME_OS
+}
+enum TypeLicenceGAR {
+  TRANSFERABLE,
+  NON_TRANFERABLE
+}
+
+relationship OneToMany {
+  Lep{condition} to Condition{lep},
+  ArticleNumerique{discipline} to Discipline{articleNumerique},
+  Offre{lep} to Lep{offre},
+  ArticleNumerique{niveau} to Niveau{articleNumerique},
+  ArticleNumerique{offre} to Offre{articleNumerique},
+  ArticleNumerique{techno} to Techno{articleNumerique required},
+  Offre{tva} to Tva{offre},
+  ArticlePapier{tva} to Tva{articlePapier}
+}
+
+dto ArticleNumerique, ArticlePapier, Condition, Discipline, Lep, Niveau, Offre, Techno, Tva with mapstruct
+paginate ArticleNumerique, ArticlePapier, Condition, Discipline, Lep, Niveau, Offre, Techno, Tva with pagination
+service ArticleNumerique, ArticlePapier, Condition, Discipline, Lep, Niveau, Offre, Techno, Tva with serviceImpl
+search ArticleNumerique, ArticlePapier, Condition, Discipline, Lep, Niveau, Offre, Techno, Tva with elasticsearch
+filter ArticleNumerique, ArticlePapier, Condition, Discipline, Lep, Niveau, Offre, Techno, Tva

@@ -3,8 +3,8 @@ package fr.openent.moisson.service.dto;
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import fr.openent.moisson.domain.enumeration.Disponibilite;
+import fr.openent.moisson.domain.enumeration.TypeArticle;
 
 /**
  * A DTO for the {@link fr.openent.moisson.domain.ArticlePapier} entity.
@@ -40,9 +40,7 @@ public class ArticlePapierDTO implements Serializable {
 
     private Boolean commandable;
 
-    private BigDecimal tva;
-
-    private BigDecimal prixHT;
+    private TypeArticle type;
 
     
     public Long getId() {
@@ -157,20 +155,12 @@ public class ArticlePapierDTO implements Serializable {
         this.commandable = commandable;
     }
 
-    public BigDecimal getTva() {
-        return tva;
+    public TypeArticle getType() {
+        return type;
     }
 
-    public void setTva(BigDecimal tva) {
-        this.tva = tva;
-    }
-
-    public BigDecimal getPrixHT() {
-        return prixHT;
-    }
-
-    public void setPrixHT(BigDecimal prixHT) {
-        this.prixHT = prixHT;
+    public void setType(TypeArticle type) {
+        this.type = type;
     }
 
     @Override
@@ -208,8 +198,7 @@ public class ArticlePapierDTO implements Serializable {
             ", dateDisponibilte='" + getDateDisponibilte() + "'" +
             ", dateParution='" + getDateParution() + "'" +
             ", commandable='" + isCommandable() + "'" +
-            ", tva=" + getTva() +
-            ", prixHT=" + getPrixHT() +
+            ", type='" + getType() + "'" +
             "}";
     }
 }
