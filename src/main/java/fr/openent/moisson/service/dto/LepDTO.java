@@ -2,13 +2,15 @@ package fr.openent.moisson.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.Set;
+
 import fr.openent.moisson.domain.enumeration.TypeLicence;
 
 /**
  * A DTO for the {@link fr.openent.moisson.domain.Lep} entity.
  */
 public class LepDTO implements Serializable {
-    
+
     private Long id;
 
     @Size(min = 13, max = 13)
@@ -22,9 +24,10 @@ public class LepDTO implements Serializable {
 
     private String duree;
 
-
     private Long offreId;
-    
+
+    private Set<ConditionDTO> conditions;
+
     public Long getId() {
         return id;
     }
@@ -79,6 +82,14 @@ public class LepDTO implements Serializable {
 
     public void setOffreId(Long offreId) {
         this.offreId = offreId;
+    }
+
+    public Set<ConditionDTO> getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(Set<ConditionDTO> conditions) {
+        this.conditions = conditions;
     }
 
     @Override

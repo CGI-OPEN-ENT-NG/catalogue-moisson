@@ -6,7 +6,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.hibernate.annotations.NaturalId;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -30,6 +31,7 @@ public class ArticleNumerique implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @NaturalId
     @Size(min = 13, max = 13)
     @Column(name = "ean", length = 13)
     private String ean;
@@ -60,7 +62,7 @@ public class ArticleNumerique implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "disponibilte")
-    private Disponibilite disponibilte;
+    private Disponibilite disponibilite;
 
     @Column(name = "date_disponibilte")
     private Instant dateDisponibilte;
@@ -79,19 +81,19 @@ public class ArticleNumerique implements Serializable {
     private String eanPapier;
 
     @OneToMany(mappedBy = "articleNumerique")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     private Set<Discipline> disciplines = new HashSet<>();
 
     @OneToMany(mappedBy = "articleNumerique")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     private Set<Niveau> niveaus = new HashSet<>();
 
     @OneToMany(mappedBy = "articleNumerique")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     private Set<Offre> offres = new HashSet<>();
 
     @OneToMany(mappedBy = "articleNumerique")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     private Set<Techno> technos = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -220,17 +222,17 @@ public class ArticleNumerique implements Serializable {
         this.urlDemo = urlDemo;
     }
 
-    public Disponibilite getDisponibilte() {
-        return disponibilte;
+    public Disponibilite getDisponibilite() {
+        return disponibilite;
     }
 
     public ArticleNumerique disponibilte(Disponibilite disponibilte) {
-        this.disponibilte = disponibilte;
+        this.disponibilite = disponibilte;
         return this;
     }
 
-    public void setDisponibilte(Disponibilite disponibilte) {
-        this.disponibilte = disponibilte;
+    public void setDisponibilite(Disponibilite disponibilte) {
+        this.disponibilite = disponibilte;
     }
 
     public Instant getDateDisponibilte() {
@@ -429,7 +431,7 @@ public class ArticleNumerique implements Serializable {
             ", distributeur='" + getDistributeur() + "'" +
             ", urlCouverture='" + getUrlCouverture() + "'" +
             ", urlDemo='" + getUrlDemo() + "'" +
-            ", disponibilte='" + getDisponibilte() + "'" +
+            ", disponibilte='" + getDisponibilite() + "'" +
             ", dateDisponibilte='" + getDateDisponibilte() + "'" +
             ", dateParution='" + getDateParution() + "'" +
             ", compatibleGAR='" + isCompatibleGAR() + "'" +

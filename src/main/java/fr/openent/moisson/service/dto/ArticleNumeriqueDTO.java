@@ -1,15 +1,25 @@
 package fr.openent.moisson.service.dto;
 
 import java.time.Instant;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import fr.openent.moisson.domain.Discipline;
+import fr.openent.moisson.domain.Niveau;
+import fr.openent.moisson.domain.Offre;
+import fr.openent.moisson.domain.Techno;
 import fr.openent.moisson.domain.enumeration.Disponibilite;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A DTO for the {@link fr.openent.moisson.domain.ArticleNumerique} entity.
  */
 public class ArticleNumeriqueDTO implements Serializable {
-    
+
     private Long id;
 
     @Size(min = 13, max = 13)
@@ -44,7 +54,14 @@ public class ArticleNumeriqueDTO implements Serializable {
     @Size(min = 13, max = 13)
     private String eanPapier;
 
-    
+    private Set<Discipline> disciplines;
+
+    private Set<Niveau> niveaus;
+
+    private Set<Offre> offres;
+
+    private Set<Techno> technos;
+
     public Long getId() {
         return id;
     }
@@ -171,6 +188,38 @@ public class ArticleNumeriqueDTO implements Serializable {
 
     public void setEanPapier(String eanPapier) {
         this.eanPapier = eanPapier;
+    }
+
+    public Set<Discipline> getDisciplines() {
+        return disciplines;
+    }
+
+    public void setDisciplines(Set<Discipline> disciplines) {
+        this.disciplines = disciplines;
+    }
+
+    public Set<Niveau> getNiveaus() {
+        return niveaus;
+    }
+
+    public void setNiveaus(Set<Niveau> niveaus) {
+        this.niveaus = niveaus;
+    }
+
+    public Set<Offre> getOffres() {
+        return offres;
+    }
+
+    public void setOffres(Set<Offre> offres) {
+        this.offres = offres;
+    }
+
+    public Set<Techno> getTechnos() {
+        return technos;
+    }
+
+    public void setTechnos(Set<Techno> technos) {
+        this.technos = technos;
     }
 
     @Override

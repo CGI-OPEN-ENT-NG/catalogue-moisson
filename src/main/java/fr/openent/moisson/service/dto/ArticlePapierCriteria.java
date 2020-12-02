@@ -3,8 +3,8 @@ package fr.openent.moisson.service.dto;
 import java.io.Serializable;
 import java.util.Objects;
 import io.github.jhipster.service.Criteria;
-import fr.openent.moisson.domain.enumeration.Disponibilite;
 import fr.openent.moisson.domain.enumeration.TypeArticle;
+import fr.openent.moisson.domain.enumeration.Disponibilite;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -12,6 +12,7 @@ import io.github.jhipster.service.filter.FloatFilter;
 import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
+import io.github.jhipster.service.filter.BigDecimalFilter;
 import io.github.jhipster.service.filter.InstantFilter;
 
 /**
@@ -24,24 +25,6 @@ import io.github.jhipster.service.filter.InstantFilter;
  * fix type specific filters.
  */
 public class ArticlePapierCriteria implements Serializable, Criteria {
-    /**
-     * Class for filtering Disponibilite
-     */
-    public static class DisponibiliteFilter extends Filter<Disponibilite> {
-
-        public DisponibiliteFilter() {
-        }
-
-        public DisponibiliteFilter(DisponibiliteFilter filter) {
-            super(filter);
-        }
-
-        @Override
-        public DisponibiliteFilter copy() {
-            return new DisponibiliteFilter(this);
-        }
-
-    }
     /**
      * Class for filtering TypeArticle
      */
@@ -57,6 +40,24 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         @Override
         public TypeArticleFilter copy() {
             return new TypeArticleFilter(this);
+        }
+
+    }
+    /**
+     * Class for filtering Disponibilite
+     */
+    public static class DisponibiliteFilter extends Filter<Disponibilite> {
+
+        public DisponibiliteFilter() {
+        }
+
+        public DisponibiliteFilter(DisponibiliteFilter filter) {
+            super(filter);
+        }
+
+        @Override
+        public DisponibiliteFilter copy() {
+            return new DisponibiliteFilter(this);
         }
 
     }
@@ -83,15 +84,19 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
 
     private StringFilter urlCouverture;
 
-    private DisponibiliteFilter disponibilte;
-
-    private InstantFilter dateDisponibilte;
-
     private InstantFilter dateParution;
 
     private BooleanFilter commandable;
 
     private TypeArticleFilter type;
+
+    private BigDecimalFilter prixHT;
+
+    private StringFilter description;
+
+    private DisponibiliteFilter disponibilite;
+
+    private InstantFilter dateDisponibilite;
 
     private LongFilter tvaId;
 
@@ -109,11 +114,13 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         this.collection = other.collection == null ? null : other.collection.copy();
         this.distributeur = other.distributeur == null ? null : other.distributeur.copy();
         this.urlCouverture = other.urlCouverture == null ? null : other.urlCouverture.copy();
-        this.disponibilte = other.disponibilte == null ? null : other.disponibilte.copy();
-        this.dateDisponibilte = other.dateDisponibilte == null ? null : other.dateDisponibilte.copy();
         this.dateParution = other.dateParution == null ? null : other.dateParution.copy();
         this.commandable = other.commandable == null ? null : other.commandable.copy();
         this.type = other.type == null ? null : other.type.copy();
+        this.prixHT = other.prixHT == null ? null : other.prixHT.copy();
+        this.description = other.description == null ? null : other.description.copy();
+        this.disponibilite = other.disponibilite == null ? null : other.disponibilite.copy();
+        this.dateDisponibilite = other.dateDisponibilite == null ? null : other.dateDisponibilite.copy();
         this.tvaId = other.tvaId == null ? null : other.tvaId.copy();
     }
 
@@ -202,22 +209,6 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         this.urlCouverture = urlCouverture;
     }
 
-    public DisponibiliteFilter getDisponibilte() {
-        return disponibilte;
-    }
-
-    public void setDisponibilte(DisponibiliteFilter disponibilte) {
-        this.disponibilte = disponibilte;
-    }
-
-    public InstantFilter getDateDisponibilte() {
-        return dateDisponibilte;
-    }
-
-    public void setDateDisponibilte(InstantFilter dateDisponibilte) {
-        this.dateDisponibilte = dateDisponibilte;
-    }
-
     public InstantFilter getDateParution() {
         return dateParution;
     }
@@ -240,6 +231,38 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
 
     public void setType(TypeArticleFilter type) {
         this.type = type;
+    }
+
+    public BigDecimalFilter getPrixHT() {
+        return prixHT;
+    }
+
+    public void setPrixHT(BigDecimalFilter prixHT) {
+        this.prixHT = prixHT;
+    }
+
+    public StringFilter getDescription() {
+        return description;
+    }
+
+    public void setDescription(StringFilter description) {
+        this.description = description;
+    }
+
+    public DisponibiliteFilter getDisponibilite() {
+        return disponibilite;
+    }
+
+    public void setDisponibilite(DisponibiliteFilter disponibilite) {
+        this.disponibilite = disponibilite;
+    }
+
+    public InstantFilter getDateDisponibilite() {
+        return dateDisponibilite;
+    }
+
+    public void setDateDisponibilite(InstantFilter dateDisponibilite) {
+        this.dateDisponibilite = dateDisponibilite;
     }
 
     public LongFilter getTvaId() {
@@ -271,11 +294,13 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
             Objects.equals(collection, that.collection) &&
             Objects.equals(distributeur, that.distributeur) &&
             Objects.equals(urlCouverture, that.urlCouverture) &&
-            Objects.equals(disponibilte, that.disponibilte) &&
-            Objects.equals(dateDisponibilte, that.dateDisponibilte) &&
             Objects.equals(dateParution, that.dateParution) &&
             Objects.equals(commandable, that.commandable) &&
             Objects.equals(type, that.type) &&
+            Objects.equals(prixHT, that.prixHT) &&
+            Objects.equals(description, that.description) &&
+            Objects.equals(disponibilite, that.disponibilite) &&
+            Objects.equals(dateDisponibilite, that.dateDisponibilite) &&
             Objects.equals(tvaId, that.tvaId);
     }
 
@@ -292,11 +317,13 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         collection,
         distributeur,
         urlCouverture,
-        disponibilte,
-        dateDisponibilte,
         dateParution,
         commandable,
         type,
+        prixHT,
+        description,
+        disponibilite,
+        dateDisponibilite,
         tvaId
         );
     }
@@ -315,11 +342,13 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
                 (collection != null ? "collection=" + collection + ", " : "") +
                 (distributeur != null ? "distributeur=" + distributeur + ", " : "") +
                 (urlCouverture != null ? "urlCouverture=" + urlCouverture + ", " : "") +
-                (disponibilte != null ? "disponibilte=" + disponibilte + ", " : "") +
-                (dateDisponibilte != null ? "dateDisponibilte=" + dateDisponibilte + ", " : "") +
                 (dateParution != null ? "dateParution=" + dateParution + ", " : "") +
                 (commandable != null ? "commandable=" + commandable + ", " : "") +
                 (type != null ? "type=" + type + ", " : "") +
+                (prixHT != null ? "prixHT=" + prixHT + ", " : "") +
+                (description != null ? "description=" + description + ", " : "") +
+                (disponibilite != null ? "disponibilite=" + disponibilite + ", " : "") +
+                (dateDisponibilite != null ? "dateDisponibilite=" + dateDisponibilite + ", " : "") +
                 (tvaId != null ? "tvaId=" + tvaId + ", " : "") +
             "}";
     }

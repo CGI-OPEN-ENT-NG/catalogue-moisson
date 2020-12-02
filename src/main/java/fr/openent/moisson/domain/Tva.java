@@ -1,6 +1,6 @@
 package fr.openent.moisson.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -24,20 +24,25 @@ public class Tva implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @JsonIgnore
     private Long id;
 
     @Column(name = "taux", precision = 21, scale = 2)
+    @JsonProperty("TAUX")
     private BigDecimal taux;
 
     @Column(name = "pourcent", precision = 21, scale = 2)
+    @JsonProperty("POURCENT")
     private BigDecimal pourcent;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "tvas", allowSetters = true)
     private Offre offre;
 
-    @ManyToOne
+    @ManyToOne()
     @JsonIgnoreProperties(value = "tvas", allowSetters = true)
+    @JsonBackReference
+    @JoinColumn(name = "article_papier_id", nullable = false)
     private ArticlePapier articlePapier;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

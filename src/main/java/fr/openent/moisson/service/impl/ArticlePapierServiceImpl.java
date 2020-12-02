@@ -50,6 +50,14 @@ public class ArticlePapierServiceImpl implements ArticlePapierService {
     }
 
     @Override
+    public ArticlePapier save(ArticlePapier articlePapier) {
+        log.debug("Request to save ArticlePapier : {}", articlePapier);
+        articlePapier = articlePapierRepository.save(articlePapier);
+        articlePapierSearchRepository.save(articlePapier);
+        return articlePapier;
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Page<ArticlePapierDTO> findAll(Pageable pageable) {
         log.debug("Request to get all ArticlePapiers");

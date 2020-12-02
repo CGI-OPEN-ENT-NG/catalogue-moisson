@@ -3,12 +3,13 @@ package fr.openent.moisson.service.dto;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Set;
 
 /**
  * A DTO for the {@link fr.openent.moisson.domain.Offre} entity.
  */
 public class OffreDTO implements Serializable {
-    
+
     private Long id;
 
     @Size(min = 13, max = 13)
@@ -30,9 +31,12 @@ public class OffreDTO implements Serializable {
 
     private Boolean adoptant;
 
-
     private Long articleNumeriqueId;
-    
+
+    private Set<LepDTO> leps;
+
+    private Set<TvaDTO> tavs;
+
     public Long getId() {
         return id;
     }
@@ -119,6 +123,22 @@ public class OffreDTO implements Serializable {
 
     public void setArticleNumeriqueId(Long articleNumeriqueId) {
         this.articleNumeriqueId = articleNumeriqueId;
+    }
+
+    public Set<LepDTO> getLeps() {
+        return leps;
+    }
+
+    public void setLeps(Set<LepDTO> leps) {
+        this.leps = leps;
+    }
+
+    public Set<TvaDTO> getTavs() {
+        return tavs;
+    }
+
+    public void setTavs(Set<TvaDTO> tavs) {
+        this.tavs = tavs;
     }
 
     @Override

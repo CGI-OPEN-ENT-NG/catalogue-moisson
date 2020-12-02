@@ -49,4 +49,5 @@ public class JacksonConfiguration {
     public ConstraintViolationProblemModule constraintViolationProblemModule() {
         return new ConstraintViolationProblemModule();
     }
+
 }

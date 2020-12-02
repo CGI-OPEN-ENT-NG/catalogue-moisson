@@ -2,25 +2,34 @@
 
 == Création de la base et des roles
 
+Par défaut les tables sont créées avec Liquibase qui est une librairie open-source permettant de tracer et gérer les modifications d'une base de données.
 Liquibase est paramétré pour la mise en place des tables et séquences au premier démarrage de l’application,
 cependant avant de lancer l’application il faut créer les roles et la base correspondante.
-(Les noms de fichiers de scripts sql sont donnés au format Flyway bien que ce dernier n’est activé par défaut,
-il sera donc possible de jouer les scripts avec flyway avec les fichiers dont la version est supérieure ou égale à V1_X_X–nomdufichier.sql
-ces fichiers seront stockés dans le répertoire main/resources/db/migration).
-Le fichier V0__init_user_role_database.sql est le fichier de base quelle que soit la procédure de migration en base de données, son nom est également fourni au format Flyway.
-1 - Jouer les scripts dans le fichier V0__init_user_role_database.sql
+
+Il faut installer postgres sur le serveur
+
+Puis en se connectant en root :
+
+ sudo -u postgres psql
+
+Il faut jouer les scripts qui sont dans le fichier :
+
+ V0__init_user_role_database.sql est le fichier de création de la base de données
 
 == Création des tables
 
 L’application utilise Liquibase pour la création des tables.
 Cependant les scripts SQL sont fournis et situés dans le répertoire db/migration.
 
-NOTE: Les script .sql sont fournis pour être utilisés "As is" ou avec Flyway
+NOTE: Les scripts SQL sont fournis pour être utilisés "As is" ou avec Flyway
 
-IMPORTANT: Les noms de fichier de scripts sont au format FlyWay et sont stockés dans le répertoire de recherche par défaut de Flyway bien que celui-ci n'est pas installé par défaut.
+IMPORTANT: Les noms de fichier de scripts sont au format FlyWay et sont stockés dans le répertoire de recherche par défaut de Flyway bien que celui-ci n'est pas installé par défaut, main/resources/db/migration.
 La procédure d’installation et d'utilisation de Flyway est fournie ci-dessous.
 
 === Installation Flyway (Optionnel)
+
+Il est possible de jouer les scripts avec Flyway au lieu de Liquibase.
+Flyway gère la "convention over configuration, c'est-à-dire que une fois le plug-in installer il va scruter conventionnellement dans main/resources/db/migration et jouer les cripts qui s'y trouvent avec un ordre prédéfini par les noms de fichiers(voir plus bas)
 
 Pour installer un plugin Flyway Maven, il faut ajouter la définition de plugin suivante dans le pom.xml :
 
@@ -195,35 +204,15 @@ Repair : réparations de la table de métadonnées.
 Clean : supprime tous les objets dans un schéma configuré. Tous les objets de base de données sont supprimés. Bien sûr, vous ne devez jamais utiliser clean sur une base de données de production.
 ----
 
-== Swagger
-
-Les composants front-end et back-end étant séparés, l’API expose le composant back-end pour le composant frontal ou des intégrations d’applications tierces.
-
-Les spécifications des API back-end sont exposées par l’intermédiaire de Swagger.
-
-Pour visualiser les spécifications d’API au format JSON :
-
-----
-http://localhost:8080/v2/api-docs
-----
-
-Pour visualiser les spécifications d’API avec SwaggerN :
-
-----
-http://localhost:8080/swagger-ui/index.html
-----
-
-Remplacer _localhost:8080_ par le bon _host_ et le bon _port_.
-
-
 == Rest api
 
-Les apis sont fournies dans le contrat d’Api fourni.
+Les endpoints des Apis sont fournis dans le contrat d’Api fourni.
 
-=== Authentification
+=== Authentification préalable
+
+Les Apis étant sécurisées il faut s'authentifier pour y accéder.
 
 ==== Authentification basique avec login et mot de passe (user et password)
-
 
 Il existe deux utilisateurs qui permettent de s'identifier :
 
@@ -293,3 +282,29 @@ Récapitulatif :
  TOKEN=$(curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate | jq -r '.id_token')
 
  curl -H 'Accept: application/json' -H "Authorization: Bearer $TOKEN" http://localhost:8080/api/account
+
+== Swagger
+
+Les composants front-end et back-end étant séparés, l’API expose le composant back-end pour le composant frontal ou des intégrations d’applications tierces.
+
+Les spécifications des API back-end sont exposées par l’intermédiaire de Swagger.
+
+Pour visualiser les spécifications d’API au format JSON :
+
+----
+http://localhost:8080/v2/api-docs
+
+dans un navigateur ou
+
+curl -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/v2/api-docs
+----
+
+Pour visualiser les spécifications d’API avec SwaggerN :
+
+----
+http://localhost:8080/swagger-ui/index.html
+
+dans un navigateur
+----
+
+Remplacer _localhost:8080_ par le bon _host_ et le bon _port_.

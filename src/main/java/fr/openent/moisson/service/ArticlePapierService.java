@@ -1,5 +1,6 @@
 package fr.openent.moisson.service;
 
+import fr.openent.moisson.domain.ArticlePapier;
 import fr.openent.moisson.service.dto.ArticlePapierDTO;
 
 import org.springframework.data.domain.Page;
@@ -19,6 +20,14 @@ public interface ArticlePapierService {
      * @return the persisted entity.
      */
     ArticlePapierDTO save(ArticlePapierDTO articlePapierDTO);
+
+    /**
+     * Save a articlePapier.
+     *
+     * @param articlePapier the entity to save.
+     * @return the persisted entity.
+     */
+    ArticlePapier save(ArticlePapier articlePapier);
 
     /**
      * Get all the articlePapiers.
@@ -48,7 +57,7 @@ public interface ArticlePapierService {
      * Search for the articlePapier corresponding to the query.
      *
      * @param query the query of the search.
-     * 
+     *
      * @param pageable the pagination information.
      * @return the list of entities.
      */

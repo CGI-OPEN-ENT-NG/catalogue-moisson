@@ -6,11 +6,11 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    
+
     <!--
         Added the entity ArticlePapier.
     -->
-    <changeSet id="20201126095206-1" author="jhipster">
+    <changeSet id="20201126095206-1" author="moisson">
         <createTable tableName="article_papier">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
@@ -42,12 +42,6 @@
             <column name="url_couverture" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="disponibilte" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="date_disponibilte" type="datetime">
-                <constraints nullable="true" />
-            </column>
             <column name="date_parution" type="datetime">
                 <constraints nullable="true" />
             </column>
@@ -57,13 +51,25 @@
             <column name="type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="prix_ht" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="description" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="disponibilite" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_disponibilite" type="datetime">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="article_papier" columnName="date_disponibilte" columnDataType="datetime"/>
         <dropDefaultValue tableName="article_papier" columnName="date_parution" columnDataType="datetime"/>
+        <dropDefaultValue tableName="article_papier" columnName="date_disponibilite" columnDataType="datetime"/>
     </changeSet>
 
-    <changeSet id="20201126095206-1-relations" author="jhipster">
+    <changeSet id="20201126095206-1-relations" author="moisson">
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -76,7 +82,7 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20201126095206-1-data" author="jhipster" context="faker">
+    <changeSet id="20201126095206-1-data" author="moisson" context="faker">
         <loadData
                   file="config/liquibase/fake-data/article_papier.csv"
                   separator=";"
@@ -91,11 +97,13 @@
             <column name="collection" type="string"/>
             <column name="distributeur" type="string"/>
             <column name="url_couverture" type="string"/>
-            <column name="disponibilte" type="string"/>
-            <column name="date_disponibilte" type="datetime"/>
             <column name="date_parution" type="datetime"/>
             <column name="commandable" type="boolean"/>
             <column name="type" type="string"/>
+            <column name="prix_ht" type="numeric"/>
+            <column name="description" type="string"/>
+            <column name="disponibilite" type="string"/>
+            <column name="date_disponibilite" type="datetime"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

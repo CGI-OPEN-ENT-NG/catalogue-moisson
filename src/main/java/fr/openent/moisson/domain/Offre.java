@@ -7,6 +7,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import org.hibernate.annotations.NaturalId;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -29,6 +30,7 @@ public class Offre implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @NaturalId
     @Size(min = 13, max = 13)
     @Column(name = "ean_libraire", length = 13)
     private String eanLibraire;
@@ -58,11 +60,11 @@ public class Offre implements Serializable {
     private Boolean adoptant;
 
     @OneToMany(mappedBy = "offre")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     private Set<Tva> tvas = new HashSet<>();
 
     @OneToMany(mappedBy = "offre")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     private Set<Lep> leps = new HashSet<>();
 
     @ManyToOne

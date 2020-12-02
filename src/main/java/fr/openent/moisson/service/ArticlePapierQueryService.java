@@ -122,12 +122,6 @@ public class ArticlePapierQueryService extends QueryService<ArticlePapier> {
             if (criteria.getUrlCouverture() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getUrlCouverture(), ArticlePapier_.urlCouverture));
             }
-            if (criteria.getDisponibilte() != null) {
-                specification = specification.and(buildSpecification(criteria.getDisponibilte(), ArticlePapier_.disponibilte));
-            }
-            if (criteria.getDateDisponibilte() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getDateDisponibilte(), ArticlePapier_.dateDisponibilte));
-            }
             if (criteria.getDateParution() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDateParution(), ArticlePapier_.dateParution));
             }
@@ -136,6 +130,18 @@ public class ArticlePapierQueryService extends QueryService<ArticlePapier> {
             }
             if (criteria.getType() != null) {
                 specification = specification.and(buildSpecification(criteria.getType(), ArticlePapier_.type));
+            }
+            if (criteria.getPrixHT() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getPrixHT(), ArticlePapier_.prixHT));
+            }
+            if (criteria.getDescription() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getDescription(), ArticlePapier_.description));
+            }
+            if (criteria.getDisponibilite() != null) {
+                specification = specification.and(buildSpecification(criteria.getDisponibilite(), ArticlePapier_.disponibilite));
+            }
+            if (criteria.getDateDisponibilite() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDateDisponibilite(), ArticlePapier_.dateDisponibilite));
             }
             if (criteria.getTvaId() != null) {
                 specification = specification.and(buildSpecification(criteria.getTvaId(),

@@ -6,8 +6,8 @@
     <!--
         Added the constraints for entity Lep.
     -->
-    <changeSet id="20201125162333-2" author="jhipster">
-        
+    <changeSet id="20201125162333-2" author="moisson">
+
         <addForeignKeyConstraint baseColumnNames="offre_id"
                                  baseTableName="lep"
                                  constraintName="fk_lep_offre_id"

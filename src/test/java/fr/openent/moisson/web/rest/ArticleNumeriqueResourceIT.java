@@ -11,12 +11,10 @@ import fr.openent.moisson.repository.search.ArticleNumeriqueSearchRepository;
 import fr.openent.moisson.service.ArticleNumeriqueService;
 import fr.openent.moisson.service.dto.ArticleNumeriqueDTO;
 import fr.openent.moisson.service.mapper.ArticleNumeriqueMapper;
-import fr.openent.moisson.service.dto.ArticleNumeriqueCriteria;
 import fr.openent.moisson.service.ArticleNumeriqueQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -204,7 +202,7 @@ public class ArticleNumeriqueResourceIT {
         assertThat(testArticleNumerique.getDistributeur()).isEqualTo(DEFAULT_DISTRIBUTEUR);
         assertThat(testArticleNumerique.getUrlCouverture()).isEqualTo(DEFAULT_URL_COUVERTURE);
         assertThat(testArticleNumerique.getUrlDemo()).isEqualTo(DEFAULT_URL_DEMO);
-        assertThat(testArticleNumerique.getDisponibilte()).isEqualTo(DEFAULT_DISPONIBILTE);
+        assertThat(testArticleNumerique.getDisponibilite()).isEqualTo(DEFAULT_DISPONIBILTE);
         assertThat(testArticleNumerique.getDateDisponibilte()).isEqualTo(DEFAULT_DATE_DISPONIBILTE);
         assertThat(testArticleNumerique.getDateParution()).isEqualTo(DEFAULT_DATE_PARUTION);
         assertThat(testArticleNumerique.isCompatibleGAR()).isEqualTo(DEFAULT_COMPATIBLE_GAR);
@@ -266,7 +264,7 @@ public class ArticleNumeriqueResourceIT {
             .andExpect(jsonPath("$.[*].accessibleENT").value(hasItem(DEFAULT_ACCESSIBLE_ENT.booleanValue())))
             .andExpect(jsonPath("$.[*].eanPapier").value(hasItem(DEFAULT_EAN_PAPIER)));
     }
-    
+
     @Test
     @Transactional
     public void getArticleNumerique() throws Exception {
@@ -1538,7 +1536,7 @@ public class ArticleNumeriqueResourceIT {
         assertThat(testArticleNumerique.getDistributeur()).isEqualTo(UPDATED_DISTRIBUTEUR);
         assertThat(testArticleNumerique.getUrlCouverture()).isEqualTo(UPDATED_URL_COUVERTURE);
         assertThat(testArticleNumerique.getUrlDemo()).isEqualTo(UPDATED_URL_DEMO);
-        assertThat(testArticleNumerique.getDisponibilte()).isEqualTo(UPDATED_DISPONIBILTE);
+        assertThat(testArticleNumerique.getDisponibilite()).isEqualTo(UPDATED_DISPONIBILTE);
         assertThat(testArticleNumerique.getDateDisponibilte()).isEqualTo(UPDATED_DATE_DISPONIBILTE);
         assertThat(testArticleNumerique.getDateParution()).isEqualTo(UPDATED_DATE_PARUTION);
         assertThat(testArticleNumerique.isCompatibleGAR()).isEqualTo(UPDATED_COMPATIBLE_GAR);
