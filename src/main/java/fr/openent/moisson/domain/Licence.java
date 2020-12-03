@@ -17,7 +17,8 @@ import java.io.Serializable;
 @Table(name = "licence")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "licence")
-public class Licence implements Serializable {
+public class
+Licence implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,6 +34,10 @@ public class Licence implements Serializable {
     @OneToOne(mappedBy = "licence")
     @JsonIgnore
     private Offre offre;
+
+    @OneToOne(mappedBy = "licence")
+    @JsonIgnore
+    private Lep lep;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -67,6 +72,19 @@ public class Licence implements Serializable {
 
     public void setOffre(Offre offre) {
         this.offre = offre;
+    }
+
+    public Lep getLep() {
+        return lep;
+    }
+
+    public Licence lep(Lep lep) {
+        this.lep = lep;
+        return this;
+    }
+
+    public void setLep(Lep lep) {
+        this.lep = lep;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

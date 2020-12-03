@@ -8,6 +8,13 @@
       "relationshipType": "one-to-one",
       "ownerSide": false,
       "otherEntityRelationshipName": "licence"
+    },
+    {
+      "relationshipName": "lep",
+      "otherEntityName": "lep",
+      "relationshipType": "one-to-one",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "licence"
     }
   ],
   "fields": [

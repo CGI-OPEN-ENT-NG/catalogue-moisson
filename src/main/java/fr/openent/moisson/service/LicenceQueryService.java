@@ -102,6 +102,10 @@ public class LicenceQueryService extends QueryService<Licence> {
                 specification = specification.and(buildSpecification(criteria.getOffreId(),
                     root -> root.join(Licence_.offre, JoinType.LEFT).get(Offre_.id)));
             }
+            if (criteria.getLepId() != null) {
+                specification = specification.and(buildSpecification(criteria.getLepId(),
+                    root -> root.join(Licence_.lep, JoinType.LEFT).get(Lep_.id)));
+            }
         }
         return specification;
     }

@@ -30,6 +30,8 @@ public class LicenceCriteria implements Serializable, Criteria {
 
     private LongFilter offreId;
 
+    private LongFilter lepId;
+
     public LicenceCriteria() {
     }
 
@@ -37,6 +39,7 @@ public class LicenceCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.valeur = other.valeur == null ? null : other.valeur.copy();
         this.offreId = other.offreId == null ? null : other.offreId.copy();
+        this.lepId = other.lepId == null ? null : other.lepId.copy();
     }
 
     @Override
@@ -68,6 +71,14 @@ public class LicenceCriteria implements Serializable, Criteria {
         this.offreId = offreId;
     }
 
+    public LongFilter getLepId() {
+        return lepId;
+    }
+
+    public void setLepId(LongFilter lepId) {
+        this.lepId = lepId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -81,7 +92,8 @@ public class LicenceCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(valeur, that.valeur) &&
-            Objects.equals(offreId, that.offreId);
+            Objects.equals(offreId, that.offreId) &&
+            Objects.equals(lepId, that.lepId);
     }
 
     @Override
@@ -89,7 +101,8 @@ public class LicenceCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         valeur,
-        offreId
+        offreId,
+        lepId
         );
     }
 
@@ -100,6 +113,7 @@ public class LicenceCriteria implements Serializable, Criteria {
                 (id != null ? "id=" + id + ", " : "") +
                 (valeur != null ? "valeur=" + valeur + ", " : "") +
                 (offreId != null ? "offreId=" + offreId + ", " : "") +
+                (lepId != null ? "lepId=" + lepId + ", " : "") +
             "}";
     }
 

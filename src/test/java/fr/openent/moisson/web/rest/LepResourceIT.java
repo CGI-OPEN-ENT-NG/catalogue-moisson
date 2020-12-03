@@ -4,6 +4,7 @@ import fr.openent.moisson.MoissoncatalogueApp;
 import fr.openent.moisson.domain.Lep;
 import fr.openent.moisson.domain.Condition;
 import fr.openent.moisson.domain.Offre;
+import fr.openent.moisson.domain.Licence;
 import fr.openent.moisson.repository.LepRepository;
 import fr.openent.moisson.repository.search.LepSearchRepository;
 import fr.openent.moisson.service.LepService;
@@ -37,7 +38,6 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import fr.openent.moisson.domain.enumeration.TypeLicence;
 /**
  * Integration tests for the {@link LepResource} REST controller.
  */
@@ -52,9 +52,6 @@ public class LepResourceIT {
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
-
-    private static final TypeLicence DEFAULT_TYPE_LICENCE = TypeLicence.ELEVE;
-    private static final TypeLicence UPDATED_TYPE_LICENCE = TypeLicence.ENSEIGNANT;
 
     private static final String DEFAULT_TITRE = "AAAAAAAAAA";
     private static final String UPDATED_TITRE = "BBBBBBBBBB";
@@ -100,9 +97,18 @@ public class LepResourceIT {
         Lep lep = new Lep()
             .ean(DEFAULT_EAN)
             .description(DEFAULT_DESCRIPTION)
-            .typeLicence(DEFAULT_TYPE_LICENCE)
             .titre(DEFAULT_TITRE)
             .duree(DEFAULT_DUREE);
+        // Add required entity
+        Licence licence;
+        if (TestUtil.findAll(em, Licence.class).isEmpty()) {
+            licence = LicenceResourceIT.createEntity(em);
+            em.persist(licence);
+            em.flush();
+        } else {
+            licence = TestUtil.findAll(em, Licence.class).get(0);
+        }
+        lep.setLicence(licence);
         return lep;
     }
     /**
@@ -115,9 +121,18 @@ public class LepResourceIT {
         Lep lep = new Lep()
             .ean(UPDATED_EAN)
             .description(UPDATED_DESCRIPTION)
-            .typeLicence(UPDATED_TYPE_LICENCE)
             .titre(UPDATED_TITRE)
             .duree(UPDATED_DUREE);
+        // Add required entity
+        Licence licence;
+        if (TestUtil.findAll(em, Licence.class).isEmpty()) {
+            licence = LicenceResourceIT.createUpdatedEntity(em);
+            em.persist(licence);
+            em.flush();
+        } else {
+            licence = TestUtil.findAll(em, Licence.class).get(0);
+        }
+        lep.setLicence(licence);
         return lep;
     }
 
@@ -143,9 +158,11 @@ public class LepResourceIT {
         Lep testLep = lepList.get(lepList.size() - 1);
         assertThat(testLep.getEan()).isEqualTo(DEFAULT_EAN);
         assertThat(testLep.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testLep.getTypeLicence()).isEqualTo(DEFAULT_TYPE_LICENCE);
         assertThat(testLep.getTitre()).isEqualTo(DEFAULT_TITRE);
         assertThat(testLep.getDuree()).isEqualTo(DEFAULT_DUREE);
+
+        // Validate the id for MapsId, the ids must be same
+        assertThat(testLep.getId()).isEqualTo(testLep.getLicence().getId());
 
         // Validate the Lep in Elasticsearch
         verify(mockLepSearchRepository, times(1)).save(testLep);
@@ -174,6 +191,42 @@ public class LepResourceIT {
         verify(mockLepSearchRepository, times(0)).save(lep);
     }
 
+    @Test
+    @Transactional
+    public void updateLepMapsIdAssociationWithNewId() throws Exception {
+        // Initialize the database
+        lepRepository.saveAndFlush(lep);
+        int databaseSizeBeforeCreate = lepRepository.findAll().size();
+
+
+        // Load the lep
+        Lep updatedLep = lepRepository.findById(lep.getId()).get();
+        // Disconnect from session so that the updates on updatedLep are not directly saved in db
+        em.detach(updatedLep);
+
+        // Update the Licence with new association value
+        updatedLep.setLicence();
+        LepDTO updatedLepDTO = lepMapper.toDto(updatedLep);
+
+        // Update the entity
+        restLepMockMvc.perform(put("/api/leps")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(updatedLepDTO)))
+            .andExpect(status().isOk());
+
+        // Validate the Lep in the database
+        List<Lep> lepList = lepRepository.findAll();
+        assertThat(lepList).hasSize(databaseSizeBeforeCreate);
+        Lep testLep = lepList.get(lepList.size() - 1);
+
+        // Validate the id for MapsId, the ids must be same
+        // Uncomment the following line for assertion. However, please note that there is a known issue and uncommenting will fail the test.
+        // Please look at https://github.com/jhipster/generator-jhipster/issues/9100. You can modify this test as necessary.
+        // assertThat(testLep.getId()).isEqualTo(testLep.getLicence().getId());
+
+        // Validate the Lep in Elasticsearch
+        verify(mockLepSearchRepository, times(1)).save(lep);
+    }
 
     @Test
     @Transactional
@@ -188,7 +241,6 @@ public class LepResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(lep.getId().intValue())))
             .andExpect(jsonPath("$.[*].ean").value(hasItem(DEFAULT_EAN)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].typeLicence").value(hasItem(DEFAULT_TYPE_LICENCE.toString())))
             .andExpect(jsonPath("$.[*].titre").value(hasItem(DEFAULT_TITRE)))
             .andExpect(jsonPath("$.[*].duree").value(hasItem(DEFAULT_DUREE)));
     }
@@ -206,7 +258,6 @@ public class LepResourceIT {
             .andExpect(jsonPath("$.id").value(lep.getId().intValue()))
             .andExpect(jsonPath("$.ean").value(DEFAULT_EAN))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
-            .andExpect(jsonPath("$.typeLicence").value(DEFAULT_TYPE_LICENCE.toString()))
             .andExpect(jsonPath("$.titre").value(DEFAULT_TITRE))
             .andExpect(jsonPath("$.duree").value(DEFAULT_DUREE));
     }
@@ -386,58 +437,6 @@ public class LepResourceIT {
         defaultLepShouldBeFound("description.doesNotContain=" + UPDATED_DESCRIPTION);
     }
 
-
-    @Test
-    @Transactional
-    public void getAllLepsByTypeLicenceIsEqualToSomething() throws Exception {
-        // Initialize the database
-        lepRepository.saveAndFlush(lep);
-
-        // Get all the lepList where typeLicence equals to DEFAULT_TYPE_LICENCE
-        defaultLepShouldBeFound("typeLicence.equals=" + DEFAULT_TYPE_LICENCE);
-
-        // Get all the lepList where typeLicence equals to UPDATED_TYPE_LICENCE
-        defaultLepShouldNotBeFound("typeLicence.equals=" + UPDATED_TYPE_LICENCE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllLepsByTypeLicenceIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        lepRepository.saveAndFlush(lep);
-
-        // Get all the lepList where typeLicence not equals to DEFAULT_TYPE_LICENCE
-        defaultLepShouldNotBeFound("typeLicence.notEquals=" + DEFAULT_TYPE_LICENCE);
-
-        // Get all the lepList where typeLicence not equals to UPDATED_TYPE_LICENCE
-        defaultLepShouldBeFound("typeLicence.notEquals=" + UPDATED_TYPE_LICENCE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllLepsByTypeLicenceIsInShouldWork() throws Exception {
-        // Initialize the database
-        lepRepository.saveAndFlush(lep);
-
-        // Get all the lepList where typeLicence in DEFAULT_TYPE_LICENCE or UPDATED_TYPE_LICENCE
-        defaultLepShouldBeFound("typeLicence.in=" + DEFAULT_TYPE_LICENCE + "," + UPDATED_TYPE_LICENCE);
-
-        // Get all the lepList where typeLicence equals to UPDATED_TYPE_LICENCE
-        defaultLepShouldNotBeFound("typeLicence.in=" + UPDATED_TYPE_LICENCE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllLepsByTypeLicenceIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        lepRepository.saveAndFlush(lep);
-
-        // Get all the lepList where typeLicence is not null
-        defaultLepShouldBeFound("typeLicence.specified=true");
-
-        // Get all the lepList where typeLicence is null
-        defaultLepShouldNotBeFound("typeLicence.specified=false");
-    }
 
     @Test
     @Transactional
@@ -634,6 +633,22 @@ public class LepResourceIT {
         defaultLepShouldNotBeFound("offreId.equals=" + (offreId + 1));
     }
 
+
+    @Test
+    @Transactional
+    public void getAllLepsByLicenceIsEqualToSomething() throws Exception {
+        // Get already existing entity
+        Licence licence = lep.getLicence();
+        lepRepository.saveAndFlush(lep);
+        Long licenceId = licence.getId();
+
+        // Get all the lepList where licence equals to licenceId
+        defaultLepShouldBeFound("licenceId.equals=" + licenceId);
+
+        // Get all the lepList where licence equals to licenceId + 1
+        defaultLepShouldNotBeFound("licenceId.equals=" + (licenceId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -644,7 +659,6 @@ public class LepResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(lep.getId().intValue())))
             .andExpect(jsonPath("$.[*].ean").value(hasItem(DEFAULT_EAN)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].typeLicence").value(hasItem(DEFAULT_TYPE_LICENCE.toString())))
             .andExpect(jsonPath("$.[*].titre").value(hasItem(DEFAULT_TITRE)))
             .andExpect(jsonPath("$.[*].duree").value(hasItem(DEFAULT_DUREE)));
 
@@ -695,7 +709,6 @@ public class LepResourceIT {
         updatedLep
             .ean(UPDATED_EAN)
             .description(UPDATED_DESCRIPTION)
-            .typeLicence(UPDATED_TYPE_LICENCE)
             .titre(UPDATED_TITRE)
             .duree(UPDATED_DUREE);
         LepDTO lepDTO = lepMapper.toDto(updatedLep);
@@ -711,7 +724,6 @@ public class LepResourceIT {
         Lep testLep = lepList.get(lepList.size() - 1);
         assertThat(testLep.getEan()).isEqualTo(UPDATED_EAN);
         assertThat(testLep.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testLep.getTypeLicence()).isEqualTo(UPDATED_TYPE_LICENCE);
         assertThat(testLep.getTitre()).isEqualTo(UPDATED_TITRE);
         assertThat(testLep.getDuree()).isEqualTo(UPDATED_DUREE);
 
@@ -778,7 +790,6 @@ public class LepResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(lep.getId().intValue())))
             .andExpect(jsonPath("$.[*].ean").value(hasItem(DEFAULT_EAN)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].typeLicence").value(hasItem(DEFAULT_TYPE_LICENCE.toString())))
             .andExpect(jsonPath("$.[*].titre").value(hasItem(DEFAULT_TITRE)))
             .andExpect(jsonPath("$.[*].duree").value(hasItem(DEFAULT_DUREE)));
     }

@@ -3,7 +3,6 @@ package fr.openent.moisson.service.dto;
 import java.io.Serializable;
 import java.util.Objects;
 import io.github.jhipster.service.Criteria;
-import fr.openent.moisson.domain.enumeration.TypeLicence;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -22,24 +21,6 @@ import io.github.jhipster.service.filter.StringFilter;
  * fix type specific filters.
  */
 public class LepCriteria implements Serializable, Criteria {
-    /**
-     * Class for filtering TypeLicence
-     */
-    public static class TypeLicenceFilter extends Filter<TypeLicence> {
-
-        public TypeLicenceFilter() {
-        }
-
-        public TypeLicenceFilter(TypeLicenceFilter filter) {
-            super(filter);
-        }
-
-        @Override
-        public TypeLicenceFilter copy() {
-            return new TypeLicenceFilter(this);
-        }
-
-    }
 
     private static final long serialVersionUID = 1L;
 
@@ -49,8 +30,6 @@ public class LepCriteria implements Serializable, Criteria {
 
     private StringFilter description;
 
-    private TypeLicenceFilter typeLicence;
-
     private StringFilter titre;
 
     private StringFilter duree;
@@ -59,6 +38,8 @@ public class LepCriteria implements Serializable, Criteria {
 
     private LongFilter offreId;
 
+    private LongFilter licenceId;
+
     public LepCriteria() {
     }
 
@@ -66,11 +47,11 @@ public class LepCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.ean = other.ean == null ? null : other.ean.copy();
         this.description = other.description == null ? null : other.description.copy();
-        this.typeLicence = other.typeLicence == null ? null : other.typeLicence.copy();
         this.titre = other.titre == null ? null : other.titre.copy();
         this.duree = other.duree == null ? null : other.duree.copy();
         this.conditionId = other.conditionId == null ? null : other.conditionId.copy();
         this.offreId = other.offreId == null ? null : other.offreId.copy();
+        this.licenceId = other.licenceId == null ? null : other.licenceId.copy();
     }
 
     @Override
@@ -100,14 +81,6 @@ public class LepCriteria implements Serializable, Criteria {
 
     public void setDescription(StringFilter description) {
         this.description = description;
-    }
-
-    public TypeLicenceFilter getTypeLicence() {
-        return typeLicence;
-    }
-
-    public void setTypeLicence(TypeLicenceFilter typeLicence) {
-        this.typeLicence = typeLicence;
     }
 
     public StringFilter getTitre() {
@@ -142,6 +115,14 @@ public class LepCriteria implements Serializable, Criteria {
         this.offreId = offreId;
     }
 
+    public LongFilter getLicenceId() {
+        return licenceId;
+    }
+
+    public void setLicenceId(LongFilter licenceId) {
+        this.licenceId = licenceId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -156,11 +137,11 @@ public class LepCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(ean, that.ean) &&
             Objects.equals(description, that.description) &&
-            Objects.equals(typeLicence, that.typeLicence) &&
             Objects.equals(titre, that.titre) &&
             Objects.equals(duree, that.duree) &&
             Objects.equals(conditionId, that.conditionId) &&
-            Objects.equals(offreId, that.offreId);
+            Objects.equals(offreId, that.offreId) &&
+            Objects.equals(licenceId, that.licenceId);
     }
 
     @Override
@@ -169,11 +150,11 @@ public class LepCriteria implements Serializable, Criteria {
         id,
         ean,
         description,
-        typeLicence,
         titre,
         duree,
         conditionId,
-        offreId
+        offreId,
+        licenceId
         );
     }
 
@@ -184,11 +165,11 @@ public class LepCriteria implements Serializable, Criteria {
                 (id != null ? "id=" + id + ", " : "") +
                 (ean != null ? "ean=" + ean + ", " : "") +
                 (description != null ? "description=" + description + ", " : "") +
-                (typeLicence != null ? "typeLicence=" + typeLicence + ", " : "") +
                 (titre != null ? "titre=" + titre + ", " : "") +
                 (duree != null ? "duree=" + duree + ", " : "") +
                 (conditionId != null ? "conditionId=" + conditionId + ", " : "") +
                 (offreId != null ? "offreId=" + offreId + ", " : "") +
+                (licenceId != null ? "licenceId=" + licenceId + ", " : "") +
             "}";
     }
 

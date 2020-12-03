@@ -14,6 +14,7 @@ public interface LicenceMapper extends EntityMapper<LicenceDTO, Licence> {
 
 
     @Mapping(target = "offre", ignore = true)
+    @Mapping(target = "lep", ignore = true)
     Licence toEntity(LicenceDTO licenceDTO);
 
     default Licence fromId(Long id) {

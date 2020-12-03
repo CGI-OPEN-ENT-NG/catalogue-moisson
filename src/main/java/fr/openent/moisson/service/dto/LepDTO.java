@@ -2,9 +2,6 @@ package fr.openent.moisson.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.Set;
-
-import fr.openent.moisson.domain.enumeration.TypeLicence;
 
 /**
  * A DTO for the {@link fr.openent.moisson.domain.Lep} entity.
@@ -18,15 +15,13 @@ public class LepDTO implements Serializable {
 
     private String description;
 
-    private TypeLicence typeLicence;
-
     private String titre;
 
     private String duree;
 
     private Long offreId;
 
-    private Set<ConditionDTO> conditions;
+    private Long licenceId;
 
     public Long getId() {
         return id;
@@ -50,14 +45,6 @@ public class LepDTO implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public TypeLicence getTypeLicence() {
-        return typeLicence;
-    }
-
-    public void setTypeLicence(TypeLicence typeLicence) {
-        this.typeLicence = typeLicence;
     }
 
     public String getTitre() {
@@ -84,12 +71,12 @@ public class LepDTO implements Serializable {
         this.offreId = offreId;
     }
 
-    public Set<ConditionDTO> getConditions() {
-        return conditions;
+    public Long getLicenceId() {
+        return licenceId;
     }
 
-    public void setConditions(Set<ConditionDTO> conditions) {
-        this.conditions = conditions;
+    public void setLicenceId(Long licenceId) {
+        this.licenceId = licenceId;
     }
 
     @Override
@@ -116,10 +103,10 @@ public class LepDTO implements Serializable {
             "id=" + getId() +
             ", ean='" + getEan() + "'" +
             ", description='" + getDescription() + "'" +
-            ", typeLicence='" + getTypeLicence() + "'" +
             ", titre='" + getTitre() + "'" +
             ", duree='" + getDuree() + "'" +
             ", offreId=" + getOffreId() +
+            ", licenceId=" + getLicenceId() +
             "}";
     }
 }

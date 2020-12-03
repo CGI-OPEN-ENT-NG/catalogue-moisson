@@ -41,13 +41,8 @@ public class Lep implements Serializable {
     @JsonProperty("DESCRIPTION")
     private String description;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type_licence")
-    @JsonProperty("TYPELICENCE")
-    private TypeLicence typeLicence;
-
     @Column(name = "titre")
-    @JsonProperty("TYPTITREELICENCE")
+    @JsonProperty("TITRE")
     private String titre;
 
     @Column(name = "duree")
@@ -66,6 +61,14 @@ public class Lep implements Serializable {
     @JsonIgnore
     @JsonBackReference
     private Offre offre;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
+    @JsonProperty("LICENCE")
+    @JsonManagedReference
+    private Licence licence;
+
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -100,19 +103,6 @@ public class Lep implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public TypeLicence getTypeLicence() {
-        return typeLicence;
-    }
-
-    public Lep typeLicence(TypeLicence typeLicence) {
-        this.typeLicence = typeLicence;
-        return this;
-    }
-
-    public void setTypeLicence(TypeLicence typeLicence) {
-        this.typeLicence = typeLicence;
     }
 
     public String getTitre() {
@@ -178,6 +168,20 @@ public class Lep implements Serializable {
     public void setOffre(Offre offre) {
         this.offre = offre;
     }
+
+    public Licence getLicence() {
+        return licence;
+    }
+
+    public Lep licence(Licence licence) {
+        this.licence = licence;
+        return this;
+    }
+
+    public void setLicence(Licence licence) {
+        this.licence = licence;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -203,7 +207,6 @@ public class Lep implements Serializable {
             "id=" + getId() +
             ", ean='" + getEan() + "'" +
             ", description='" + getDescription() + "'" +
-            ", typeLicence='" + getTypeLicence() + "'" +
             ", titre='" + getTitre() + "'" +
             ", duree='" + getDuree() + "'" +
             "}";

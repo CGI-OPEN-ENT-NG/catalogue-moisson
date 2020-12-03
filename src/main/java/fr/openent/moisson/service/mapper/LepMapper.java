@@ -9,15 +9,17 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Lep} and its DTO {@link LepDTO}.
  */
-@Mapper(componentModel = "spring", uses = {OffreMapper.class, ConditionMapper.class})
+@Mapper(componentModel = "spring", uses = {OffreMapper.class, LicenceMapper.class})
 public interface LepMapper extends EntityMapper<LepDTO, Lep> {
 
     @Mapping(source = "offre.id", target = "offreId")
+    @Mapping(source = "licence.id", target = "licenceId")
     LepDTO toDto(Lep lep);
 
-   // @Mapping(target = "conditions", ignore = true)
+    @Mapping(target = "conditions", ignore = true)
     @Mapping(target = "removeCondition", ignore = true)
     @Mapping(source = "offreId", target = "offre")
+    @Mapping(source = "licenceId", target = "licence")
     Lep toEntity(LepDTO lepDTO);
 
     default Lep fromId(Long id) {

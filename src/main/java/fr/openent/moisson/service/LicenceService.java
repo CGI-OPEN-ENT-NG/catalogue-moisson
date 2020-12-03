@@ -34,6 +34,12 @@ public interface LicenceService {
      * @return the {@link List} of entities.
      */
     List<LicenceDTO> findAllWhereOffreIsNull();
+    /**
+     * Get all the LicenceDTO where Lep is {@code null}.
+     *
+     * @return the {@link List} of entities.
+     */
+    List<LicenceDTO> findAllWhereLepIsNull();
 
 
     /**

@@ -81,7 +81,7 @@ public class ArticlePapier implements Serializable {
     private Instant dateParution;
 
     @Column(name = "prix_ht", precision = 21, scale = 2)
-    @JsonProperty("PRIXHT")
+    @JsonProperty("PXHT")
     private BigDecimal prixHT;
 
     @Column(name = "description")

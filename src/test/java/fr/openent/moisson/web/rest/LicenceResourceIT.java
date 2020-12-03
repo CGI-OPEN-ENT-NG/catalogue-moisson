@@ -3,6 +3,7 @@ package fr.openent.moisson.web.rest;
 import fr.openent.moisson.MoissoncatalogueApp;
 import fr.openent.moisson.domain.Licence;
 import fr.openent.moisson.domain.Offre;
+import fr.openent.moisson.domain.Lep;
 import fr.openent.moisson.repository.LicenceRepository;
 import fr.openent.moisson.repository.search.LicenceSearchRepository;
 import fr.openent.moisson.service.LicenceService;
@@ -293,6 +294,27 @@ public class LicenceResourceIT {
 
         // Get all the licenceList where offre equals to offreId + 1
         defaultLicenceShouldNotBeFound("offreId.equals=" + (offreId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllLicencesByLepIsEqualToSomething() throws Exception {
+        // Initialize the database
+        licenceRepository.saveAndFlush(licence);
+        Lep lep = LepResourceIT.createEntity(em);
+        em.persist(lep);
+        em.flush();
+        licence.setLep(lep);
+        lep.setLicence(licence);
+        licenceRepository.saveAndFlush(licence);
+        Long lepId = lep.getId();
+
+        // Get all the licenceList where lep equals to lepId
+        defaultLicenceShouldBeFound("lepId.equals=" + lepId);
+
+        // Get all the licenceList where lep equals to lepId + 1
+        defaultLicenceShouldNotBeFound("lepId.equals=" + (lepId + 1));
     }
 
     /**

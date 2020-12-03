@@ -77,6 +77,21 @@ public class LicenceServiceImpl implements LicenceService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+
+    /**
+     *  Get all the licences where Lep is {@code null}.
+     *  @return the list of entities.
+     */
+    @Transactional(readOnly = true) 
+    public List<LicenceDTO> findAllWhereLepIsNull() {
+        log.debug("Request to get all licences where Lep is null");
+        return StreamSupport
+            .stream(licenceRepository.findAll().spliterator(), false)
+            .filter(licence -> licence.getLep() == null)
+            .map(licenceMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
     @Override
     @Transactional(readOnly = true)
     public Optional<LicenceDTO> findOne(Long id) {
