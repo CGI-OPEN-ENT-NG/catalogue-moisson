@@ -1,6 +1,7 @@
 package fr.openent.moisson.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
+
 import java.io.Serializable;
 
 import fr.openent.moisson.domain.enumeration.Technologie;
@@ -32,104 +34,137 @@ public class Techno implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "technologie")
+    @JsonProperty("Technologie")
     private Technologie technologie;
 
     @Column(name = "version_reader")
+    @JsonProperty("VersionReader")
     private String versionReader;
 
     @Column(name = "available_hors_ent")
+    @JsonProperty("AvailableHorsENT")
     private Boolean availableHorsENT;
 
     @Column(name = "available_via_ent")
+    @JsonProperty("AvailableViaENT")
     private Boolean availableViaENT;
 
     @Column(name = "available_via_gar")
+    @JsonProperty("AvailableViaGAR")
     private Boolean availableViaGAR;
 
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "type_licence_gar", nullable = false)
+    @JsonProperty("TypeLicenceGA")
     private TypeLicenceGAR typeLicenceGAR;
 
     @Column(name = "can_use_offline")
+    @JsonProperty("CanUseOffline")
     private Boolean canUseOffline;
 
     @Column(name = "one_clic")
+    @JsonProperty("oneClic")
     private Boolean oneClic;
 
     @Column(name = "export_cle_usb")
+    @JsonProperty("ExportCleUSB")
     private Boolean exportCleUSB;
 
     @Column(name = "deploiement_masse")
+    @JsonProperty("deploiementMasse")
     private Boolean deploiementMasse;
 
     @Column(name = "configuration_mini_os")
+    @JsonProperty("ConfigurationMiniOS")
     private String configurationMiniOS;
 
     @Column(name = "need_flash")
-    private Boolean needFlash;
+    @JsonProperty("NeedFlash")
+     private Boolean needFlash;
 
     @Column(name = "annotations")
+    @JsonProperty("Annotations")
     private Boolean annotations;
 
     @Column(name = "creation_cours")
+    @JsonProperty("CreationCours")
     private Boolean creationCours;
 
     @Column(name = "nb_maxi_install")
+    @JsonProperty("NbMaxiInstall")
     private Integer nbMaxiInstall;
 
     @Column(name = "nb_max_simult_connexions")
+    @JsonProperty("NbMaxSimultConnexions")
     private Integer nbMaxSimultConnexions;
 
     @Column(name = "web_adaptatif")
+    @JsonProperty("WebAdaptatif")
     private Boolean webAdaptatif;
 
     @Column(name = "marque_page")
+    @JsonProperty("MarquePage")
     private Boolean marquePage;
 
     @Column(name = "capture_image")
+    @JsonProperty("CaptureImage")
     private Boolean captureImage;
 
     @Column(name = "zoom")
+    @JsonProperty("Zoom")
     private Boolean zoom;
 
     @Column(name = "fonctions_recherche")
+    @JsonProperty("FonctionsRecherche")
     private Boolean fonctionsRecherche;
 
     @Column(name = "corriges_pour_enseignants")
+    @JsonProperty("CorrigesPourEnseignants")
     private Boolean corrigesPourEnseignants;
 
     @Column(name = "assignation_taches_eleves")
+    @JsonProperty("AssignationTachesEleves")
     private Boolean assignationTachesEleves;
 
     @Column(name = "partage_contenu_eleves")
+    @JsonProperty("PartageContenuEleves")
     private Boolean partageContenuEleves;
 
     @Column(name = "exercices_interactifs")
+    @JsonProperty("ExercicesInteractifs")
     private Boolean exercicesInteractifs;
 
     @Column(name = "exercices_auto_corriges")
+    @JsonProperty("ExercicesAutoCorriges")
     private Boolean exercicesAutoCorriges;
 
     @Column(name = "export_reponses_eleves")
+    @JsonProperty("ExportReponsesEleves")
     private Boolean exportReponsesEleves;
 
     @Column(name = "import_document")
+    @JsonProperty("ImportDocument")
     private Boolean importDocument;
 
     @Column(name = "export_document")
+    @JsonProperty("ExportDocument")
     private Boolean exportDocument;
 
     @Column(name = "export_scorm")
+    @JsonProperty("ExportSCORM")
     private Boolean exportSCORM;
 
     @Column(name = "personnalisation_user_interface")
+    @JsonProperty("PersonnalisationUserInterface")
     private Boolean personnalisationUserInterface;
 
     @Column(name = "modif_contenu_editorial")
+    @JsonProperty("ModifContenuEditorial")
     private Boolean modifContenuEditorial;
 
     @Column(name = "dispositif_dys")
+    @JsonProperty("DispositifDYS")
     private Boolean dispositifDYS;
 
     @ManyToOne
@@ -149,26 +184,26 @@ public class Techno implements Serializable {
         return technologie;
     }
 
+    public void setTechnologie(Technologie technologie) {
+        this.technologie = technologie;
+    }
+
     public Techno technologie(Technologie technologie) {
         this.technologie = technologie;
         return this;
-    }
-
-    public void setTechnologie(Technologie technologie) {
-        this.technologie = technologie;
     }
 
     public String getVersionReader() {
         return versionReader;
     }
 
+    public void setVersionReader(String versionReader) {
+        this.versionReader = versionReader;
+    }
+
     public Techno versionReader(String versionReader) {
         this.versionReader = versionReader;
         return this;
-    }
-
-    public void setVersionReader(String versionReader) {
-        this.versionReader = versionReader;
     }
 
     public Boolean isAvailableHorsENT() {
@@ -214,13 +249,13 @@ public class Techno implements Serializable {
         return typeLicenceGAR;
     }
 
+    public void setTypeLicenceGAR(TypeLicenceGAR typeLicenceGAR) {
+        this.typeLicenceGAR = typeLicenceGAR;
+    }
+
     public Techno typeLicenceGAR(TypeLicenceGAR typeLicenceGAR) {
         this.typeLicenceGAR = typeLicenceGAR;
         return this;
-    }
-
-    public void setTypeLicenceGAR(TypeLicenceGAR typeLicenceGAR) {
-        this.typeLicenceGAR = typeLicenceGAR;
     }
 
     public Boolean isCanUseOffline() {
@@ -279,13 +314,13 @@ public class Techno implements Serializable {
         return configurationMiniOS;
     }
 
+    public void setConfigurationMiniOS(String configurationMiniOS) {
+        this.configurationMiniOS = configurationMiniOS;
+    }
+
     public Techno configurationMiniOS(String configurationMiniOS) {
         this.configurationMiniOS = configurationMiniOS;
         return this;
-    }
-
-    public void setConfigurationMiniOS(String configurationMiniOS) {
-        this.configurationMiniOS = configurationMiniOS;
     }
 
     public Boolean isNeedFlash() {
@@ -331,26 +366,26 @@ public class Techno implements Serializable {
         return nbMaxiInstall;
     }
 
+    public void setNbMaxiInstall(Integer nbMaxiInstall) {
+        this.nbMaxiInstall = nbMaxiInstall;
+    }
+
     public Techno nbMaxiInstall(Integer nbMaxiInstall) {
         this.nbMaxiInstall = nbMaxiInstall;
         return this;
-    }
-
-    public void setNbMaxiInstall(Integer nbMaxiInstall) {
-        this.nbMaxiInstall = nbMaxiInstall;
     }
 
     public Integer getNbMaxSimultConnexions() {
         return nbMaxSimultConnexions;
     }
 
+    public void setNbMaxSimultConnexions(Integer nbMaxSimultConnexions) {
+        this.nbMaxSimultConnexions = nbMaxSimultConnexions;
+    }
+
     public Techno nbMaxSimultConnexions(Integer nbMaxSimultConnexions) {
         this.nbMaxSimultConnexions = nbMaxSimultConnexions;
         return this;
-    }
-
-    public void setNbMaxSimultConnexions(Integer nbMaxSimultConnexions) {
-        this.nbMaxSimultConnexions = nbMaxSimultConnexions;
     }
 
     public Boolean isWebAdaptatif() {
@@ -578,13 +613,13 @@ public class Techno implements Serializable {
         return articleNumerique;
     }
 
+    public void setArticleNumerique(ArticleNumerique articleNumerique) {
+        this.articleNumerique = articleNumerique;
+    }
+
     public Techno articleNumerique(ArticleNumerique articleNumerique) {
         this.articleNumerique = articleNumerique;
         return this;
-    }
-
-    public void setArticleNumerique(ArticleNumerique articleNumerique) {
-        this.articleNumerique = articleNumerique;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

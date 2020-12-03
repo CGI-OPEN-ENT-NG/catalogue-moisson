@@ -6,8 +6,8 @@
     <!--
         Added the constraints for entity Condition.
     -->
-    <changeSet id="20201125154023-2" author="jhipster">
-        
+    <changeSet id="20201125154023-2" author="moisson">
+
         <addForeignKeyConstraint baseColumnNames="lep_id"
                                  baseTableName="condition"
                                  constraintName="fk_condition_lep_id"

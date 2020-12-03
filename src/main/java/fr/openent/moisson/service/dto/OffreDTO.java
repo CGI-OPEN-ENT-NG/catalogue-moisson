@@ -14,13 +14,7 @@ public class OffreDTO implements Serializable {
     @Size(min = 13, max = 13)
     private String eanLibraire;
 
-    private String reference;
-
-    private Integer duree;
-
     private Integer quantiteMinimaleAchat;
-
-    private String licence;
 
     private Boolean prescripteur;
 
@@ -30,8 +24,14 @@ public class OffreDTO implements Serializable {
 
     private Boolean adoptant;
 
+    private String duree;
+
+    private String referenceEditeur;
+
 
     private Long articleNumeriqueId;
+
+    private Long licenceId;
     
     public Long getId() {
         return id;
@@ -49,36 +49,12 @@ public class OffreDTO implements Serializable {
         this.eanLibraire = eanLibraire;
     }
 
-    public String getReference() {
-        return reference;
-    }
-
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
-
-    public Integer getDuree() {
-        return duree;
-    }
-
-    public void setDuree(Integer duree) {
-        this.duree = duree;
-    }
-
     public Integer getQuantiteMinimaleAchat() {
         return quantiteMinimaleAchat;
     }
 
     public void setQuantiteMinimaleAchat(Integer quantiteMinimaleAchat) {
         this.quantiteMinimaleAchat = quantiteMinimaleAchat;
-    }
-
-    public String getLicence() {
-        return licence;
-    }
-
-    public void setLicence(String licence) {
-        this.licence = licence;
     }
 
     public Boolean isPrescripteur() {
@@ -113,12 +89,36 @@ public class OffreDTO implements Serializable {
         this.adoptant = adoptant;
     }
 
+    public String getDuree() {
+        return duree;
+    }
+
+    public void setDuree(String duree) {
+        this.duree = duree;
+    }
+
+    public String getReferenceEditeur() {
+        return referenceEditeur;
+    }
+
+    public void setReferenceEditeur(String referenceEditeur) {
+        this.referenceEditeur = referenceEditeur;
+    }
+
     public Long getArticleNumeriqueId() {
         return articleNumeriqueId;
     }
 
     public void setArticleNumeriqueId(Long articleNumeriqueId) {
         this.articleNumeriqueId = articleNumeriqueId;
+    }
+
+    public Long getLicenceId() {
+        return licenceId;
+    }
+
+    public void setLicenceId(Long licenceId) {
+        this.licenceId = licenceId;
     }
 
     @Override
@@ -144,15 +144,15 @@ public class OffreDTO implements Serializable {
         return "OffreDTO{" +
             "id=" + getId() +
             ", eanLibraire='" + getEanLibraire() + "'" +
-            ", reference='" + getReference() + "'" +
-            ", duree=" + getDuree() +
             ", quantiteMinimaleAchat=" + getQuantiteMinimaleAchat() +
-            ", licence='" + getLicence() + "'" +
             ", prescripteur='" + isPrescripteur() + "'" +
             ", libelle='" + getLibelle() + "'" +
             ", prixHT=" + getPrixHT() +
             ", adoptant='" + isAdoptant() + "'" +
+            ", duree='" + getDuree() + "'" +
+            ", referenceEditeur='" + getReferenceEditeur() + "'" +
             ", articleNumeriqueId=" + getArticleNumeriqueId() +
+            ", licenceId=" + getLicenceId() +
             "}";
     }
 }

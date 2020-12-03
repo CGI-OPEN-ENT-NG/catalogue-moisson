@@ -1,5 +1,8 @@
 package fr.openent.moisson.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -7,18 +10,21 @@ import java.math.BigDecimal;
  * A DTO for the {@link fr.openent.moisson.domain.Tva} entity.
  */
 public class TvaDTO implements Serializable {
-    
+
+    @JsonIgnore
     private Long id;
 
+    @JsonProperty("TAUX")
     private BigDecimal taux;
 
+    @JsonProperty("POURCENT")
     private BigDecimal pourcent;
 
-
+    @JsonIgnore
     private Long offreId;
-
+    @JsonIgnore
     private Long articlePapierId;
-    
+
     public Long getId() {
         return id;
     }

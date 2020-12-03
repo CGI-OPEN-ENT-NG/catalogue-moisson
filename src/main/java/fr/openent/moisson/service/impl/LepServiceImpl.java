@@ -3,6 +3,7 @@ package fr.openent.moisson.service.impl;
 import fr.openent.moisson.service.LepService;
 import fr.openent.moisson.domain.Lep;
 import fr.openent.moisson.repository.LepRepository;
+import fr.openent.moisson.repository.LicenceRepository;
 import fr.openent.moisson.repository.search.LepSearchRepository;
 import fr.openent.moisson.service.dto.LepDTO;
 import fr.openent.moisson.service.mapper.LepMapper;
@@ -33,16 +34,21 @@ public class LepServiceImpl implements LepService {
 
     private final LepSearchRepository lepSearchRepository;
 
-    public LepServiceImpl(LepRepository lepRepository, LepMapper lepMapper, LepSearchRepository lepSearchRepository) {
+    private final LicenceRepository licenceRepository;
+
+    public LepServiceImpl(LepRepository lepRepository, LepMapper lepMapper, LepSearchRepository lepSearchRepository, LicenceRepository licenceRepository) {
         this.lepRepository = lepRepository;
         this.lepMapper = lepMapper;
         this.lepSearchRepository = lepSearchRepository;
+        this.licenceRepository = licenceRepository;
     }
 
     @Override
     public LepDTO save(LepDTO lepDTO) {
         log.debug("Request to save Lep : {}", lepDTO);
         Lep lep = lepMapper.toEntity(lepDTO);
+        Long licenceId = lepDTO.getLicenceId();
+        licenceRepository.findById(licenceId).ifPresent(lep::licence);
         lep = lepRepository.save(lep);
         LepDTO result = lepMapper.toDto(lep);
         lepSearchRepository.save(lep);

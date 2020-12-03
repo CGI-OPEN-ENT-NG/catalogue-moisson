@@ -17,7 +17,7 @@ application {
     enableHibernateCache true
     enableSwaggerCodegen true
     enableTranslation true
-    jhiPrefix moisson
+    jhiPrefix jhi
     jhipsterVersion "6.10.5"
     jwtSecretKey "Y2Q0MTg2OGI2NDk0NDhkNmQyNWQ3MzdjZWY1YmNmNmEyYzg4YTcyMjNjYjczYjM2MGZhMWM1ZDcxZjg3OTI2YjEwYjAzMWNiYTk3NjU5ZDJkNzFlNDQ1ZmMyMTljZWEyZDcxNTBlZTI4MmFhYjkyNTlmY2NkYjM0YzVkYmEwYmY="
     languages [fr, en]
@@ -37,7 +37,7 @@ application {
     websocket false
   }
 
-  entities ArticleNumerique, ArticlePapier, Condition, Discipline, Lep, Niveau, Offre, Techno, Tva
+  entities ArticleNumerique, ArticlePapier, Condition, Discipline, Disponibilite, Lep, Licence, Niveau, Offre, Techno, Tva
 }
 
 entity ArticleNumerique {
@@ -50,12 +50,13 @@ entity ArticleNumerique {
   distributeur String,
   urlCouverture String,
   urlDemo String,
-  disponibilte Disponibilite,
-  dateDisponibilte Instant,
   dateParution Instant,
   compatibleGAR Boolean,
   accessibleENT Boolean,
-  eanPapier String minlength(13) maxlength(13)
+  eanPapier String minlength(13) maxlength(13),
+  description String,
+  type TypeArticle,
+  publicCible PublicCible
 }
 entity ArticlePapier {
   ean String minlength(13) maxlength(13),
@@ -67,11 +68,9 @@ entity ArticlePapier {
   collection String,
   distributeur String,
   urlCouverture String,
-  disponibilte Disponibilite,
-  dateDisponibilte Instant,
   dateParution Instant,
-  commandable Boolean,
-  type TypeArticle
+  prixHT BigDecimal,
+  description String
 }
 entity Condition {
   gratuite Integer,
@@ -82,12 +81,21 @@ entity Discipline {
   terme String,
   concept String
 }
+entity Disponibilite {
+  commentaire String,
+  dateDisponibilite Instant,
+  commandable Boolean,
+  valeur DisponibiliteEnum
+}
 entity Lep {
   ean String minlength(13) maxlength(13),
   description String,
   typeLicence TypeLicence,
   titre String,
   duree String
+}
+entity Licence {
+  valeur String
 }
 entity Niveau {
   libelle String,
@@ -96,14 +104,13 @@ entity Niveau {
 }
 entity Offre {
   eanLibraire String minlength(13) maxlength(13),
-  reference String,
-  duree Integer,
   quantiteMinimaleAchat Integer,
-  licence String,
   prescripteur Boolean,
   libelle String,
   prixHT BigDecimal,
-  adoptant Boolean
+  adoptant Boolean,
+  duree String,
+  referenceEditeur String
 }
 entity Techno {
   technologie Technologie,
@@ -144,13 +151,22 @@ entity Tva {
   taux BigDecimal,
   pourcent BigDecimal
 }
-enum Disponibilite {
-  DISPONIBLE,
-  EN_COURS_D_IMPRESSION
-}
 enum TypeArticle {
   NUMERIQUE,
   PAPIER
+}
+enum PublicCible {
+  ELEVE,
+  ENSEIGNANT,
+  ELEVE_ET_ENSEIGNANT
+}
+enum DisponibiliteEnum {
+  DISPONIBLE,
+  EN_COURS_D_IMPRESSION,
+  EN_COURS_DE_REIMPRESSION,
+  NON_DISPONIBLE_PROVISOIREMENT,
+  EPUISE,
+  A_PARAITRE
 }
 enum TypeLicence {
   ELEVE,
@@ -170,6 +186,11 @@ enum TypeLicenceGAR {
   NON_TRANFERABLE
 }
 
+relationship OneToOne {
+  ArticleNumerique{disponibilite} to Disponibilite{articleNumerique} with jpaDerivedIdentifier,
+  ArticlePapier{disponibilite} to Disponibilite{articlePapier} with jpaDerivedIdentifier,
+  Offre{licence} to Licence{offre} with jpaDerivedIdentifier
+}
 relationship OneToMany {
   Lep{condition} to Condition{lep},
   ArticleNumerique{discipline} to Discipline{articleNumerique},
@@ -181,8 +202,8 @@ relationship OneToMany {
   ArticlePapier{tva} to Tva{articlePapier}
 }
 
-dto ArticleNumerique, ArticlePapier, Condition, Discipline, Lep, Niveau, Offre, Techno, Tva with mapstruct
-paginate ArticleNumerique, ArticlePapier, Condition, Discipline, Lep, Niveau, Offre, Techno, Tva with pagination
-service ArticleNumerique, ArticlePapier, Condition, Discipline, Lep, Niveau, Offre, Techno, Tva with serviceImpl
-search ArticleNumerique, ArticlePapier, Condition, Discipline, Lep, Niveau, Offre, Techno, Tva with elasticsearch
-filter ArticleNumerique, ArticlePapier, Condition, Discipline, Lep, Niveau, Offre, Techno, Tva
+dto ArticleNumerique, ArticlePapier, Condition, Discipline, Disponibilite, Lep, Licence, Niveau, Offre, Techno, Tva with mapstruct
+paginate ArticleNumerique, ArticlePapier, Condition, Discipline, Disponibilite, Lep, Licence, Niveau, Offre, Techno, Tva with pagination
+service ArticleNumerique, ArticlePapier, Condition, Discipline, Disponibilite, Lep, Licence, Niveau, Offre, Techno, Tva with serviceImpl
+search ArticleNumerique, ArticlePapier, Condition, Discipline, Disponibilite, Lep, Licence, Niveau, Offre, Techno, Tva with elasticsearch
+filter ArticleNumerique, ArticlePapier, Condition, Discipline, Disponibilite, Lep, Licence, Niveau, Offre, Techno, Tva

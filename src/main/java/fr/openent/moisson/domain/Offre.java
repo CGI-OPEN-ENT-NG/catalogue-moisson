@@ -1,6 +1,9 @@
 package fr.openent.moisson.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -23,51 +26,64 @@ import java.util.Set;
 public class Offre implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     @Size(min = 13, max = 13)
     @Column(name = "ean_libraire", length = 13)
+    @JsonProperty("EANLDE")
     private String eanLibraire;
 
-    @Column(name = "reference")
-    private String reference;
-
-    @Column(name = "duree")
-    private Integer duree;
-
     @Column(name = "quantite_minimale_achat")
+    @JsonProperty("QTE_MINI")
     private Integer quantiteMinimaleAchat;
 
-    @Column(name = "licence")
-    private String licence;
-
     @Column(name = "prescripteur")
+    @JsonProperty("PRESCRIPTEUR")
     private Boolean prescripteur;
 
     @Column(name = "libelle")
+    @JsonProperty("LIBELLE")
     private String libelle;
 
     @Column(name = "prix_ht", precision = 21, scale = 2)
+    @JsonProperty("PXHT")
     private BigDecimal prixHT;
 
     @Column(name = "adoptant")
+    @JsonProperty("ADOPTANT")
     private Boolean adoptant;
+
+    @Column(name = "duree")
+    @JsonProperty("DUREE")
+    private String duree;
+
+    @Column(name = "reference_editeur")
+    @JsonProperty("REF_EDITEUR")
+    private String referenceEditeur;
 
     @OneToMany(mappedBy = "offre")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonProperty("TVA")
     private Set<Tva> tvas = new HashSet<>();
 
     @OneToMany(mappedBy = "offre")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonProperty("LEP")
     private Set<Lep> leps = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = "offres", allowSetters = true)
+    @JsonBackReference
+    @JoinColumn(name = "article_numerique_id", nullable = false)
     private ArticleNumerique articleNumerique;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
+    @JsonProperty("LICENCE")
+    @JsonManagedReference
+    private Licence licence;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -91,32 +107,6 @@ public class Offre implements Serializable {
         this.eanLibraire = eanLibraire;
     }
 
-    public String getReference() {
-        return reference;
-    }
-
-    public Offre reference(String reference) {
-        this.reference = reference;
-        return this;
-    }
-
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
-
-    public Integer getDuree() {
-        return duree;
-    }
-
-    public Offre duree(Integer duree) {
-        this.duree = duree;
-        return this;
-    }
-
-    public void setDuree(Integer duree) {
-        this.duree = duree;
-    }
-
     public Integer getQuantiteMinimaleAchat() {
         return quantiteMinimaleAchat;
     }
@@ -128,19 +118,6 @@ public class Offre implements Serializable {
 
     public void setQuantiteMinimaleAchat(Integer quantiteMinimaleAchat) {
         this.quantiteMinimaleAchat = quantiteMinimaleAchat;
-    }
-
-    public String getLicence() {
-        return licence;
-    }
-
-    public Offre licence(String licence) {
-        this.licence = licence;
-        return this;
-    }
-
-    public void setLicence(String licence) {
-        this.licence = licence;
     }
 
     public Boolean isPrescripteur() {
@@ -193,6 +170,32 @@ public class Offre implements Serializable {
 
     public void setAdoptant(Boolean adoptant) {
         this.adoptant = adoptant;
+    }
+
+    public String getDuree() {
+        return duree;
+    }
+
+    public Offre duree(String duree) {
+        this.duree = duree;
+        return this;
+    }
+
+    public void setDuree(String duree) {
+        this.duree = duree;
+    }
+
+    public String getReferenceEditeur() {
+        return referenceEditeur;
+    }
+
+    public Offre referenceEditeur(String referenceEditeur) {
+        this.referenceEditeur = referenceEditeur;
+        return this;
+    }
+
+    public void setReferenceEditeur(String referenceEditeur) {
+        this.referenceEditeur = referenceEditeur;
     }
 
     public Set<Tva> getTvas() {
@@ -257,6 +260,19 @@ public class Offre implements Serializable {
     public void setArticleNumerique(ArticleNumerique articleNumerique) {
         this.articleNumerique = articleNumerique;
     }
+
+    public Licence getLicence() {
+        return licence;
+    }
+
+    public Offre licence(Licence licence) {
+        this.licence = licence;
+        return this;
+    }
+
+    public void setLicence(Licence licence) {
+        this.licence = licence;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -281,14 +297,13 @@ public class Offre implements Serializable {
         return "Offre{" +
             "id=" + getId() +
             ", eanLibraire='" + getEanLibraire() + "'" +
-            ", reference='" + getReference() + "'" +
-            ", duree=" + getDuree() +
             ", quantiteMinimaleAchat=" + getQuantiteMinimaleAchat() +
-            ", licence='" + getLicence() + "'" +
             ", prescripteur='" + isPrescripteur() + "'" +
             ", libelle='" + getLibelle() + "'" +
             ", prixHT=" + getPrixHT() +
             ", adoptant='" + isAdoptant() + "'" +
+            ", duree='" + getDuree() + "'" +
+            ", referenceEditeur='" + getReferenceEditeur() + "'" +
             "}";
     }
 }

@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="offre"/>
 
+        <addForeignKeyConstraint baseColumnNames="id"
+                                 baseTableName="lep"
+                                 constraintName="fk_lep_licence_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="licence"/>
+
     </changeSet>
 </databaseChangeLog>

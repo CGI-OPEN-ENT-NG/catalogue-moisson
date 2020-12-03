@@ -3,6 +3,7 @@ package fr.openent.moisson.service.impl;
 import fr.openent.moisson.service.OffreService;
 import fr.openent.moisson.domain.Offre;
 import fr.openent.moisson.repository.OffreRepository;
+import fr.openent.moisson.repository.LicenceRepository;
 import fr.openent.moisson.repository.search.OffreSearchRepository;
 import fr.openent.moisson.service.dto.OffreDTO;
 import fr.openent.moisson.service.mapper.OffreMapper;
@@ -33,16 +34,21 @@ public class OffreServiceImpl implements OffreService {
 
     private final OffreSearchRepository offreSearchRepository;
 
-    public OffreServiceImpl(OffreRepository offreRepository, OffreMapper offreMapper, OffreSearchRepository offreSearchRepository) {
+    private final LicenceRepository licenceRepository;
+
+    public OffreServiceImpl(OffreRepository offreRepository, OffreMapper offreMapper, OffreSearchRepository offreSearchRepository, LicenceRepository licenceRepository) {
         this.offreRepository = offreRepository;
         this.offreMapper = offreMapper;
         this.offreSearchRepository = offreSearchRepository;
+        this.licenceRepository = licenceRepository;
     }
 
     @Override
     public OffreDTO save(OffreDTO offreDTO) {
         log.debug("Request to save Offre : {}", offreDTO);
         Offre offre = offreMapper.toEntity(offreDTO);
+        Long licenceId = offreDTO.getLicenceId();
+        licenceRepository.findById(licenceId).ifPresent(offre::licence);
         offre = offreRepository.save(offre);
         OffreDTO result = offreMapper.toDto(offre);
         offreSearchRepository.save(offre);

@@ -3,6 +3,7 @@ package fr.openent.moisson.service.impl;
 import fr.openent.moisson.service.ArticlePapierService;
 import fr.openent.moisson.domain.ArticlePapier;
 import fr.openent.moisson.repository.ArticlePapierRepository;
+import fr.openent.moisson.repository.DisponibiliteRepository;
 import fr.openent.moisson.repository.search.ArticlePapierSearchRepository;
 import fr.openent.moisson.service.dto.ArticlePapierDTO;
 import fr.openent.moisson.service.mapper.ArticlePapierMapper;
@@ -33,20 +34,33 @@ public class ArticlePapierServiceImpl implements ArticlePapierService {
 
     private final ArticlePapierSearchRepository articlePapierSearchRepository;
 
-    public ArticlePapierServiceImpl(ArticlePapierRepository articlePapierRepository, ArticlePapierMapper articlePapierMapper, ArticlePapierSearchRepository articlePapierSearchRepository) {
+    private final DisponibiliteRepository disponibiliteRepository;
+
+    public ArticlePapierServiceImpl(ArticlePapierRepository articlePapierRepository, ArticlePapierMapper articlePapierMapper, ArticlePapierSearchRepository articlePapierSearchRepository, DisponibiliteRepository disponibiliteRepository) {
         this.articlePapierRepository = articlePapierRepository;
         this.articlePapierMapper = articlePapierMapper;
         this.articlePapierSearchRepository = articlePapierSearchRepository;
+        this.disponibiliteRepository = disponibiliteRepository;
     }
 
     @Override
     public ArticlePapierDTO save(ArticlePapierDTO articlePapierDTO) {
         log.debug("Request to save ArticlePapier : {}", articlePapierDTO);
         ArticlePapier articlePapier = articlePapierMapper.toEntity(articlePapierDTO);
+        Long disponibiliteId = articlePapierDTO.getDisponibiliteId();
+        disponibiliteRepository.findById(disponibiliteId).ifPresent(articlePapier::disponibilite);
         articlePapier = articlePapierRepository.save(articlePapier);
         ArticlePapierDTO result = articlePapierMapper.toDto(articlePapier);
         articlePapierSearchRepository.save(articlePapier);
         return result;
+    }
+
+    @Override
+    public ArticlePapier save(ArticlePapier articlePapier) {
+        log.debug("Request to save ArticlePapier : {}", articlePapier);
+        articlePapier = articlePapierRepository.save(articlePapier);
+        articlePapierSearchRepository.save(articlePapier);
+        return articlePapier;
     }
 
     @Override

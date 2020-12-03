@@ -65,6 +65,8 @@ public class CacheConfiguration {
             createCache(cm, fr.openent.moisson.domain.ArticleNumerique.class.getName() + ".offres");
             createCache(cm, fr.openent.moisson.domain.ArticleNumerique.class.getName() + ".technos");
             createCache(cm, fr.openent.moisson.domain.ArticlePapier.class.getName() + ".tvas");
+            createCache(cm, fr.openent.moisson.domain.Disponibilite.class.getName());
+            createCache(cm, fr.openent.moisson.domain.Licence.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

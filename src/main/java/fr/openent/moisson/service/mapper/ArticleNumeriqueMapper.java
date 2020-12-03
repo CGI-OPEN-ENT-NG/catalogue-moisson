@@ -9,9 +9,11 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link ArticleNumerique} and its DTO {@link ArticleNumeriqueDTO}.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {DisponibiliteMapper.class})
 public interface ArticleNumeriqueMapper extends EntityMapper<ArticleNumeriqueDTO, ArticleNumerique> {
 
+    @Mapping(source = "disponibilite.id", target = "disponibiliteId")
+    ArticleNumeriqueDTO toDto(ArticleNumerique articleNumerique);
 
     @Mapping(target = "disciplines", ignore = true)
     @Mapping(target = "removeDiscipline", ignore = true)
@@ -21,6 +23,7 @@ public interface ArticleNumeriqueMapper extends EntityMapper<ArticleNumeriqueDTO
     @Mapping(target = "removeOffre", ignore = true)
     @Mapping(target = "technos", ignore = true)
     @Mapping(target = "removeTechno", ignore = true)
+    @Mapping(source = "disponibiliteId", target = "disponibilite")
     ArticleNumerique toEntity(ArticleNumeriqueDTO articleNumeriqueDTO);
 
     default ArticleNumerique fromId(Long id) {

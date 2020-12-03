@@ -3,8 +3,7 @@ package fr.openent.moisson.service.dto;
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import fr.openent.moisson.domain.enumeration.Disponibilite;
-import fr.openent.moisson.domain.enumeration.TypeArticle;
+import java.math.BigDecimal;
 
 /**
  * A DTO for the {@link fr.openent.moisson.domain.ArticlePapier} entity.
@@ -32,16 +31,14 @@ public class ArticlePapierDTO implements Serializable {
 
     private String urlCouverture;
 
-    private Disponibilite disponibilte;
-
-    private Instant dateDisponibilte;
-
     private Instant dateParution;
 
-    private Boolean commandable;
+    private BigDecimal prixHT;
 
-    private TypeArticle type;
+    private String description;
 
+
+    private Long disponibiliteId;
     
     public Long getId() {
         return id;
@@ -123,22 +120,6 @@ public class ArticlePapierDTO implements Serializable {
         this.urlCouverture = urlCouverture;
     }
 
-    public Disponibilite getDisponibilte() {
-        return disponibilte;
-    }
-
-    public void setDisponibilte(Disponibilite disponibilte) {
-        this.disponibilte = disponibilte;
-    }
-
-    public Instant getDateDisponibilte() {
-        return dateDisponibilte;
-    }
-
-    public void setDateDisponibilte(Instant dateDisponibilte) {
-        this.dateDisponibilte = dateDisponibilte;
-    }
-
     public Instant getDateParution() {
         return dateParution;
     }
@@ -147,20 +128,28 @@ public class ArticlePapierDTO implements Serializable {
         this.dateParution = dateParution;
     }
 
-    public Boolean isCommandable() {
-        return commandable;
+    public BigDecimal getPrixHT() {
+        return prixHT;
     }
 
-    public void setCommandable(Boolean commandable) {
-        this.commandable = commandable;
+    public void setPrixHT(BigDecimal prixHT) {
+        this.prixHT = prixHT;
     }
 
-    public TypeArticle getType() {
-        return type;
+    public String getDescription() {
+        return description;
     }
 
-    public void setType(TypeArticle type) {
-        this.type = type;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Long getDisponibiliteId() {
+        return disponibiliteId;
+    }
+
+    public void setDisponibiliteId(Long disponibiliteId) {
+        this.disponibiliteId = disponibiliteId;
     }
 
     @Override
@@ -194,11 +183,10 @@ public class ArticlePapierDTO implements Serializable {
             ", collection='" + getCollection() + "'" +
             ", distributeur='" + getDistributeur() + "'" +
             ", urlCouverture='" + getUrlCouverture() + "'" +
-            ", disponibilte='" + getDisponibilte() + "'" +
-            ", dateDisponibilte='" + getDateDisponibilte() + "'" +
             ", dateParution='" + getDateParution() + "'" +
-            ", commandable='" + isCommandable() + "'" +
-            ", type='" + getType() + "'" +
+            ", prixHT=" + getPrixHT() +
+            ", description='" + getDescription() + "'" +
+            ", disponibiliteId=" + getDisponibiliteId() +
             "}";
     }
 }

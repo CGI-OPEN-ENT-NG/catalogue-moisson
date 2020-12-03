@@ -1,18 +1,22 @@
 package fr.openent.moisson.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.openent.moisson.domain.enumeration.PublicCible;
+import fr.openent.moisson.domain.enumeration.TypeArticle;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.hibernate.annotations.NaturalId;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
-
-import fr.openent.moisson.domain.enumeration.Disponibilite;
 
 /**
  * A ArticleNumerique.
@@ -28,71 +32,107 @@ public class ArticleNumerique implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @JsonIgnore
     private Long id;
 
+    @NaturalId
     @Size(min = 13, max = 13)
     @Column(name = "ean", length = 13)
+    @JsonProperty("EAN")
     private String ean;
 
     @Column(name = "ark")
+    @JsonProperty("ARK")
     private String ark;
 
     @Column(name = "titre")
+    @JsonProperty("TITRE")
     private String titre;
 
     @Column(name = "editeur")
+    @JsonProperty("EDITEUR")
     private String editeur;
 
     @Column(name = "auteur")
+    @JsonProperty("AUTEUR")
     private String auteur;
 
     @Column(name = "collection")
+    @JsonProperty("COLLECTION")
     private String collection;
 
     @Column(name = "distributeur")
+    @JsonProperty("DISTRIBUTEUR")
     private String distributeur;
 
     @Column(name = "url_couverture")
+    @JsonProperty("URL_COUVERTURE")
     private String urlCouverture;
 
     @Column(name = "url_demo")
+    @JsonProperty("URL_DEMO")
     private String urlDemo;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "disponibilte")
-    private Disponibilite disponibilte;
-
-    @Column(name = "date_disponibilte")
-    private Instant dateDisponibilte;
+    @Column(name = "description")
+    @JsonProperty("DESCRIPTION")
+    private String description;
 
     @Column(name = "date_parution")
+    @JsonProperty("DATE_PARUTION")
     private Instant dateParution;
 
     @Column(name = "compatible_gar")
+    @JsonProperty("COMPATIBLE_GAR")
     private Boolean compatibleGAR;
 
     @Column(name = "accessible_ent")
+    @JsonProperty("ACCESSIBLE_ENT")
     private Boolean accessibleENT;
 
     @Size(min = 13, max = 13)
     @Column(name = "ean_papier", length = 13)
+    @JsonProperty("EAN_PAPIER")
     private String eanPapier;
 
-    @OneToMany(mappedBy = "articleNumerique")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    @JsonProperty("TYPE")
+    private TypeArticle type;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "public_cible")
+    @JsonProperty("PUBLIC")
+    private PublicCible publicCible;
+
+    @OneToMany(mappedBy = "articleNumerique", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
+    @JsonProperty("DISCIPLINE")
+    @JsonManagedReference
     private Set<Discipline> disciplines = new HashSet<>();
 
-    @OneToMany(mappedBy = "articleNumerique")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @OneToMany(mappedBy = "articleNumerique",cascade = CascadeType.ALL, orphanRemoval = true)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
+    @JsonProperty("NIVEAU")
+    @JsonManagedReference
     private Set<Niveau> niveaus = new HashSet<>();
 
     @OneToMany(mappedBy = "articleNumerique")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
+    @JsonProperty("OFFRES")
     private Set<Offre> offres = new HashSet<>();
 
     @OneToMany(mappedBy = "articleNumerique")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
+    @JsonProperty("TECHNO")
     private Set<Techno> technos = new HashSet<>();
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
+    @JsonManagedReference
+    @JsonProperty("DISPONIBILITE")
+    private Disponibilite disponibilite;
+
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -220,30 +260,17 @@ public class ArticleNumerique implements Serializable {
         this.urlDemo = urlDemo;
     }
 
-    public Disponibilite getDisponibilte() {
-        return disponibilte;
+    public Disponibilite getDisponibilite() {
+        return disponibilite;
     }
 
-    public ArticleNumerique disponibilte(Disponibilite disponibilte) {
-        this.disponibilte = disponibilte;
+    public ArticleNumerique disponibilite(Disponibilite disponibilite) {
+        this.disponibilite = disponibilite;
         return this;
     }
 
-    public void setDisponibilte(Disponibilite disponibilte) {
-        this.disponibilte = disponibilte;
-    }
-
-    public Instant getDateDisponibilte() {
-        return dateDisponibilte;
-    }
-
-    public ArticleNumerique dateDisponibilte(Instant dateDisponibilte) {
-        this.dateDisponibilte = dateDisponibilte;
-        return this;
-    }
-
-    public void setDateDisponibilte(Instant dateDisponibilte) {
-        this.dateDisponibilte = dateDisponibilte;
+    public void setDisponibilite(Disponibilite disponibilite) {
+        this.disponibilite = disponibilite;
     }
 
     public Instant getDateParution() {
@@ -296,6 +323,45 @@ public class ArticleNumerique implements Serializable {
 
     public void setEanPapier(String eanPapier) {
         this.eanPapier = eanPapier;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public ArticleNumerique description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public TypeArticle getType() {
+        return type;
+    }
+
+    public ArticleNumerique type(TypeArticle type) {
+        this.type = type;
+        return this;
+    }
+
+    public void setType(TypeArticle type) {
+        this.type = type;
+    }
+
+    public PublicCible getPublicCible() {
+        return publicCible;
+    }
+
+    public ArticleNumerique publicCible(PublicCible publicCible) {
+        this.publicCible = publicCible;
+        return this;
+    }
+
+    public void setPublicCible(PublicCible publicCible) {
+        this.publicCible = publicCible;
     }
 
     public Set<Discipline> getDisciplines() {
@@ -429,12 +495,14 @@ public class ArticleNumerique implements Serializable {
             ", distributeur='" + getDistributeur() + "'" +
             ", urlCouverture='" + getUrlCouverture() + "'" +
             ", urlDemo='" + getUrlDemo() + "'" +
-            ", disponibilte='" + getDisponibilte() + "'" +
-            ", dateDisponibilte='" + getDateDisponibilte() + "'" +
+            ", disponibilite='" + getDisponibilite() + "'" +
             ", dateParution='" + getDateParution() + "'" +
             ", compatibleGAR='" + isCompatibleGAR() + "'" +
             ", accessibleENT='" + isAccessibleENT() + "'" +
             ", eanPapier='" + getEanPapier() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", type='" + getType() + "'" +
+            ", publicCible='" + getPublicCible() + "'" +
             "}";
     }
 }

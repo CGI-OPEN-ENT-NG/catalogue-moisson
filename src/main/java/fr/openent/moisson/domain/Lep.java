@@ -1,12 +1,13 @@
 package fr.openent.moisson.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import org.hibernate.annotations.NaturalId;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -30,30 +31,44 @@ public class Lep implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @NaturalId
     @Size(min = 13, max = 13)
     @Column(name = "ean", length = 13)
+    @JsonProperty("EAN")
     private String ean;
 
     @Column(name = "description")
+    @JsonProperty("DESCRIPTION")
     private String description;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type_licence")
-    private TypeLicence typeLicence;
-
     @Column(name = "titre")
+    @JsonProperty("TITRE")
     private String titre;
 
     @Column(name = "duree")
+    @JsonProperty("DUREE")
     private String duree;
 
     @OneToMany(mappedBy = "lep")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
+    @JsonProperty("CONDITIONS")
+    @JsonManagedReference
     private Set<Condition> conditions = new HashSet<>();
 
     @ManyToOne
+    @JoinColumn(name = "offre_id", nullable = false)
     @JsonIgnoreProperties(value = "leps", allowSetters = true)
+    @JsonIgnore
+    @JsonBackReference
     private Offre offre;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
+    @JsonProperty("LICENCE")
+    @JsonManagedReference
+    private Licence licence;
+
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -88,19 +103,6 @@ public class Lep implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public TypeLicence getTypeLicence() {
-        return typeLicence;
-    }
-
-    public Lep typeLicence(TypeLicence typeLicence) {
-        this.typeLicence = typeLicence;
-        return this;
-    }
-
-    public void setTypeLicence(TypeLicence typeLicence) {
-        this.typeLicence = typeLicence;
     }
 
     public String getTitre() {
@@ -166,6 +168,20 @@ public class Lep implements Serializable {
     public void setOffre(Offre offre) {
         this.offre = offre;
     }
+
+    public Licence getLicence() {
+        return licence;
+    }
+
+    public Lep licence(Licence licence) {
+        this.licence = licence;
+        return this;
+    }
+
+    public void setLicence(Licence licence) {
+        this.licence = licence;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -191,7 +207,6 @@ public class Lep implements Serializable {
             "id=" + getId() +
             ", ean='" + getEan() + "'" +
             ", description='" + getDescription() + "'" +
-            ", typeLicence='" + getTypeLicence() + "'" +
             ", titre='" + getTitre() + "'" +
             ", duree='" + getDuree() + "'" +
             "}";

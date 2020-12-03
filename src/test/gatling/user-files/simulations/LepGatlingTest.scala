@@ -74,7 +74,6 @@ class LepGatlingTest extends Simulation {
                 "id":null
                 , "ean":"SAMPLE_TEXT"
                 , "description":"SAMPLE_TEXT"
-                , "typeLicence":"ELEVE"
                 , "titre":"SAMPLE_TEXT"
                 , "duree":"SAMPLE_TEXT"
                 }""")).asJson

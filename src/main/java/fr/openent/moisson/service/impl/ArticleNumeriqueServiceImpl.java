@@ -3,6 +3,7 @@ package fr.openent.moisson.service.impl;
 import fr.openent.moisson.service.ArticleNumeriqueService;
 import fr.openent.moisson.domain.ArticleNumerique;
 import fr.openent.moisson.repository.ArticleNumeriqueRepository;
+import fr.openent.moisson.repository.DisponibiliteRepository;
 import fr.openent.moisson.repository.search.ArticleNumeriqueSearchRepository;
 import fr.openent.moisson.service.dto.ArticleNumeriqueDTO;
 import fr.openent.moisson.service.mapper.ArticleNumeriqueMapper;
@@ -33,16 +34,21 @@ public class ArticleNumeriqueServiceImpl implements ArticleNumeriqueService {
 
     private final ArticleNumeriqueSearchRepository articleNumeriqueSearchRepository;
 
-    public ArticleNumeriqueServiceImpl(ArticleNumeriqueRepository articleNumeriqueRepository, ArticleNumeriqueMapper articleNumeriqueMapper, ArticleNumeriqueSearchRepository articleNumeriqueSearchRepository) {
+    private final DisponibiliteRepository disponibiliteRepository;
+
+    public ArticleNumeriqueServiceImpl(ArticleNumeriqueRepository articleNumeriqueRepository, ArticleNumeriqueMapper articleNumeriqueMapper, ArticleNumeriqueSearchRepository articleNumeriqueSearchRepository, DisponibiliteRepository disponibiliteRepository) {
         this.articleNumeriqueRepository = articleNumeriqueRepository;
         this.articleNumeriqueMapper = articleNumeriqueMapper;
         this.articleNumeriqueSearchRepository = articleNumeriqueSearchRepository;
+        this.disponibiliteRepository = disponibiliteRepository;
     }
 
     @Override
     public ArticleNumeriqueDTO save(ArticleNumeriqueDTO articleNumeriqueDTO) {
         log.debug("Request to save ArticleNumerique : {}", articleNumeriqueDTO);
         ArticleNumerique articleNumerique = articleNumeriqueMapper.toEntity(articleNumeriqueDTO);
+        Long disponibiliteId = articleNumeriqueDTO.getDisponibiliteId();
+        disponibiliteRepository.findById(disponibiliteId).ifPresent(articleNumerique::disponibilite);
         articleNumerique = articleNumeriqueRepository.save(articleNumerique);
         ArticleNumeriqueDTO result = articleNumeriqueMapper.toDto(articleNumerique);
         articleNumeriqueSearchRepository.save(articleNumerique);

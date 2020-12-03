@@ -81,12 +81,13 @@ class ArticleNumeriqueGatlingTest extends Simulation {
                 , "distributeur":"SAMPLE_TEXT"
                 , "urlCouverture":"SAMPLE_TEXT"
                 , "urlDemo":"SAMPLE_TEXT"
-                , "disponibilte":"DISPONIBLE"
-                , "dateDisponibilte":"2020-01-01T00:00:00.000Z"
                 , "dateParution":"2020-01-01T00:00:00.000Z"
                 , "compatibleGAR":null
                 , "accessibleENT":null
                 , "eanPapier":"SAMPLE_TEXT"
+                , "description":"SAMPLE_TEXT"
+                , "type":"NUMERIQUE"
+                , "publicCible":"ELEVE"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_articleNumerique_url"))).exitHereIfFailed

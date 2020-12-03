@@ -14,6 +14,15 @@
       "relationshipType": "many-to-one",
       "otherEntityField": "id",
       "otherEntityRelationshipName": "lep"
+    },
+    {
+      "relationshipName": "licence",
+      "otherEntityName": "licence",
+      "relationshipType": "one-to-one",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "useJPADerivedIdentifier": true,
+      "otherEntityRelationshipName": "lep"
     }
   ],
   "fields": [
@@ -27,11 +36,6 @@
     {
       "fieldName": "description",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "typeLicence",
-      "fieldType": "TypeLicence",
-      "fieldValues": "ELEVE,ENSEIGNANT,ETABLISSEMENT"
     },
     {
       "fieldName": "titre",

@@ -1,0 +1,35 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [
+    {
+      "relationshipName": "offre",
+      "otherEntityName": "offre",
+      "relationshipType": "one-to-one",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "licence"
+    },
+    {
+      "relationshipName": "lep",
+      "otherEntityName": "lep",
+      "relationshipType": "one-to-one",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "licence"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "valeur",
+      "fieldType": "String"
+    }
+  ],
+  "changelogDate": "20201203131843",
+  "dto": "mapstruct",
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl",
+  "entityTableName": "licence",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": true,
+  "pagination": "pagination"
+}

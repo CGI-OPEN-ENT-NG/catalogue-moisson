@@ -101,9 +101,6 @@ public class LepQueryService extends QueryService<Lep> {
             if (criteria.getDescription() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDescription(), Lep_.description));
             }
-            if (criteria.getTypeLicence() != null) {
-                specification = specification.and(buildSpecification(criteria.getTypeLicence(), Lep_.typeLicence));
-            }
             if (criteria.getTitre() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getTitre(), Lep_.titre));
             }
@@ -117,6 +114,10 @@ public class LepQueryService extends QueryService<Lep> {
             if (criteria.getOffreId() != null) {
                 specification = specification.and(buildSpecification(criteria.getOffreId(),
                     root -> root.join(Lep_.offre, JoinType.LEFT).get(Offre_.id)));
+            }
+            if (criteria.getLicenceId() != null) {
+                specification = specification.and(buildSpecification(criteria.getLicenceId(),
+                    root -> root.join(Lep_.licence, JoinType.LEFT).get(Licence_.id)));
             }
         }
         return specification;

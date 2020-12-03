@@ -3,7 +3,8 @@ package fr.openent.moisson.service.dto;
 import java.io.Serializable;
 import java.util.Objects;
 import io.github.jhipster.service.Criteria;
-import fr.openent.moisson.domain.enumeration.Disponibilite;
+import fr.openent.moisson.domain.enumeration.TypeArticle;
+import fr.openent.moisson.domain.enumeration.PublicCible;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -24,20 +25,38 @@ import io.github.jhipster.service.filter.InstantFilter;
  */
 public class ArticleNumeriqueCriteria implements Serializable, Criteria {
     /**
-     * Class for filtering Disponibilite
+     * Class for filtering TypeArticle
      */
-    public static class DisponibiliteFilter extends Filter<Disponibilite> {
+    public static class TypeArticleFilter extends Filter<TypeArticle> {
 
-        public DisponibiliteFilter() {
+        public TypeArticleFilter() {
         }
 
-        public DisponibiliteFilter(DisponibiliteFilter filter) {
+        public TypeArticleFilter(TypeArticleFilter filter) {
             super(filter);
         }
 
         @Override
-        public DisponibiliteFilter copy() {
-            return new DisponibiliteFilter(this);
+        public TypeArticleFilter copy() {
+            return new TypeArticleFilter(this);
+        }
+
+    }
+    /**
+     * Class for filtering PublicCible
+     */
+    public static class PublicCibleFilter extends Filter<PublicCible> {
+
+        public PublicCibleFilter() {
+        }
+
+        public PublicCibleFilter(PublicCibleFilter filter) {
+            super(filter);
+        }
+
+        @Override
+        public PublicCibleFilter copy() {
+            return new PublicCibleFilter(this);
         }
 
     }
@@ -64,10 +83,6 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
 
     private StringFilter urlDemo;
 
-    private DisponibiliteFilter disponibilte;
-
-    private InstantFilter dateDisponibilte;
-
     private InstantFilter dateParution;
 
     private BooleanFilter compatibleGAR;
@@ -76,6 +91,12 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
 
     private StringFilter eanPapier;
 
+    private StringFilter description;
+
+    private TypeArticleFilter type;
+
+    private PublicCibleFilter publicCible;
+
     private LongFilter disciplineId;
 
     private LongFilter niveauId;
@@ -83,6 +104,8 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
     private LongFilter offreId;
 
     private LongFilter technoId;
+
+    private LongFilter disponibiliteId;
 
     public ArticleNumeriqueCriteria() {
     }
@@ -98,16 +121,18 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         this.distributeur = other.distributeur == null ? null : other.distributeur.copy();
         this.urlCouverture = other.urlCouverture == null ? null : other.urlCouverture.copy();
         this.urlDemo = other.urlDemo == null ? null : other.urlDemo.copy();
-        this.disponibilte = other.disponibilte == null ? null : other.disponibilte.copy();
-        this.dateDisponibilte = other.dateDisponibilte == null ? null : other.dateDisponibilte.copy();
         this.dateParution = other.dateParution == null ? null : other.dateParution.copy();
         this.compatibleGAR = other.compatibleGAR == null ? null : other.compatibleGAR.copy();
         this.accessibleENT = other.accessibleENT == null ? null : other.accessibleENT.copy();
         this.eanPapier = other.eanPapier == null ? null : other.eanPapier.copy();
+        this.description = other.description == null ? null : other.description.copy();
+        this.type = other.type == null ? null : other.type.copy();
+        this.publicCible = other.publicCible == null ? null : other.publicCible.copy();
         this.disciplineId = other.disciplineId == null ? null : other.disciplineId.copy();
         this.niveauId = other.niveauId == null ? null : other.niveauId.copy();
         this.offreId = other.offreId == null ? null : other.offreId.copy();
         this.technoId = other.technoId == null ? null : other.technoId.copy();
+        this.disponibiliteId = other.disponibiliteId == null ? null : other.disponibiliteId.copy();
     }
 
     @Override
@@ -195,22 +220,6 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         this.urlDemo = urlDemo;
     }
 
-    public DisponibiliteFilter getDisponibilte() {
-        return disponibilte;
-    }
-
-    public void setDisponibilte(DisponibiliteFilter disponibilte) {
-        this.disponibilte = disponibilte;
-    }
-
-    public InstantFilter getDateDisponibilte() {
-        return dateDisponibilte;
-    }
-
-    public void setDateDisponibilte(InstantFilter dateDisponibilte) {
-        this.dateDisponibilte = dateDisponibilte;
-    }
-
     public InstantFilter getDateParution() {
         return dateParution;
     }
@@ -241,6 +250,30 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
 
     public void setEanPapier(StringFilter eanPapier) {
         this.eanPapier = eanPapier;
+    }
+
+    public StringFilter getDescription() {
+        return description;
+    }
+
+    public void setDescription(StringFilter description) {
+        this.description = description;
+    }
+
+    public TypeArticleFilter getType() {
+        return type;
+    }
+
+    public void setType(TypeArticleFilter type) {
+        this.type = type;
+    }
+
+    public PublicCibleFilter getPublicCible() {
+        return publicCible;
+    }
+
+    public void setPublicCible(PublicCibleFilter publicCible) {
+        this.publicCible = publicCible;
     }
 
     public LongFilter getDisciplineId() {
@@ -275,6 +308,14 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         this.technoId = technoId;
     }
 
+    public LongFilter getDisponibiliteId() {
+        return disponibiliteId;
+    }
+
+    public void setDisponibiliteId(LongFilter disponibiliteId) {
+        this.disponibiliteId = disponibiliteId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -296,16 +337,18 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
             Objects.equals(distributeur, that.distributeur) &&
             Objects.equals(urlCouverture, that.urlCouverture) &&
             Objects.equals(urlDemo, that.urlDemo) &&
-            Objects.equals(disponibilte, that.disponibilte) &&
-            Objects.equals(dateDisponibilte, that.dateDisponibilte) &&
             Objects.equals(dateParution, that.dateParution) &&
             Objects.equals(compatibleGAR, that.compatibleGAR) &&
             Objects.equals(accessibleENT, that.accessibleENT) &&
             Objects.equals(eanPapier, that.eanPapier) &&
+            Objects.equals(description, that.description) &&
+            Objects.equals(type, that.type) &&
+            Objects.equals(publicCible, that.publicCible) &&
             Objects.equals(disciplineId, that.disciplineId) &&
             Objects.equals(niveauId, that.niveauId) &&
             Objects.equals(offreId, that.offreId) &&
-            Objects.equals(technoId, that.technoId);
+            Objects.equals(technoId, that.technoId) &&
+            Objects.equals(disponibiliteId, that.disponibiliteId);
     }
 
     @Override
@@ -321,16 +364,18 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         distributeur,
         urlCouverture,
         urlDemo,
-        disponibilte,
-        dateDisponibilte,
         dateParution,
         compatibleGAR,
         accessibleENT,
         eanPapier,
+        description,
+        type,
+        publicCible,
         disciplineId,
         niveauId,
         offreId,
-        technoId
+        technoId,
+        disponibiliteId
         );
     }
 
@@ -348,16 +393,18 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
                 (distributeur != null ? "distributeur=" + distributeur + ", " : "") +
                 (urlCouverture != null ? "urlCouverture=" + urlCouverture + ", " : "") +
                 (urlDemo != null ? "urlDemo=" + urlDemo + ", " : "") +
-                (disponibilte != null ? "disponibilte=" + disponibilte + ", " : "") +
-                (dateDisponibilte != null ? "dateDisponibilte=" + dateDisponibilte + ", " : "") +
                 (dateParution != null ? "dateParution=" + dateParution + ", " : "") +
                 (compatibleGAR != null ? "compatibleGAR=" + compatibleGAR + ", " : "") +
                 (accessibleENT != null ? "accessibleENT=" + accessibleENT + ", " : "") +
                 (eanPapier != null ? "eanPapier=" + eanPapier + ", " : "") +
+                (description != null ? "description=" + description + ", " : "") +
+                (type != null ? "type=" + type + ", " : "") +
+                (publicCible != null ? "publicCible=" + publicCible + ", " : "") +
                 (disciplineId != null ? "disciplineId=" + disciplineId + ", " : "") +
                 (niveauId != null ? "niveauId=" + niveauId + ", " : "") +
                 (offreId != null ? "offreId=" + offreId + ", " : "") +
                 (technoId != null ? "technoId=" + technoId + ", " : "") +
+                (disponibiliteId != null ? "disponibiliteId=" + disponibiliteId + ", " : "") +
             "}";
     }
 

@@ -1,0 +1,48 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [
+    {
+      "relationshipName": "articlePapier",
+      "otherEntityName": "articlePapier",
+      "relationshipType": "one-to-one",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "disponibilite"
+    },
+    {
+      "relationshipName": "articleNumerique",
+      "otherEntityName": "articleNumerique",
+      "relationshipType": "one-to-one",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "disponibilite"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "commentaire",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateDisponibilite",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "commandable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "valeur",
+      "fieldType": "DisponibiliteEnum",
+      "fieldValues": "DISPONIBLE,EN_COURS_D_IMPRESSION,EN_COURS_DE_REIMPRESSION,NON_DISPONIBLE_PROVISOIREMENT,EPUISE,A_PARAITRE"
+    }
+  ],
+  "changelogDate": "20201203103333",
+  "dto": "mapstruct",
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl",
+  "entityTableName": "disponibilite",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": true,
+  "pagination": "pagination"
+}

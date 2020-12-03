@@ -3,7 +3,8 @@ package fr.openent.moisson.service.dto;
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import fr.openent.moisson.domain.enumeration.Disponibilite;
+import fr.openent.moisson.domain.enumeration.TypeArticle;
+import fr.openent.moisson.domain.enumeration.PublicCible;
 
 /**
  * A DTO for the {@link fr.openent.moisson.domain.ArticleNumerique} entity.
@@ -31,10 +32,6 @@ public class ArticleNumeriqueDTO implements Serializable {
 
     private String urlDemo;
 
-    private Disponibilite disponibilte;
-
-    private Instant dateDisponibilte;
-
     private Instant dateParution;
 
     private Boolean compatibleGAR;
@@ -44,6 +41,14 @@ public class ArticleNumeriqueDTO implements Serializable {
     @Size(min = 13, max = 13)
     private String eanPapier;
 
+    private String description;
+
+    private TypeArticle type;
+
+    private PublicCible publicCible;
+
+
+    private Long disponibiliteId;
     
     public Long getId() {
         return id;
@@ -125,22 +130,6 @@ public class ArticleNumeriqueDTO implements Serializable {
         this.urlDemo = urlDemo;
     }
 
-    public Disponibilite getDisponibilte() {
-        return disponibilte;
-    }
-
-    public void setDisponibilte(Disponibilite disponibilte) {
-        this.disponibilte = disponibilte;
-    }
-
-    public Instant getDateDisponibilte() {
-        return dateDisponibilte;
-    }
-
-    public void setDateDisponibilte(Instant dateDisponibilte) {
-        this.dateDisponibilte = dateDisponibilte;
-    }
-
     public Instant getDateParution() {
         return dateParution;
     }
@@ -171,6 +160,38 @@ public class ArticleNumeriqueDTO implements Serializable {
 
     public void setEanPapier(String eanPapier) {
         this.eanPapier = eanPapier;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public TypeArticle getType() {
+        return type;
+    }
+
+    public void setType(TypeArticle type) {
+        this.type = type;
+    }
+
+    public PublicCible getPublicCible() {
+        return publicCible;
+    }
+
+    public void setPublicCible(PublicCible publicCible) {
+        this.publicCible = publicCible;
+    }
+
+    public Long getDisponibiliteId() {
+        return disponibiliteId;
+    }
+
+    public void setDisponibiliteId(Long disponibiliteId) {
+        this.disponibiliteId = disponibiliteId;
     }
 
     @Override
@@ -204,12 +225,14 @@ public class ArticleNumeriqueDTO implements Serializable {
             ", distributeur='" + getDistributeur() + "'" +
             ", urlCouverture='" + getUrlCouverture() + "'" +
             ", urlDemo='" + getUrlDemo() + "'" +
-            ", disponibilte='" + getDisponibilte() + "'" +
-            ", dateDisponibilte='" + getDateDisponibilte() + "'" +
             ", dateParution='" + getDateParution() + "'" +
             ", compatibleGAR='" + isCompatibleGAR() + "'" +
             ", accessibleENT='" + isAccessibleENT() + "'" +
             ", eanPapier='" + getEanPapier() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", type='" + getType() + "'" +
+            ", publicCible='" + getPublicCible() + "'" +
+            ", disponibiliteId=" + getDisponibiliteId() +
             "}";
     }
 }

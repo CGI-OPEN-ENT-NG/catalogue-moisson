@@ -29,13 +29,7 @@ public class OffreCriteria implements Serializable, Criteria {
 
     private StringFilter eanLibraire;
 
-    private StringFilter reference;
-
-    private IntegerFilter duree;
-
     private IntegerFilter quantiteMinimaleAchat;
-
-    private StringFilter licence;
 
     private BooleanFilter prescripteur;
 
@@ -45,11 +39,17 @@ public class OffreCriteria implements Serializable, Criteria {
 
     private BooleanFilter adoptant;
 
+    private StringFilter duree;
+
+    private StringFilter referenceEditeur;
+
     private LongFilter tvaId;
 
     private LongFilter lepId;
 
     private LongFilter articleNumeriqueId;
+
+    private LongFilter licenceId;
 
     public OffreCriteria() {
     }
@@ -57,17 +57,17 @@ public class OffreCriteria implements Serializable, Criteria {
     public OffreCriteria(OffreCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.eanLibraire = other.eanLibraire == null ? null : other.eanLibraire.copy();
-        this.reference = other.reference == null ? null : other.reference.copy();
-        this.duree = other.duree == null ? null : other.duree.copy();
         this.quantiteMinimaleAchat = other.quantiteMinimaleAchat == null ? null : other.quantiteMinimaleAchat.copy();
-        this.licence = other.licence == null ? null : other.licence.copy();
         this.prescripteur = other.prescripteur == null ? null : other.prescripteur.copy();
         this.libelle = other.libelle == null ? null : other.libelle.copy();
         this.prixHT = other.prixHT == null ? null : other.prixHT.copy();
         this.adoptant = other.adoptant == null ? null : other.adoptant.copy();
+        this.duree = other.duree == null ? null : other.duree.copy();
+        this.referenceEditeur = other.referenceEditeur == null ? null : other.referenceEditeur.copy();
         this.tvaId = other.tvaId == null ? null : other.tvaId.copy();
         this.lepId = other.lepId == null ? null : other.lepId.copy();
         this.articleNumeriqueId = other.articleNumeriqueId == null ? null : other.articleNumeriqueId.copy();
+        this.licenceId = other.licenceId == null ? null : other.licenceId.copy();
     }
 
     @Override
@@ -91,36 +91,12 @@ public class OffreCriteria implements Serializable, Criteria {
         this.eanLibraire = eanLibraire;
     }
 
-    public StringFilter getReference() {
-        return reference;
-    }
-
-    public void setReference(StringFilter reference) {
-        this.reference = reference;
-    }
-
-    public IntegerFilter getDuree() {
-        return duree;
-    }
-
-    public void setDuree(IntegerFilter duree) {
-        this.duree = duree;
-    }
-
     public IntegerFilter getQuantiteMinimaleAchat() {
         return quantiteMinimaleAchat;
     }
 
     public void setQuantiteMinimaleAchat(IntegerFilter quantiteMinimaleAchat) {
         this.quantiteMinimaleAchat = quantiteMinimaleAchat;
-    }
-
-    public StringFilter getLicence() {
-        return licence;
-    }
-
-    public void setLicence(StringFilter licence) {
-        this.licence = licence;
     }
 
     public BooleanFilter getPrescripteur() {
@@ -155,6 +131,22 @@ public class OffreCriteria implements Serializable, Criteria {
         this.adoptant = adoptant;
     }
 
+    public StringFilter getDuree() {
+        return duree;
+    }
+
+    public void setDuree(StringFilter duree) {
+        this.duree = duree;
+    }
+
+    public StringFilter getReferenceEditeur() {
+        return referenceEditeur;
+    }
+
+    public void setReferenceEditeur(StringFilter referenceEditeur) {
+        this.referenceEditeur = referenceEditeur;
+    }
+
     public LongFilter getTvaId() {
         return tvaId;
     }
@@ -179,6 +171,14 @@ public class OffreCriteria implements Serializable, Criteria {
         this.articleNumeriqueId = articleNumeriqueId;
     }
 
+    public LongFilter getLicenceId() {
+        return licenceId;
+    }
+
+    public void setLicenceId(LongFilter licenceId) {
+        this.licenceId = licenceId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -192,17 +192,17 @@ public class OffreCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(eanLibraire, that.eanLibraire) &&
-            Objects.equals(reference, that.reference) &&
-            Objects.equals(duree, that.duree) &&
             Objects.equals(quantiteMinimaleAchat, that.quantiteMinimaleAchat) &&
-            Objects.equals(licence, that.licence) &&
             Objects.equals(prescripteur, that.prescripteur) &&
             Objects.equals(libelle, that.libelle) &&
             Objects.equals(prixHT, that.prixHT) &&
             Objects.equals(adoptant, that.adoptant) &&
+            Objects.equals(duree, that.duree) &&
+            Objects.equals(referenceEditeur, that.referenceEditeur) &&
             Objects.equals(tvaId, that.tvaId) &&
             Objects.equals(lepId, that.lepId) &&
-            Objects.equals(articleNumeriqueId, that.articleNumeriqueId);
+            Objects.equals(articleNumeriqueId, that.articleNumeriqueId) &&
+            Objects.equals(licenceId, that.licenceId);
     }
 
     @Override
@@ -210,17 +210,17 @@ public class OffreCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         eanLibraire,
-        reference,
-        duree,
         quantiteMinimaleAchat,
-        licence,
         prescripteur,
         libelle,
         prixHT,
         adoptant,
+        duree,
+        referenceEditeur,
         tvaId,
         lepId,
-        articleNumeriqueId
+        articleNumeriqueId,
+        licenceId
         );
     }
 
@@ -230,17 +230,17 @@ public class OffreCriteria implements Serializable, Criteria {
         return "OffreCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (eanLibraire != null ? "eanLibraire=" + eanLibraire + ", " : "") +
-                (reference != null ? "reference=" + reference + ", " : "") +
-                (duree != null ? "duree=" + duree + ", " : "") +
                 (quantiteMinimaleAchat != null ? "quantiteMinimaleAchat=" + quantiteMinimaleAchat + ", " : "") +
-                (licence != null ? "licence=" + licence + ", " : "") +
                 (prescripteur != null ? "prescripteur=" + prescripteur + ", " : "") +
                 (libelle != null ? "libelle=" + libelle + ", " : "") +
                 (prixHT != null ? "prixHT=" + prixHT + ", " : "") +
                 (adoptant != null ? "adoptant=" + adoptant + ", " : "") +
+                (duree != null ? "duree=" + duree + ", " : "") +
+                (referenceEditeur != null ? "referenceEditeur=" + referenceEditeur + ", " : "") +
                 (tvaId != null ? "tvaId=" + tvaId + ", " : "") +
                 (lepId != null ? "lepId=" + lepId + ", " : "") +
                 (articleNumeriqueId != null ? "articleNumeriqueId=" + articleNumeriqueId + ", " : "") +
+                (licenceId != null ? "licenceId=" + licenceId + ", " : "") +
             "}";
     }
 

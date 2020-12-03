@@ -73,14 +73,13 @@ class OffreGatlingTest extends Simulation {
             .body(StringBody("""{
                 "id":null
                 , "eanLibraire":"SAMPLE_TEXT"
-                , "reference":"SAMPLE_TEXT"
-                , "duree":"0"
                 , "quantiteMinimaleAchat":"0"
-                , "licence":"SAMPLE_TEXT"
                 , "prescripteur":null
                 , "libelle":"SAMPLE_TEXT"
                 , "prixHT":"0"
                 , "adoptant":null
+                , "duree":"SAMPLE_TEXT"
+                , "referenceEditeur":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_offre_url"))).exitHereIfFailed

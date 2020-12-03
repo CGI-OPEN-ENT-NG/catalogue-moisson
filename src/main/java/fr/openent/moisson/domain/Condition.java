@@ -1,6 +1,9 @@
 package fr.openent.moisson.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -26,13 +29,18 @@ public class Condition implements Serializable {
     private Long id;
 
     @Column(name = "gratuite")
+    @JsonProperty("GRATUITE")
     private Integer gratuite;
 
     @Column(name = "condition_gratuite")
+    @JsonProperty("CONDITIONGRATUITE")
     private Integer conditionGratuite;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "conditions", allowSetters = true)
+    @JsonIgnore
+    @JsonBackReference
+    @JoinColumn(name = "lep_id", nullable = false)
     private Lep lep;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
