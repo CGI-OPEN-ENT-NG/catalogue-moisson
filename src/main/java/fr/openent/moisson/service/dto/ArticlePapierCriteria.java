@@ -3,8 +3,6 @@ package fr.openent.moisson.service.dto;
 import java.io.Serializable;
 import java.util.Objects;
 import io.github.jhipster.service.Criteria;
-import fr.openent.moisson.domain.enumeration.TypeArticle;
-import fr.openent.moisson.domain.enumeration.Disponibilite;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -25,42 +23,6 @@ import io.github.jhipster.service.filter.InstantFilter;
  * fix type specific filters.
  */
 public class ArticlePapierCriteria implements Serializable, Criteria {
-    /**
-     * Class for filtering TypeArticle
-     */
-    public static class TypeArticleFilter extends Filter<TypeArticle> {
-
-        public TypeArticleFilter() {
-        }
-
-        public TypeArticleFilter(TypeArticleFilter filter) {
-            super(filter);
-        }
-
-        @Override
-        public TypeArticleFilter copy() {
-            return new TypeArticleFilter(this);
-        }
-
-    }
-    /**
-     * Class for filtering Disponibilite
-     */
-    public static class DisponibiliteFilter extends Filter<Disponibilite> {
-
-        public DisponibiliteFilter() {
-        }
-
-        public DisponibiliteFilter(DisponibiliteFilter filter) {
-            super(filter);
-        }
-
-        @Override
-        public DisponibiliteFilter copy() {
-            return new DisponibiliteFilter(this);
-        }
-
-    }
 
     private static final long serialVersionUID = 1L;
 
@@ -86,19 +48,13 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
 
     private InstantFilter dateParution;
 
-    private BooleanFilter commandable;
-
-    private TypeArticleFilter type;
-
     private BigDecimalFilter prixHT;
 
     private StringFilter description;
 
-    private DisponibiliteFilter disponibilite;
-
-    private InstantFilter dateDisponibilite;
-
     private LongFilter tvaId;
+
+    private LongFilter disponibiliteId;
 
     public ArticlePapierCriteria() {
     }
@@ -115,13 +71,10 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         this.distributeur = other.distributeur == null ? null : other.distributeur.copy();
         this.urlCouverture = other.urlCouverture == null ? null : other.urlCouverture.copy();
         this.dateParution = other.dateParution == null ? null : other.dateParution.copy();
-        this.commandable = other.commandable == null ? null : other.commandable.copy();
-        this.type = other.type == null ? null : other.type.copy();
         this.prixHT = other.prixHT == null ? null : other.prixHT.copy();
         this.description = other.description == null ? null : other.description.copy();
-        this.disponibilite = other.disponibilite == null ? null : other.disponibilite.copy();
-        this.dateDisponibilite = other.dateDisponibilite == null ? null : other.dateDisponibilite.copy();
         this.tvaId = other.tvaId == null ? null : other.tvaId.copy();
+        this.disponibiliteId = other.disponibiliteId == null ? null : other.disponibiliteId.copy();
     }
 
     @Override
@@ -217,22 +170,6 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         this.dateParution = dateParution;
     }
 
-    public BooleanFilter getCommandable() {
-        return commandable;
-    }
-
-    public void setCommandable(BooleanFilter commandable) {
-        this.commandable = commandable;
-    }
-
-    public TypeArticleFilter getType() {
-        return type;
-    }
-
-    public void setType(TypeArticleFilter type) {
-        this.type = type;
-    }
-
     public BigDecimalFilter getPrixHT() {
         return prixHT;
     }
@@ -249,28 +186,20 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         this.description = description;
     }
 
-    public DisponibiliteFilter getDisponibilite() {
-        return disponibilite;
-    }
-
-    public void setDisponibilite(DisponibiliteFilter disponibilite) {
-        this.disponibilite = disponibilite;
-    }
-
-    public InstantFilter getDateDisponibilite() {
-        return dateDisponibilite;
-    }
-
-    public void setDateDisponibilite(InstantFilter dateDisponibilite) {
-        this.dateDisponibilite = dateDisponibilite;
-    }
-
     public LongFilter getTvaId() {
         return tvaId;
     }
 
     public void setTvaId(LongFilter tvaId) {
         this.tvaId = tvaId;
+    }
+
+    public LongFilter getDisponibiliteId() {
+        return disponibiliteId;
+    }
+
+    public void setDisponibiliteId(LongFilter disponibiliteId) {
+        this.disponibiliteId = disponibiliteId;
     }
 
 
@@ -295,13 +224,10 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
             Objects.equals(distributeur, that.distributeur) &&
             Objects.equals(urlCouverture, that.urlCouverture) &&
             Objects.equals(dateParution, that.dateParution) &&
-            Objects.equals(commandable, that.commandable) &&
-            Objects.equals(type, that.type) &&
             Objects.equals(prixHT, that.prixHT) &&
             Objects.equals(description, that.description) &&
-            Objects.equals(disponibilite, that.disponibilite) &&
-            Objects.equals(dateDisponibilite, that.dateDisponibilite) &&
-            Objects.equals(tvaId, that.tvaId);
+            Objects.equals(tvaId, that.tvaId) &&
+            Objects.equals(disponibiliteId, that.disponibiliteId);
     }
 
     @Override
@@ -318,13 +244,10 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         distributeur,
         urlCouverture,
         dateParution,
-        commandable,
-        type,
         prixHT,
         description,
-        disponibilite,
-        dateDisponibilite,
-        tvaId
+        tvaId,
+        disponibiliteId
         );
     }
 
@@ -343,13 +266,10 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
                 (distributeur != null ? "distributeur=" + distributeur + ", " : "") +
                 (urlCouverture != null ? "urlCouverture=" + urlCouverture + ", " : "") +
                 (dateParution != null ? "dateParution=" + dateParution + ", " : "") +
-                (commandable != null ? "commandable=" + commandable + ", " : "") +
-                (type != null ? "type=" + type + ", " : "") +
                 (prixHT != null ? "prixHT=" + prixHT + ", " : "") +
                 (description != null ? "description=" + description + ", " : "") +
-                (disponibilite != null ? "disponibilite=" + disponibilite + ", " : "") +
-                (dateDisponibilite != null ? "dateDisponibilite=" + dateDisponibilite + ", " : "") +
                 (tvaId != null ? "tvaId=" + tvaId + ", " : "") +
+                (disponibiliteId != null ? "disponibiliteId=" + disponibiliteId + ", " : "") +
             "}";
     }
 

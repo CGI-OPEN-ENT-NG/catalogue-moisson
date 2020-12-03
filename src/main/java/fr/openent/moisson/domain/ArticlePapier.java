@@ -19,8 +19,6 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-import fr.openent.moisson.domain.enumeration.Disponibilite;
-
 import fr.openent.moisson.domain.enumeration.TypeArticle;
 
 /**
@@ -78,27 +76,9 @@ public class ArticlePapier implements Serializable {
     @JsonProperty("URL_COUVERTURE")
     private String urlCouverture;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "disponibilite")
-    @JsonProperty("DISPONIBILITE")
-    private Disponibilite disponibilite;
-
-    @Column(name = "date_disponibilite")
-    @JsonProperty("DATE_DISPONIBILTE")
-    private Instant dateDisponibilite;
-
     @Column(name = "date_parution")
     @JsonProperty("DATE_PARUTION")
     private Instant dateParution;
-
-    @Column(name = "commandable")
-    @JsonProperty("COMMANDABLE")
-    private Boolean commandable;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type")
-    @JsonProperty("TYPE")
-    private TypeArticle type;
 
     @Column(name = "prix_ht", precision = 21, scale = 2)
     @JsonProperty("PRIXHT")
@@ -113,6 +93,13 @@ public class ArticlePapier implements Serializable {
     @JsonProperty("TVA")
     @JsonManagedReference // @JsonManagedReference sur la collection et @JsonBackReference sur la référence (Tva)
     private Set<Tva> tvas = new HashSet<>();
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
+    @JsonProperty("DISPONIBILITE")
+    private Disponibilite disponibilite;
+
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -240,32 +227,6 @@ public class ArticlePapier implements Serializable {
         this.urlCouverture = urlCouverture;
     }
 
-    public Disponibilite getDisponibilite() {
-        return disponibilite;
-    }
-
-    public ArticlePapier disponibilite(Disponibilite disponibilite) {
-        this.disponibilite = disponibilite;
-        return this;
-    }
-
-    public void setDisponibilite(Disponibilite disponibilite) {
-        this.disponibilite = disponibilite;
-    }
-
-    public Instant getDateDisponibilite() {
-        return dateDisponibilite;
-    }
-
-    public ArticlePapier dateDisponibilite(Instant dateDisponibilite) {
-        this.dateDisponibilite = dateDisponibilite;
-        return this;
-    }
-
-    public void setDateDisponibilite(Instant dateDisponibilite) {
-        this.dateDisponibilite = dateDisponibilite;
-    }
-
     public Instant getDateParution() {
         return dateParution;
     }
@@ -277,32 +238,6 @@ public class ArticlePapier implements Serializable {
 
     public void setDateParution(Instant dateParution) {
         this.dateParution = dateParution;
-    }
-
-    public Boolean isCommandable() {
-        return commandable;
-    }
-
-    public ArticlePapier commandable(Boolean commandable) {
-        this.commandable = commandable;
-        return this;
-    }
-
-    public void setCommandable(Boolean commandable) {
-        this.commandable = commandable;
-    }
-
-    public TypeArticle getType() {
-        return type;
-    }
-
-    public ArticlePapier type(TypeArticle type) {
-        this.type = type;
-        return this;
-    }
-
-    public void setType(TypeArticle type) {
-        this.type = type;
     }
 
     public BigDecimal getPrixHT() {
@@ -355,6 +290,20 @@ public class ArticlePapier implements Serializable {
     public void setTvas(Set<Tva> tvas) {
         this.tvas = tvas;
     }
+
+    public Disponibilite getDisponibilite() {
+        return disponibilite;
+    }
+
+    public ArticlePapier disponibilite(Disponibilite disponibilite) {
+        this.disponibilite = disponibilite;
+        return this;
+    }
+
+    public void setDisponibilite(Disponibilite disponibilite) {
+        this.disponibilite = disponibilite;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -387,11 +336,7 @@ public class ArticlePapier implements Serializable {
             ", collection='" + getCollection() + "'" +
             ", distributeur='" + getDistributeur() + "'" +
             ", urlCouverture='" + getUrlCouverture() + "'" +
-            ", disponibilite='" + getDisponibilite() + "'" +
-            ", dateDisponibilite='" + getDateDisponibilite() + "'" +
             ", dateParution='" + getDateParution() + "'" +
-            ", commandable='" + isCommandable() + "'" +
-            ", type='" + getType() + "'" +
             ", prixHT=" + getPrixHT() +
             ", description='" + getDescription() + "'" +
             "}";

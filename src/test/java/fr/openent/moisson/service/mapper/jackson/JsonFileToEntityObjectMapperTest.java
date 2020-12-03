@@ -38,7 +38,7 @@ class JsonFileToEntityObjectMapperTest {
         List<ArticlePapier> articlePapiers = objectMapper.readValue(new File("src/test/resources/json/articles_papiers.json"), new TypeReference<List<ArticlePapier>>() { });
         // articlePapiers.forEach(System.out::println);
         // La relation est bidirectionnelle, il est logique que chaque côté de la relation soit mappé à l'autre,
-        // il fautt avoir une référence de chaque côté de l'autre côté
+        // il faut avoir une référence de chaque côté de l'autre côté
         articlePapiers.forEach(ap ->
             {
                 ap.getTvas().forEach(ap::addTva);

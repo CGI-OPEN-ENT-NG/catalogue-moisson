@@ -2,7 +2,7 @@
 
 -- DROP TABLE public.moisson_date_time_wrapper;
 
-CREATE TABLE public.moisson_date_time_wrapper
+/*CREATE TABLE public.moisson_date_time_wrapper
 (
     id bigint NOT NULL,
     instant timestamp without time zone,
@@ -20,4 +20,4 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE public.moisson_date_time_wrapper
-    OWNER to usercatalogue;
+    OWNER to usercatalogue;*/

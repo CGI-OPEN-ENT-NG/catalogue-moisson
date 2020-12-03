@@ -37,6 +37,8 @@ public class Tva implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(value = "tvas", allowSetters = true)
+    @JsonBackReference
+    @JoinColumn(name = "offre_id", nullable = false)
     private Offre offre;
 
     @ManyToOne()

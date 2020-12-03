@@ -3,25 +3,18 @@ package fr.openent.moisson.service.dto;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Set;
 
 /**
  * A DTO for the {@link fr.openent.moisson.domain.Offre} entity.
  */
 public class OffreDTO implements Serializable {
-
+    
     private Long id;
 
     @Size(min = 13, max = 13)
     private String eanLibraire;
 
-    private String reference;
-
-    private Integer duree;
-
     private Integer quantiteMinimaleAchat;
-
-    private String licence;
 
     private Boolean prescripteur;
 
@@ -31,12 +24,15 @@ public class OffreDTO implements Serializable {
 
     private Boolean adoptant;
 
+    private String duree;
+
+    private String referenceEditeur;
+
+
     private Long articleNumeriqueId;
 
-    private Set<LepDTO> leps;
-
-    private Set<TvaDTO> tavs;
-
+    private Long licenceId;
+    
     public Long getId() {
         return id;
     }
@@ -53,36 +49,12 @@ public class OffreDTO implements Serializable {
         this.eanLibraire = eanLibraire;
     }
 
-    public String getReference() {
-        return reference;
-    }
-
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
-
-    public Integer getDuree() {
-        return duree;
-    }
-
-    public void setDuree(Integer duree) {
-        this.duree = duree;
-    }
-
     public Integer getQuantiteMinimaleAchat() {
         return quantiteMinimaleAchat;
     }
 
     public void setQuantiteMinimaleAchat(Integer quantiteMinimaleAchat) {
         this.quantiteMinimaleAchat = quantiteMinimaleAchat;
-    }
-
-    public String getLicence() {
-        return licence;
-    }
-
-    public void setLicence(String licence) {
-        this.licence = licence;
     }
 
     public Boolean isPrescripteur() {
@@ -117,6 +89,22 @@ public class OffreDTO implements Serializable {
         this.adoptant = adoptant;
     }
 
+    public String getDuree() {
+        return duree;
+    }
+
+    public void setDuree(String duree) {
+        this.duree = duree;
+    }
+
+    public String getReferenceEditeur() {
+        return referenceEditeur;
+    }
+
+    public void setReferenceEditeur(String referenceEditeur) {
+        this.referenceEditeur = referenceEditeur;
+    }
+
     public Long getArticleNumeriqueId() {
         return articleNumeriqueId;
     }
@@ -125,20 +113,12 @@ public class OffreDTO implements Serializable {
         this.articleNumeriqueId = articleNumeriqueId;
     }
 
-    public Set<LepDTO> getLeps() {
-        return leps;
+    public Long getLicenceId() {
+        return licenceId;
     }
 
-    public void setLeps(Set<LepDTO> leps) {
-        this.leps = leps;
-    }
-
-    public Set<TvaDTO> getTavs() {
-        return tavs;
-    }
-
-    public void setTavs(Set<TvaDTO> tavs) {
-        this.tavs = tavs;
+    public void setLicenceId(Long licenceId) {
+        this.licenceId = licenceId;
     }
 
     @Override
@@ -164,15 +144,15 @@ public class OffreDTO implements Serializable {
         return "OffreDTO{" +
             "id=" + getId() +
             ", eanLibraire='" + getEanLibraire() + "'" +
-            ", reference='" + getReference() + "'" +
-            ", duree=" + getDuree() +
             ", quantiteMinimaleAchat=" + getQuantiteMinimaleAchat() +
-            ", licence='" + getLicence() + "'" +
             ", prescripteur='" + isPrescripteur() + "'" +
             ", libelle='" + getLibelle() + "'" +
             ", prixHT=" + getPrixHT() +
             ", adoptant='" + isAdoptant() + "'" +
+            ", duree='" + getDuree() + "'" +
+            ", referenceEditeur='" + getReferenceEditeur() + "'" +
             ", articleNumeriqueId=" + getArticleNumeriqueId() +
+            ", licenceId=" + getLicenceId() +
             "}";
     }
 }

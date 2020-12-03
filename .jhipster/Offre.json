@@ -20,6 +20,15 @@
       "relationshipType": "many-to-one",
       "otherEntityField": "id",
       "otherEntityRelationshipName": "offre"
+    },
+    {
+      "relationshipName": "licence",
+      "otherEntityName": "licence",
+      "relationshipType": "one-to-one",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "useJPADerivedIdentifier": true,
+      "otherEntityRelationshipName": "offre"
     }
   ],
   "fields": [
@@ -31,20 +40,8 @@
       "fieldValidateRulesMaxlength": "13"
     },
     {
-      "fieldName": "reference",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "duree",
-      "fieldType": "Integer"
-    },
-    {
       "fieldName": "quantiteMinimaleAchat",
       "fieldType": "Integer"
-    },
-    {
-      "fieldName": "licence",
-      "fieldType": "String"
     },
     {
       "fieldName": "prescripteur",
@@ -61,6 +58,14 @@
     {
       "fieldName": "adoptant",
       "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "duree",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "referenceEditeur",
+      "fieldType": "String"
     }
   ],
   "changelogDate": "20201126093844",

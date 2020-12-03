@@ -6,10 +6,8 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="00000000000004" author="moisson">
-    </changeSet>
     <!--Il est possible de supprimer context="test" le temps de la génération ou modifier le pom en transformant <contexts>!test</contexts> en <contexts>test</contexts>voir ci-dessous-->
-    <changeSet author="moisson" id="00000000000005" context="test">
+    <changeSet author="moisson" id="20201203011050">
         <createTable tableName="moisson_date_time_wrapper">
             <column  name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="moisson_date_time_wrapperPK"/>

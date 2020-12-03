@@ -122,12 +122,6 @@ public class ArticleNumeriqueQueryService extends QueryService<ArticleNumerique>
             if (criteria.getUrlDemo() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getUrlDemo(), ArticleNumerique_.urlDemo));
             }
-            if (criteria.getDisponibilte() != null) {
-                specification = specification.and(buildSpecification(criteria.getDisponibilte(), ArticleNumerique_.disponibilte));
-            }
-            if (criteria.getDateDisponibilte() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getDateDisponibilte(), ArticleNumerique_.dateDisponibilte));
-            }
             if (criteria.getDateParution() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDateParution(), ArticleNumerique_.dateParution));
             }
@@ -139,6 +133,15 @@ public class ArticleNumeriqueQueryService extends QueryService<ArticleNumerique>
             }
             if (criteria.getEanPapier() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getEanPapier(), ArticleNumerique_.eanPapier));
+            }
+            if (criteria.getDescription() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getDescription(), ArticleNumerique_.description));
+            }
+            if (criteria.getType() != null) {
+                specification = specification.and(buildSpecification(criteria.getType(), ArticleNumerique_.type));
+            }
+            if (criteria.getPublicCible() != null) {
+                specification = specification.and(buildSpecification(criteria.getPublicCible(), ArticleNumerique_.publicCible));
             }
             if (criteria.getDisciplineId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDisciplineId(),
@@ -155,6 +158,10 @@ public class ArticleNumeriqueQueryService extends QueryService<ArticleNumerique>
             if (criteria.getTechnoId() != null) {
                 specification = specification.and(buildSpecification(criteria.getTechnoId(),
                     root -> root.join(ArticleNumerique_.technos, JoinType.LEFT).get(Techno_.id)));
+            }
+            if (criteria.getDisponibiliteId() != null) {
+                specification = specification.and(buildSpecification(criteria.getDisponibiliteId(),
+                    root -> root.join(ArticleNumerique_.disponibilite, JoinType.LEFT).get(Disponibilite_.id)));
             }
         }
         return specification;

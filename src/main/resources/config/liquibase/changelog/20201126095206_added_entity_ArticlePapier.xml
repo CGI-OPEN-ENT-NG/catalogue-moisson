@@ -45,28 +45,15 @@
             <column name="date_parution" type="datetime">
                 <constraints nullable="true" />
             </column>
-            <column name="commandable" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="type" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="prix_ht" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
             <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="disponibilite" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="date_disponibilite" type="datetime">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="article_papier" columnName="date_parution" columnDataType="datetime"/>
-        <dropDefaultValue tableName="article_papier" columnName="date_disponibilite" columnDataType="datetime"/>
     </changeSet>
 
     <changeSet id="20201126095206-1-relations" author="moisson">
@@ -98,12 +85,8 @@
             <column name="distributeur" type="string"/>
             <column name="url_couverture" type="string"/>
             <column name="date_parution" type="datetime"/>
-            <column name="commandable" type="boolean"/>
-            <column name="type" type="string"/>
             <column name="prix_ht" type="numeric"/>
             <column name="description" type="string"/>
-            <column name="disponibilite" type="string"/>
-            <column name="date_disponibilite" type="datetime"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

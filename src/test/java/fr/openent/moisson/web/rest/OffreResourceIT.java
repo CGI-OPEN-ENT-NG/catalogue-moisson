@@ -5,6 +5,7 @@ import fr.openent.moisson.domain.Offre;
 import fr.openent.moisson.domain.Tva;
 import fr.openent.moisson.domain.Lep;
 import fr.openent.moisson.domain.ArticleNumerique;
+import fr.openent.moisson.domain.Licence;
 import fr.openent.moisson.repository.OffreRepository;
 import fr.openent.moisson.repository.search.OffreSearchRepository;
 import fr.openent.moisson.service.OffreService;
@@ -51,19 +52,9 @@ public class OffreResourceIT {
     private static final String DEFAULT_EAN_LIBRAIRE = "AAAAAAAAAAAAA";
     private static final String UPDATED_EAN_LIBRAIRE = "BBBBBBBBBBBBB";
 
-    private static final String DEFAULT_REFERENCE = "AAAAAAAAAA";
-    private static final String UPDATED_REFERENCE = "BBBBBBBBBB";
-
-    private static final Integer DEFAULT_DUREE = 1;
-    private static final Integer UPDATED_DUREE = 2;
-    private static final Integer SMALLER_DUREE = 1 - 1;
-
     private static final Integer DEFAULT_QUANTITE_MINIMALE_ACHAT = 1;
     private static final Integer UPDATED_QUANTITE_MINIMALE_ACHAT = 2;
     private static final Integer SMALLER_QUANTITE_MINIMALE_ACHAT = 1 - 1;
-
-    private static final String DEFAULT_LICENCE = "AAAAAAAAAA";
-    private static final String UPDATED_LICENCE = "BBBBBBBBBB";
 
     private static final Boolean DEFAULT_PRESCRIPTEUR = false;
     private static final Boolean UPDATED_PRESCRIPTEUR = true;
@@ -77,6 +68,12 @@ public class OffreResourceIT {
 
     private static final Boolean DEFAULT_ADOPTANT = false;
     private static final Boolean UPDATED_ADOPTANT = true;
+
+    private static final String DEFAULT_DUREE = "AAAAAAAAAA";
+    private static final String UPDATED_DUREE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_REFERENCE_EDITEUR = "AAAAAAAAAA";
+    private static final String UPDATED_REFERENCE_EDITEUR = "BBBBBBBBBB";
 
     @Autowired
     private OffreRepository offreRepository;
@@ -115,14 +112,23 @@ public class OffreResourceIT {
     public static Offre createEntity(EntityManager em) {
         Offre offre = new Offre()
             .eanLibraire(DEFAULT_EAN_LIBRAIRE)
-            .reference(DEFAULT_REFERENCE)
-            .duree(DEFAULT_DUREE)
             .quantiteMinimaleAchat(DEFAULT_QUANTITE_MINIMALE_ACHAT)
-            .licence(DEFAULT_LICENCE)
             .prescripteur(DEFAULT_PRESCRIPTEUR)
             .libelle(DEFAULT_LIBELLE)
             .prixHT(DEFAULT_PRIX_HT)
-            .adoptant(DEFAULT_ADOPTANT);
+            .adoptant(DEFAULT_ADOPTANT)
+            .duree(DEFAULT_DUREE)
+            .referenceEditeur(DEFAULT_REFERENCE_EDITEUR);
+        // Add required entity
+        Licence licence;
+        if (TestUtil.findAll(em, Licence.class).isEmpty()) {
+            licence = LicenceResourceIT.createEntity(em);
+            em.persist(licence);
+            em.flush();
+        } else {
+            licence = TestUtil.findAll(em, Licence.class).get(0);
+        }
+        offre.setLicence(licence);
         return offre;
     }
     /**
@@ -134,14 +140,23 @@ public class OffreResourceIT {
     public static Offre createUpdatedEntity(EntityManager em) {
         Offre offre = new Offre()
             .eanLibraire(UPDATED_EAN_LIBRAIRE)
-            .reference(UPDATED_REFERENCE)
-            .duree(UPDATED_DUREE)
             .quantiteMinimaleAchat(UPDATED_QUANTITE_MINIMALE_ACHAT)
-            .licence(UPDATED_LICENCE)
             .prescripteur(UPDATED_PRESCRIPTEUR)
             .libelle(UPDATED_LIBELLE)
             .prixHT(UPDATED_PRIX_HT)
-            .adoptant(UPDATED_ADOPTANT);
+            .adoptant(UPDATED_ADOPTANT)
+            .duree(UPDATED_DUREE)
+            .referenceEditeur(UPDATED_REFERENCE_EDITEUR);
+        // Add required entity
+        Licence licence;
+        if (TestUtil.findAll(em, Licence.class).isEmpty()) {
+            licence = LicenceResourceIT.createUpdatedEntity(em);
+            em.persist(licence);
+            em.flush();
+        } else {
+            licence = TestUtil.findAll(em, Licence.class).get(0);
+        }
+        offre.setLicence(licence);
         return offre;
     }
 
@@ -166,14 +181,16 @@ public class OffreResourceIT {
         assertThat(offreList).hasSize(databaseSizeBeforeCreate + 1);
         Offre testOffre = offreList.get(offreList.size() - 1);
         assertThat(testOffre.getEanLibraire()).isEqualTo(DEFAULT_EAN_LIBRAIRE);
-        assertThat(testOffre.getReference()).isEqualTo(DEFAULT_REFERENCE);
-        assertThat(testOffre.getDuree()).isEqualTo(DEFAULT_DUREE);
         assertThat(testOffre.getQuantiteMinimaleAchat()).isEqualTo(DEFAULT_QUANTITE_MINIMALE_ACHAT);
-        assertThat(testOffre.getLicence()).isEqualTo(DEFAULT_LICENCE);
         assertThat(testOffre.isPrescripteur()).isEqualTo(DEFAULT_PRESCRIPTEUR);
         assertThat(testOffre.getLibelle()).isEqualTo(DEFAULT_LIBELLE);
         assertThat(testOffre.getPrixHT()).isEqualTo(DEFAULT_PRIX_HT);
         assertThat(testOffre.isAdoptant()).isEqualTo(DEFAULT_ADOPTANT);
+        assertThat(testOffre.getDuree()).isEqualTo(DEFAULT_DUREE);
+        assertThat(testOffre.getReferenceEditeur()).isEqualTo(DEFAULT_REFERENCE_EDITEUR);
+
+        // Validate the id for MapsId, the ids must be same
+        assertThat(testOffre.getId()).isEqualTo(testOffre.getLicence().getId());
 
         // Validate the Offre in Elasticsearch
         verify(mockOffreSearchRepository, times(1)).save(testOffre);
@@ -202,6 +219,42 @@ public class OffreResourceIT {
         verify(mockOffreSearchRepository, times(0)).save(offre);
     }
 
+    @Test
+    @Transactional
+    public void updateOffreMapsIdAssociationWithNewId() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+        int databaseSizeBeforeCreate = offreRepository.findAll().size();
+
+
+        // Load the offre
+        Offre updatedOffre = offreRepository.findById(offre.getId()).get();
+        // Disconnect from session so that the updates on updatedOffre are not directly saved in db
+        em.detach(updatedOffre);
+
+        // Update the Licence with new association value
+        updatedOffre.setLicence(offre.getLicence());
+        OffreDTO updatedOffreDTO = offreMapper.toDto(updatedOffre);
+
+        // Update the entity
+        restOffreMockMvc.perform(put("/api/offres")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(updatedOffreDTO)))
+            .andExpect(status().isOk());
+
+        // Validate the Offre in the database
+        List<Offre> offreList = offreRepository.findAll();
+        assertThat(offreList).hasSize(databaseSizeBeforeCreate);
+        Offre testOffre = offreList.get(offreList.size() - 1);
+
+        // Validate the id for MapsId, the ids must be same
+        // Uncomment the following line for assertion. However, please note that there is a known issue and uncommenting will fail the test.
+        // Please look at https://github.com/jhipster/generator-jhipster/issues/9100. You can modify this test as necessary.
+        // assertThat(testOffre.getId()).isEqualTo(testOffre.getLicence().getId());
+
+        // Validate the Offre in Elasticsearch
+        verify(mockOffreSearchRepository, times(1)).save(offre);
+    }
 
     @Test
     @Transactional
@@ -215,16 +268,15 @@ public class OffreResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(offre.getId().intValue())))
             .andExpect(jsonPath("$.[*].eanLibraire").value(hasItem(DEFAULT_EAN_LIBRAIRE)))
-            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE)))
-            .andExpect(jsonPath("$.[*].duree").value(hasItem(DEFAULT_DUREE)))
             .andExpect(jsonPath("$.[*].quantiteMinimaleAchat").value(hasItem(DEFAULT_QUANTITE_MINIMALE_ACHAT)))
-            .andExpect(jsonPath("$.[*].licence").value(hasItem(DEFAULT_LICENCE)))
             .andExpect(jsonPath("$.[*].prescripteur").value(hasItem(DEFAULT_PRESCRIPTEUR.booleanValue())))
             .andExpect(jsonPath("$.[*].libelle").value(hasItem(DEFAULT_LIBELLE)))
             .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())))
-            .andExpect(jsonPath("$.[*].adoptant").value(hasItem(DEFAULT_ADOPTANT.booleanValue())));
+            .andExpect(jsonPath("$.[*].adoptant").value(hasItem(DEFAULT_ADOPTANT.booleanValue())))
+            .andExpect(jsonPath("$.[*].duree").value(hasItem(DEFAULT_DUREE)))
+            .andExpect(jsonPath("$.[*].referenceEditeur").value(hasItem(DEFAULT_REFERENCE_EDITEUR)));
     }
-    
+
     @Test
     @Transactional
     public void getOffre() throws Exception {
@@ -237,14 +289,13 @@ public class OffreResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(offre.getId().intValue()))
             .andExpect(jsonPath("$.eanLibraire").value(DEFAULT_EAN_LIBRAIRE))
-            .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE))
-            .andExpect(jsonPath("$.duree").value(DEFAULT_DUREE))
             .andExpect(jsonPath("$.quantiteMinimaleAchat").value(DEFAULT_QUANTITE_MINIMALE_ACHAT))
-            .andExpect(jsonPath("$.licence").value(DEFAULT_LICENCE))
             .andExpect(jsonPath("$.prescripteur").value(DEFAULT_PRESCRIPTEUR.booleanValue()))
             .andExpect(jsonPath("$.libelle").value(DEFAULT_LIBELLE))
             .andExpect(jsonPath("$.prixHT").value(DEFAULT_PRIX_HT.intValue()))
-            .andExpect(jsonPath("$.adoptant").value(DEFAULT_ADOPTANT.booleanValue()));
+            .andExpect(jsonPath("$.adoptant").value(DEFAULT_ADOPTANT.booleanValue()))
+            .andExpect(jsonPath("$.duree").value(DEFAULT_DUREE))
+            .andExpect(jsonPath("$.referenceEditeur").value(DEFAULT_REFERENCE_EDITEUR));
     }
 
 
@@ -342,189 +393,6 @@ public class OffreResourceIT {
 
         // Get all the offreList where eanLibraire does not contain UPDATED_EAN_LIBRAIRE
         defaultOffreShouldBeFound("eanLibraire.doesNotContain=" + UPDATED_EAN_LIBRAIRE);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllOffresByReferenceIsEqualToSomething() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where reference equals to DEFAULT_REFERENCE
-        defaultOffreShouldBeFound("reference.equals=" + DEFAULT_REFERENCE);
-
-        // Get all the offreList where reference equals to UPDATED_REFERENCE
-        defaultOffreShouldNotBeFound("reference.equals=" + UPDATED_REFERENCE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByReferenceIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where reference not equals to DEFAULT_REFERENCE
-        defaultOffreShouldNotBeFound("reference.notEquals=" + DEFAULT_REFERENCE);
-
-        // Get all the offreList where reference not equals to UPDATED_REFERENCE
-        defaultOffreShouldBeFound("reference.notEquals=" + UPDATED_REFERENCE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByReferenceIsInShouldWork() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where reference in DEFAULT_REFERENCE or UPDATED_REFERENCE
-        defaultOffreShouldBeFound("reference.in=" + DEFAULT_REFERENCE + "," + UPDATED_REFERENCE);
-
-        // Get all the offreList where reference equals to UPDATED_REFERENCE
-        defaultOffreShouldNotBeFound("reference.in=" + UPDATED_REFERENCE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByReferenceIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where reference is not null
-        defaultOffreShouldBeFound("reference.specified=true");
-
-        // Get all the offreList where reference is null
-        defaultOffreShouldNotBeFound("reference.specified=false");
-    }
-                @Test
-    @Transactional
-    public void getAllOffresByReferenceContainsSomething() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where reference contains DEFAULT_REFERENCE
-        defaultOffreShouldBeFound("reference.contains=" + DEFAULT_REFERENCE);
-
-        // Get all the offreList where reference contains UPDATED_REFERENCE
-        defaultOffreShouldNotBeFound("reference.contains=" + UPDATED_REFERENCE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByReferenceNotContainsSomething() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where reference does not contain DEFAULT_REFERENCE
-        defaultOffreShouldNotBeFound("reference.doesNotContain=" + DEFAULT_REFERENCE);
-
-        // Get all the offreList where reference does not contain UPDATED_REFERENCE
-        defaultOffreShouldBeFound("reference.doesNotContain=" + UPDATED_REFERENCE);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllOffresByDureeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where duree equals to DEFAULT_DUREE
-        defaultOffreShouldBeFound("duree.equals=" + DEFAULT_DUREE);
-
-        // Get all the offreList where duree equals to UPDATED_DUREE
-        defaultOffreShouldNotBeFound("duree.equals=" + UPDATED_DUREE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByDureeIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where duree not equals to DEFAULT_DUREE
-        defaultOffreShouldNotBeFound("duree.notEquals=" + DEFAULT_DUREE);
-
-        // Get all the offreList where duree not equals to UPDATED_DUREE
-        defaultOffreShouldBeFound("duree.notEquals=" + UPDATED_DUREE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByDureeIsInShouldWork() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where duree in DEFAULT_DUREE or UPDATED_DUREE
-        defaultOffreShouldBeFound("duree.in=" + DEFAULT_DUREE + "," + UPDATED_DUREE);
-
-        // Get all the offreList where duree equals to UPDATED_DUREE
-        defaultOffreShouldNotBeFound("duree.in=" + UPDATED_DUREE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByDureeIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where duree is not null
-        defaultOffreShouldBeFound("duree.specified=true");
-
-        // Get all the offreList where duree is null
-        defaultOffreShouldNotBeFound("duree.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByDureeIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where duree is greater than or equal to DEFAULT_DUREE
-        defaultOffreShouldBeFound("duree.greaterThanOrEqual=" + DEFAULT_DUREE);
-
-        // Get all the offreList where duree is greater than or equal to UPDATED_DUREE
-        defaultOffreShouldNotBeFound("duree.greaterThanOrEqual=" + UPDATED_DUREE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByDureeIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where duree is less than or equal to DEFAULT_DUREE
-        defaultOffreShouldBeFound("duree.lessThanOrEqual=" + DEFAULT_DUREE);
-
-        // Get all the offreList where duree is less than or equal to SMALLER_DUREE
-        defaultOffreShouldNotBeFound("duree.lessThanOrEqual=" + SMALLER_DUREE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByDureeIsLessThanSomething() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where duree is less than DEFAULT_DUREE
-        defaultOffreShouldNotBeFound("duree.lessThan=" + DEFAULT_DUREE);
-
-        // Get all the offreList where duree is less than UPDATED_DUREE
-        defaultOffreShouldBeFound("duree.lessThan=" + UPDATED_DUREE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByDureeIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where duree is greater than DEFAULT_DUREE
-        defaultOffreShouldNotBeFound("duree.greaterThan=" + DEFAULT_DUREE);
-
-        // Get all the offreList where duree is greater than SMALLER_DUREE
-        defaultOffreShouldBeFound("duree.greaterThan=" + SMALLER_DUREE);
     }
 
 
@@ -630,84 +498,6 @@ public class OffreResourceIT {
 
         // Get all the offreList where quantiteMinimaleAchat is greater than SMALLER_QUANTITE_MINIMALE_ACHAT
         defaultOffreShouldBeFound("quantiteMinimaleAchat.greaterThan=" + SMALLER_QUANTITE_MINIMALE_ACHAT);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllOffresByLicenceIsEqualToSomething() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where licence equals to DEFAULT_LICENCE
-        defaultOffreShouldBeFound("licence.equals=" + DEFAULT_LICENCE);
-
-        // Get all the offreList where licence equals to UPDATED_LICENCE
-        defaultOffreShouldNotBeFound("licence.equals=" + UPDATED_LICENCE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByLicenceIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where licence not equals to DEFAULT_LICENCE
-        defaultOffreShouldNotBeFound("licence.notEquals=" + DEFAULT_LICENCE);
-
-        // Get all the offreList where licence not equals to UPDATED_LICENCE
-        defaultOffreShouldBeFound("licence.notEquals=" + UPDATED_LICENCE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByLicenceIsInShouldWork() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where licence in DEFAULT_LICENCE or UPDATED_LICENCE
-        defaultOffreShouldBeFound("licence.in=" + DEFAULT_LICENCE + "," + UPDATED_LICENCE);
-
-        // Get all the offreList where licence equals to UPDATED_LICENCE
-        defaultOffreShouldNotBeFound("licence.in=" + UPDATED_LICENCE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByLicenceIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where licence is not null
-        defaultOffreShouldBeFound("licence.specified=true");
-
-        // Get all the offreList where licence is null
-        defaultOffreShouldNotBeFound("licence.specified=false");
-    }
-                @Test
-    @Transactional
-    public void getAllOffresByLicenceContainsSomething() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where licence contains DEFAULT_LICENCE
-        defaultOffreShouldBeFound("licence.contains=" + DEFAULT_LICENCE);
-
-        // Get all the offreList where licence contains UPDATED_LICENCE
-        defaultOffreShouldNotBeFound("licence.contains=" + UPDATED_LICENCE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllOffresByLicenceNotContainsSomething() throws Exception {
-        // Initialize the database
-        offreRepository.saveAndFlush(offre);
-
-        // Get all the offreList where licence does not contain DEFAULT_LICENCE
-        defaultOffreShouldNotBeFound("licence.doesNotContain=" + DEFAULT_LICENCE);
-
-        // Get all the offreList where licence does not contain UPDATED_LICENCE
-        defaultOffreShouldBeFound("licence.doesNotContain=" + UPDATED_LICENCE);
     }
 
 
@@ -1000,6 +790,162 @@ public class OffreResourceIT {
 
     @Test
     @Transactional
+    public void getAllOffresByDureeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where duree equals to DEFAULT_DUREE
+        defaultOffreShouldBeFound("duree.equals=" + DEFAULT_DUREE);
+
+        // Get all the offreList where duree equals to UPDATED_DUREE
+        defaultOffreShouldNotBeFound("duree.equals=" + UPDATED_DUREE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByDureeIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where duree not equals to DEFAULT_DUREE
+        defaultOffreShouldNotBeFound("duree.notEquals=" + DEFAULT_DUREE);
+
+        // Get all the offreList where duree not equals to UPDATED_DUREE
+        defaultOffreShouldBeFound("duree.notEquals=" + UPDATED_DUREE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByDureeIsInShouldWork() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where duree in DEFAULT_DUREE or UPDATED_DUREE
+        defaultOffreShouldBeFound("duree.in=" + DEFAULT_DUREE + "," + UPDATED_DUREE);
+
+        // Get all the offreList where duree equals to UPDATED_DUREE
+        defaultOffreShouldNotBeFound("duree.in=" + UPDATED_DUREE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByDureeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where duree is not null
+        defaultOffreShouldBeFound("duree.specified=true");
+
+        // Get all the offreList where duree is null
+        defaultOffreShouldNotBeFound("duree.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllOffresByDureeContainsSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where duree contains DEFAULT_DUREE
+        defaultOffreShouldBeFound("duree.contains=" + DEFAULT_DUREE);
+
+        // Get all the offreList where duree contains UPDATED_DUREE
+        defaultOffreShouldNotBeFound("duree.contains=" + UPDATED_DUREE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByDureeNotContainsSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where duree does not contain DEFAULT_DUREE
+        defaultOffreShouldNotBeFound("duree.doesNotContain=" + DEFAULT_DUREE);
+
+        // Get all the offreList where duree does not contain UPDATED_DUREE
+        defaultOffreShouldBeFound("duree.doesNotContain=" + UPDATED_DUREE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllOffresByReferenceEditeurIsEqualToSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where referenceEditeur equals to DEFAULT_REFERENCE_EDITEUR
+        defaultOffreShouldBeFound("referenceEditeur.equals=" + DEFAULT_REFERENCE_EDITEUR);
+
+        // Get all the offreList where referenceEditeur equals to UPDATED_REFERENCE_EDITEUR
+        defaultOffreShouldNotBeFound("referenceEditeur.equals=" + UPDATED_REFERENCE_EDITEUR);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByReferenceEditeurIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where referenceEditeur not equals to DEFAULT_REFERENCE_EDITEUR
+        defaultOffreShouldNotBeFound("referenceEditeur.notEquals=" + DEFAULT_REFERENCE_EDITEUR);
+
+        // Get all the offreList where referenceEditeur not equals to UPDATED_REFERENCE_EDITEUR
+        defaultOffreShouldBeFound("referenceEditeur.notEquals=" + UPDATED_REFERENCE_EDITEUR);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByReferenceEditeurIsInShouldWork() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where referenceEditeur in DEFAULT_REFERENCE_EDITEUR or UPDATED_REFERENCE_EDITEUR
+        defaultOffreShouldBeFound("referenceEditeur.in=" + DEFAULT_REFERENCE_EDITEUR + "," + UPDATED_REFERENCE_EDITEUR);
+
+        // Get all the offreList where referenceEditeur equals to UPDATED_REFERENCE_EDITEUR
+        defaultOffreShouldNotBeFound("referenceEditeur.in=" + UPDATED_REFERENCE_EDITEUR);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByReferenceEditeurIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where referenceEditeur is not null
+        defaultOffreShouldBeFound("referenceEditeur.specified=true");
+
+        // Get all the offreList where referenceEditeur is null
+        defaultOffreShouldNotBeFound("referenceEditeur.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllOffresByReferenceEditeurContainsSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where referenceEditeur contains DEFAULT_REFERENCE_EDITEUR
+        defaultOffreShouldBeFound("referenceEditeur.contains=" + DEFAULT_REFERENCE_EDITEUR);
+
+        // Get all the offreList where referenceEditeur contains UPDATED_REFERENCE_EDITEUR
+        defaultOffreShouldNotBeFound("referenceEditeur.contains=" + UPDATED_REFERENCE_EDITEUR);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByReferenceEditeurNotContainsSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where referenceEditeur does not contain DEFAULT_REFERENCE_EDITEUR
+        defaultOffreShouldNotBeFound("referenceEditeur.doesNotContain=" + DEFAULT_REFERENCE_EDITEUR);
+
+        // Get all the offreList where referenceEditeur does not contain UPDATED_REFERENCE_EDITEUR
+        defaultOffreShouldBeFound("referenceEditeur.doesNotContain=" + UPDATED_REFERENCE_EDITEUR);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllOffresByTvaIsEqualToSomething() throws Exception {
         // Initialize the database
         offreRepository.saveAndFlush(offre);
@@ -1057,6 +1003,22 @@ public class OffreResourceIT {
         defaultOffreShouldNotBeFound("articleNumeriqueId.equals=" + (articleNumeriqueId + 1));
     }
 
+
+    @Test
+    @Transactional
+    public void getAllOffresByLicenceIsEqualToSomething() throws Exception {
+        // Get already existing entity
+        Licence licence = offre.getLicence();
+        offreRepository.saveAndFlush(offre);
+        Long licenceId = licence.getId();
+
+        // Get all the offreList where licence equals to licenceId
+        defaultOffreShouldBeFound("licenceId.equals=" + licenceId);
+
+        // Get all the offreList where licence equals to licenceId + 1
+        defaultOffreShouldNotBeFound("licenceId.equals=" + (licenceId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -1066,14 +1028,13 @@ public class OffreResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(offre.getId().intValue())))
             .andExpect(jsonPath("$.[*].eanLibraire").value(hasItem(DEFAULT_EAN_LIBRAIRE)))
-            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE)))
-            .andExpect(jsonPath("$.[*].duree").value(hasItem(DEFAULT_DUREE)))
             .andExpect(jsonPath("$.[*].quantiteMinimaleAchat").value(hasItem(DEFAULT_QUANTITE_MINIMALE_ACHAT)))
-            .andExpect(jsonPath("$.[*].licence").value(hasItem(DEFAULT_LICENCE)))
             .andExpect(jsonPath("$.[*].prescripteur").value(hasItem(DEFAULT_PRESCRIPTEUR.booleanValue())))
             .andExpect(jsonPath("$.[*].libelle").value(hasItem(DEFAULT_LIBELLE)))
             .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())))
-            .andExpect(jsonPath("$.[*].adoptant").value(hasItem(DEFAULT_ADOPTANT.booleanValue())));
+            .andExpect(jsonPath("$.[*].adoptant").value(hasItem(DEFAULT_ADOPTANT.booleanValue())))
+            .andExpect(jsonPath("$.[*].duree").value(hasItem(DEFAULT_DUREE)))
+            .andExpect(jsonPath("$.[*].referenceEditeur").value(hasItem(DEFAULT_REFERENCE_EDITEUR)));
 
         // Check, that the count call also returns 1
         restOffreMockMvc.perform(get("/api/offres/count?sort=id,desc&" + filter))
@@ -1121,14 +1082,13 @@ public class OffreResourceIT {
         em.detach(updatedOffre);
         updatedOffre
             .eanLibraire(UPDATED_EAN_LIBRAIRE)
-            .reference(UPDATED_REFERENCE)
-            .duree(UPDATED_DUREE)
             .quantiteMinimaleAchat(UPDATED_QUANTITE_MINIMALE_ACHAT)
-            .licence(UPDATED_LICENCE)
             .prescripteur(UPDATED_PRESCRIPTEUR)
             .libelle(UPDATED_LIBELLE)
             .prixHT(UPDATED_PRIX_HT)
-            .adoptant(UPDATED_ADOPTANT);
+            .adoptant(UPDATED_ADOPTANT)
+            .duree(UPDATED_DUREE)
+            .referenceEditeur(UPDATED_REFERENCE_EDITEUR);
         OffreDTO offreDTO = offreMapper.toDto(updatedOffre);
 
         restOffreMockMvc.perform(put("/api/offres")
@@ -1141,14 +1101,13 @@ public class OffreResourceIT {
         assertThat(offreList).hasSize(databaseSizeBeforeUpdate);
         Offre testOffre = offreList.get(offreList.size() - 1);
         assertThat(testOffre.getEanLibraire()).isEqualTo(UPDATED_EAN_LIBRAIRE);
-        assertThat(testOffre.getReference()).isEqualTo(UPDATED_REFERENCE);
-        assertThat(testOffre.getDuree()).isEqualTo(UPDATED_DUREE);
         assertThat(testOffre.getQuantiteMinimaleAchat()).isEqualTo(UPDATED_QUANTITE_MINIMALE_ACHAT);
-        assertThat(testOffre.getLicence()).isEqualTo(UPDATED_LICENCE);
         assertThat(testOffre.isPrescripteur()).isEqualTo(UPDATED_PRESCRIPTEUR);
         assertThat(testOffre.getLibelle()).isEqualTo(UPDATED_LIBELLE);
         assertThat(testOffre.getPrixHT()).isEqualTo(UPDATED_PRIX_HT);
         assertThat(testOffre.isAdoptant()).isEqualTo(UPDATED_ADOPTANT);
+        assertThat(testOffre.getDuree()).isEqualTo(UPDATED_DUREE);
+        assertThat(testOffre.getReferenceEditeur()).isEqualTo(UPDATED_REFERENCE_EDITEUR);
 
         // Validate the Offre in Elasticsearch
         verify(mockOffreSearchRepository, times(1)).save(testOffre);
@@ -1212,13 +1171,12 @@ public class OffreResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(offre.getId().intValue())))
             .andExpect(jsonPath("$.[*].eanLibraire").value(hasItem(DEFAULT_EAN_LIBRAIRE)))
-            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE)))
-            .andExpect(jsonPath("$.[*].duree").value(hasItem(DEFAULT_DUREE)))
             .andExpect(jsonPath("$.[*].quantiteMinimaleAchat").value(hasItem(DEFAULT_QUANTITE_MINIMALE_ACHAT)))
-            .andExpect(jsonPath("$.[*].licence").value(hasItem(DEFAULT_LICENCE)))
             .andExpect(jsonPath("$.[*].prescripteur").value(hasItem(DEFAULT_PRESCRIPTEUR.booleanValue())))
             .andExpect(jsonPath("$.[*].libelle").value(hasItem(DEFAULT_LIBELLE)))
             .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())))
-            .andExpect(jsonPath("$.[*].adoptant").value(hasItem(DEFAULT_ADOPTANT.booleanValue())));
+            .andExpect(jsonPath("$.[*].adoptant").value(hasItem(DEFAULT_ADOPTANT.booleanValue())))
+            .andExpect(jsonPath("$.[*].duree").value(hasItem(DEFAULT_DUREE)))
+            .andExpect(jsonPath("$.[*].referenceEditeur").value(hasItem(DEFAULT_REFERENCE_EDITEUR)));
     }
 }

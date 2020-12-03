@@ -1,6 +1,9 @@
 package fr.openent.moisson.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -26,16 +29,21 @@ public class Niveau implements Serializable {
     private Long id;
 
     @Column(name = "libelle")
+    @JsonProperty("NIVEAU")
     private String libelle;
 
     @Column(name = "terme")
+    @JsonIgnore
     private String terme;
 
     @Column(name = "concept")
+    @JsonIgnore
     private String concept;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "niveaus", allowSetters = true)
+    @JsonBackReference
+    @JoinColumn(name = "article_numerique_id", nullable = false)
     private ArticleNumerique articleNumerique;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

@@ -1,6 +1,11 @@
 = Installation
 
-== Création de la base et des roles
+ IMPORTANT: Avant de déployer il faut impérativement créer la base de données et les roles
+
+ 1 . Création de la base et des scripts
+ 2 . déploiement de l'application
+
+== Créations de la base et des roles
 
 Par défaut les tables sont créées avec Liquibase qui est une librairie open-source permettant de tracer et gérer les modifications d'une base de données.
 Liquibase est paramétré pour la mise en place des tables et séquences au premier démarrage de l’application,
@@ -19,14 +24,212 @@ Il faut jouer les scripts qui sont dans le fichier :
 == Création des tables
 
 L’application utilise Liquibase pour la création des tables.
-Cependant les scripts SQL sont fournis et situés dans le répertoire db/migration.
+Ces dernières sont donc créées automatiquement lors du déploiement de l’application.
 
-NOTE: Les scripts SQL sont fournis pour être utilisés "As is" ou avec Flyway
+NOTE: Les scripts SQL sont fournis et situés dans le répertoire db/migration et peuvent être utilisés "As is" ou avec Flyway
 
 IMPORTANT: Les noms de fichier de scripts sont au format FlyWay et sont stockés dans le répertoire de recherche par défaut de Flyway bien que celui-ci n'est pas installé par défaut, main/resources/db/migration.
-La procédure d’installation et d'utilisation de Flyway est fournie ci-dessous.
+La procédure d’installation et d’utilisation de Flyway est fournie à la fin du document.
 
-=== Installation Flyway (Optionnel)
+== Déploiement de l’application
+
+== Rest api
+
+Les endpoints des Apis sont fournis dans le contrat d’Api fourni.
+
+=== Authentification préalable
+
+Les Apis étant sécurisées il faut s'authentifier pour y accéder.
+
+==== Authentification basique avec login et mot de passe (user et password)
+
+Il existe deux utilisateurs qui permettent de s'identifier :
+
+ . l’utilisateur "admin" avec le password "admin" par défaut qui possède les roles ROLE_USER et ROLE_ADMIN
+
+ . l’utilisateur "user" avec le password "user" par défaut qui possède le role ROLE_USER
+
+L'administrateur "admin" peut accéder aux apis en lecture écriture et suppression.
+
+L'utilisateur "user" peut accéder aux apis en lecture seule.
+
+Pour accéder aux apis il faut utiliser curl, postman ou insomnia designer
+
+1 - Avec curl pour accéder il faut préciser l’"user" et le "password" :
+
+ Pour obtenir les informations sur l'utilisateur
+ curl -v http://admin:admin@localhost:8080/api/account
+ ou
+ curl -vu admin:admin http://localhost:8080/api/account
+
+ Pour obtenir la liste des arcticles numériques :
+ curl -vu admin:admin http://localhost:8080/api/article-numeriques
+ curl -vu user:user http://localhost:8080/api/article-numeriques
+
+NOTE: -v pemet d'activer le mode verbose -vu étant équivalent à -v -u
+
+2 - Avec Postman ou Insomnia il faut saisir les url en prenant soin de bien spécifier le verbe (GET, POST, PUT etc...)
+
+Dans l'onglet authentication ou auth il faut saisir le login et le mot de passe
+
+ Le endpoint suivant retourne le login de l'utilisateur authentifié avec le verbe GET
+ http://user:user@localhost:8080/api/authenticate
+
+==== Authentification avec token JWT
+
+L’api est livrée avec une authentification par token JWT.
+
+Il faut dan un premier temps générer le token, avec le endpoint http://user:user@localhost:8080/api/authenticate et le verbe POST
+
+ curl  -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate
+ le curl génère un token.
+
+ "id_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTYwOTAwMzc2M30.bh8fQMGXawP354wGS1qG_KxSCD1_7hmthQej6DZmUWQdlW8J2Lo1j0EH27m9FJiv_o6vS6hu1iUzAi4lt8uegw"
+
+Il faut ensuite le passer en paramètre dans le header de la requête
+
+ curl -H 'Accept: application/json' -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTYwOTAwMzc2M30.bh8fQMGXawP354wGS1qG_KxSCD1_7hmthQej6DZmUWQdlW8J2Lo1j0EH27m9FJiv_o6vS6hu1iUzAi4lt8uegw" http://localhost:8080/api/account
+
+Sous linux il est possible d'automatiser il faut au préalable installer un parser Json. Par exemple après avoir installé le parser jq il est possible de stocker le token dans une variable d'environnement
+
+ TOKEN=$(curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate | jq -r '.id_token')
+
+Il suffit en suite de passer le token de la manière suivante :
+
+ curl -H 'Accept: application/json' -H "Authorization: Bearer $TOKEN" http://localhost:8080/api/account
+
+Sous postman ou insomnia il gfaut faire le POST avec l'url et ajouter dans le body ce qui correspond au --data du curl (format json):
+
+ {"username":"admin","password":"admin"}
+
+Récapitulatif :
+
+ curl  -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate
+
+ curl -H 'Accept: application/json' -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTYwNjUwMTMxOH0.5ldyoVOtvIFIt3E4GlmTcfRg82XjodEcObIJ9JRqT3OU4KY_QOYfi7ELqge8xgQsdkene0-0S8F4zamU845Auw" http://localhost:8080/api/account
+
+ TOKEN=$(curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate | jq -r '.id_token')
+
+ curl -H 'Accept: application/json' -H "Authorization: Bearer $TOKEN" http://localhost:8080/api/account
+
+== Swagger
+
+Les composants front-end et back-end étant séparés, l’API expose le composant back-end pour le composant frontal ou des intégrations d’applications tierces.
+
+Les spécifications des API back-end sont exposées par l’intermédiaire de Swagger.
+
+Pour visualiser les spécifications d’API au format JSON :
+
+----
+http://localhost:8080/v2/api-docs
+
+dans un navigateur ou
+
+curl -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/v2/api-docs
+----
+
+Pour visualiser les spécifications d’API avec SwaggerN :
+
+----
+http://localhost:8080/swagger-ui/index.html
+
+dans un navigateur
+----
+
+Remplacer _localhost:8080_ par le bon _host_ et le bon _port_.
+
+== Testing
+
+=== Création des tables du contexte test
+
+Lors de la création des tables avec liquibase, le pom possède un <contexts>!test</contexts> il faut donc le modifier car la table jhi_date_time_wrapper est absente de la base or elle est nécessaire aux tests <contexts>test</contexts>.
+
+Si le préfixe n’est pas jhi il faut adapter le nom de la table avec le bon préfixe, par ex avec préfixe moisson:
+
+	moisson_date_time_wrapper
+
+La table correspondante est dans le package :
+
+ {basePackage}.repository.timezone:
+ ...
+ @Entity
+ @Table(name = "moisson_date_time_wrapper")
+ public class DateTimeWrapper implements Serializable {...}
+
+Procédure de rattrapage :
+
+créer un fichier yyyyMMddHHmmss_initial_schema_test.xml avec le contenu suivant (les changeset doivent avoir des id différents qui n'existent pas dans la table databasechangelog)
+
+ <databaseChangeLog
+ xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+ xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+ http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+ <!-- <changeSet author="jhipster" id="yyyyMMddHHmmss" context="test">
+ Il faut supprimer context="test" pour la génération
+ ou bien de modifier le pom en transformant <contexts>!test</contexts> en <contexts>test</contexts> dans le pom.xml-->
+
+     <changeSet author="jhipster" id="yyyyMMddHHmmss">
+         <createTable tableName="jhi_date_time_wrapper">
+             <column  name="id" type="BIGINT">
+                 <constraints primaryKey="true" primaryKeyName="jhi_date_time_wrapperPK"/>
+             </column>
+             <column name="instant" type="timestamp"/>
+             <column name="local_date_time" type="timestamp"/>
+             <column name="offset_date_time" type="timestamp"/>
+             <column name="zoned_date_time" type="timestamp"/>
+             <column name="local_time" type="time"/>
+             <column name="offset_time" type="time"/>
+             <column name="local_date" type="date"/>
+         </createTable>
+     </changeSet>
+ </databaseChangeLog>
+
+Rajouter la ligne dans master.xml :
+
+<include file="config/liquibase/changelog/yyyyMMddHHmmss_initial_schema_test.xml" relativeToChangelogFile="false"/>
+
+Attention si context="test" est conservé au niveau du pom.xml il faut modifier le pom.xml en conséquense au niveau du plugin liquibase :
+
+ <plugin>
+ <groupId>org.liquibase</groupId>
+ <artifactId>liquibase-maven-plugin</artifactId>
+ <version>${liquibase.version}</version>
+ <configuration>
+     <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
+     <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
+     <driver>org.postgresql.Driver</driver>
+     <url>jdbc:postgresql://localhost:5432/catalogue-ng-jhipster</url>
+     <defaultSchemaName></defaultSchemaName>
+     <username>catalogue</username>
+     <password>catalogue</password>
+     <referenceUrl>hibernate:spring:fr.tech.corree.domain?dialect=io.github.jhipster.domain.util.FixedPostgreSQL10Dialect
+     &amp;hibernate.physical_naming_strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+     &amp;hibernate.implicit_naming_strategy=org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl</referenceUrl>
+     <!-- <referenceUrl>hibernate:spring:fr.tech.corree.domain?dialect=io.github.jhipster.domain.util.FixedPostgreSQL10Dialect
+     &amp;hibernate.physical_naming_strategy=fr.tech.corree.domain.naming.CataloguePhysicalNamingStrategyImpl
+     &amp;hibernate.implicit_naming_strategy=org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl</referenceUrl> -->
+     <verbose>true</verbose>
+     <logging>debug</logging>
+     #*<contexts>test</contexts> // ATTENTION JHIPSTER GENERE LE FICHIER AVEC <contexts>!test</contexts>*#
+ </configuration>
+ <dependencies>
+ // Dependencies
+ </dependencies>
+ </plugin>
+
+Puis en ligne de commande :
+
+	mvn liquibase:update
+
+NOTE: si la table est bloquée avec l'erreur mvn tourne en boucle en attendant la libération du verrou il faut, passer cette requête: UPDATE DATABASECHANGELOGLOCK SET LOCKED=false, LOCKGRANTED=null, LOCKEDBY=null where ID=1;
+
+La table est créée
+
+
+== Installation Flyway (Optionnel)
 
 Il est possible de jouer les scripts avec Flyway au lieu de Liquibase.
 Flyway gère la "convention over configuration, c'est-à-dire que une fois le plug-in installer il va scruter conventionnellement dans main/resources/db/migration et jouer les cripts qui s'y trouvent avec un ordre prédéfini par les noms de fichiers(voir plus bas)
@@ -182,13 +385,13 @@ Cette table de métadonnées suit également les sommes de contrôle de migratio
 Le framework effectue les étapes suivantes pour s'adapter aux schémas de base de données en évolution :
 
 . Il vérifie un schéma de base de données pour localiser sa table de métadonnées (SCHEMA_VERSION par défaut).
- Si la table de métadonnées n’existe pas, elle en créera une.
+Si la table de métadonnées n’existe pas, elle en créera une.
 . Il analyse un chemin de classe d'application pour les migrations disponibles
 . Il compare les migrations à la table de métadonnées.
- Si un numéro de version est inférieur ou égal à une version marquée comme actuelle,
- il est ignoré : par conséquent il ne faut pas modifier la numérotation des scripts après la première migration.
+Si un numéro de version est inférieur ou égal à une version marquée comme actuelle,
+il est ignoré : par conséquent il ne faut pas modifier la numérotation des scripts après la première migration.
 . Il marque toutes les migrations restantes comme des migrations en attente.
- Ceux-ci sont triés en fonction du numéro de version et sont exécutés dans l’ordre.
+Ceux-ci sont triés en fonction du numéro de version et sont exécutés dans l’ordre.
 . Au fur et à mesure que chaque migration est appliquée, la table de métadonnées est mise à jour en conséquence.
 
 === Commandes mvn
@@ -203,108 +406,3 @@ Validate : valide le schéma de base de données actuel par rapport aux migratio
 Repair : réparations de la table de métadonnées.
 Clean : supprime tous les objets dans un schéma configuré. Tous les objets de base de données sont supprimés. Bien sûr, vous ne devez jamais utiliser clean sur une base de données de production.
 ----
-
-== Rest api
-
-Les endpoints des Apis sont fournis dans le contrat d’Api fourni.
-
-=== Authentification préalable
-
-Les Apis étant sécurisées il faut s'authentifier pour y accéder.
-
-==== Authentification basique avec login et mot de passe (user et password)
-
-Il existe deux utilisateurs qui permettent de s'identifier :
-
- . l’utilisateur "admin" avec le password "admin" par défaut qui possède les roles ROLE_USER et ROLE_ADMIN
-
- . l’utilisateur "user" avec le password "user" par défaut qui possède le role ROLE_USER
-
-L'administrateur "admin" peut accéder aux apis en lecture écriture et suppression.
-
-L'utilisateur "user" peut accéder aux apis en lecture seule.
-
-Pour accéder aux apis il faut utiliser curl, postman ou insomnia designer
-
-1 - Avec curl pour accéder il faut préciser l’"user" et le "password" :
-
- Pour obtenir les informations sur l'utilisateur
- curl -v http://admin:admin@localhost:8080/api/account
- ou
- curl -vu admin:admin http://localhost:8080/api/account
-
- Pour obtenir la liste des arcticles numériques :
- curl -vu admin:admin http://localhost:8080/api/article-numeriques
- curl -vu user:user http://localhost:8080/api/article-numeriques
-
-NOTE: -v pemet d'activer le mode verbose -vu étant équivalent à -v -u
-
-2 - Avec Postman ou Insomnia il faut saisir les url en prenant soin de bien spécifier le verbe (GET, POST, PUT etc...)
-
-Dans l'onglet authentication ou auth il faut saisir le login et le mot de passe
-
- Le endpoint suivant retourne le login de l'utilisateur authentifié avec le verbe GET
- http://user:user@localhost:8080/api/authenticate
-
-==== Authentification avec token JWT
-
-L’api est livrée avec une authentification par token JWT.
-
-Il faut dan un premier temps générer le token, avec le endpoint http://user:user@localhost:8080/api/authenticate et le verbe POST
-
- curl  -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate
- le curl génère un token.
-
- "id_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTYwOTAwMzc2M30.bh8fQMGXawP354wGS1qG_KxSCD1_7hmthQej6DZmUWQdlW8J2Lo1j0EH27m9FJiv_o6vS6hu1iUzAi4lt8uegw"
-
-Il faut ensuite le passer en paramètre dans le header de la requête
-
- curl -H 'Accept: application/json' -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTYwOTAwMzc2M30.bh8fQMGXawP354wGS1qG_KxSCD1_7hmthQej6DZmUWQdlW8J2Lo1j0EH27m9FJiv_o6vS6hu1iUzAi4lt8uegw" http://localhost:8080/api/account
-
-Sous linux il est possible d'automatiser il faut au préalable installer un parser Json. Par exemple après avoir installé le parser jq il est possible de stocker le token dans une variable d'environnement
-
- TOKEN=$(curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate | jq -r '.id_token')
-
-Il suffit en suite de passer le token de la manière suivante :
-
- curl -H 'Accept: application/json' -H "Authorization: Bearer $TOKEN" http://localhost:8080/api/account
-
-Sous postman ou insomnia il gfaut faire le POST avec l'url et ajouter dans le body ce qui correspond au --data du curl (format json):
-
- {"username":"admin","password":"admin"}
-
-Récapitulatif :
-
- curl  -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate
-
- curl -H 'Accept: application/json' -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTYwNjUwMTMxOH0.5ldyoVOtvIFIt3E4GlmTcfRg82XjodEcObIJ9JRqT3OU4KY_QOYfi7ELqge8xgQsdkene0-0S8F4zamU845Auw" http://localhost:8080/api/account
-
- TOKEN=$(curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate | jq -r '.id_token')
-
- curl -H 'Accept: application/json' -H "Authorization: Bearer $TOKEN" http://localhost:8080/api/account
-
-== Swagger
-
-Les composants front-end et back-end étant séparés, l’API expose le composant back-end pour le composant frontal ou des intégrations d’applications tierces.
-
-Les spécifications des API back-end sont exposées par l’intermédiaire de Swagger.
-
-Pour visualiser les spécifications d’API au format JSON :
-
-----
-http://localhost:8080/v2/api-docs
-
-dans un navigateur ou
-
-curl -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/v2/api-docs
-----
-
-Pour visualiser les spécifications d’API avec SwaggerN :
-
-----
-http://localhost:8080/swagger-ui/index.html
-
-dans un navigateur
-----
-
-Remplacer _localhost:8080_ par le bon _host_ et le bon _port_.

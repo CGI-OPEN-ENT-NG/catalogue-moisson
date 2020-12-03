@@ -98,17 +98,8 @@ public class OffreQueryService extends QueryService<Offre> {
             if (criteria.getEanLibraire() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getEanLibraire(), Offre_.eanLibraire));
             }
-            if (criteria.getReference() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getReference(), Offre_.reference));
-            }
-            if (criteria.getDuree() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getDuree(), Offre_.duree));
-            }
             if (criteria.getQuantiteMinimaleAchat() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getQuantiteMinimaleAchat(), Offre_.quantiteMinimaleAchat));
-            }
-            if (criteria.getLicence() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getLicence(), Offre_.licence));
             }
             if (criteria.getPrescripteur() != null) {
                 specification = specification.and(buildSpecification(criteria.getPrescripteur(), Offre_.prescripteur));
@@ -122,6 +113,12 @@ public class OffreQueryService extends QueryService<Offre> {
             if (criteria.getAdoptant() != null) {
                 specification = specification.and(buildSpecification(criteria.getAdoptant(), Offre_.adoptant));
             }
+            if (criteria.getDuree() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getDuree(), Offre_.duree));
+            }
+            if (criteria.getReferenceEditeur() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getReferenceEditeur(), Offre_.referenceEditeur));
+            }
             if (criteria.getTvaId() != null) {
                 specification = specification.and(buildSpecification(criteria.getTvaId(),
                     root -> root.join(Offre_.tvas, JoinType.LEFT).get(Tva_.id)));
@@ -133,6 +130,10 @@ public class OffreQueryService extends QueryService<Offre> {
             if (criteria.getArticleNumeriqueId() != null) {
                 specification = specification.and(buildSpecification(criteria.getArticleNumeriqueId(),
                     root -> root.join(Offre_.articleNumerique, JoinType.LEFT).get(ArticleNumerique_.id)));
+            }
+            if (criteria.getLicenceId() != null) {
+                specification = specification.and(buildSpecification(criteria.getLicenceId(),
+                    root -> root.join(Offre_.licence, JoinType.LEFT).get(Licence_.id)));
             }
         }
         return specification;

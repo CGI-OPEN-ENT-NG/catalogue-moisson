@@ -3,6 +3,7 @@ package fr.openent.moisson.web.rest;
 import fr.openent.moisson.MoissoncatalogueApp;
 import fr.openent.moisson.domain.ArticlePapier;
 import fr.openent.moisson.domain.Tva;
+import fr.openent.moisson.domain.Disponibilite;
 import fr.openent.moisson.repository.ArticlePapierRepository;
 import fr.openent.moisson.repository.search.ArticlePapierSearchRepository;
 import fr.openent.moisson.service.ArticlePapierService;
@@ -39,8 +40,6 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import fr.openent.moisson.domain.enumeration.TypeArticle;
-import fr.openent.moisson.domain.enumeration.Disponibilite;
 /**
  * Integration tests for the {@link ArticlePapierResource} REST controller.
  */
@@ -80,24 +79,12 @@ public class ArticlePapierResourceIT {
     private static final Instant DEFAULT_DATE_PARUTION = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE_PARUTION = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Boolean DEFAULT_COMMANDABLE = false;
-    private static final Boolean UPDATED_COMMANDABLE = true;
-
-    private static final TypeArticle DEFAULT_TYPE = TypeArticle.NUMERIQUE;
-    private static final TypeArticle UPDATED_TYPE = TypeArticle.PAPIER;
-
     private static final BigDecimal DEFAULT_PRIX_HT = new BigDecimal(1);
     private static final BigDecimal UPDATED_PRIX_HT = new BigDecimal(2);
     private static final BigDecimal SMALLER_PRIX_HT = new BigDecimal(1 - 1);
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
-
-    private static final Disponibilite DEFAULT_DISPONIBILITE = Disponibilite.DISPONIBLE;
-    private static final Disponibilite UPDATED_DISPONIBILITE = Disponibilite.EN_COURS_D_IMPRESSION;
-
-    private static final Instant DEFAULT_DATE_DISPONIBILITE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_DATE_DISPONIBILITE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     @Autowired
     private ArticlePapierRepository articlePapierRepository;
@@ -145,12 +132,18 @@ public class ArticlePapierResourceIT {
             .distributeur(DEFAULT_DISTRIBUTEUR)
             .urlCouverture(DEFAULT_URL_COUVERTURE)
             .dateParution(DEFAULT_DATE_PARUTION)
-            .commandable(DEFAULT_COMMANDABLE)
-            .type(DEFAULT_TYPE)
             .prixHT(DEFAULT_PRIX_HT)
-            .description(DEFAULT_DESCRIPTION)
-            .disponibilite(DEFAULT_DISPONIBILITE)
-            .dateDisponibilite(DEFAULT_DATE_DISPONIBILITE);
+            .description(DEFAULT_DESCRIPTION);
+        // Add required entity
+        Disponibilite disponibilite;
+        if (TestUtil.findAll(em, Disponibilite.class).isEmpty()) {
+            disponibilite = DisponibiliteResourceIT.createEntity(em);
+            em.persist(disponibilite);
+            em.flush();
+        } else {
+            disponibilite = TestUtil.findAll(em, Disponibilite.class).get(0);
+        }
+        articlePapier.setDisponibilite(disponibilite);
         return articlePapier;
     }
     /**
@@ -171,12 +164,18 @@ public class ArticlePapierResourceIT {
             .distributeur(UPDATED_DISTRIBUTEUR)
             .urlCouverture(UPDATED_URL_COUVERTURE)
             .dateParution(UPDATED_DATE_PARUTION)
-            .commandable(UPDATED_COMMANDABLE)
-            .type(UPDATED_TYPE)
             .prixHT(UPDATED_PRIX_HT)
-            .description(UPDATED_DESCRIPTION)
-            .disponibilite(UPDATED_DISPONIBILITE)
-            .dateDisponibilite(UPDATED_DATE_DISPONIBILITE);
+            .description(UPDATED_DESCRIPTION);
+        // Add required entity
+        Disponibilite disponibilite;
+        if (TestUtil.findAll(em, Disponibilite.class).isEmpty()) {
+            disponibilite = DisponibiliteResourceIT.createUpdatedEntity(em);
+            em.persist(disponibilite);
+            em.flush();
+        } else {
+            disponibilite = TestUtil.findAll(em, Disponibilite.class).get(0);
+        }
+        articlePapier.setDisponibilite(disponibilite);
         return articlePapier;
     }
 
@@ -210,12 +209,11 @@ public class ArticlePapierResourceIT {
         assertThat(testArticlePapier.getDistributeur()).isEqualTo(DEFAULT_DISTRIBUTEUR);
         assertThat(testArticlePapier.getUrlCouverture()).isEqualTo(DEFAULT_URL_COUVERTURE);
         assertThat(testArticlePapier.getDateParution()).isEqualTo(DEFAULT_DATE_PARUTION);
-        assertThat(testArticlePapier.isCommandable()).isEqualTo(DEFAULT_COMMANDABLE);
-        assertThat(testArticlePapier.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testArticlePapier.getPrixHT()).isEqualTo(DEFAULT_PRIX_HT);
         assertThat(testArticlePapier.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testArticlePapier.getDisponibilite()).isEqualTo(DEFAULT_DISPONIBILITE);
-        assertThat(testArticlePapier.getDateDisponibilite()).isEqualTo(DEFAULT_DATE_DISPONIBILITE);
+
+        // Validate the id for MapsId, the ids must be same
+        assertThat(testArticlePapier.getId()).isEqualTo(testArticlePapier.getDisponibilite().getId());
 
         // Validate the ArticlePapier in Elasticsearch
         verify(mockArticlePapierSearchRepository, times(1)).save(testArticlePapier);
@@ -244,6 +242,42 @@ public class ArticlePapierResourceIT {
         verify(mockArticlePapierSearchRepository, times(0)).save(articlePapier);
     }
 
+    @Test
+    @Transactional
+    public void updateArticlePapierMapsIdAssociationWithNewId() throws Exception {
+        // Initialize the database
+        articlePapierRepository.saveAndFlush(articlePapier);
+        int databaseSizeBeforeCreate = articlePapierRepository.findAll().size();
+
+
+        // Load the articlePapier
+        ArticlePapier updatedArticlePapier = articlePapierRepository.findById(articlePapier.getId()).get();
+        // Disconnect from session so that the updates on updatedArticlePapier are not directly saved in db
+        em.detach(updatedArticlePapier);
+
+        // Update the Disponibilite with new association value
+        updatedArticlePapier.setDisponibilite(articlePapier.getDisponibilite());
+        ArticlePapierDTO updatedArticlePapierDTO = articlePapierMapper.toDto(updatedArticlePapier);
+
+        // Update the entity
+        restArticlePapierMockMvc.perform(put("/api/article-papiers")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(updatedArticlePapierDTO)))
+            .andExpect(status().isOk());
+
+        // Validate the ArticlePapier in the database
+        List<ArticlePapier> articlePapierList = articlePapierRepository.findAll();
+        assertThat(articlePapierList).hasSize(databaseSizeBeforeCreate);
+        ArticlePapier testArticlePapier = articlePapierList.get(articlePapierList.size() - 1);
+
+        // Validate the id for MapsId, the ids must be same
+        // Uncomment the following line for assertion. However, please note that there is a known issue and uncommenting will fail the test.
+        // Please look at https://github.com/jhipster/generator-jhipster/issues/9100. You can modify this test as necessary.
+        // assertThat(testArticlePapier.getId()).isEqualTo(testArticlePapier.getDisponibilite().getId());
+
+        // Validate the ArticlePapier in Elasticsearch
+        verify(mockArticlePapierSearchRepository, times(1)).save(articlePapier);
+    }
 
     @Test
     @Transactional
@@ -266,14 +300,10 @@ public class ArticlePapierResourceIT {
             .andExpect(jsonPath("$.[*].distributeur").value(hasItem(DEFAULT_DISTRIBUTEUR)))
             .andExpect(jsonPath("$.[*].urlCouverture").value(hasItem(DEFAULT_URL_COUVERTURE)))
             .andExpect(jsonPath("$.[*].dateParution").value(hasItem(DEFAULT_DATE_PARUTION.toString())))
-            .andExpect(jsonPath("$.[*].commandable").value(hasItem(DEFAULT_COMMANDABLE.booleanValue())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].disponibilite").value(hasItem(DEFAULT_DISPONIBILITE.toString())))
-            .andExpect(jsonPath("$.[*].dateDisponibilite").value(hasItem(DEFAULT_DATE_DISPONIBILITE.toString())));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
     }
-    
+
     @Test
     @Transactional
     public void getArticlePapier() throws Exception {
@@ -295,12 +325,8 @@ public class ArticlePapierResourceIT {
             .andExpect(jsonPath("$.distributeur").value(DEFAULT_DISTRIBUTEUR))
             .andExpect(jsonPath("$.urlCouverture").value(DEFAULT_URL_COUVERTURE))
             .andExpect(jsonPath("$.dateParution").value(DEFAULT_DATE_PARUTION.toString()))
-            .andExpect(jsonPath("$.commandable").value(DEFAULT_COMMANDABLE.booleanValue()))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.prixHT").value(DEFAULT_PRIX_HT.intValue()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
-            .andExpect(jsonPath("$.disponibilite").value(DEFAULT_DISPONIBILITE.toString()))
-            .andExpect(jsonPath("$.dateDisponibilite").value(DEFAULT_DATE_DISPONIBILITE.toString()));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
     }
 
 
@@ -1079,110 +1105,6 @@ public class ArticlePapierResourceIT {
 
     @Test
     @Transactional
-    public void getAllArticlePapiersByCommandableIsEqualToSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where commandable equals to DEFAULT_COMMANDABLE
-        defaultArticlePapierShouldBeFound("commandable.equals=" + DEFAULT_COMMANDABLE);
-
-        // Get all the articlePapierList where commandable equals to UPDATED_COMMANDABLE
-        defaultArticlePapierShouldNotBeFound("commandable.equals=" + UPDATED_COMMANDABLE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByCommandableIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where commandable not equals to DEFAULT_COMMANDABLE
-        defaultArticlePapierShouldNotBeFound("commandable.notEquals=" + DEFAULT_COMMANDABLE);
-
-        // Get all the articlePapierList where commandable not equals to UPDATED_COMMANDABLE
-        defaultArticlePapierShouldBeFound("commandable.notEquals=" + UPDATED_COMMANDABLE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByCommandableIsInShouldWork() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where commandable in DEFAULT_COMMANDABLE or UPDATED_COMMANDABLE
-        defaultArticlePapierShouldBeFound("commandable.in=" + DEFAULT_COMMANDABLE + "," + UPDATED_COMMANDABLE);
-
-        // Get all the articlePapierList where commandable equals to UPDATED_COMMANDABLE
-        defaultArticlePapierShouldNotBeFound("commandable.in=" + UPDATED_COMMANDABLE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByCommandableIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where commandable is not null
-        defaultArticlePapierShouldBeFound("commandable.specified=true");
-
-        // Get all the articlePapierList where commandable is null
-        defaultArticlePapierShouldNotBeFound("commandable.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByTypeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where type equals to DEFAULT_TYPE
-        defaultArticlePapierShouldBeFound("type.equals=" + DEFAULT_TYPE);
-
-        // Get all the articlePapierList where type equals to UPDATED_TYPE
-        defaultArticlePapierShouldNotBeFound("type.equals=" + UPDATED_TYPE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByTypeIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where type not equals to DEFAULT_TYPE
-        defaultArticlePapierShouldNotBeFound("type.notEquals=" + DEFAULT_TYPE);
-
-        // Get all the articlePapierList where type not equals to UPDATED_TYPE
-        defaultArticlePapierShouldBeFound("type.notEquals=" + UPDATED_TYPE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByTypeIsInShouldWork() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where type in DEFAULT_TYPE or UPDATED_TYPE
-        defaultArticlePapierShouldBeFound("type.in=" + DEFAULT_TYPE + "," + UPDATED_TYPE);
-
-        // Get all the articlePapierList where type equals to UPDATED_TYPE
-        defaultArticlePapierShouldNotBeFound("type.in=" + UPDATED_TYPE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByTypeIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where type is not null
-        defaultArticlePapierShouldBeFound("type.specified=true");
-
-        // Get all the articlePapierList where type is null
-        defaultArticlePapierShouldNotBeFound("type.specified=false");
-    }
-
-    @Test
-    @Transactional
     public void getAllArticlePapiersByPrixHTIsEqualToSomething() throws Exception {
         // Initialize the database
         articlePapierRepository.saveAndFlush(articlePapier);
@@ -1366,110 +1288,6 @@ public class ArticlePapierResourceIT {
 
     @Test
     @Transactional
-    public void getAllArticlePapiersByDisponibiliteIsEqualToSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where disponibilite equals to DEFAULT_DISPONIBILITE
-        defaultArticlePapierShouldBeFound("disponibilite.equals=" + DEFAULT_DISPONIBILITE);
-
-        // Get all the articlePapierList where disponibilite equals to UPDATED_DISPONIBILITE
-        defaultArticlePapierShouldNotBeFound("disponibilite.equals=" + UPDATED_DISPONIBILITE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByDisponibiliteIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where disponibilite not equals to DEFAULT_DISPONIBILITE
-        defaultArticlePapierShouldNotBeFound("disponibilite.notEquals=" + DEFAULT_DISPONIBILITE);
-
-        // Get all the articlePapierList where disponibilite not equals to UPDATED_DISPONIBILITE
-        defaultArticlePapierShouldBeFound("disponibilite.notEquals=" + UPDATED_DISPONIBILITE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByDisponibiliteIsInShouldWork() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where disponibilite in DEFAULT_DISPONIBILITE or UPDATED_DISPONIBILITE
-        defaultArticlePapierShouldBeFound("disponibilite.in=" + DEFAULT_DISPONIBILITE + "," + UPDATED_DISPONIBILITE);
-
-        // Get all the articlePapierList where disponibilite equals to UPDATED_DISPONIBILITE
-        defaultArticlePapierShouldNotBeFound("disponibilite.in=" + UPDATED_DISPONIBILITE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByDisponibiliteIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where disponibilite is not null
-        defaultArticlePapierShouldBeFound("disponibilite.specified=true");
-
-        // Get all the articlePapierList where disponibilite is null
-        defaultArticlePapierShouldNotBeFound("disponibilite.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByDateDisponibiliteIsEqualToSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where dateDisponibilite equals to DEFAULT_DATE_DISPONIBILITE
-        defaultArticlePapierShouldBeFound("dateDisponibilite.equals=" + DEFAULT_DATE_DISPONIBILITE);
-
-        // Get all the articlePapierList where dateDisponibilite equals to UPDATED_DATE_DISPONIBILITE
-        defaultArticlePapierShouldNotBeFound("dateDisponibilite.equals=" + UPDATED_DATE_DISPONIBILITE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByDateDisponibiliteIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where dateDisponibilite not equals to DEFAULT_DATE_DISPONIBILITE
-        defaultArticlePapierShouldNotBeFound("dateDisponibilite.notEquals=" + DEFAULT_DATE_DISPONIBILITE);
-
-        // Get all the articlePapierList where dateDisponibilite not equals to UPDATED_DATE_DISPONIBILITE
-        defaultArticlePapierShouldBeFound("dateDisponibilite.notEquals=" + UPDATED_DATE_DISPONIBILITE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByDateDisponibiliteIsInShouldWork() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where dateDisponibilite in DEFAULT_DATE_DISPONIBILITE or UPDATED_DATE_DISPONIBILITE
-        defaultArticlePapierShouldBeFound("dateDisponibilite.in=" + DEFAULT_DATE_DISPONIBILITE + "," + UPDATED_DATE_DISPONIBILITE);
-
-        // Get all the articlePapierList where dateDisponibilite equals to UPDATED_DATE_DISPONIBILITE
-        defaultArticlePapierShouldNotBeFound("dateDisponibilite.in=" + UPDATED_DATE_DISPONIBILITE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticlePapiersByDateDisponibiliteIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        articlePapierRepository.saveAndFlush(articlePapier);
-
-        // Get all the articlePapierList where dateDisponibilite is not null
-        defaultArticlePapierShouldBeFound("dateDisponibilite.specified=true");
-
-        // Get all the articlePapierList where dateDisponibilite is null
-        defaultArticlePapierShouldNotBeFound("dateDisponibilite.specified=false");
-    }
-
-    @Test
-    @Transactional
     public void getAllArticlePapiersByTvaIsEqualToSomething() throws Exception {
         // Initialize the database
         articlePapierRepository.saveAndFlush(articlePapier);
@@ -1485,6 +1303,22 @@ public class ArticlePapierResourceIT {
 
         // Get all the articlePapierList where tva equals to tvaId + 1
         defaultArticlePapierShouldNotBeFound("tvaId.equals=" + (tvaId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllArticlePapiersByDisponibiliteIsEqualToSomething() throws Exception {
+        // Get already existing entity
+        Disponibilite disponibilite = articlePapier.getDisponibilite();
+        articlePapierRepository.saveAndFlush(articlePapier);
+        Long disponibiliteId = disponibilite.getId();
+
+        // Get all the articlePapierList where disponibilite equals to disponibiliteId
+        defaultArticlePapierShouldBeFound("disponibiliteId.equals=" + disponibiliteId);
+
+        // Get all the articlePapierList where disponibilite equals to disponibiliteId + 1
+        defaultArticlePapierShouldNotBeFound("disponibiliteId.equals=" + (disponibiliteId + 1));
     }
 
     /**
@@ -1505,12 +1339,8 @@ public class ArticlePapierResourceIT {
             .andExpect(jsonPath("$.[*].distributeur").value(hasItem(DEFAULT_DISTRIBUTEUR)))
             .andExpect(jsonPath("$.[*].urlCouverture").value(hasItem(DEFAULT_URL_COUVERTURE)))
             .andExpect(jsonPath("$.[*].dateParution").value(hasItem(DEFAULT_DATE_PARUTION.toString())))
-            .andExpect(jsonPath("$.[*].commandable").value(hasItem(DEFAULT_COMMANDABLE.booleanValue())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].disponibilite").value(hasItem(DEFAULT_DISPONIBILITE.toString())))
-            .andExpect(jsonPath("$.[*].dateDisponibilite").value(hasItem(DEFAULT_DATE_DISPONIBILITE.toString())));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
 
         // Check, that the count call also returns 1
         restArticlePapierMockMvc.perform(get("/api/article-papiers/count?sort=id,desc&" + filter))
@@ -1567,12 +1397,8 @@ public class ArticlePapierResourceIT {
             .distributeur(UPDATED_DISTRIBUTEUR)
             .urlCouverture(UPDATED_URL_COUVERTURE)
             .dateParution(UPDATED_DATE_PARUTION)
-            .commandable(UPDATED_COMMANDABLE)
-            .type(UPDATED_TYPE)
             .prixHT(UPDATED_PRIX_HT)
-            .description(UPDATED_DESCRIPTION)
-            .disponibilite(UPDATED_DISPONIBILITE)
-            .dateDisponibilite(UPDATED_DATE_DISPONIBILITE);
+            .description(UPDATED_DESCRIPTION);
         ArticlePapierDTO articlePapierDTO = articlePapierMapper.toDto(updatedArticlePapier);
 
         restArticlePapierMockMvc.perform(put("/api/article-papiers")
@@ -1594,12 +1420,8 @@ public class ArticlePapierResourceIT {
         assertThat(testArticlePapier.getDistributeur()).isEqualTo(UPDATED_DISTRIBUTEUR);
         assertThat(testArticlePapier.getUrlCouverture()).isEqualTo(UPDATED_URL_COUVERTURE);
         assertThat(testArticlePapier.getDateParution()).isEqualTo(UPDATED_DATE_PARUTION);
-        assertThat(testArticlePapier.isCommandable()).isEqualTo(UPDATED_COMMANDABLE);
-        assertThat(testArticlePapier.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testArticlePapier.getPrixHT()).isEqualTo(UPDATED_PRIX_HT);
         assertThat(testArticlePapier.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testArticlePapier.getDisponibilite()).isEqualTo(UPDATED_DISPONIBILITE);
-        assertThat(testArticlePapier.getDateDisponibilite()).isEqualTo(UPDATED_DATE_DISPONIBILITE);
 
         // Validate the ArticlePapier in Elasticsearch
         verify(mockArticlePapierSearchRepository, times(1)).save(testArticlePapier);
@@ -1672,11 +1494,7 @@ public class ArticlePapierResourceIT {
             .andExpect(jsonPath("$.[*].distributeur").value(hasItem(DEFAULT_DISTRIBUTEUR)))
             .andExpect(jsonPath("$.[*].urlCouverture").value(hasItem(DEFAULT_URL_COUVERTURE)))
             .andExpect(jsonPath("$.[*].dateParution").value(hasItem(DEFAULT_DATE_PARUTION.toString())))
-            .andExpect(jsonPath("$.[*].commandable").value(hasItem(DEFAULT_COMMANDABLE.booleanValue())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].disponibilite").value(hasItem(DEFAULT_DISPONIBILITE.toString())))
-            .andExpect(jsonPath("$.[*].dateDisponibilite").value(hasItem(DEFAULT_DATE_DISPONIBILITE.toString())));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
     }
 }

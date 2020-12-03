@@ -1,6 +1,6 @@
 package fr.openent.moisson.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -34,27 +34,37 @@ public class Lep implements Serializable {
     @NaturalId
     @Size(min = 13, max = 13)
     @Column(name = "ean", length = 13)
+    @JsonProperty("EAN")
     private String ean;
 
     @Column(name = "description")
+    @JsonProperty("DESCRIPTION")
     private String description;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type_licence")
+    @JsonProperty("TYPELICENCE")
     private TypeLicence typeLicence;
 
     @Column(name = "titre")
+    @JsonProperty("TYPTITREELICENCE")
     private String titre;
 
     @Column(name = "duree")
+    @JsonProperty("DUREE")
     private String duree;
 
     @OneToMany(mappedBy = "lep")
     @Cache(usage = CacheConcurrencyStrategy.NONE)
+    @JsonProperty("CONDITIONS")
+    @JsonManagedReference
     private Set<Condition> conditions = new HashSet<>();
 
     @ManyToOne
+    @JoinColumn(name = "offre_id", nullable = false)
     @JsonIgnoreProperties(value = "leps", allowSetters = true)
+    @JsonIgnore
+    @JsonBackReference
     private Offre offre;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

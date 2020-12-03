@@ -82,12 +82,8 @@ class ArticlePapierGatlingTest extends Simulation {
                 , "distributeur":"SAMPLE_TEXT"
                 , "urlCouverture":"SAMPLE_TEXT"
                 , "dateParution":"2020-01-01T00:00:00.000Z"
-                , "commandable":null
-                , "type":"NUMERIQUE"
                 , "prixHT":"0"
                 , "description":"SAMPLE_TEXT"
-                , "disponibilite":"DISPONIBLE"
-                , "dateDisponibilite":"2020-01-01T00:00:00.000Z"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_articlePapier_url"))).exitHereIfFailed

@@ -24,6 +24,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
@@ -64,6 +65,9 @@ public class ArticlePapierResource {
         log.debug("REST request to save ArticlePapier : {}", articlePapierDTO);
         if (articlePapierDTO.getId() != null) {
             throw new BadRequestAlertException("A new articlePapier cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        if (Objects.isNull(articlePapierDTO.getDisponibiliteId())) {
+            throw new BadRequestAlertException("Invalid association value provided", ENTITY_NAME, "null");
         }
         ArticlePapierDTO result = articlePapierService.save(articlePapierDTO);
         return ResponseEntity.created(new URI("/api/article-papiers/" + result.getId()))

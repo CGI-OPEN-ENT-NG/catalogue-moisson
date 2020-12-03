@@ -1,25 +1,16 @@
 package fr.openent.moisson.service.dto;
 
 import java.time.Instant;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-
-import fr.openent.moisson.domain.Discipline;
-import fr.openent.moisson.domain.Niveau;
-import fr.openent.moisson.domain.Offre;
-import fr.openent.moisson.domain.Techno;
-import fr.openent.moisson.domain.enumeration.Disponibilite;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import fr.openent.moisson.domain.enumeration.TypeArticle;
+import fr.openent.moisson.domain.enumeration.PublicCible;
 
 /**
  * A DTO for the {@link fr.openent.moisson.domain.ArticleNumerique} entity.
  */
 public class ArticleNumeriqueDTO implements Serializable {
-
+    
     private Long id;
 
     @Size(min = 13, max = 13)
@@ -41,10 +32,6 @@ public class ArticleNumeriqueDTO implements Serializable {
 
     private String urlDemo;
 
-    private Disponibilite disponibilte;
-
-    private Instant dateDisponibilte;
-
     private Instant dateParution;
 
     private Boolean compatibleGAR;
@@ -54,14 +41,15 @@ public class ArticleNumeriqueDTO implements Serializable {
     @Size(min = 13, max = 13)
     private String eanPapier;
 
-    private Set<Discipline> disciplines;
+    private String description;
 
-    private Set<Niveau> niveaus;
+    private TypeArticle type;
 
-    private Set<Offre> offres;
+    private PublicCible publicCible;
 
-    private Set<Techno> technos;
 
+    private Long disponibiliteId;
+    
     public Long getId() {
         return id;
     }
@@ -142,22 +130,6 @@ public class ArticleNumeriqueDTO implements Serializable {
         this.urlDemo = urlDemo;
     }
 
-    public Disponibilite getDisponibilte() {
-        return disponibilte;
-    }
-
-    public void setDisponibilte(Disponibilite disponibilte) {
-        this.disponibilte = disponibilte;
-    }
-
-    public Instant getDateDisponibilte() {
-        return dateDisponibilte;
-    }
-
-    public void setDateDisponibilte(Instant dateDisponibilte) {
-        this.dateDisponibilte = dateDisponibilte;
-    }
-
     public Instant getDateParution() {
         return dateParution;
     }
@@ -190,36 +162,36 @@ public class ArticleNumeriqueDTO implements Serializable {
         this.eanPapier = eanPapier;
     }
 
-    public Set<Discipline> getDisciplines() {
-        return disciplines;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDisciplines(Set<Discipline> disciplines) {
-        this.disciplines = disciplines;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Set<Niveau> getNiveaus() {
-        return niveaus;
+    public TypeArticle getType() {
+        return type;
     }
 
-    public void setNiveaus(Set<Niveau> niveaus) {
-        this.niveaus = niveaus;
+    public void setType(TypeArticle type) {
+        this.type = type;
     }
 
-    public Set<Offre> getOffres() {
-        return offres;
+    public PublicCible getPublicCible() {
+        return publicCible;
     }
 
-    public void setOffres(Set<Offre> offres) {
-        this.offres = offres;
+    public void setPublicCible(PublicCible publicCible) {
+        this.publicCible = publicCible;
     }
 
-    public Set<Techno> getTechnos() {
-        return technos;
+    public Long getDisponibiliteId() {
+        return disponibiliteId;
     }
 
-    public void setTechnos(Set<Techno> technos) {
-        this.technos = technos;
+    public void setDisponibiliteId(Long disponibiliteId) {
+        this.disponibiliteId = disponibiliteId;
     }
 
     @Override
@@ -253,12 +225,14 @@ public class ArticleNumeriqueDTO implements Serializable {
             ", distributeur='" + getDistributeur() + "'" +
             ", urlCouverture='" + getUrlCouverture() + "'" +
             ", urlDemo='" + getUrlDemo() + "'" +
-            ", disponibilte='" + getDisponibilte() + "'" +
-            ", dateDisponibilte='" + getDateDisponibilte() + "'" +
             ", dateParution='" + getDateParution() + "'" +
             ", compatibleGAR='" + isCompatibleGAR() + "'" +
             ", accessibleENT='" + isAccessibleENT() + "'" +
             ", eanPapier='" + getEanPapier() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", type='" + getType() + "'" +
+            ", publicCible='" + getPublicCible() + "'" +
+            ", disponibiliteId=" + getDisponibiliteId() +
             "}";
     }
 }

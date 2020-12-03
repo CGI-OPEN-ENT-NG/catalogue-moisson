@@ -125,27 +125,19 @@ public class ArticlePapierQueryService extends QueryService<ArticlePapier> {
             if (criteria.getDateParution() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDateParution(), ArticlePapier_.dateParution));
             }
-            if (criteria.getCommandable() != null) {
-                specification = specification.and(buildSpecification(criteria.getCommandable(), ArticlePapier_.commandable));
-            }
-            if (criteria.getType() != null) {
-                specification = specification.and(buildSpecification(criteria.getType(), ArticlePapier_.type));
-            }
             if (criteria.getPrixHT() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPrixHT(), ArticlePapier_.prixHT));
             }
             if (criteria.getDescription() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDescription(), ArticlePapier_.description));
             }
-            if (criteria.getDisponibilite() != null) {
-                specification = specification.and(buildSpecification(criteria.getDisponibilite(), ArticlePapier_.disponibilite));
-            }
-            if (criteria.getDateDisponibilite() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getDateDisponibilite(), ArticlePapier_.dateDisponibilite));
-            }
             if (criteria.getTvaId() != null) {
                 specification = specification.and(buildSpecification(criteria.getTvaId(),
                     root -> root.join(ArticlePapier_.tvas, JoinType.LEFT).get(Tva_.id)));
+            }
+            if (criteria.getDisponibiliteId() != null) {
+                specification = specification.and(buildSpecification(criteria.getDisponibiliteId(),
+                    root -> root.join(ArticlePapier_.disponibilite, JoinType.LEFT).get(Disponibilite_.id)));
             }
         }
         return specification;

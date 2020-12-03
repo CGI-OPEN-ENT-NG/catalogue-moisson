@@ -7,6 +7,15 @@
       "otherEntityName": "tva",
       "relationshipType": "one-to-many",
       "otherEntityRelationshipName": "articlePapier"
+    },
+    {
+      "relationshipName": "disponibilite",
+      "otherEntityName": "disponibilite",
+      "relationshipType": "one-to-one",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "useJPADerivedIdentifier": true,
+      "otherEntityRelationshipName": "articlePapier"
     }
   ],
   "fields": [
@@ -54,30 +63,12 @@
       "fieldType": "Instant"
     },
     {
-      "fieldName": "commandable",
-      "fieldType": "Boolean"
-    },
-    {
-      "fieldName": "type",
-      "fieldType": "TypeArticle",
-      "fieldValues": "NUMERIQUE,PAPIER"
-    },
-    {
       "fieldName": "prixHT",
       "fieldType": "BigDecimal"
     },
     {
       "fieldName": "description",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "disponibilite",
-      "fieldType": "Disponibilite",
-      "fieldValues": "DISPONIBLE,EN_COURS_D_IMPRESSION,EN_COURS_DE_REIMPRESSION,NON_DISPONIBLE_PROVISOIREMENT,EPUISE,A_PARAITRE"
-    },
-    {
-      "fieldName": "dateDisponibilite",
-      "fieldType": "Instant"
     }
   ],
   "changelogDate": "20201126095206",
