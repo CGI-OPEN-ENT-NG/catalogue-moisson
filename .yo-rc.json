@@ -29,7 +29,7 @@
     "skipClient": true,
     "creationTimestamp": 1606316099697,
     "testFrameworks": ["gatling", "cucumber", "protractor"],
-    "jhiPrefix": "jhi",
+    "jhiPrefix": "moisson",
     "entitySuffix": "",
     "dtoSuffix": "DTO",
     "otherModules": [
