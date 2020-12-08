@@ -6,8 +6,8 @@
     <!--
         Added the constraints for entity ArticleNumerique.
     -->
-    <changeSet id="20201126102500-2" author="moisson">
-
+    <changeSet id="20201126102500-2" author="jhipster">
+        
         <addForeignKeyConstraint baseColumnNames="id"
                                  baseTableName="article_numerique"
                                  constraintName="fk_article_numerique_disponibilite_id"

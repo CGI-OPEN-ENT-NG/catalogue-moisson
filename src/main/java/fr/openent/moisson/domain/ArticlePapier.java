@@ -1,10 +1,12 @@
 package fr.openent.moisson.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.InstantSerializer;
 import fr.openent.moisson.service.dto.TvaDTO;
+import fr.openent.moisson.service.mapper.json.MoissonCustomInstantDeserializer;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -17,6 +19,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import fr.openent.moisson.domain.enumeration.TypeArticle;
@@ -78,6 +81,8 @@ public class ArticlePapier implements Serializable {
 
     @Column(name = "date_parution")
     @JsonProperty("DATE_PARUTION")
+    @JsonSerialize(using = InstantSerializer.class)
+    @JsonDeserialize(using = MoissonCustomInstantDeserializer.class)
     private Instant dateParution;
 
     @Column(name = "prix_ht", precision = 21, scale = 2)
@@ -88,7 +93,7 @@ public class ArticlePapier implements Serializable {
     @JsonProperty("DESCRIPTION")
     private String description;
 
-    @OneToMany(mappedBy = "articlePapier", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "articlePapier", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("TVA")
     @JsonManagedReference // @JsonManagedReference sur la collection et @JsonBackReference sur la référence (Tva)
@@ -100,7 +105,8 @@ public class ArticlePapier implements Serializable {
     @JsonProperty("DISPONIBILITE")
     private Disponibilite disponibilite;
 
-
+    @Transient
+    private BigDecimal prixTTC;
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -287,6 +293,15 @@ public class ArticlePapier implements Serializable {
         return this;
     }
 
+    public void removeTvas() {
+        Iterator<Tva> iterator = this.tvas.iterator();
+        while (iterator.hasNext()) {
+            Tva tva = iterator.next();
+            tva.setArticlePapier(null);
+            iterator.remove();
+        }
+    }
+
     public void setTvas(Set<Tva> tvas) {
         this.tvas = tvas;
     }
@@ -302,6 +317,28 @@ public class ArticlePapier implements Serializable {
 
     public void setDisponibilite(Disponibilite disponibilite) {
         this.disponibilite = disponibilite;
+    }
+
+    @PostLoad
+    private void postLoad() {
+        BigDecimal prixHT = this.getPrixHT();
+        this.prixTTC = BigDecimal.ZERO;
+        for (Tva tva : this.getTvas()) {
+            this.prixTTC.add(prixHT.multiply(tva.getTaux().multiply(tva.getPourcent())));
+        }
+    }
+
+    public BigDecimal getPrixTTC() {
+        return prixTTC;
+    }
+
+    public void setPrixTTC(BigDecimal prixTTC) {
+        this.prixTTC = prixTTC;
+    }
+
+    public ArticlePapier prixTTC(BigDecimal prixTTC) {
+        this.prixTTC = prixTTC;
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -3,7 +3,6 @@ package fr.openent.moisson.service.dto;
 import java.io.Serializable;
 import java.util.Objects;
 import io.github.jhipster.service.Criteria;
-import fr.openent.moisson.domain.enumeration.TypeArticle;
 import fr.openent.moisson.domain.enumeration.PublicCible;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
@@ -24,24 +23,6 @@ import io.github.jhipster.service.filter.InstantFilter;
  * fix type specific filters.
  */
 public class ArticleNumeriqueCriteria implements Serializable, Criteria {
-    /**
-     * Class for filtering TypeArticle
-     */
-    public static class TypeArticleFilter extends Filter<TypeArticle> {
-
-        public TypeArticleFilter() {
-        }
-
-        public TypeArticleFilter(TypeArticleFilter filter) {
-            super(filter);
-        }
-
-        @Override
-        public TypeArticleFilter copy() {
-            return new TypeArticleFilter(this);
-        }
-
-    }
     /**
      * Class for filtering PublicCible
      */
@@ -93,8 +74,6 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
 
     private StringFilter description;
 
-    private TypeArticleFilter type;
-
     private PublicCibleFilter publicCible;
 
     private LongFilter disciplineId;
@@ -126,7 +105,6 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         this.accessibleENT = other.accessibleENT == null ? null : other.accessibleENT.copy();
         this.eanPapier = other.eanPapier == null ? null : other.eanPapier.copy();
         this.description = other.description == null ? null : other.description.copy();
-        this.type = other.type == null ? null : other.type.copy();
         this.publicCible = other.publicCible == null ? null : other.publicCible.copy();
         this.disciplineId = other.disciplineId == null ? null : other.disciplineId.copy();
         this.niveauId = other.niveauId == null ? null : other.niveauId.copy();
@@ -260,14 +238,6 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         this.description = description;
     }
 
-    public TypeArticleFilter getType() {
-        return type;
-    }
-
-    public void setType(TypeArticleFilter type) {
-        this.type = type;
-    }
-
     public PublicCibleFilter getPublicCible() {
         return publicCible;
     }
@@ -342,7 +312,6 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
             Objects.equals(accessibleENT, that.accessibleENT) &&
             Objects.equals(eanPapier, that.eanPapier) &&
             Objects.equals(description, that.description) &&
-            Objects.equals(type, that.type) &&
             Objects.equals(publicCible, that.publicCible) &&
             Objects.equals(disciplineId, that.disciplineId) &&
             Objects.equals(niveauId, that.niveauId) &&
@@ -369,7 +338,6 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         accessibleENT,
         eanPapier,
         description,
-        type,
         publicCible,
         disciplineId,
         niveauId,
@@ -398,7 +366,6 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
                 (accessibleENT != null ? "accessibleENT=" + accessibleENT + ", " : "") +
                 (eanPapier != null ? "eanPapier=" + eanPapier + ", " : "") +
                 (description != null ? "description=" + description + ", " : "") +
-                (type != null ? "type=" + type + ", " : "") +
                 (publicCible != null ? "publicCible=" + publicCible + ", " : "") +
                 (disciplineId != null ? "disciplineId=" + disciplineId + ", " : "") +
                 (niveauId != null ? "niveauId=" + niveauId + ", " : "") +

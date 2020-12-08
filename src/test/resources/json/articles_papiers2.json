@@ -4,7 +4,7 @@
     "TITRE": "SPECIALITE NUMERIQUE ET SCIENC",
     "TVA": [
       {
-        "TAUX": 18.6,
+        "TAUX": 5.5,
         "POURCENT": 100
       }
     ],
@@ -22,6 +22,12 @@
     },
     "DATE_PARUTION": "2019-08-20T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3kMDXo4pf5O_sgfIIhm3Z_oGbRWrhKPDCA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Numérique et Sciences Informatiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -29,7 +35,7 @@
     "TITRE": "SCIENCES DE GESTION ET NUMERIQ",
     "TVA": [
       {
-        "TAUX": 18.6,
+        "TAUX": 5.5,
         "POURCENT": 100
       }
     ],
@@ -47,6 +53,12 @@
     },
     "DATE_PARUTION": "2019-05-05T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Sciences de gestion"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère STMG"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -72,6 +84,12 @@
     },
     "DATE_PARUTION": "2020-08-02T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Sciences physique - chimie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -97,6 +115,12 @@
     },
     "DATE_PARUTION": "2020-08-03T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Humanités, Littérature et Philosophie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -122,6 +146,12 @@
     },
     "DATE_PARUTION": "2020-08-31T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Sciences physique - chimie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -147,6 +177,12 @@
     },
     "DATE_PARUTION": "2020-08-31T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -172,6 +208,12 @@
     },
     "DATE_PARUTION": "2020-06-15T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités- Histoire,Géographie,géopolitique,sciences "
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -197,6 +239,12 @@
     },
     "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3i232Hi4Aj2r-IaSvPGECbR9YPScXaRsDg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités- Histoire,Géographie,géopolitique,sciences "
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -222,6 +270,12 @@
     },
     "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3r7VhEBer865yrDviYA4pXni-0SZzK1gtA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités- Histoire,Géographie,géopolitique,sciences "
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -247,6 +301,12 @@
     },
     "DATE_PARUTION": "2019-06-12T22:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3gfSpx6LXDSzOV_TBKcaCvjOVx6o7jtPSA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités- Histoire,Géographie,géopolitique,sciences "
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -272,6 +332,12 @@
     },
     "DATE_PARUTION": "2019-06-13T22:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3jJRm5eWi0YQi9xlvzR93NH8L_3BBRxamw-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités- Histoire,Géographie,géopolitique,sciences "
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -297,6 +363,12 @@
     },
     "DATE_PARUTION": "2019-05-14T22:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3jAS9pBhtQYkbp8zKBNkZrgkpMcxpU4Bjw-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités- Histoire,Géographie,géopolitique,sciences "
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -322,6 +394,12 @@
     },
     "DATE_PARUTION": "2019-04-29T22:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3jRbVlC12EgK84oh-F8ZZlKok0G93OPnwQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités- Histoire,Géographie,géopolitique,sciences "
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -347,6 +425,12 @@
     },
     "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3ptItB2DGZeDlUG2jzsxWXtJslM1J5KzLg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Histoire - Géographie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -372,6 +456,12 @@
     },
     "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3joLrwLfGfADjyD3jODeTKbfb19tP-8aRA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Histoire - Géographie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -397,6 +487,12 @@
     },
     "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3o9_7umdU0sqMov_lol1w0z8tf8hMbxrag-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Economie, Droit"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -415,13 +511,19 @@
     "COLLECTION": "CONTROLE CONTIN",
     "DISTRIBUTEUR": "ELLIPSES MARKETING",
     "DISPONIBILITE": {
-      "DATE_DISPO": "1971-01-01T00:00:00.000Z",
+      "DATE_DISPO": "0000-00-00T00:00:00.000Z",
       "COMMANDABLE": false,
       "COMMENTAIRE": "",
       "VALEUR": "Epuisé"
     },
     "DATE_PARUTION": "2017-07-03T22:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3hExenmgzE2H6OZfPkEBd4l15ax1FX95kQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Economie, Droit"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale ES, L, S"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -447,6 +549,12 @@
     },
     "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3upw8frwdVNUjNVw3dAFfQvLecatrM09zQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -472,6 +580,12 @@
     },
     "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3tzdEZAoo5J_T9yfdvvDRLNVITBjLNM5Pg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -497,6 +611,12 @@
     },
     "DATE_PARUTION": "2020-04-20T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3gDn5zOELF4tEMDBmyOZatgFeoDn5efWOw-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -522,6 +642,12 @@
     },
     "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3vD0UUzQN4-XzwghuJ-R76fA0iSJ26ftsg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -547,6 +673,12 @@
     },
     "DATE_PARUTION": "2020-06-08T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3mKBLR1JhuOufPmQB_Hicvjxe32QpU4ukg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -572,6 +704,12 @@
     },
     "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3q1hKArI02XkAuVCxGhcmuzU6UvuX82Tuw-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -597,6 +735,12 @@
     },
     "DATE_PARUTION": "2020-04-13T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3rBCX6x4oQnVKQC6Mh1_7V-XUD7B_OJOaA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -622,6 +766,12 @@
     },
     "DATE_PARUTION": "2020-01-27T23:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3hiTWq9d8_tWZqOQVS_I5pow00u1Ios-Pg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -647,6 +797,12 @@
     },
     "DATE_PARUTION": "2020-06-08T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3meTVazzmNEbCvUIRhlvjYk5MYm-YeMvgw-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Enseignement scientifique"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -672,6 +828,12 @@
     },
     "DATE_PARUTION": "2020-06-08T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3jm7TP_i_K1WxwNNHLCZhiVLS-ldCH6Wjw-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - SVT"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -697,6 +859,12 @@
     },
     "DATE_PARUTION": "2020-06-15T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Français"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -722,6 +890,12 @@
     },
     "DATE_PARUTION": "2020-06-15T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Français"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -747,6 +921,12 @@
     },
     "DATE_PARUTION": "2020-05-11T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3gDwSVZRdkeuP8qbIoWHWBfggBGqPOz18g-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Numérique et Sciences Informatiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -772,6 +952,12 @@
     },
     "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3k_3naEObZ1e6u9ZaC3brRiiWwDrNnBwHA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Sciences physique - chimie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -797,6 +983,12 @@
     },
     "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3tgc9yGNhiuPLPNQFuA47zkVhqG5Y5uB-A-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Sciences physique - chimie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -822,6 +1014,12 @@
     },
     "DATE_PARUTION": "2019-10-28T23:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3lkIwGdHe9jANerwNbZhUobg4625_bOknQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Sciences physique - chimie"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -847,6 +1045,12 @@
     },
     "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3nX_o4FIAApcGXJ3azbUpyPb-g1J--O50A-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Histoire - Géographie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -872,6 +1076,12 @@
     },
     "DATE_PARUTION": "2020-05-25T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3rUSEh1lCq33veDv7IZu6mJFm3ojwJjkyg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Histoire - Géographie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -897,6 +1107,12 @@
     },
     "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3p3U6-ZHY8qMKPsrx418Cw_whndrdu7cTQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Histoire - Géographie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -922,6 +1138,12 @@
     },
     "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3q8y2JA97a6zt75L70uRJw_vi72yKMtgEw-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -947,6 +1169,12 @@
     },
     "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3gMnBchRV7rU3mae0pxKIseI3GpCB1VzcQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -972,6 +1200,12 @@
     },
     "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3rNJXKss8xjEt4PK_HIZMs5HSvIwr-lNKg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Options - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère/Tle"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -997,6 +1231,12 @@
     },
     "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3n34KA7fMa2wtLCiaYBT2Dt1ar-P_njcKA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "2de/1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1022,6 +1262,12 @@
     },
     "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3tkMg4G61t8TSp1Q9_AMb_QfHLLhaMjleg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "2de"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1047,6 +1293,12 @@
     },
     "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3oBClaJNPgZdpwjomH9HAtr3AXzdsSfPHA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1072,6 +1324,12 @@
     },
     "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3nQk5qXuUICVQF0fjbQmJIrBmNyxbUPYUg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1097,6 +1355,12 @@
     },
     "DATE_PARUTION": "2020-05-11T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3ojDopUBDWQ3r-6FED5pONVBg7IRAbQNhA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1122,6 +1386,12 @@
     },
     "DATE_PARUTION": "2020-03-02T23:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3mUob3tEjkL4VQaahBiAz0TQd1D-JMBFDQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1147,6 +1417,12 @@
     },
     "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3hw9DzwftemUT8HKEnNQKjVHArPOzrYbhg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Enseignement scientifique"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1172,6 +1448,12 @@
     },
     "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3s2us8yCHWday3HbSUCOQvUM0xC0NvbgnA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Langue - Allemand"
+    },
+    "NIVEAU": {
+      "VALEUR": "B1-B2"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1197,6 +1479,12 @@
     },
     "DATE_PARUTION": "2020-02-17T23:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3tOPjYyW61f467hboXfWiNedU1koWZc6BA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Langue - Allemand"
+    },
+    "NIVEAU": {
+      "VALEUR": "A1-A2"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1222,6 +1510,12 @@
     },
     "DATE_PARUTION": "2020-02-10T23:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3ryQVQwurp31iUXH7IclfAEByAPqXekbCg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Langue - Allemand"
+    },
+    "NIVEAU": {
+      "VALEUR": "A1-A2"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1247,6 +1541,12 @@
     },
     "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3sQHz6Feh5iYh7d3VqaAQ-zm-Ise7_ZL1g-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Langue - Anglais"
+    },
+    "NIVEAU": {
+      "VALEUR": "A1-A2"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1272,6 +1572,12 @@
     },
     "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3s3wQfWvFP-En47iUf8CcWISNQ4V8ihiXg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Chinois"
+    },
+    "NIVEAU": {
+      "VALEUR": "A1-A2"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1297,6 +1603,12 @@
     },
     "DATE_PARUTION": "2020-05-11T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3g2Lp4rhZwnLhnHmy3jr0rjg0ocNqHTQVQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Chinois"
+    },
+    "NIVEAU": {
+      "VALEUR": "A1"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1322,6 +1634,12 @@
     },
     "DATE_PARUTION": "2020-06-22T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Langue - Espagnol"
+    },
+    "NIVEAU": {
+      "VALEUR": "A1"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1347,6 +1665,12 @@
     },
     "DATE_PARUTION": "2020-06-29T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Français"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1372,6 +1696,12 @@
     },
     "DATE_PARUTION": "2020-06-29T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Français"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1397,6 +1727,12 @@
     },
     "DATE_PARUTION": "2020-06-29T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Français"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1422,6 +1758,12 @@
     },
     "DATE_PARUTION": "2020-02-17T23:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3skomQEcS0d0l27zqg6k_xE40sv29DzcYA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Humanités, Littérature et Philosophie"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1447,6 +1789,12 @@
     },
     "DATE_PARUTION": "2020-02-03T23:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3s8hLCecHFPKGRDiAzpJaqoi-wwLV1fbAw-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Langues, littératures et cultures étrangè"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1472,6 +1820,12 @@
     },
     "DATE_PARUTION": "2020-07-20T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Numérique et Sciences Informatiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1497,6 +1851,12 @@
     },
     "DATE_PARUTION": "2020-07-22T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Langue - Anglais"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1522,6 +1882,12 @@
     },
     "DATE_PARUTION": "2020-07-27T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1547,6 +1913,12 @@
     },
     "DATE_PARUTION": "2020-07-27T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Numérique et Sciences Informatiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1572,6 +1944,12 @@
     },
     "DATE_PARUTION": "2020-08-03T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "ECJS"
+    },
+    "NIVEAU": {
+      "VALEUR": "BTS"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1597,6 +1975,12 @@
     },
     "DATE_PARUTION": "2020-08-03T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités- Histoire,Géographie,géopolitique,sciences "
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1617,11 +2001,17 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-10-12T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "L'éditeur ne nous a fourni aucune date",
-      "VALEUR": "À paraître"
+      "COMMENTAIRE": "",
+      "VALEUR": "À paraître\rL'éditeur ne nous a fourni aucune date"
     },
     "DATE_PARUTION": "2020-12-07T23:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1647,6 +2037,12 @@
     },
     "DATE_PARUTION": "2020-08-31T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - SES"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale ES, L, S"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1668,10 +2064,16 @@
       "DATE_DISPO": "2020-08-31T22:00:00.000Z",
       "COMMANDABLE": true,
       "COMMENTAIRE": "",
-      "VALEUR": "À paraître"
+      "VALEUR": "À paraître\rL'éditeur ne nous a fourni aucune date"
     },
     "DATE_PARUTION": "2020-11-30T23:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3l2iiS314NhRxaUZIyyXSuw6GaehjrJN0Q-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - SES"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale ES, L, S"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1693,10 +2095,16 @@
       "DATE_DISPO": "2020-09-21T22:00:00.000Z",
       "COMMANDABLE": true,
       "COMMENTAIRE": "",
-      "VALEUR": "À paraître"
+      "VALEUR": "À paraître\rL'éditeur ne nous a fourni aucune date"
     },
     "DATE_PARUTION": "2021-01-04T23:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3srvfmBKAT1-huvF-9Sd9rYDgkWoJoU3cA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Humanités, Littérature et Philosophie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1717,11 +2125,17 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2021-03-08T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "Dispo prévisionnelle le 16/03/2021",
-      "VALEUR": "À paraître"
+      "COMMENTAIRE": "",
+      "VALEUR": "À paraître\rDispo prévisionnelle le 16/03/2021"
     },
     "DATE_PARUTION": "2021-03-08T23:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3luIwGa4oGUQTv_BE_kL1QCtK1ZgVt6lsQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - SES"
+    },
+    "NIVEAU": {
+      "VALEUR": "2de"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1742,11 +2156,17 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2021-03-08T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "Dispo prévisionnelle le 16/03/2021",
-      "VALEUR": "À paraître"
+      "COMMENTAIRE": "",
+      "VALEUR": "À paraître\rDispo prévisionnelle le 16/03/2021"
     },
     "DATE_PARUTION": "2021-03-08T23:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3i0ULLwKiZtIAkqkNtuzY0JDu9lD7NdaOA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - SES"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1768,10 +2188,16 @@
       "DATE_DISPO": "2020-11-09T23:00:00.000Z",
       "COMMANDABLE": true,
       "COMMENTAIRE": "",
-      "VALEUR": "À paraître"
+      "VALEUR": "À paraître\rL'éditeur ne nous a fourni aucune date"
     },
     "DATE_PARUTION": "2021-01-11T23:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Humanités, Littérature et Philosophie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1793,10 +2219,16 @@
       "DATE_DISPO": "2020-10-12T22:00:00.000Z",
       "COMMANDABLE": true,
       "COMMENTAIRE": "",
-      "VALEUR": "À paraître"
+      "VALEUR": "À paraître\rL'éditeur ne nous a fourni aucune date"
     },
     "DATE_PARUTION": "2020-10-12T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - SES"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale ES, L, S"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1818,10 +2250,16 @@
       "DATE_DISPO": "2020-10-26T23:00:00.000Z",
       "COMMANDABLE": true,
       "COMMENTAIRE": "",
-      "VALEUR": "À paraître"
+      "VALEUR": "À paraître\rL'éditeur ne nous a fourni aucune date"
     },
     "DATE_PARUTION": "2020-10-26T23:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Langues, littératures et cultures étrangè"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1842,11 +2280,17 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2021-01-04T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "Dispo prévisionnelle le 12/01/2021",
-      "VALEUR": "À paraître"
+      "COMMENTAIRE": "",
+      "VALEUR": "À paraître\rDispo prévisionnelle le 12/01/2021"
     },
     "DATE_PARUTION": "2021-01-04T23:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3pXYoL5o4qC6InjFIzxkkYmQLXJbQ44PTQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Français"
+    },
+    "NIVEAU": {
+      "VALEUR": "2de"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1868,10 +2312,16 @@
       "DATE_DISPO": "2020-11-16T23:00:00.000Z",
       "COMMANDABLE": true,
       "COMMENTAIRE": "",
-      "VALEUR": "À paraître"
+      "VALEUR": "À paraître\rL'éditeur ne nous a fourni aucune date"
     },
     "DATE_PARUTION": "2021-01-11T23:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Humanités, Littérature et Philosophie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1897,6 +2347,12 @@
     },
     "DATE_PARUTION": "2020-09-14T22:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Histoire, géographie, EMC"
+    },
+    "NIVEAU": {
+      "VALEUR": "Tous niveaux"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1917,11 +2373,17 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-11-30T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "Dispo prévisionnelle le 08/12/2020",
-      "VALEUR": "À paraître"
+      "COMMENTAIRE": "",
+      "VALEUR": "À paraître\rDispo prévisionnelle le 08/12/2020"
     },
     "DATE_PARUTION": "2020-11-30T23:00:00.000Z",
     "URL_COUVERTURE": "",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - SVT"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1947,6 +2409,12 @@
     },
     "DATE_PARUTION": "2020-05-11T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3vLQEHW8yVRUyNV9IyX0I0fT2WnU7_SGjg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Numérique et Sciences Informatiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales générales"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1972,6 +2440,12 @@
     },
     "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3hfekwSwh8HYT3uzUIwm3CCZwNnvkft3mQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités- Histoire,Géographie,géopolitique,sciences "
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -1997,6 +2471,12 @@
     },
     "DATE_PARUTION": "2019-06-27T22:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3iawGsXrLkygCINXR7Q6CnbEZ-39adxMUQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités- Histoire,Géographie,géopolitique,sciences "
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2022,6 +2502,12 @@
     },
     "DATE_PARUTION": "2018-10-01T22:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3nyxVEKtKrgulQ7KfLvNWyChBBgKr8AyIg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Mathématiques"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale ES, L, S"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2047,6 +2533,12 @@
     },
     "DATE_PARUTION": "2020-06-08T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3sS1xUHjJ2hxDT9rFDCDVb4sRhD86PbZHA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Humanités, Littérature et Philosophie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales toutes séries"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2076,6 +2568,12 @@
     },
     "DATE_PARUTION": "2019-05-26T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30Acin2x22qjkoyHVKW-F0CuAevg0jRl9iPQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - sciences numeriques, technologie"
+    },
+    "NIVEAU": {
+      "VALEUR": "1ère STMG"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2098,13 +2596,19 @@
     "COLLECTION": "MANAG BAC TECHN",
     "DISTRIBUTEUR": "INTERFORUM",
     "DISPONIBILITE": {
-      "DATE_DISPO": "",
+      "DATE_DISPO": "0000-00-00T00:00:00.000Z",
       "COMMANDABLE": true,
       "COMMENTAIRE": "",
       "VALEUR": "Disponible"
     },
     "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AdxN4vygH58a8XgModAGnIk9FcIJeEVr1g-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Management,  Sciences de Gestion et Numérique"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale STMG"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2127,13 +2631,19 @@
     "COLLECTION": "GEST FINANCE LT",
     "DISTRIBUTEUR": "INTERFORUM",
     "DISPONIBILITE": {
-      "DATE_DISPO": "",
+      "DATE_DISPO": "0000-00-00T00:00:00.000Z",
       "COMMANDABLE": true,
       "COMMENTAIRE": "",
       "VALEUR": "Disponible"
     },
     "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AWZI-sVi6urwp7qsy6ddJ4U4fYzcN7EVPA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécifique - Gestion et Finance"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale STMG"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2156,13 +2666,19 @@
     "COLLECTION": "RH COMM MERCALT",
     "DISTRIBUTEUR": "INTERFORUM",
     "DISPONIBILITE": {
-      "DATE_DISPO": "",
+      "DATE_DISPO": "0000-00-00T00:00:00.000Z",
       "COMMANDABLE": true,
       "COMMENTAIRE": "",
       "VALEUR": "Disponible"
     },
     "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AdofHXoDK6VaVDgJXv6NpSxdI27T5NJWyw-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ressources humaines - Communication"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale STMG"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2185,13 +2701,19 @@
     "COLLECTION": "RH COMM MERCALT",
     "DISTRIBUTEUR": "INTERFORUM",
     "DISPONIBILITE": {
-      "DATE_DISPO": "",
+      "DATE_DISPO": "0000-00-00T00:00:00.000Z",
       "COMMANDABLE": true,
       "COMMENTAIRE": "",
       "VALEUR": "Disponible"
     },
     "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AX2aU-N7NXPGZPlpbFvlbDmYAqd4XR8obA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécifique - Mercatique"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale STMG"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2214,13 +2736,19 @@
     "COLLECTION": "DROIT BAC TECHN",
     "DISTRIBUTEUR": "INTERFORUM",
     "DISPONIBILITE": {
-      "DATE_DISPO": "",
+      "DATE_DISPO": "0000-00-00T00:00:00.000Z",
       "COMMANDABLE": true,
       "COMMENTAIRE": "",
       "VALEUR": "Disponible"
     },
     "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AdVHmKBHNfrgYbr8viFE5jJYMroDa9XKIQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Economie, Droit"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale STMG"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2243,13 +2771,19 @@
     "COLLECTION": "ECO BAC TECHNIQ",
     "DISTRIBUTEUR": "INTERFORUM",
     "DISPONIBILITE": {
-      "DATE_DISPO": "",
+      "DATE_DISPO": "0000-00-00T00:00:00.000Z",
       "COMMANDABLE": true,
       "COMMENTAIRE": "",
       "VALEUR": "Disponible"
     },
     "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AaCHa_kBPnF6UT3YRQ52jdpcAjrYKFcqpA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Economie, Droit"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale STMG"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2279,6 +2813,12 @@
     },
     "DATE_PARUTION": "2020-05-03T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AbD0GoA3act8wrhQTAGQUUK22SD8Y7PbqQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Technique - Biologie et physiopathologie humaines"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale ST2S"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2308,6 +2848,12 @@
     },
     "DATE_PARUTION": "2020-05-03T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AZqzbU7m2Ow2N9GoSc1Xc-lKwK8jzf3GEw-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Technique - Philosophie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales technologiques"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2333,6 +2879,12 @@
     },
     "DATE_PARUTION": "2020-05-15T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s-sjUN977-FgCmJ2hmISQuHiUu7nMw41CRbz3ahFq7nVg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécialités - Sciences physique - chimie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale STI2D"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2358,6 +2910,12 @@
     },
     "DATE_PARUTION": "2020-05-15T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s-sjUN977-FgPtZF-5Ap7BwN9qCAGFKNJvhbUN7od4Acw-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens tronc commun - Philosophie"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminales technologiques"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2380,13 +2938,19 @@
     "COLLECTION": "DROIT BAC TECHN",
     "DISTRIBUTEUR": "INTERFORUM",
     "DISPONIBILITE": {
-      "DATE_DISPO": "",
+      "DATE_DISPO": "0000-00-00T00:00:00.000Z",
       "COMMANDABLE": true,
       "COMMENTAIRE": "",
       "VALEUR": "Disponible"
     },
     "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AXWoNAHSMVYheXNHddM4nKyKFE-q7j3TjQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Technique - Economie, droit, management"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale STMG"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2409,13 +2973,19 @@
     "COLLECTION": "ECO BAC TECHNIQ",
     "DISTRIBUTEUR": "INTERFORUM",
     "DISPONIBILITE": {
-      "DATE_DISPO": "",
+      "DATE_DISPO": "0000-00-00T00:00:00.000Z",
       "COMMANDABLE": true,
       "COMMENTAIRE": "",
       "VALEUR": "Disponible"
     },
     "DATE_PARUTION": "2020-05-03T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AVoAmd7BMtlBVRWeNDjURDaHoiT0lRAOrQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Technique - Economie, droit, management"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale STMG"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2438,13 +3008,19 @@
     "COLLECTION": "MANAG BAC TECHN",
     "DISTRIBUTEUR": "INTERFORUM",
     "DISPONIBILITE": {
-      "DATE_DISPO": "",
+      "DATE_DISPO": "0000-00-00T00:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "L'éditeur ne nous a fourni aucune date",
-      "VALEUR": "En cours de réimpression"
+      "COMMENTAIRE": "",
+      "VALEUR": "En cours de réimpression\rL'éditeur ne nous a fourni aucune date"
     },
     "DATE_PARUTION": "2020-05-17T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30Ad6YcbT3rANu4qnhQ1Coeuz8oUQCkssbjA-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Technique - Sciences de gestion et numérique"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale STMG"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2467,13 +3043,19 @@
     "COLLECTION": "RH COMM MERCALT",
     "DISTRIBUTEUR": "INTERFORUM",
     "DISPONIBILITE": {
-      "DATE_DISPO": "",
+      "DATE_DISPO": "0000-00-00T00:00:00.000Z",
       "COMMANDABLE": true,
       "COMMENTAIRE": "",
       "VALEUR": "Disponible"
     },
     "DATE_PARUTION": "2020-05-10T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AaE2655ASZVw-X-9f0UZaDK5zdEPWcjMEg-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécifique - Mercatique"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale STMG"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2496,13 +3078,19 @@
     "COLLECTION": "RH COMM MERCALT",
     "DISTRIBUTEUR": "INTERFORUM",
     "DISPONIBILITE": {
-      "DATE_DISPO": "",
+      "DATE_DISPO": "0000-00-00T00:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "L'éditeur ne nous a fourni aucune date",
-      "VALEUR": "Non disponible provisoirement"
+      "COMMENTAIRE": "",
+      "VALEUR": "Non disponible provisoirement\rL'éditeur ne nous a fourni aucune date"
     },
     "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AV6BCMdzjb1OvSs_snH4jgHD9bdFGEYnLQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ressources humaines - Communication"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale STMG"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2532,6 +3120,12 @@
     },
     "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AZPwR7ZI1oVaWFfEwudM60TPT0vWcfbueQ-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Ens. spécifique - Gestion et Finance"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale STMG"
+    },
     "DESCRIPTION": ""
   },
   {
@@ -2561,6 +3155,12 @@
     },
     "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AW74WAo6fUADbwBzPTVpH1k0sfSlHSUa1w-cover-large.jpg",
+    "DISCIPLINE": {
+      "VALEUR": "Sciences et techniques sanitaires et sociales"
+    },
+    "NIVEAU": {
+      "VALEUR": "Terminale ST2S"
+    },
     "DESCRIPTION": ""
   }
 ]

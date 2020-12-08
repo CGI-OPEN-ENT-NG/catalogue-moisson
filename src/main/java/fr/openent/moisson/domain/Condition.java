@@ -1,9 +1,6 @@
 package fr.openent.moisson.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -19,6 +16,7 @@ import java.io.Serializable;
 @Table(name = "condition")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "condition")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Condition implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,7 +37,7 @@ public class Condition implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = "conditions", allowSetters = true)
     @JsonIgnore
-    @JsonBackReference
+
     @JoinColumn(name = "lep_id", nullable = false)
     private Lep lep;
 

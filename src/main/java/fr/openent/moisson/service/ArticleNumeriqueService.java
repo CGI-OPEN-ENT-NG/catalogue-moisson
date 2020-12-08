@@ -1,5 +1,7 @@
 package fr.openent.moisson.service;
 
+import fr.openent.moisson.domain.ArticleNumerique;
+import fr.openent.moisson.domain.ArticlePapier;
 import fr.openent.moisson.service.dto.ArticleNumeriqueDTO;
 
 import org.springframework.data.domain.Page;
@@ -19,6 +21,14 @@ public interface ArticleNumeriqueService {
      * @return the persisted entity.
      */
     ArticleNumeriqueDTO save(ArticleNumeriqueDTO articleNumeriqueDTO);
+
+    /**
+     * Save a articleNumerique.
+     *
+     * @param articleNumerique the entity to save.
+     * @return the persisted entity.
+     */
+    ArticleNumerique save(ArticleNumerique articleNumerique);
 
     /**
      * Get all the articleNumeriques.
@@ -48,7 +58,7 @@ public interface ArticleNumeriqueService {
      * Search for the articleNumerique corresponding to the query.
      *
      * @param query the query of the search.
-     * 
+     *
      * @param pageable the pagination information.
      * @return the list of entities.
      */

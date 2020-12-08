@@ -35,16 +35,15 @@ public class Tva implements Serializable {
     @JsonProperty("POURCENT")
     private BigDecimal pourcent;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "tvas", allowSetters = true)
-    @JsonBackReference
     @JoinColumn(name = "offre_id", nullable = false)
     private Offre offre;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "article_papier_id", nullable = false)
     @JsonIgnoreProperties(value = "tvas", allowSetters = true)
     @JsonBackReference
-    @JoinColumn(name = "article_papier_id", nullable = false)
     private ArticlePapier articlePapier;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

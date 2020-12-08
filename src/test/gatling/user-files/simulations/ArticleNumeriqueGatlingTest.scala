@@ -86,7 +86,6 @@ class ArticleNumeriqueGatlingTest extends Simulation {
                 , "accessibleENT":null
                 , "eanPapier":"SAMPLE_TEXT"
                 , "description":"SAMPLE_TEXT"
-                , "type":"NUMERIQUE"
                 , "publicCible":"ELEVE"
                 }""")).asJson
             .check(status.is(201))

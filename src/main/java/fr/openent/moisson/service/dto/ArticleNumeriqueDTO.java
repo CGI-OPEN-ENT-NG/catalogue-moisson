@@ -3,7 +3,6 @@ package fr.openent.moisson.service.dto;
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import fr.openent.moisson.domain.enumeration.TypeArticle;
 import fr.openent.moisson.domain.enumeration.PublicCible;
 
 /**
@@ -42,8 +41,6 @@ public class ArticleNumeriqueDTO implements Serializable {
     private String eanPapier;
 
     private String description;
-
-    private TypeArticle type;
 
     private PublicCible publicCible;
 
@@ -170,14 +167,6 @@ public class ArticleNumeriqueDTO implements Serializable {
         this.description = description;
     }
 
-    public TypeArticle getType() {
-        return type;
-    }
-
-    public void setType(TypeArticle type) {
-        this.type = type;
-    }
-
     public PublicCible getPublicCible() {
         return publicCible;
     }
@@ -230,7 +219,6 @@ public class ArticleNumeriqueDTO implements Serializable {
             ", accessibleENT='" + isAccessibleENT() + "'" +
             ", eanPapier='" + getEanPapier() + "'" +
             ", description='" + getDescription() + "'" +
-            ", type='" + getType() + "'" +
             ", publicCible='" + getPublicCible() + "'" +
             ", disponibiliteId=" + getDisponibiliteId() +
             "}";

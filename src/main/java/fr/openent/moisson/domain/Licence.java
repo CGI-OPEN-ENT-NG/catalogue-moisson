@@ -1,7 +1,6 @@
 package fr.openent.moisson.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -17,8 +16,8 @@ import java.io.Serializable;
 @Table(name = "licence")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "licence")
-public class
-Licence implements Serializable {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Licence implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

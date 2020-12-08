@@ -29,7 +29,7 @@ public class Discipline implements Serializable {
     private Long id;
 
     @Column(name = "libelle")
-    @JsonProperty("DISCIPLINE")
+    @JsonProperty("LIBELLE")
     private String libelle;
 
     @Column(name = "terme")
@@ -42,7 +42,7 @@ public class Discipline implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(value = "disciplines", allowSetters = true)
-    @JsonBackReference
+
     @JoinColumn(name = "article_numerique_id", nullable = false)
     private ArticleNumerique articleNumerique;
 

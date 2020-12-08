@@ -74,10 +74,17 @@ public class ArticlePapierServiceImpl implements ArticlePapierService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<ArticlePapierDTO> findOne(Long id) {
+    public Optional<ArticlePapierDTO> findOneDTO(Long id) {
         log.debug("Request to get ArticlePapier : {}", id);
         return articlePapierRepository.findById(id)
             .map(articlePapierMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<ArticlePapier> findOne(Long id) {
+        log.debug("Request to get ArticlePapier : {}", id);
+        return articlePapierRepository.findById(id);
     }
 
     @Override

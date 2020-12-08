@@ -22,6 +22,7 @@ import fr.openent.moisson.domain.enumeration.TypeLicence;
 @Table(name = "lep")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "lep")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Lep implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,21 +53,19 @@ public class Lep implements Serializable {
     @OneToMany(mappedBy = "lep")
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("CONDITIONS")
-    @JsonManagedReference
+
     private Set<Condition> conditions = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "offre_id", nullable = false)
     @JsonIgnoreProperties(value = "leps", allowSetters = true)
     @JsonIgnore
-    @JsonBackReference
     private Offre offre;
 
     @OneToOne
     @MapsId
     @JoinColumn(name = "id")
-    @JsonProperty("LICENCE")
-    @JsonManagedReference
+    @JsonProperty("TYPELICENCE")
     private Licence licence;
 
 

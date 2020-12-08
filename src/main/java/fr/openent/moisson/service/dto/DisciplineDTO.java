@@ -6,7 +6,7 @@ import java.io.Serializable;
  * A DTO for the {@link fr.openent.moisson.domain.Discipline} entity.
  */
 public class DisciplineDTO implements Serializable {
-    
+
     private Long id;
 
     private String libelle;
@@ -15,9 +15,8 @@ public class DisciplineDTO implements Serializable {
 
     private String concept;
 
-
     private Long articleNumeriqueId;
-    
+
     public Long getId() {
         return id;
     }

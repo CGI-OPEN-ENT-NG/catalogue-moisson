@@ -42,7 +42,6 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import fr.openent.moisson.domain.enumeration.TypeArticle;
 import fr.openent.moisson.domain.enumeration.PublicCible;
 /**
  * Integration tests for the {@link ArticleNumeriqueResource} REST controller.
@@ -94,9 +93,6 @@ public class ArticleNumeriqueResourceIT {
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
-
-    private static final TypeArticle DEFAULT_TYPE = TypeArticle.NUMERIQUE;
-    private static final TypeArticle UPDATED_TYPE = TypeArticle.PAPIER;
 
     private static final PublicCible DEFAULT_PUBLIC_CIBLE = PublicCible.ELEVE;
     private static final PublicCible UPDATED_PUBLIC_CIBLE = PublicCible.ENSEIGNANT;
@@ -151,7 +147,6 @@ public class ArticleNumeriqueResourceIT {
             .accessibleENT(DEFAULT_ACCESSIBLE_ENT)
             .eanPapier(DEFAULT_EAN_PAPIER)
             .description(DEFAULT_DESCRIPTION)
-            .type(DEFAULT_TYPE)
             .publicCible(DEFAULT_PUBLIC_CIBLE);
         // Add required entity
         Disponibilite disponibilite;
@@ -187,7 +182,6 @@ public class ArticleNumeriqueResourceIT {
             .accessibleENT(UPDATED_ACCESSIBLE_ENT)
             .eanPapier(UPDATED_EAN_PAPIER)
             .description(UPDATED_DESCRIPTION)
-            .type(UPDATED_TYPE)
             .publicCible(UPDATED_PUBLIC_CIBLE);
         // Add required entity
         Disponibilite disponibilite;
@@ -236,7 +230,6 @@ public class ArticleNumeriqueResourceIT {
         assertThat(testArticleNumerique.isAccessibleENT()).isEqualTo(DEFAULT_ACCESSIBLE_ENT);
         assertThat(testArticleNumerique.getEanPapier()).isEqualTo(DEFAULT_EAN_PAPIER);
         assertThat(testArticleNumerique.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testArticleNumerique.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testArticleNumerique.getPublicCible()).isEqualTo(DEFAULT_PUBLIC_CIBLE);
 
         // Validate the id for MapsId, the ids must be same
@@ -283,7 +276,7 @@ public class ArticleNumeriqueResourceIT {
         em.detach(updatedArticleNumerique);
 
         // Update the Disponibilite with new association value
-        updatedArticleNumerique.setDisponibilite(articleNumerique.getDisponibilite());
+        updatedArticleNumerique.setDisponibilite(updatedArticleNumerique.getDisponibilite());
         ArticleNumeriqueDTO updatedArticleNumeriqueDTO = articleNumeriqueMapper.toDto(updatedArticleNumerique);
 
         // Update the entity
@@ -331,7 +324,6 @@ public class ArticleNumeriqueResourceIT {
             .andExpect(jsonPath("$.[*].accessibleENT").value(hasItem(DEFAULT_ACCESSIBLE_ENT.booleanValue())))
             .andExpect(jsonPath("$.[*].eanPapier").value(hasItem(DEFAULT_EAN_PAPIER)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].publicCible").value(hasItem(DEFAULT_PUBLIC_CIBLE.toString())));
     }
 
@@ -360,7 +352,6 @@ public class ArticleNumeriqueResourceIT {
             .andExpect(jsonPath("$.accessibleENT").value(DEFAULT_ACCESSIBLE_ENT.booleanValue()))
             .andExpect(jsonPath("$.eanPapier").value(DEFAULT_EAN_PAPIER))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.publicCible").value(DEFAULT_PUBLIC_CIBLE.toString()));
     }
 
@@ -1400,58 +1391,6 @@ public class ArticleNumeriqueResourceIT {
 
     @Test
     @Transactional
-    public void getAllArticleNumeriquesByTypeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        articleNumeriqueRepository.saveAndFlush(articleNumerique);
-
-        // Get all the articleNumeriqueList where type equals to DEFAULT_TYPE
-        defaultArticleNumeriqueShouldBeFound("type.equals=" + DEFAULT_TYPE);
-
-        // Get all the articleNumeriqueList where type equals to UPDATED_TYPE
-        defaultArticleNumeriqueShouldNotBeFound("type.equals=" + UPDATED_TYPE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticleNumeriquesByTypeIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        articleNumeriqueRepository.saveAndFlush(articleNumerique);
-
-        // Get all the articleNumeriqueList where type not equals to DEFAULT_TYPE
-        defaultArticleNumeriqueShouldNotBeFound("type.notEquals=" + DEFAULT_TYPE);
-
-        // Get all the articleNumeriqueList where type not equals to UPDATED_TYPE
-        defaultArticleNumeriqueShouldBeFound("type.notEquals=" + UPDATED_TYPE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticleNumeriquesByTypeIsInShouldWork() throws Exception {
-        // Initialize the database
-        articleNumeriqueRepository.saveAndFlush(articleNumerique);
-
-        // Get all the articleNumeriqueList where type in DEFAULT_TYPE or UPDATED_TYPE
-        defaultArticleNumeriqueShouldBeFound("type.in=" + DEFAULT_TYPE + "," + UPDATED_TYPE);
-
-        // Get all the articleNumeriqueList where type equals to UPDATED_TYPE
-        defaultArticleNumeriqueShouldNotBeFound("type.in=" + UPDATED_TYPE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticleNumeriquesByTypeIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        articleNumeriqueRepository.saveAndFlush(articleNumerique);
-
-        // Get all the articleNumeriqueList where type is not null
-        defaultArticleNumeriqueShouldBeFound("type.specified=true");
-
-        // Get all the articleNumeriqueList where type is null
-        defaultArticleNumeriqueShouldNotBeFound("type.specified=false");
-    }
-
-    @Test
-    @Transactional
     public void getAllArticleNumeriquesByPublicCibleIsEqualToSomething() throws Exception {
         // Initialize the database
         articleNumeriqueRepository.saveAndFlush(articleNumerique);
@@ -1619,7 +1558,6 @@ public class ArticleNumeriqueResourceIT {
             .andExpect(jsonPath("$.[*].accessibleENT").value(hasItem(DEFAULT_ACCESSIBLE_ENT.booleanValue())))
             .andExpect(jsonPath("$.[*].eanPapier").value(hasItem(DEFAULT_EAN_PAPIER)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].publicCible").value(hasItem(DEFAULT_PUBLIC_CIBLE.toString())));
 
         // Check, that the count call also returns 1
@@ -1681,7 +1619,6 @@ public class ArticleNumeriqueResourceIT {
             .accessibleENT(UPDATED_ACCESSIBLE_ENT)
             .eanPapier(UPDATED_EAN_PAPIER)
             .description(UPDATED_DESCRIPTION)
-            .type(UPDATED_TYPE)
             .publicCible(UPDATED_PUBLIC_CIBLE);
         ArticleNumeriqueDTO articleNumeriqueDTO = articleNumeriqueMapper.toDto(updatedArticleNumerique);
 
@@ -1708,7 +1645,6 @@ public class ArticleNumeriqueResourceIT {
         assertThat(testArticleNumerique.isAccessibleENT()).isEqualTo(UPDATED_ACCESSIBLE_ENT);
         assertThat(testArticleNumerique.getEanPapier()).isEqualTo(UPDATED_EAN_PAPIER);
         assertThat(testArticleNumerique.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testArticleNumerique.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testArticleNumerique.getPublicCible()).isEqualTo(UPDATED_PUBLIC_CIBLE);
 
         // Validate the ArticleNumerique in Elasticsearch
@@ -1786,7 +1722,6 @@ public class ArticleNumeriqueResourceIT {
             .andExpect(jsonPath("$.[*].accessibleENT").value(hasItem(DEFAULT_ACCESSIBLE_ENT.booleanValue())))
             .andExpect(jsonPath("$.[*].eanPapier").value(hasItem(DEFAULT_EAN_PAPIER)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].publicCible").value(hasItem(DEFAULT_PUBLIC_CIBLE.toString())));
     }
 }

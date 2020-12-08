@@ -29,7 +29,7 @@ public class Niveau implements Serializable {
     private Long id;
 
     @Column(name = "libelle")
-    @JsonProperty("NIVEAU")
+    @JsonProperty("LIBELLE")
     private String libelle;
 
     @Column(name = "terme")
@@ -42,7 +42,7 @@ public class Niveau implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(value = "niveaus", allowSetters = true)
-    @JsonBackReference
+
     @JoinColumn(name = "article_numerique_id", nullable = false)
     private ArticleNumerique articleNumerique;
 

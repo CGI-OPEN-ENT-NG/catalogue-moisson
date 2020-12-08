@@ -7,13 +7,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum DisponibiliteEnum {
     DISPONIBLE("Disponible"),
+    NON_DISPONIBLE("Non disponible"),
     EN_COURS_D_IMPRESSION("En cours d'impression"),
     EN_COURS_DE_REIMPRESSION("En cours de réimpression"),
     NON_DISPONIBLE_PROVISOIREMENT("Non disponible provisoirement"),
     EPUISE("Epuisé"),
     A_PARAITRE("À paraître");
-//    TRUE("true"),
-//    FALSE("false");
 
     @JsonValue
     private String value;

@@ -3,8 +3,8 @@ package fr.openent.moisson.service.mapper;
 
 import fr.openent.moisson.domain.*;
 import fr.openent.moisson.service.dto.TechnoDTO;
-
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 /**
  * Mapper for the entity {@link Techno} and its DTO {@link TechnoDTO}.

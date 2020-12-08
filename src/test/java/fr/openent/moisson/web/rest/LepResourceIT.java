@@ -205,7 +205,7 @@ public class LepResourceIT {
         em.detach(updatedLep);
 
         // Update the Licence with new association value
-        updatedLep.setLicence();
+        updatedLep.setLicence(lep.getLicence());
         LepDTO updatedLepDTO = lepMapper.toDto(updatedLep);
 
         // Update the entity
@@ -244,7 +244,7 @@ public class LepResourceIT {
             .andExpect(jsonPath("$.[*].titre").value(hasItem(DEFAULT_TITRE)))
             .andExpect(jsonPath("$.[*].duree").value(hasItem(DEFAULT_DUREE)));
     }
-    
+
     @Test
     @Transactional
     public void getLep() throws Exception {

@@ -44,7 +44,15 @@ public interface ArticlePapierService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<ArticlePapierDTO> findOne(Long id);
+    Optional<ArticlePapierDTO> findOneDTO(Long id);
+
+    /**
+     * Get the "id" articlePapier.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    Optional<ArticlePapier> findOne(Long id);
 
     /**
      * Delete the "id" articlePapier.

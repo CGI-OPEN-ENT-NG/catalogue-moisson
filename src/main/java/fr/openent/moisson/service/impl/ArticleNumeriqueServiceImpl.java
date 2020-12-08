@@ -1,5 +1,6 @@
 package fr.openent.moisson.service.impl;
 
+import fr.openent.moisson.domain.ArticlePapier;
 import fr.openent.moisson.service.ArticleNumeriqueService;
 import fr.openent.moisson.domain.ArticleNumerique;
 import fr.openent.moisson.repository.ArticleNumeriqueRepository;
@@ -56,13 +57,20 @@ public class ArticleNumeriqueServiceImpl implements ArticleNumeriqueService {
     }
 
     @Override
+    public ArticleNumerique save(ArticleNumerique articleNumerique) {
+        log.debug("Request to save ArticleNumerique : {}", articleNumerique);
+        articleNumerique = articleNumeriqueRepository.save(articleNumerique);
+        articleNumeriqueRepository.save(articleNumerique);
+        return articleNumerique;
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Page<ArticleNumeriqueDTO> findAll(Pageable pageable) {
         log.debug("Request to get all ArticleNumeriques");
         return articleNumeriqueRepository.findAll(pageable)
             .map(articleNumeriqueMapper::toDto);
     }
-
 
     @Override
     @Transactional(readOnly = true)

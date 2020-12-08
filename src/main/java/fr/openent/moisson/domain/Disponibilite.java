@@ -1,8 +1,14 @@
 package fr.openent.moisson.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.InstantSerializer;
+import fr.openent.moisson.service.mapper.json.MoissonCustomInstantDeserializer;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -36,6 +42,8 @@ public class Disponibilite implements Serializable {
 
     @Column(name = "date_disponibilite")
     @JsonProperty("DATE_DISPO")
+    @JsonDeserialize(using = MoissonCustomInstantDeserializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern= "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
     private Instant dateDisponibilite;
 
     @Column(name = "commandable")
@@ -49,12 +57,12 @@ public class Disponibilite implements Serializable {
 
     @OneToOne(mappedBy = "disponibilite")
     @JsonIgnore
-    @JsonBackReference
+
     private ArticlePapier articlePapier;
 
     @OneToOne(mappedBy = "disponibilite")
     @JsonIgnore
-    @JsonBackReference
+
     private ArticleNumerique articleNumerique;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

@@ -1,8 +1,6 @@
 package fr.openent.moisson.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import fr.openent.moisson.domain.enumeration.PublicCible;
 import fr.openent.moisson.domain.enumeration.TypeArticle;
 import org.hibernate.annotations.Cache;
@@ -14,6 +12,7 @@ import javax.validation.constraints.*;
 import org.hibernate.annotations.NaturalId;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +24,7 @@ import java.util.Set;
 @Table(name = "article_numerique")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "articlenumerique")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ArticleNumerique implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,6 +33,7 @@ public class ArticleNumerique implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     @JsonIgnore
+    @JsonProperty("id")
     private Long id;
 
     @NaturalId
@@ -95,11 +96,6 @@ public class ArticleNumerique implements Serializable {
     private String eanPapier;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type")
-    @JsonProperty("TYPE")
-    private TypeArticle type;
-
-    @Enumerated(EnumType.STRING)
     @Column(name = "public_cible")
     @JsonProperty("PUBLIC")
     private PublicCible publicCible;
@@ -107,13 +103,11 @@ public class ArticleNumerique implements Serializable {
     @OneToMany(mappedBy = "articleNumerique", cascade = CascadeType.ALL, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("DISCIPLINE")
-    @JsonManagedReference
     private Set<Discipline> disciplines = new HashSet<>();
 
     @OneToMany(mappedBy = "articleNumerique",cascade = CascadeType.ALL, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("NIVEAU")
-    @JsonManagedReference
     private Set<Niveau> niveaus = new HashSet<>();
 
     @OneToMany(mappedBy = "articleNumerique")
@@ -129,12 +123,11 @@ public class ArticleNumerique implements Serializable {
     @OneToOne
     @MapsId
     @JoinColumn(name = "id")
-    @JsonManagedReference
     @JsonProperty("DISPONIBILITE")
     private Disponibilite disponibilite;
 
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
         return id;
     }
@@ -338,19 +331,6 @@ public class ArticleNumerique implements Serializable {
         this.description = description;
     }
 
-    public TypeArticle getType() {
-        return type;
-    }
-
-    public ArticleNumerique type(TypeArticle type) {
-        this.type = type;
-        return this;
-    }
-
-    public void setType(TypeArticle type) {
-        this.type = type;
-    }
-
     public PublicCible getPublicCible() {
         return publicCible;
     }
@@ -463,6 +443,7 @@ public class ArticleNumerique implements Serializable {
     public void setTechnos(Set<Techno> technos) {
         this.technos = technos;
     }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -495,13 +476,11 @@ public class ArticleNumerique implements Serializable {
             ", distributeur='" + getDistributeur() + "'" +
             ", urlCouverture='" + getUrlCouverture() + "'" +
             ", urlDemo='" + getUrlDemo() + "'" +
-            ", disponibilite='" + getDisponibilite() + "'" +
             ", dateParution='" + getDateParution() + "'" +
             ", compatibleGAR='" + isCompatibleGAR() + "'" +
             ", accessibleENT='" + isAccessibleENT() + "'" +
             ", eanPapier='" + getEanPapier() + "'" +
             ", description='" + getDescription() + "'" +
-            ", type='" + getType() + "'" +
             ", publicCible='" + getPublicCible() + "'" +
             "}";
     }

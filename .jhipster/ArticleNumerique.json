@@ -100,11 +100,6 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "type",
-      "fieldType": "TypeArticle",
-      "fieldValues": "NUMERIQUE,PAPIER"
-    },
-    {
       "fieldName": "publicCible",
       "fieldType": "PublicCible",
       "fieldValues": "ELEVE,ENSEIGNANT,ELEVE_ET_ENSEIGNANT"

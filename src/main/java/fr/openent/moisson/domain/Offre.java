@@ -1,9 +1,6 @@
 package fr.openent.moisson.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -23,6 +20,7 @@ import java.util.Set;
 @Table(name = "offre")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "offre")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Offre implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -74,7 +72,7 @@ public class Offre implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(value = "offres", allowSetters = true)
-    @JsonBackReference
+
     @JoinColumn(name = "article_numerique_id", nullable = false)
     private ArticleNumerique articleNumerique;
 
@@ -82,8 +80,10 @@ public class Offre implements Serializable {
     @MapsId
     @JoinColumn(name = "id")
     @JsonProperty("LICENCE")
-    @JsonManagedReference
     private Licence licence;
+
+    @Transient
+    private BigDecimal prixTTC;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -273,6 +273,28 @@ public class Offre implements Serializable {
     public void setLicence(Licence licence) {
         this.licence = licence;
     }
+
+    @PostLoad
+    private void postLoad() {
+        BigDecimal prixHT = this.getPrixHT();
+        this.prixTTC = BigDecimal.ZERO;
+        for (Tva tva : this.getTvas()) {
+            this.prixTTC.add(prixHT.multiply(tva.getTaux().multiply(tva.getPourcent())));
+        }
+    }
+    public BigDecimal getPrixTTC() {
+        return prixTTC;
+    }
+
+    public void setPrixTTC(BigDecimal prixTTC) {
+        this.prixTTC = prixTTC;
+    }
+
+    public Offre prixTTC(BigDecimal prixTTC) {
+        this.prixTTC = prixTTC;
+        return this;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

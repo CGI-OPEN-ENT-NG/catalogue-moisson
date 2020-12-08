@@ -3,9 +3,8 @@ package fr.openent.moisson.service.mapper;
 
 import fr.openent.moisson.domain.*;
 import fr.openent.moisson.service.dto.TvaDTO;
-
-import org.mapstruct.*;
-
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 /**
  * Mapper for the entity {@link Tva} and its DTO {@link TvaDTO}.
  */
