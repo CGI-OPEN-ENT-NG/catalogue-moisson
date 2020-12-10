@@ -5,8 +5,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -17,6 +15,9 @@ import java.math.BigDecimal;
 @Table(name = "tva")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "tva")
+// Pour les gérer références cycliques au lieu de  @JsonManagedReference et @JsonBackReference
+// Il faut ajouter  @JsonProperty("id") au niveau de l'id
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Tva implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,6 +26,7 @@ public class Tva implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     @JsonIgnore
+    @JsonProperty("id")
     private Long id;
 
     @Column(name = "taux", precision = 21, scale = 2)
@@ -35,6 +37,7 @@ public class Tva implements Serializable {
     @JsonProperty("POURCENT")
     private BigDecimal pourcent;
 
+    // Eager par défaut mettre donc lazy pour éviter récupération offre
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "tvas", allowSetters = true)
     @JoinColumn(name = "offre_id", nullable = false)
@@ -43,7 +46,6 @@ public class Tva implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_papier_id", nullable = false)
     @JsonIgnoreProperties(value = "tvas", allowSetters = true)
-    @JsonBackReference
     private ArticlePapier articlePapier;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

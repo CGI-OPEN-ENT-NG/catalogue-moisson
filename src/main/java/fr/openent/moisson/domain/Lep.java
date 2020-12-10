@@ -38,7 +38,7 @@ public class Lep implements Serializable {
     @JsonProperty("EAN")
     private String ean;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 65000)
     @JsonProperty("DESCRIPTION")
     private String description;
 
@@ -50,10 +50,9 @@ public class Lep implements Serializable {
     @JsonProperty("DUREE")
     private String duree;
 
-    @OneToMany(mappedBy = "lep")
+    @OneToMany(mappedBy = "lep", cascade = CascadeType.ALL, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("CONDITIONS")
-
     private Set<Condition> conditions = new HashSet<>();
 
     @ManyToOne

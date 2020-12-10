@@ -4,12 +4,13 @@ import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Set;
 
 /**
  * A DTO for the {@link fr.openent.moisson.domain.ArticlePapier} entity.
  */
 public class ArticlePapierDTO implements Serializable {
-    
+
     private Long id;
 
     @Size(min = 13, max = 13)
@@ -37,9 +38,10 @@ public class ArticlePapierDTO implements Serializable {
 
     private String description;
 
+    private Set<TvaDTO> tvas;
 
     private Long disponibiliteId;
-    
+
     public Long getId() {
         return id;
     }
@@ -151,6 +153,15 @@ public class ArticlePapierDTO implements Serializable {
     public void setDisponibiliteId(Long disponibiliteId) {
         this.disponibiliteId = disponibiliteId;
     }
+
+    public Set<TvaDTO> getTvas() {
+        return tvas;
+    }
+
+    public void setTvas(Set<TvaDTO> tvas) {
+        this.tvas = tvas;
+    }
+
 
     @Override
     public boolean equals(Object o) {

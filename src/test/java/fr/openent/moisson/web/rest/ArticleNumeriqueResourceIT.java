@@ -88,14 +88,14 @@ public class ArticleNumeriqueResourceIT {
     private static final Boolean DEFAULT_ACCESSIBLE_ENT = false;
     private static final Boolean UPDATED_ACCESSIBLE_ENT = true;
 
-    private static final String DEFAULT_EAN_PAPIER = "AAAAAAAAAAAAA";
-    private static final String UPDATED_EAN_PAPIER = "BBBBBBBBBBBBB";
-
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
     private static final PublicCible DEFAULT_PUBLIC_CIBLE = PublicCible.ELEVE;
     private static final PublicCible UPDATED_PUBLIC_CIBLE = PublicCible.ENSEIGNANT;
+
+    private static final String DEFAULT_EAN_PAPIER = "AAAAAAAAAA";
+    private static final String UPDATED_EAN_PAPIER = "BBBBBBBBBB";
 
     @Autowired
     private ArticleNumeriqueRepository articleNumeriqueRepository;
@@ -145,9 +145,9 @@ public class ArticleNumeriqueResourceIT {
             .dateParution(DEFAULT_DATE_PARUTION)
             .compatibleGAR(DEFAULT_COMPATIBLE_GAR)
             .accessibleENT(DEFAULT_ACCESSIBLE_ENT)
-            .eanPapier(DEFAULT_EAN_PAPIER)
             .description(DEFAULT_DESCRIPTION)
-            .publicCible(DEFAULT_PUBLIC_CIBLE);
+            .publicCible(DEFAULT_PUBLIC_CIBLE)
+            .eanPapier(DEFAULT_EAN_PAPIER);
         // Add required entity
         Disponibilite disponibilite;
         if (TestUtil.findAll(em, Disponibilite.class).isEmpty()) {
@@ -180,9 +180,9 @@ public class ArticleNumeriqueResourceIT {
             .dateParution(UPDATED_DATE_PARUTION)
             .compatibleGAR(UPDATED_COMPATIBLE_GAR)
             .accessibleENT(UPDATED_ACCESSIBLE_ENT)
-            .eanPapier(UPDATED_EAN_PAPIER)
             .description(UPDATED_DESCRIPTION)
-            .publicCible(UPDATED_PUBLIC_CIBLE);
+            .publicCible(UPDATED_PUBLIC_CIBLE)
+            .eanPapier(UPDATED_EAN_PAPIER);
         // Add required entity
         Disponibilite disponibilite;
         if (TestUtil.findAll(em, Disponibilite.class).isEmpty()) {
@@ -228,9 +228,9 @@ public class ArticleNumeriqueResourceIT {
         assertThat(testArticleNumerique.getDateParution()).isEqualTo(DEFAULT_DATE_PARUTION);
         assertThat(testArticleNumerique.isCompatibleGAR()).isEqualTo(DEFAULT_COMPATIBLE_GAR);
         assertThat(testArticleNumerique.isAccessibleENT()).isEqualTo(DEFAULT_ACCESSIBLE_ENT);
-        assertThat(testArticleNumerique.getEanPapier()).isEqualTo(DEFAULT_EAN_PAPIER);
         assertThat(testArticleNumerique.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testArticleNumerique.getPublicCible()).isEqualTo(DEFAULT_PUBLIC_CIBLE);
+        assertThat(testArticleNumerique.getEanPapier()).isEqualTo(DEFAULT_EAN_PAPIER);
 
         // Validate the id for MapsId, the ids must be same
         assertThat(testArticleNumerique.getId()).isEqualTo(testArticleNumerique.getDisponibilite().getId());
@@ -322,9 +322,9 @@ public class ArticleNumeriqueResourceIT {
             .andExpect(jsonPath("$.[*].dateParution").value(hasItem(DEFAULT_DATE_PARUTION.toString())))
             .andExpect(jsonPath("$.[*].compatibleGAR").value(hasItem(DEFAULT_COMPATIBLE_GAR.booleanValue())))
             .andExpect(jsonPath("$.[*].accessibleENT").value(hasItem(DEFAULT_ACCESSIBLE_ENT.booleanValue())))
-            .andExpect(jsonPath("$.[*].eanPapier").value(hasItem(DEFAULT_EAN_PAPIER)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].publicCible").value(hasItem(DEFAULT_PUBLIC_CIBLE.toString())));
+            .andExpect(jsonPath("$.[*].publicCible").value(hasItem(DEFAULT_PUBLIC_CIBLE.toString())))
+            .andExpect(jsonPath("$.[*].eanPapier").value(hasItem(DEFAULT_EAN_PAPIER)));
     }
 
     @Test
@@ -350,9 +350,9 @@ public class ArticleNumeriqueResourceIT {
             .andExpect(jsonPath("$.dateParution").value(DEFAULT_DATE_PARUTION.toString()))
             .andExpect(jsonPath("$.compatibleGAR").value(DEFAULT_COMPATIBLE_GAR.booleanValue()))
             .andExpect(jsonPath("$.accessibleENT").value(DEFAULT_ACCESSIBLE_ENT.booleanValue()))
-            .andExpect(jsonPath("$.eanPapier").value(DEFAULT_EAN_PAPIER))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
-            .andExpect(jsonPath("$.publicCible").value(DEFAULT_PUBLIC_CIBLE.toString()));
+            .andExpect(jsonPath("$.publicCible").value(DEFAULT_PUBLIC_CIBLE.toString()))
+            .andExpect(jsonPath("$.eanPapier").value(DEFAULT_EAN_PAPIER));
     }
 
 
@@ -1235,84 +1235,6 @@ public class ArticleNumeriqueResourceIT {
 
     @Test
     @Transactional
-    public void getAllArticleNumeriquesByEanPapierIsEqualToSomething() throws Exception {
-        // Initialize the database
-        articleNumeriqueRepository.saveAndFlush(articleNumerique);
-
-        // Get all the articleNumeriqueList where eanPapier equals to DEFAULT_EAN_PAPIER
-        defaultArticleNumeriqueShouldBeFound("eanPapier.equals=" + DEFAULT_EAN_PAPIER);
-
-        // Get all the articleNumeriqueList where eanPapier equals to UPDATED_EAN_PAPIER
-        defaultArticleNumeriqueShouldNotBeFound("eanPapier.equals=" + UPDATED_EAN_PAPIER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticleNumeriquesByEanPapierIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        articleNumeriqueRepository.saveAndFlush(articleNumerique);
-
-        // Get all the articleNumeriqueList where eanPapier not equals to DEFAULT_EAN_PAPIER
-        defaultArticleNumeriqueShouldNotBeFound("eanPapier.notEquals=" + DEFAULT_EAN_PAPIER);
-
-        // Get all the articleNumeriqueList where eanPapier not equals to UPDATED_EAN_PAPIER
-        defaultArticleNumeriqueShouldBeFound("eanPapier.notEquals=" + UPDATED_EAN_PAPIER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticleNumeriquesByEanPapierIsInShouldWork() throws Exception {
-        // Initialize the database
-        articleNumeriqueRepository.saveAndFlush(articleNumerique);
-
-        // Get all the articleNumeriqueList where eanPapier in DEFAULT_EAN_PAPIER or UPDATED_EAN_PAPIER
-        defaultArticleNumeriqueShouldBeFound("eanPapier.in=" + DEFAULT_EAN_PAPIER + "," + UPDATED_EAN_PAPIER);
-
-        // Get all the articleNumeriqueList where eanPapier equals to UPDATED_EAN_PAPIER
-        defaultArticleNumeriqueShouldNotBeFound("eanPapier.in=" + UPDATED_EAN_PAPIER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticleNumeriquesByEanPapierIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        articleNumeriqueRepository.saveAndFlush(articleNumerique);
-
-        // Get all the articleNumeriqueList where eanPapier is not null
-        defaultArticleNumeriqueShouldBeFound("eanPapier.specified=true");
-
-        // Get all the articleNumeriqueList where eanPapier is null
-        defaultArticleNumeriqueShouldNotBeFound("eanPapier.specified=false");
-    }
-                @Test
-    @Transactional
-    public void getAllArticleNumeriquesByEanPapierContainsSomething() throws Exception {
-        // Initialize the database
-        articleNumeriqueRepository.saveAndFlush(articleNumerique);
-
-        // Get all the articleNumeriqueList where eanPapier contains DEFAULT_EAN_PAPIER
-        defaultArticleNumeriqueShouldBeFound("eanPapier.contains=" + DEFAULT_EAN_PAPIER);
-
-        // Get all the articleNumeriqueList where eanPapier contains UPDATED_EAN_PAPIER
-        defaultArticleNumeriqueShouldNotBeFound("eanPapier.contains=" + UPDATED_EAN_PAPIER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllArticleNumeriquesByEanPapierNotContainsSomething() throws Exception {
-        // Initialize the database
-        articleNumeriqueRepository.saveAndFlush(articleNumerique);
-
-        // Get all the articleNumeriqueList where eanPapier does not contain DEFAULT_EAN_PAPIER
-        defaultArticleNumeriqueShouldNotBeFound("eanPapier.doesNotContain=" + DEFAULT_EAN_PAPIER);
-
-        // Get all the articleNumeriqueList where eanPapier does not contain UPDATED_EAN_PAPIER
-        defaultArticleNumeriqueShouldBeFound("eanPapier.doesNotContain=" + UPDATED_EAN_PAPIER);
-    }
-
-
-    @Test
-    @Transactional
     public void getAllArticleNumeriquesByDescriptionIsEqualToSomething() throws Exception {
         // Initialize the database
         articleNumeriqueRepository.saveAndFlush(articleNumerique);
@@ -1443,6 +1365,84 @@ public class ArticleNumeriqueResourceIT {
 
     @Test
     @Transactional
+    public void getAllArticleNumeriquesByEanPapierIsEqualToSomething() throws Exception {
+        // Initialize the database
+        articleNumeriqueRepository.saveAndFlush(articleNumerique);
+
+        // Get all the articleNumeriqueList where eanPapier equals to DEFAULT_EAN_PAPIER
+        defaultArticleNumeriqueShouldBeFound("eanPapier.equals=" + DEFAULT_EAN_PAPIER);
+
+        // Get all the articleNumeriqueList where eanPapier equals to UPDATED_EAN_PAPIER
+        defaultArticleNumeriqueShouldNotBeFound("eanPapier.equals=" + UPDATED_EAN_PAPIER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllArticleNumeriquesByEanPapierIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        articleNumeriqueRepository.saveAndFlush(articleNumerique);
+
+        // Get all the articleNumeriqueList where eanPapier not equals to DEFAULT_EAN_PAPIER
+        defaultArticleNumeriqueShouldNotBeFound("eanPapier.notEquals=" + DEFAULT_EAN_PAPIER);
+
+        // Get all the articleNumeriqueList where eanPapier not equals to UPDATED_EAN_PAPIER
+        defaultArticleNumeriqueShouldBeFound("eanPapier.notEquals=" + UPDATED_EAN_PAPIER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllArticleNumeriquesByEanPapierIsInShouldWork() throws Exception {
+        // Initialize the database
+        articleNumeriqueRepository.saveAndFlush(articleNumerique);
+
+        // Get all the articleNumeriqueList where eanPapier in DEFAULT_EAN_PAPIER or UPDATED_EAN_PAPIER
+        defaultArticleNumeriqueShouldBeFound("eanPapier.in=" + DEFAULT_EAN_PAPIER + "," + UPDATED_EAN_PAPIER);
+
+        // Get all the articleNumeriqueList where eanPapier equals to UPDATED_EAN_PAPIER
+        defaultArticleNumeriqueShouldNotBeFound("eanPapier.in=" + UPDATED_EAN_PAPIER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllArticleNumeriquesByEanPapierIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        articleNumeriqueRepository.saveAndFlush(articleNumerique);
+
+        // Get all the articleNumeriqueList where eanPapier is not null
+        defaultArticleNumeriqueShouldBeFound("eanPapier.specified=true");
+
+        // Get all the articleNumeriqueList where eanPapier is null
+        defaultArticleNumeriqueShouldNotBeFound("eanPapier.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllArticleNumeriquesByEanPapierContainsSomething() throws Exception {
+        // Initialize the database
+        articleNumeriqueRepository.saveAndFlush(articleNumerique);
+
+        // Get all the articleNumeriqueList where eanPapier contains DEFAULT_EAN_PAPIER
+        defaultArticleNumeriqueShouldBeFound("eanPapier.contains=" + DEFAULT_EAN_PAPIER);
+
+        // Get all the articleNumeriqueList where eanPapier contains UPDATED_EAN_PAPIER
+        defaultArticleNumeriqueShouldNotBeFound("eanPapier.contains=" + UPDATED_EAN_PAPIER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllArticleNumeriquesByEanPapierNotContainsSomething() throws Exception {
+        // Initialize the database
+        articleNumeriqueRepository.saveAndFlush(articleNumerique);
+
+        // Get all the articleNumeriqueList where eanPapier does not contain DEFAULT_EAN_PAPIER
+        defaultArticleNumeriqueShouldNotBeFound("eanPapier.doesNotContain=" + DEFAULT_EAN_PAPIER);
+
+        // Get all the articleNumeriqueList where eanPapier does not contain UPDATED_EAN_PAPIER
+        defaultArticleNumeriqueShouldBeFound("eanPapier.doesNotContain=" + UPDATED_EAN_PAPIER);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllArticleNumeriquesByDisciplineIsEqualToSomething() throws Exception {
         // Initialize the database
         articleNumeriqueRepository.saveAndFlush(articleNumerique);
@@ -1556,9 +1556,9 @@ public class ArticleNumeriqueResourceIT {
             .andExpect(jsonPath("$.[*].dateParution").value(hasItem(DEFAULT_DATE_PARUTION.toString())))
             .andExpect(jsonPath("$.[*].compatibleGAR").value(hasItem(DEFAULT_COMPATIBLE_GAR.booleanValue())))
             .andExpect(jsonPath("$.[*].accessibleENT").value(hasItem(DEFAULT_ACCESSIBLE_ENT.booleanValue())))
-            .andExpect(jsonPath("$.[*].eanPapier").value(hasItem(DEFAULT_EAN_PAPIER)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].publicCible").value(hasItem(DEFAULT_PUBLIC_CIBLE.toString())));
+            .andExpect(jsonPath("$.[*].publicCible").value(hasItem(DEFAULT_PUBLIC_CIBLE.toString())))
+            .andExpect(jsonPath("$.[*].eanPapier").value(hasItem(DEFAULT_EAN_PAPIER)));
 
         // Check, that the count call also returns 1
         restArticleNumeriqueMockMvc.perform(get("/api/article-numeriques/count?sort=id,desc&" + filter))
@@ -1617,9 +1617,9 @@ public class ArticleNumeriqueResourceIT {
             .dateParution(UPDATED_DATE_PARUTION)
             .compatibleGAR(UPDATED_COMPATIBLE_GAR)
             .accessibleENT(UPDATED_ACCESSIBLE_ENT)
-            .eanPapier(UPDATED_EAN_PAPIER)
             .description(UPDATED_DESCRIPTION)
-            .publicCible(UPDATED_PUBLIC_CIBLE);
+            .publicCible(UPDATED_PUBLIC_CIBLE)
+            .eanPapier(UPDATED_EAN_PAPIER);
         ArticleNumeriqueDTO articleNumeriqueDTO = articleNumeriqueMapper.toDto(updatedArticleNumerique);
 
         restArticleNumeriqueMockMvc.perform(put("/api/article-numeriques")
@@ -1643,9 +1643,9 @@ public class ArticleNumeriqueResourceIT {
         assertThat(testArticleNumerique.getDateParution()).isEqualTo(UPDATED_DATE_PARUTION);
         assertThat(testArticleNumerique.isCompatibleGAR()).isEqualTo(UPDATED_COMPATIBLE_GAR);
         assertThat(testArticleNumerique.isAccessibleENT()).isEqualTo(UPDATED_ACCESSIBLE_ENT);
-        assertThat(testArticleNumerique.getEanPapier()).isEqualTo(UPDATED_EAN_PAPIER);
         assertThat(testArticleNumerique.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testArticleNumerique.getPublicCible()).isEqualTo(UPDATED_PUBLIC_CIBLE);
+        assertThat(testArticleNumerique.getEanPapier()).isEqualTo(UPDATED_EAN_PAPIER);
 
         // Validate the ArticleNumerique in Elasticsearch
         verify(mockArticleNumeriqueSearchRepository, times(1)).save(testArticleNumerique);
@@ -1720,8 +1720,8 @@ public class ArticleNumeriqueResourceIT {
             .andExpect(jsonPath("$.[*].dateParution").value(hasItem(DEFAULT_DATE_PARUTION.toString())))
             .andExpect(jsonPath("$.[*].compatibleGAR").value(hasItem(DEFAULT_COMPATIBLE_GAR.booleanValue())))
             .andExpect(jsonPath("$.[*].accessibleENT").value(hasItem(DEFAULT_ACCESSIBLE_ENT.booleanValue())))
-            .andExpect(jsonPath("$.[*].eanPapier").value(hasItem(DEFAULT_EAN_PAPIER)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].publicCible").value(hasItem(DEFAULT_PUBLIC_CIBLE.toString())));
+            .andExpect(jsonPath("$.[*].publicCible").value(hasItem(DEFAULT_PUBLIC_CIBLE.toString())))
+            .andExpect(jsonPath("$.[*].eanPapier").value(hasItem(DEFAULT_EAN_PAPIER)));
     }
 }

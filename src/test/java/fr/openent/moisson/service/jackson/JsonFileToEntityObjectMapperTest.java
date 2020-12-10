@@ -1,14 +1,13 @@
-package fr.openent.moisson.service.mapper.jackson
+package fr.openent.moisson.service.jackson
     ;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.openent.moisson.domain.*;
+import fr.openent.moisson.repository.ArticleNumeriqueRepository;
 import fr.openent.moisson.repository.ArticlePapierRepository;
 import fr.openent.moisson.repository.TvaRepository;
-import fr.openent.moisson.service.ArticleNumeriqueService;
-import fr.openent.moisson.service.ArticlePapierService;
-import fr.openent.moisson.service.TvaService;
+import fr.openent.moisson.service.*;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -26,13 +25,10 @@ import java.util.*;
 class JsonFileToEntityObjectMapperTest {
 
     @Autowired
-    protected ArticlePapierService articlePapierService;
-
-    @Autowired
-    protected ArticleNumeriqueService articleNumeriqueService;
-
-    @Autowired
     protected ArticlePapierRepository articlePapierRepository;
+
+    @Autowired
+    protected ArticleNumeriqueRepository articleNumeriqueRepository;
 
     @Test
     public void jacksonArticlePapierTest() throws IOException {
@@ -46,15 +42,11 @@ class JsonFileToEntityObjectMapperTest {
             {
                 Optional<ArticlePapier> existArticlePapier = articlePapierRepository.findByEan(articlePapier.getEan());
                 if (existArticlePapier.isPresent()) {
-                    System.out.println(existArticlePapier.get().getTvas());
-                    existArticlePapier.get().removeTvas();
-                    // articlePapierService.save(existArticlePapier.get());
-                    articlePapier.getTvas().forEach(existArticlePapier.get()::addTva);
-                    articlePapierService.save(existArticlePapier.get());
-                } else {
+                    System.out.println(existArticlePapier.get().getPrixTTC());
+                    articlePapierRepository.deleteById(existArticlePapier.get().getId());
+                }
                     articlePapier.getTvas().forEach(articlePapier::addTva);
                     articlePapierRepository.save(articlePapier);
-                }
             }
         );
     }
@@ -66,19 +58,23 @@ class JsonFileToEntityObjectMapperTest {
         });
         articleNumeriques.forEach(articleNumerique ->
             {
+                Optional<ArticleNumerique> existArticleNumerique = articleNumeriqueRepository.findByEan(articleNumerique.getEan());
+                if (existArticleNumerique.isPresent()) {
+                    articleNumeriqueRepository.deleteById(existArticleNumerique.get().getId());
+                }
                 for (Offre offre : articleNumerique.getOffres()) {
                     for (Lep lep : offre.getLeps()) {
                         lep.getConditions().forEach(lep::addCondition);
                         offre.addLep(lep);
                     }
                     offre.getTvas().forEach(offre::addTva);
-                    // offre.setLicence(offre.getLicence());
+                    articleNumerique.addOffre(offre);
                 }
                 articleNumerique.getNiveaus().forEach(articleNumerique::addNiveau);
                 articleNumerique.getDisciplines().forEach(articleNumerique::addDiscipline);
-                //articleNumerique.setDisponibilite(articleNumerique.getDisponibilite());
+                articleNumerique.getTechnos().forEach(articleNumerique::addTechno);
 
-                articleNumeriqueService.save(articleNumerique);
+                articleNumeriqueRepository.save(articleNumerique);
             }
         );
     }

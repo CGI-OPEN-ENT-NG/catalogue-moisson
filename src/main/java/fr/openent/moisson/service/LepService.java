@@ -1,5 +1,6 @@
 package fr.openent.moisson.service;
 
+import fr.openent.moisson.domain.Lep;
 import fr.openent.moisson.service.dto.LepDTO;
 
 import org.springframework.data.domain.Page;
@@ -19,6 +20,14 @@ public interface LepService {
      * @return the persisted entity.
      */
     LepDTO save(LepDTO lepDTO);
+
+    /**
+     * Save a lep.
+     *
+     * @param lep the entity to save.
+     * @return the persisted entity.
+     */
+    Lep save(Lep lep);
 
     /**
      * Get all the leps.
@@ -48,7 +57,7 @@ public interface LepService {
      * Search for the lep corresponding to the query.
      *
      * @param query the query of the search.
-     * 
+     *
      * @param pageable the pagination information.
      * @return the list of entities.
      */

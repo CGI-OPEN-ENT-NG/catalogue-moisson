@@ -54,7 +54,7 @@ public class ArticleNumerique implements Serializable {
     @JsonProperty("EDITEUR")
     private String editeur;
 
-    @Column(name = "auteur")
+    @Column(name = "auteur", length = 1024)
     @JsonProperty("AUTEUR")
     private String auteur;
 
@@ -74,7 +74,7 @@ public class ArticleNumerique implements Serializable {
     @JsonProperty("URL_DEMO")
     private String urlDemo;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 65000)
     @JsonProperty("DESCRIPTION")
     private String description;
 
@@ -90,8 +90,7 @@ public class ArticleNumerique implements Serializable {
     @JsonProperty("ACCESSIBLE_ENT")
     private Boolean accessibleENT;
 
-    @Size(min = 13, max = 13)
-    @Column(name = "ean_papier", length = 13)
+    @Column(name = "ean_papier")
     @JsonProperty("EAN_PAPIER")
     private String eanPapier;
 
@@ -110,12 +109,12 @@ public class ArticleNumerique implements Serializable {
     @JsonProperty("NIVEAU")
     private Set<Niveau> niveaus = new HashSet<>();
 
-    @OneToMany(mappedBy = "articleNumerique")
+    @OneToMany(mappedBy = "articleNumerique", cascade = CascadeType.ALL, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("OFFRES")
     private Set<Offre> offres = new HashSet<>();
 
-    @OneToMany(mappedBy = "articleNumerique")
+    @OneToMany(mappedBy = "articleNumerique", cascade = CascadeType.ALL, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("TECHNO")
     private Set<Techno> technos = new HashSet<>();

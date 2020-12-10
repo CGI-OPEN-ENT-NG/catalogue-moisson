@@ -56,7 +56,7 @@ public class Techno implements Serializable {
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "type_licence_gar", nullable = false)
-    @JsonProperty("TypeLicenceGA")
+    @JsonProperty("TypeLicenceGAR")
     private TypeLicenceGAR typeLicenceGAR;
 
     @Column(name = "can_use_offline")
@@ -64,7 +64,7 @@ public class Techno implements Serializable {
     private Boolean canUseOffline;
 
     @Column(name = "one_clic")
-    @JsonProperty("oneClic")
+    @JsonProperty("Oneclic")
     private Boolean oneClic;
 
     @Column(name = "export_cle_usb")
@@ -72,7 +72,7 @@ public class Techno implements Serializable {
     private Boolean exportCleUSB;
 
     @Column(name = "deploiement_masse")
-    @JsonProperty("deploiementMasse")
+    @JsonProperty("DeploiementMasse")
     private Boolean deploiementMasse;
 
     @Column(name = "configuration_mini_os")

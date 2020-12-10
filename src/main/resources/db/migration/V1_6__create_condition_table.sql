@@ -1,31 +1,23 @@
--- Table: public.article_papier
+-- Table: public.condition
 
--- DROP TABLE public.article_papier;
+-- DROP TABLE public.condition;
 
-CREATE TABLE IF NOT EXISTS public.article_papier
+CREATE TABLE public.condition
 (
     id bigint NOT NULL,
-    ean character varying(13) COLLATE pg_catalog."default",
-    ark character varying(255) COLLATE pg_catalog."default",
-    titre character varying(255) COLLATE pg_catalog."default",
-    editeur character varying(255) COLLATE pg_catalog."default",
-    auteur character varying(255) COLLATE pg_catalog."default",
-    reference_editeur character varying(255) COLLATE pg_catalog."default",
-    collection character varying(255) COLLATE pg_catalog."default",
-    distributeur character varying(255) COLLATE pg_catalog."default",
-    url_couverture character varying(255) COLLATE pg_catalog."default",
-    disponibilte character varying(255) COLLATE pg_catalog."default",
-    date_disponibilte timestamp without time zone,
-    date_parution timestamp without time zone,
-    commandable boolean,
-    tva numeric(21,2),
-    prix_ht numeric(21,2),
-    CONSTRAINT article_papier_pkey PRIMARY KEY (id)
+    gratuite integer,
+    condition_gratuite integer,
+    lep_id bigint,
+    CONSTRAINT condition_pkey PRIMARY KEY (id),
+    CONSTRAINT fk_condition_lep_id FOREIGN KEY (lep_id)
+        REFERENCES public.lep (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
 )
     WITH (
         OIDS = FALSE
     )
     TABLESPACE pg_default;
 
-ALTER TABLE public.article_papier
+ALTER TABLE public.condition
     OWNER to usercatalogue;

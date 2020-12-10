@@ -1,5 +1,7 @@
 package fr.openent.moisson.service;
 
+import fr.openent.moisson.domain.Lep;
+import fr.openent.moisson.domain.Offre;
 import fr.openent.moisson.service.dto.OffreDTO;
 
 import org.springframework.data.domain.Page;
@@ -19,6 +21,14 @@ public interface OffreService {
      * @return the persisted entity.
      */
     OffreDTO save(OffreDTO offreDTO);
+
+    /**
+     * Save a offre.
+     *
+     * @param offre the entity to save.
+     * @return the persisted entity.
+     */
+    Offre save(Offre offre);
 
     /**
      * Get all the offres.
@@ -48,7 +58,7 @@ public interface OffreService {
      * Search for the offre corresponding to the query.
      *
      * @param query the query of the search.
-     * 
+     *
      * @param pageable the pagination information.
      * @return the list of entities.
      */

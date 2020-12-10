@@ -37,7 +37,6 @@ public class Condition implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = "conditions", allowSetters = true)
     @JsonIgnore
-
     @JoinColumn(name = "lep_id", nullable = false)
     private Lep lep;
 

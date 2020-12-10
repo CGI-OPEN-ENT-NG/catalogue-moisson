@@ -4,7 +4,7 @@
     "TITRE": "SPECIALITE NUMERIQUE ET SCIENC",
     "TVA": [
       {
-        "TAUX": 18.6,
+        "TAUX": 5.5,
         "POURCENT": 100
       }
     ],
@@ -29,8 +29,12 @@
     "TITRE": "SCIENCES DE GESTION ET NUMERIQ",
     "TVA": [
       {
-        "TAUX": 18.6,
-        "POURCENT": 100
+        "TAUX": 5.5,
+        "POURCENT": 93.980280228334
+      },
+      {
+        "TAUX": 20,
+        "POURCENT": 6.0197197716658
       }
     ],
     "PXHT": 22.27,
@@ -55,7 +59,11 @@
     "TVA": [
       {
         "TAUX": 5.5,
-        "POURCENT": 100
+        "POURCENT": 93.980280228334
+      },
+      {
+        "TAUX": 20,
+        "POURCENT": 6.0197197716658
       }
     ],
     "PXHT": 17.06,
@@ -80,7 +88,11 @@
     "TVA": [
       {
         "TAUX": 5.5,
-        "POURCENT": 100
+        "POURCENT": 93.980280228334
+      },
+      {
+        "TAUX": 20,
+        "POURCENT": 6.0197197716658
       }
     ],
     "PXHT": 13.74,
@@ -105,7 +117,11 @@
     "TVA": [
       {
         "TAUX": 5.5,
-        "POURCENT": 100
+        "POURCENT": 93.980280228334
+      },
+      {
+        "TAUX": 20,
+        "POURCENT": 6.0197197716658
       }
     ],
     "PXHT": 12.32,
@@ -130,7 +146,11 @@
     "TVA": [
       {
         "TAUX": 5.5,
-        "POURCENT": 100
+        "POURCENT": 93.980280228334
+      },
+      {
+        "TAUX": 20,
+        "POURCENT": 6.0197197716658
       }
     ],
     "PXHT": 17.06,

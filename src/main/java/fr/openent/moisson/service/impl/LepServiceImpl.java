@@ -56,6 +56,14 @@ public class LepServiceImpl implements LepService {
     }
 
     @Override
+    public Lep save(Lep lep) {
+        log.debug("Request to save Lep : {}", lep);
+        lep = lepRepository.save(lep);
+        lepSearchRepository.save(lep);
+        return lep;
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Page<LepDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Leps");

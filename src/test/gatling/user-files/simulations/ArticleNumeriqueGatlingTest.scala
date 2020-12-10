@@ -84,9 +84,9 @@ class ArticleNumeriqueGatlingTest extends Simulation {
                 , "dateParution":"2020-01-01T00:00:00.000Z"
                 , "compatibleGAR":null
                 , "accessibleENT":null
-                , "eanPapier":"SAMPLE_TEXT"
                 , "description":"SAMPLE_TEXT"
                 , "publicCible":"ELEVE"
+                , "eanPapier":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_articleNumerique_url"))).exitHereIfFailed

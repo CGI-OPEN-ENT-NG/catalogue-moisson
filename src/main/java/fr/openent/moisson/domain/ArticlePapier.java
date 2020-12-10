@@ -31,6 +31,7 @@ import fr.openent.moisson.domain.enumeration.TypeArticle;
 @Table(name = "article_papier")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "articlepapier")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ArticlePapier implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,6 +40,7 @@ public class ArticlePapier implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     @JsonIgnore
+    @JsonProperty("id")
     private Long id;
 
     @Size(min = 13, max = 13)
@@ -59,7 +61,7 @@ public class ArticlePapier implements Serializable {
     @JsonProperty("EDITEUR")
     private String editeur;
 
-    @Column(name = "auteur")
+    @Column(name = "auteur", length = 102)
     @JsonProperty("AUTEUR")
     private String auteur;
 
@@ -89,14 +91,14 @@ public class ArticlePapier implements Serializable {
     @JsonProperty("PXHT")
     private BigDecimal prixHT;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 65000)
     @JsonProperty("DESCRIPTION")
     private String description;
 
     @OneToMany(mappedBy = "articlePapier", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("TVA")
-    @JsonManagedReference // @JsonManagedReference sur la collection et @JsonBackReference sur la référence (Tva)
+    // @JsonManagedReference // @JsonManagedReference sur la collection et @JsonBackReference sur la référence (Tva)
     private Set<Tva> tvas = new HashSet<>();
 
     @OneToOne
@@ -106,7 +108,7 @@ public class ArticlePapier implements Serializable {
     private Disponibilite disponibilite;
 
     @Transient
-    private BigDecimal prixTTC;
+    private BigDecimal prixTTC = BigDecimal.ZERO;
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -322,12 +324,13 @@ public class ArticlePapier implements Serializable {
     @PostLoad
     private void postLoad() {
         BigDecimal prixHT = this.getPrixHT();
-        this.prixTTC = BigDecimal.ZERO;
+        BigDecimal pxTTC = this.getPrixHT();
         for (Tva tva : this.getTvas()) {
-            this.prixTTC.add(prixHT.multiply(tva.getTaux().multiply(tva.getPourcent())));
+            var innerTva = prixHT.multiply(tva.getTaux().multiply(tva.getPourcent())).divide(new BigDecimal("10000"));
+            pxTTC = pxTTC.add(innerTva);
         }
+        this.prixTTC=pxTTC;
     }
-
     public BigDecimal getPrixTTC() {
         return prixTTC;
     }

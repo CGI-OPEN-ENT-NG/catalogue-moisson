@@ -70,11 +70,11 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
 
     private BooleanFilter accessibleENT;
 
-    private StringFilter eanPapier;
-
     private StringFilter description;
 
     private PublicCibleFilter publicCible;
+
+    private StringFilter eanPapier;
 
     private LongFilter disciplineId;
 
@@ -103,9 +103,9 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         this.dateParution = other.dateParution == null ? null : other.dateParution.copy();
         this.compatibleGAR = other.compatibleGAR == null ? null : other.compatibleGAR.copy();
         this.accessibleENT = other.accessibleENT == null ? null : other.accessibleENT.copy();
-        this.eanPapier = other.eanPapier == null ? null : other.eanPapier.copy();
         this.description = other.description == null ? null : other.description.copy();
         this.publicCible = other.publicCible == null ? null : other.publicCible.copy();
+        this.eanPapier = other.eanPapier == null ? null : other.eanPapier.copy();
         this.disciplineId = other.disciplineId == null ? null : other.disciplineId.copy();
         this.niveauId = other.niveauId == null ? null : other.niveauId.copy();
         this.offreId = other.offreId == null ? null : other.offreId.copy();
@@ -222,14 +222,6 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         this.accessibleENT = accessibleENT;
     }
 
-    public StringFilter getEanPapier() {
-        return eanPapier;
-    }
-
-    public void setEanPapier(StringFilter eanPapier) {
-        this.eanPapier = eanPapier;
-    }
-
     public StringFilter getDescription() {
         return description;
     }
@@ -244,6 +236,14 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
 
     public void setPublicCible(PublicCibleFilter publicCible) {
         this.publicCible = publicCible;
+    }
+
+    public StringFilter getEanPapier() {
+        return eanPapier;
+    }
+
+    public void setEanPapier(StringFilter eanPapier) {
+        this.eanPapier = eanPapier;
     }
 
     public LongFilter getDisciplineId() {
@@ -310,9 +310,9 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
             Objects.equals(dateParution, that.dateParution) &&
             Objects.equals(compatibleGAR, that.compatibleGAR) &&
             Objects.equals(accessibleENT, that.accessibleENT) &&
-            Objects.equals(eanPapier, that.eanPapier) &&
             Objects.equals(description, that.description) &&
             Objects.equals(publicCible, that.publicCible) &&
+            Objects.equals(eanPapier, that.eanPapier) &&
             Objects.equals(disciplineId, that.disciplineId) &&
             Objects.equals(niveauId, that.niveauId) &&
             Objects.equals(offreId, that.offreId) &&
@@ -336,9 +336,9 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         dateParution,
         compatibleGAR,
         accessibleENT,
-        eanPapier,
         description,
         publicCible,
+        eanPapier,
         disciplineId,
         niveauId,
         offreId,
@@ -364,9 +364,9 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
                 (dateParution != null ? "dateParution=" + dateParution + ", " : "") +
                 (compatibleGAR != null ? "compatibleGAR=" + compatibleGAR + ", " : "") +
                 (accessibleENT != null ? "accessibleENT=" + accessibleENT + ", " : "") +
-                (eanPapier != null ? "eanPapier=" + eanPapier + ", " : "") +
                 (description != null ? "description=" + description + ", " : "") +
                 (publicCible != null ? "publicCible=" + publicCible + ", " : "") +
+                (eanPapier != null ? "eanPapier=" + eanPapier + ", " : "") +
                 (disciplineId != null ? "disciplineId=" + disciplineId + ", " : "") +
                 (niveauId != null ? "niveauId=" + niveauId + ", " : "") +
                 (offreId != null ? "offreId=" + offreId + ", " : "") +

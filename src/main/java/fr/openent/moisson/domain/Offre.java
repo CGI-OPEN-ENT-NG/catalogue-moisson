@@ -60,19 +60,18 @@ public class Offre implements Serializable {
     @JsonProperty("REF_EDITEUR")
     private String referenceEditeur;
 
-    @OneToMany(mappedBy = "offre")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("TVA")
     private Set<Tva> tvas = new HashSet<>();
 
-    @OneToMany(mappedBy = "offre")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("LEP")
     private Set<Lep> leps = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = "offres", allowSetters = true)
-
     @JoinColumn(name = "article_numerique_id", nullable = false)
     private ArticleNumerique articleNumerique;
 
@@ -83,7 +82,7 @@ public class Offre implements Serializable {
     private Licence licence;
 
     @Transient
-    private BigDecimal prixTTC;
+    private BigDecimal prixTTC = BigDecimal.ZERO;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -277,11 +276,14 @@ public class Offre implements Serializable {
     @PostLoad
     private void postLoad() {
         BigDecimal prixHT = this.getPrixHT();
-        this.prixTTC = BigDecimal.ZERO;
+        BigDecimal pxTTC = this.getPrixHT();
         for (Tva tva : this.getTvas()) {
-            this.prixTTC.add(prixHT.multiply(tva.getTaux().multiply(tva.getPourcent())));
+            var innerTva = prixHT.multiply(tva.getTaux().multiply(tva.getPourcent())).divide(new BigDecimal("10000"));
+            pxTTC = pxTTC.add(innerTva);
         }
+        this.prixTTC=pxTTC;
     }
+
     public BigDecimal getPrixTTC() {
         return prixTTC;
     }

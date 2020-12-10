@@ -45,7 +45,10 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
+    # Domaine (nom d'hôte à modifier, par défaut : localhost) et port éventuellement mais généralement c'est le port par défaut.
+    # Ne pas modifier le nom de la base  : moissoncatalogue
     url: jdbc:postgresql://localhost:5432/moissoncatalogue
+    # Ne pas modifier username: usercatalogue
     username: usercatalogue
     password: catalogue
     hikari:
@@ -62,6 +65,8 @@ spring:
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
+    # Domaine (nom d'hôte à modifier, par défaut : localhost) et port éventuellement mais généralement c'est le port par défaut.
+    # Ne pas modifier le nom de la base  : moissoncatalogue
     url: jdbc:postgresql://localhost:5432/moissoncatalogue
   mail:
     host: localhost
@@ -74,8 +79,11 @@ spring:
     cache: false
   elasticsearch:
     rest:
+      # A modifier si autre
       uris: dev.tech.fr:9200
-
+      # A modifier si il y a une authentification ne pas décommenter sinon car l'appliaction ne démarre pas
+      # username: admin
+      # password: admin
 server:
   port: 8080
 
@@ -130,5 +138,10 @@ jhipster:
 # More documentation is available at:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
-
-# application:
+application:
+  libraire:
+    urlArticlePapier:
+    urlArticleNumerique:
+  scheduler:
+    # Tous les jours à 4 heures AM
+    cron: 45 0 16 ? * *

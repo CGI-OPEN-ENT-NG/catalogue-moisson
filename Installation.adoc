@@ -1,11 +1,88 @@
-= Installation
+﻿= Installation
 
- IMPORTANT: Avant de déployer il faut impérativement créer la base de données et les roles
+IMPORTANT: Avant de déployer il faut impérativement configurer l'application et créer la base de données et les rôles
 
- 1 . Création de la base et des scripts
- 2 . déploiement de l'application
+ 1 - Configuration du fichier de propriétés
+ 2 . Création de la base et des scripts
+ 3 . déploiement de l'application
 
-== Créations de la base et des roles
+== Configuration du fichier de propriétés.
+
+Le fichier de configuration est fourni indépendamment du fichier .war:
+
+ Fichier de configuation:
+   application-prod.yml
+
+Une fois les paramètres fixer il faut le déposer dans un répertoire config créé au meme niveau que le répertoire de contexte de l’application:
+
+Exemple pour tomcat 9 :
+
+   répertoire de config:
+     /tomcat9/webapps/config
+   répertoire de contexte:
+     /tomcat9/webapps/moisooncatalogue
+
+== Paramètres du fichier de configuration :
+
+=== Base de données
+
+Il faut modifier le nom d’hôte at éventuellement le port :
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    # Domaine (nom d'hôte à modifier, par défaut : localhost) et port éventuellement mais généralement c'est le port par défaut.
+    # Ne pas modifier le nom de la base  : moissoncatalogue
+    url: jdbc:postgresql://localhost:5432/moissoncatalogue
+    # Ne pas modifier username: usercatalogue
+    username: usercatalogue
+    password: catalogue
+
+NOTE: Il est possible de changer le mot de passe au sein du fichier.
+
+IMPORTANT: Si le mot de passe est changé, Il faut, le changer également dans le script d’initialisation de la base avant de le jour (voir explication dans création de la base de données ci-après) :
+
+ V0__init_user_role_database.sql
+
+remplacer le mot de passe "catalogue" :
+
+ CREATE ROLE usercatalogue LOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION PASSWORD 'catalogue';
+
+par le NOUVEAU_MOT_DE_PASSE :
+
+ CREATE ROLE usercatalogue LOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION PASSWORD 'NOUVEAU_MOT_DE_PASSE';
+
+=== ElasticSearch
+
+Il faut modifier l’hôte le port et définir login et password :
+
+      # Hôte et port à modifier sans les scheme (http ou https)
+      uris: localhost:9200
+      # A modifier s’il y a une authentification ne pas dé commenter sinon car l’application ne démarre pas.
+      # username: admin
+      # password: admin
+
+=== Liquibase
+
+
+  liquibase:
+    contexts: prod
+    # Domaine (nom d'hôte à modifier par défaut : localhost).
+    # Ne pas modifier le nom de la base  : moissoncatalogue
+    url: jdbc:postgresql://localhost:5432/moissoncatalogue
+
+=== Mail
+
+Optionnel car non utilisé pour le moment :
+
+  mail:
+    host: localhost
+    port: 25
+    username:
+    password:
+
+== Création de la ase de données.
+
+=== Créations de la base et des rôles.
 
 Par défaut les tables sont créées avec Liquibase qui est une librairie open-source permettant de tracer et gérer les modifications d'une base de données.
 Liquibase est paramétré pour la mise en place des tables et séquences au premier démarrage de l’application,
@@ -21,7 +98,7 @@ Il faut jouer les scripts qui sont dans le fichier :
 
  V0__init_user_role_database.sql est le fichier de création de la base de données
 
-== Création des tables
+=== Création des tables
 
 L’application utilise Liquibase pour la création des tables.
 Ces dernières sont donc créées automatiquement lors du déploiement de l’application.
@@ -66,7 +143,7 @@ Pour accéder aux apis il faut utiliser curl, postman ou insomnia designer
  curl -vu admin:admin http://localhost:8080/api/article-numeriques
  curl -vu user:user http://localhost:8080/api/article-numeriques
 
-NOTE: -v pemet d'activer le mode verbose -vu étant équivalent à -v -u
+NOTE: -v permet d'activer le mode verbose -vu étant équivalent à -v -u
 
 2 - Avec Postman ou Insomnia il faut saisir les url en prenant soin de bien spécifier le verbe (GET, POST, PUT etc...)
 
@@ -98,7 +175,7 @@ Il suffit en suite de passer le token de la manière suivante :
 
  curl -H 'Accept: application/json' -H "Authorization: Bearer $TOKEN" http://localhost:8080/api/account
 
-Sous postman ou insomnia il gfaut faire le POST avec l'url et ajouter dans le body ce qui correspond au --data du curl (format json):
+Sous postman ou insomnia il faut faire le POST avec l'url et ajouter dans le body ce qui correspond au --data du curl (format json):
 
  {"username":"admin","password":"admin"}
 
@@ -137,6 +214,19 @@ dans un navigateur
 ----
 
 Remplacer _localhost:8080_ par le bon _host_ et le bon _port_.
+
+== Endpoints
+
+=== Lancer la sauvegarde des json en base de donnée.
+
+Les paramètres de sauvegarde sont num, pap ou all, ils doivent être ajoutés à la find du endpoint :
+
+ TOKEN=$(curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate | jq -r '.id_token')
+
+puis pour avoir les articles papiers et numériques (all :
+
+ curl -X POST -H 'Accept: application/json' -H "Authorization: Bearer $TOKEN" http://localhost:8080/api/json/all
+
 
 == Testing
 

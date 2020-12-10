@@ -89,13 +89,6 @@
       "fieldType": "Boolean"
     },
     {
-      "fieldName": "eanPapier",
-      "fieldType": "String",
-      "fieldValidateRules": ["minlength", "maxlength"],
-      "fieldValidateRulesMinlength": "13",
-      "fieldValidateRulesMaxlength": "13"
-    },
-    {
       "fieldName": "description",
       "fieldType": "String"
     },
@@ -103,6 +96,10 @@
       "fieldName": "publicCible",
       "fieldType": "PublicCible",
       "fieldValues": "ELEVE,ENSEIGNANT,ELEVE_ET_ENSEIGNANT"
+    },
+    {
+      "fieldName": "eanPapier",
+      "fieldType": "String"
     }
   ],
   "changelogDate": "20201126102500",

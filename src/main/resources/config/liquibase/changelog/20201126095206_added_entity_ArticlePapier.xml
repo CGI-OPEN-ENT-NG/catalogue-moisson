@@ -27,7 +27,7 @@
             <column name="editeur" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auteur" type="varchar(255)">
+            <column name="auteur" type="varchar(1024)">
                 <constraints nullable="true" />
             </column>
             <column name="reference_editeur" type="varchar(255)">
@@ -48,10 +48,10 @@
             <column name="prix_ht" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
-            <column name="description" type="varchar(255)">
+            <column name="description" type="varchar(65000)">
                 <constraints nullable="true" />
             </column>
-            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+            <!-- Add columns here -->
         </createTable>
         <dropDefaultValue tableName="article_papier" columnName="date_parution" columnDataType="datetime"/>
     </changeSet>
@@ -59,13 +59,13 @@
     <changeSet id="20201126095206-1-relations" author="moisson">
 
     </changeSet>
-    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+    <!-- Add changesets here -->
 
     <!--
         Load sample data generated with Faker.js
         - This data can be easily edited using a CSV editor (or even MS Excel) and
           is located in the 'src/main/resources/config/liquibase/fake-data' directory
-        - By default this data is applied when running with the JHipster 'dev' profile.
+        - By default this data is applied when running with the 'dev' profile.
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
@@ -87,7 +87,7 @@
             <column name="date_parution" type="datetime"/>
             <column name="prix_ht" type="numeric"/>
             <column name="description" type="string"/>
-            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+            <!-- Add load columns here -->
         </loadData>
     </changeSet>
 

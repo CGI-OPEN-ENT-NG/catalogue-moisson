@@ -37,12 +37,11 @@ public class ArticleNumeriqueDTO implements Serializable {
 
     private Boolean accessibleENT;
 
-    @Size(min = 13, max = 13)
-    private String eanPapier;
-
     private String description;
 
     private PublicCible publicCible;
+
+    private String eanPapier;
 
 
     private Long disponibiliteId;
@@ -151,14 +150,6 @@ public class ArticleNumeriqueDTO implements Serializable {
         this.accessibleENT = accessibleENT;
     }
 
-    public String getEanPapier() {
-        return eanPapier;
-    }
-
-    public void setEanPapier(String eanPapier) {
-        this.eanPapier = eanPapier;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -173,6 +164,14 @@ public class ArticleNumeriqueDTO implements Serializable {
 
     public void setPublicCible(PublicCible publicCible) {
         this.publicCible = publicCible;
+    }
+
+    public String getEanPapier() {
+        return eanPapier;
+    }
+
+    public void setEanPapier(String eanPapier) {
+        this.eanPapier = eanPapier;
     }
 
     public Long getDisponibiliteId() {
@@ -217,9 +216,9 @@ public class ArticleNumeriqueDTO implements Serializable {
             ", dateParution='" + getDateParution() + "'" +
             ", compatibleGAR='" + isCompatibleGAR() + "'" +
             ", accessibleENT='" + isAccessibleENT() + "'" +
-            ", eanPapier='" + getEanPapier() + "'" +
             ", description='" + getDescription() + "'" +
             ", publicCible='" + getPublicCible() + "'" +
+            ", eanPapier='" + getEanPapier() + "'" +
             ", disponibiliteId=" + getDisponibiliteId() +
             "}";
     }

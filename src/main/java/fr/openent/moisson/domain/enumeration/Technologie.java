@@ -1,5 +1,7 @@
 package fr.openent.moisson.domain.enumeration;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * The Technologie enumeration.
  */
@@ -11,6 +13,7 @@ public enum Technologie {
     SMARTPHONE("Smartphone"),
     CHROME_OS("ChromeOS");
 
+    @JsonValue
     private String value;
 
     private Technologie(String value) {
