@@ -496,3 +496,11 @@ Validate : valide le schéma de base de données actuel par rapport aux migratio
 Repair : réparations de la table de métadonnées.
 Clean : supprime tous les objets dans un schéma configuré. Tous les objets de base de données sont supprimés. Bien sûr, vous ne devez jamais utiliser clean sur une base de données de production.
 ----
+
+== Docker
+
+=== Création des volumes
+
+Il faut créer les volumes où seront stockées les données:
+ mkdir ~/volumes/moissoncatalogue/postgresql
+ mkdir ~/volumes/moissoncatalogue/elasticsearch
