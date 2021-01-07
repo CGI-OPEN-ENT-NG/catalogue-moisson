@@ -32,17 +32,17 @@ class JsonFileToEntityObjectMapperTest {
     public void jacksonArticlePapierTest() throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        List<ArticlePapier> articlePapiers = objectMapper.readValue(new File("src/test/resources/json/articles_papiers.json"), new TypeReference<List<ArticlePapier>>() {
+        var articlePapiers = objectMapper.readValue(new File("src/test/resources/json/articles_papiers.json"), new TypeReference<List<ArticlePapier>>() {
         });
         // La relation est bidirectionnelle, il est logique que chaque côté de la relation soit mappé à l'autre,
         // il faut avoir une référence de chaque côté de l'autre côté
         articlePapiers.forEach(articlePapier ->
             {
                 Optional<ArticlePapier> existArticlePapier = articlePapierRepository.findByEan(articlePapier.getEan());
-                if (existArticlePapier.isPresent()) {
-                    System.out.println(existArticlePapier.get().getPrixTTC());
-                    articlePapierRepository.deleteById(existArticlePapier.get().getId());
-                }
+                existArticlePapier.ifPresent(papier -> {
+                    System.out.println(papier.getPrixTTC());
+                    articlePapierRepository.deleteById(papier.getId());
+                });
                     articlePapier.getTvas().forEach(articlePapier::addTva);
                     articlePapier.getNiveaus().forEach(articlePapier::addNiveau);
                     articlePapier.getDisciplines().forEach(articlePapier::addDiscipline);
@@ -54,14 +54,12 @@ class JsonFileToEntityObjectMapperTest {
     @Test
     public void jacksonArticleNumeriqueTest() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<ArticleNumerique> articleNumeriques = objectMapper.readValue(new File("src/test/resources/json/articles_numeriques.json"), new TypeReference<List<ArticleNumerique>>() {
+        var articleNumeriques = objectMapper.readValue(new File("src/test/resources/json/articles_numeriques.json"), new TypeReference<List<ArticleNumerique>>() {
         });
         articleNumeriques.forEach(articleNumerique ->
             {
                 Optional<ArticleNumerique> existArticleNumerique = articleNumeriqueRepository.findByEan(articleNumerique.getEan());
-                if (existArticleNumerique.isPresent()) {
-                    articleNumeriqueRepository.deleteById(existArticleNumerique.get().getId());
-                }
+                existArticleNumerique.ifPresent(numerique -> articleNumeriqueRepository.deleteById(numerique.getId()));
                 for (Offre offre : articleNumerique.getOffres()) {
                     for (Lep lep : offre.getLeps()) {
                         lep.getConditions().forEach(lep::addCondition);

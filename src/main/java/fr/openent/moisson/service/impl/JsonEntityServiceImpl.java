@@ -60,7 +60,7 @@ public class JsonEntityServiceImpl implements JsonEntityService {
         List<ArticlePapier> articlePapiers;
         if(urlArticlePapier.startsWith("http://") || urlArticlePapier.startsWith("https://")){
             InputStream inputStream = getJsonFromUrl(urlArticlePapier);
-            articlePapiers = objectMapper.readValue(inputStream,  new TypeReference<List<ArticlePapier>>() {
+            articlePapiers = objectMapper.readValue(inputStream, new TypeReference<>() {
             });
         } else {
             articlePapiers = objectMapper.readValue(new File("src/test/resources/json/articles_papiers.json"),
@@ -94,7 +94,7 @@ public class JsonEntityServiceImpl implements JsonEntityService {
         List<ArticleNumerique> articleNumeriques;
         if(urlArticleNumerique.startsWith("http://") || urlArticleNumerique.startsWith("https://")){
             InputStream inputStream = getJsonFromUrl(urlArticleNumerique);
-            articleNumeriques = objectMapper.readValue(inputStream,  new TypeReference<List<ArticleNumerique>>() {
+            articleNumeriques = objectMapper.readValue(inputStream, new TypeReference<>() {
             });
         } else {
             articleNumeriques = objectMapper.readValue(new File("src/test/resources/json/articles_numeriques.json"),
@@ -142,7 +142,7 @@ public class JsonEntityServiceImpl implements JsonEntityService {
             }
 
             if (redirect) {
-                // Obtention de l'url de redirection dans le header : "location" header field
+                // Obtention de l'URL de redirection dans le header : "location" header field
                 String newUrl = httpURLConnection.getHeaderField("Location");
 
                 // Obtention des cookies si nécessaire pour le login

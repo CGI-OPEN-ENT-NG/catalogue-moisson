@@ -45,7 +45,7 @@ public class JsonEntityResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/json/{typeArticle}")
-    public ResponseEntity<String> createEnties(@PathVariable String typeArticle) throws URISyntaxException, IOException {
+    public ResponseEntity<String> createEntities(@PathVariable String typeArticle) throws URISyntaxException, IOException {
         log.debug("REST request to save Json File for type : {}", typeArticle);
         LocalTime startTime = LocalTime.now();
         Integer result = 0;
@@ -77,5 +77,4 @@ public class JsonEntityResource {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, message))
             .body(message);
     }
-
 }
