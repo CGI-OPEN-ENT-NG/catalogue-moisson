@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="article_numerique"/>
 
+        <addForeignKeyConstraint baseColumnNames="article_papier_id"
+                                 baseTableName="discipline"
+                                 constraintName="fk_discipline_article_papier_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="article_papier"/>
+
     </changeSet>
 </databaseChangeLog>

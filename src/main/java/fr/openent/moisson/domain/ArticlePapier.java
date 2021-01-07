@@ -1,28 +1,25 @@
 package fr.openent.moisson.domain;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.InstantSerializer;
-import fr.openent.moisson.service.dto.TvaDTO;
 import fr.openent.moisson.service.mapper.json.MoissonCustomInstantDeserializer;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
-import org.hibernate.annotations.NaturalId;
-import org.springframework.data.elasticsearch.annotations.FieldType;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-
-import fr.openent.moisson.domain.enumeration.TypeArticle;
 
 /**
  * A ArticlePapier.
@@ -101,6 +98,16 @@ public class ArticlePapier implements Serializable {
     // @JsonManagedReference // @JsonManagedReference sur la collection et @JsonBackReference sur la référence (Tva)
     private Set<Tva> tvas = new HashSet<>();
 
+    @OneToMany(mappedBy = "articlePapier",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
+    @JsonProperty("DISCIPLINE")
+    private Set<Discipline> disciplines = new HashSet<>();
+
+    @OneToMany(mappedBy = "articlePapier",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
+    @JsonProperty("NIVEAU")
+    private Set<Niveau> niveaus = new HashSet<>();
+
     @OneToOne
     @MapsId
     @JoinColumn(name = "id")
@@ -109,6 +116,7 @@ public class ArticlePapier implements Serializable {
 
     @Transient
     private BigDecimal prixTTC = BigDecimal.ZERO;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -122,17 +130,21 @@ public class ArticlePapier implements Serializable {
         return ean;
     }
 
+    public void setEan(String ean) {
+        this.ean = ean;
+    }
+
     public ArticlePapier ean(String ean) {
         this.ean = ean;
         return this;
     }
 
-    public void setEan(String ean) {
-        this.ean = ean;
-    }
-
     public String getArk() {
         return ark;
+    }
+
+    public void setArk(String ark) {
+        this.ark = ark;
     }
 
     public ArticlePapier ark(String ark) {
@@ -140,12 +152,12 @@ public class ArticlePapier implements Serializable {
         return this;
     }
 
-    public void setArk(String ark) {
-        this.ark = ark;
-    }
-
     public String getTitre() {
         return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
     public ArticlePapier titre(String titre) {
@@ -153,12 +165,12 @@ public class ArticlePapier implements Serializable {
         return this;
     }
 
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
     public String getEditeur() {
         return editeur;
+    }
+
+    public void setEditeur(String editeur) {
+        this.editeur = editeur;
     }
 
     public ArticlePapier editeur(String editeur) {
@@ -166,12 +178,12 @@ public class ArticlePapier implements Serializable {
         return this;
     }
 
-    public void setEditeur(String editeur) {
-        this.editeur = editeur;
-    }
-
     public String getAuteur() {
         return auteur;
+    }
+
+    public void setAuteur(String auteur) {
+        this.auteur = auteur;
     }
 
     public ArticlePapier auteur(String auteur) {
@@ -179,12 +191,12 @@ public class ArticlePapier implements Serializable {
         return this;
     }
 
-    public void setAuteur(String auteur) {
-        this.auteur = auteur;
-    }
-
     public String getReferenceEditeur() {
         return referenceEditeur;
+    }
+
+    public void setReferenceEditeur(String referenceEditeur) {
+        this.referenceEditeur = referenceEditeur;
     }
 
     public ArticlePapier referenceEditeur(String referenceEditeur) {
@@ -192,12 +204,12 @@ public class ArticlePapier implements Serializable {
         return this;
     }
 
-    public void setReferenceEditeur(String referenceEditeur) {
-        this.referenceEditeur = referenceEditeur;
-    }
-
     public String getCollection() {
         return collection;
+    }
+
+    public void setCollection(String collection) {
+        this.collection = collection;
     }
 
     public ArticlePapier collection(String collection) {
@@ -205,12 +217,12 @@ public class ArticlePapier implements Serializable {
         return this;
     }
 
-    public void setCollection(String collection) {
-        this.collection = collection;
-    }
-
     public String getDistributeur() {
         return distributeur;
+    }
+
+    public void setDistributeur(String distributeur) {
+        this.distributeur = distributeur;
     }
 
     public ArticlePapier distributeur(String distributeur) {
@@ -218,12 +230,12 @@ public class ArticlePapier implements Serializable {
         return this;
     }
 
-    public void setDistributeur(String distributeur) {
-        this.distributeur = distributeur;
-    }
-
     public String getUrlCouverture() {
         return urlCouverture;
+    }
+
+    public void setUrlCouverture(String urlCouverture) {
+        this.urlCouverture = urlCouverture;
     }
 
     public ArticlePapier urlCouverture(String urlCouverture) {
@@ -231,12 +243,12 @@ public class ArticlePapier implements Serializable {
         return this;
     }
 
-    public void setUrlCouverture(String urlCouverture) {
-        this.urlCouverture = urlCouverture;
-    }
-
     public Instant getDateParution() {
         return dateParution;
+    }
+
+    public void setDateParution(Instant dateParution) {
+        this.dateParution = dateParution;
     }
 
     public ArticlePapier dateParution(Instant dateParution) {
@@ -244,12 +256,12 @@ public class ArticlePapier implements Serializable {
         return this;
     }
 
-    public void setDateParution(Instant dateParution) {
-        this.dateParution = dateParution;
-    }
-
     public BigDecimal getPrixHT() {
         return prixHT;
+    }
+
+    public void setPrixHT(BigDecimal prixHT) {
+        this.prixHT = prixHT;
     }
 
     public ArticlePapier prixHT(BigDecimal prixHT) {
@@ -257,12 +269,12 @@ public class ArticlePapier implements Serializable {
         return this;
     }
 
-    public void setPrixHT(BigDecimal prixHT) {
-        this.prixHT = prixHT;
-    }
-
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public ArticlePapier description(String description) {
@@ -270,12 +282,12 @@ public class ArticlePapier implements Serializable {
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Set<Tva> getTvas() {
         return tvas;
+    }
+
+    public void setTvas(Set<Tva> tvas) {
+        this.tvas = tvas;
     }
 
     public ArticlePapier tvas(Set<Tva> tvas) {
@@ -304,21 +316,17 @@ public class ArticlePapier implements Serializable {
         }
     }
 
-    public void setTvas(Set<Tva> tvas) {
-        this.tvas = tvas;
-    }
-
     public Disponibilite getDisponibilite() {
         return disponibilite;
+    }
+
+    public void setDisponibilite(Disponibilite disponibilite) {
+        this.disponibilite = disponibilite;
     }
 
     public ArticlePapier disponibilite(Disponibilite disponibilite) {
         this.disponibilite = disponibilite;
         return this;
-    }
-
-    public void setDisponibilite(Disponibilite disponibilite) {
-        this.disponibilite = disponibilite;
     }
 
     @PostLoad
@@ -329,8 +337,9 @@ public class ArticlePapier implements Serializable {
             var innerTva = prixHT.multiply(tva.getTaux().multiply(tva.getPourcent())).divide(new BigDecimal("10000"));
             pxTTC = pxTTC.add(innerTva);
         }
-        this.prixTTC=pxTTC;
+        this.prixTTC = pxTTC;
     }
+
     public BigDecimal getPrixTTC() {
         return prixTTC;
     }
@@ -343,6 +352,56 @@ public class ArticlePapier implements Serializable {
         this.prixTTC = prixTTC;
         return this;
     }
+
+    public Set<Discipline> getDisciplines() {
+        return disciplines;
+    }
+
+    public void setDisciplines(Set<Discipline> disciplines) {
+        this.disciplines = disciplines;
+    }
+
+    public ArticlePapier disciplines(Set<Discipline> disciplines) {
+        this.disciplines = disciplines;
+        return this;
+    }
+
+    public ArticlePapier addDiscipline(Discipline discipline) {
+        this.disciplines.add(discipline);
+        discipline.setArticlePapier(this);
+        return this;
+    }
+    public ArticlePapier removeDiscipline(Discipline discipline) {
+        this.disciplines.remove(discipline);
+        discipline.setArticlePapier(null);
+        return this;
+    }
+
+    public Set<Niveau> getNiveaus() {
+        return niveaus;
+    }
+
+    public void setNiveaus(Set<Niveau> niveaus) {
+        this.niveaus = niveaus;
+    }
+
+    public ArticlePapier niveaus(Set<Niveau> niveaus) {
+        this.niveaus = niveaus;
+        return this;
+    }
+
+    public ArticlePapier addNiveau(Niveau niveau) {
+        this.niveaus.add(niveau);
+        niveau.setArticlePapier(this);
+        return this;
+    }
+
+    public ArticlePapier removeNiveau(Niveau niveau) {
+        this.niveaus.remove(niveau);
+        niveau.setArticlePapier(null);
+        return this;
+    }
+
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

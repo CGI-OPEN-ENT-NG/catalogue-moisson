@@ -4,6 +4,8 @@ import fr.openent.moisson.MoissoncatalogueApp;
 import fr.openent.moisson.domain.ArticlePapier;
 import fr.openent.moisson.domain.Tva;
 import fr.openent.moisson.domain.Disponibilite;
+import fr.openent.moisson.domain.Discipline;
+import fr.openent.moisson.domain.Niveau;
 import fr.openent.moisson.repository.ArticlePapierRepository;
 import fr.openent.moisson.repository.search.ArticlePapierSearchRepository;
 import fr.openent.moisson.service.ArticlePapierService;
@@ -1319,6 +1321,46 @@ public class ArticlePapierResourceIT {
 
         // Get all the articlePapierList where disponibilite equals to disponibiliteId + 1
         defaultArticlePapierShouldNotBeFound("disponibiliteId.equals=" + (disponibiliteId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllArticlePapiersByDisciplineIsEqualToSomething() throws Exception {
+        // Initialize the database
+        articlePapierRepository.saveAndFlush(articlePapier);
+        Discipline discipline = DisciplineResourceIT.createEntity(em);
+        em.persist(discipline);
+        em.flush();
+        articlePapier.addDiscipline(discipline);
+        articlePapierRepository.saveAndFlush(articlePapier);
+        Long disciplineId = discipline.getId();
+
+        // Get all the articlePapierList where discipline equals to disciplineId
+        defaultArticlePapierShouldBeFound("disciplineId.equals=" + disciplineId);
+
+        // Get all the articlePapierList where discipline equals to disciplineId + 1
+        defaultArticlePapierShouldNotBeFound("disciplineId.equals=" + (disciplineId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllArticlePapiersByNiveauIsEqualToSomething() throws Exception {
+        // Initialize the database
+        articlePapierRepository.saveAndFlush(articlePapier);
+        Niveau niveau = NiveauResourceIT.createEntity(em);
+        em.persist(niveau);
+        em.flush();
+        articlePapier.addNiveau(niveau);
+        articlePapierRepository.saveAndFlush(articlePapier);
+        Long niveauId = niveau.getId();
+
+        // Get all the articlePapierList where niveau equals to niveauId
+        defaultArticlePapierShouldBeFound("niveauId.equals=" + niveauId);
+
+        // Get all the articlePapierList where niveau equals to niveauId + 1
+        defaultArticlePapierShouldNotBeFound("niveauId.equals=" + (niveauId + 1));
     }
 
     /**

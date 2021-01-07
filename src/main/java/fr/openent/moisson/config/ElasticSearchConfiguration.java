@@ -1,12 +1,5 @@
 package fr.openent.moisson.config;
 
-import java.io.IOException;
-import java.security.SecureRandom;
-import java.security.cert.X509Certificate;
-
-import javax.annotation.PreDestroy;
-import javax.net.ssl.*;
-
 import org.elasticsearch.client.RestHighLevelClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +16,17 @@ import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfig
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 
+import javax.annotation.PreDestroy;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import java.io.IOException;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+
 import static javax.net.ssl.HttpsURLConnection.setDefaultSSLSocketFactory;
-import static javax.net.ssl.SSLContext.*;
+import static javax.net.ssl.SSLContext.getInstance;
 
 @Configuration
 @EnableConfigurationProperties(ElasticsearchProperties.class)

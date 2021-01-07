@@ -16,6 +16,18 @@
       "ownerSide": true,
       "useJPADerivedIdentifier": true,
       "otherEntityRelationshipName": "articlePapier"
+    },
+    {
+      "relationshipName": "discipline",
+      "otherEntityName": "discipline",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "articlePapier"
+    },
+    {
+      "relationshipName": "niveau",
+      "otherEntityName": "niveau",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "articlePapier"
     }
   ],
   "fields": [

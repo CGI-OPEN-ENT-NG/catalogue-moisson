@@ -1,22 +1,23 @@
 package fr.openent.moisson.config;
 
-import java.time.Duration;
-
-import org.ehcache.config.builders.*;
-import org.ehcache.jsr107.Eh107Configuration;
-
-import org.hibernate.cache.jcache.ConfigSettings;
 import io.github.jhipster.config.JHipsterProperties;
-
+import io.github.jhipster.config.cache.PrefixedKeyGenerator;
+import org.ehcache.config.builders.CacheConfigurationBuilder;
+import org.ehcache.config.builders.ExpiryPolicyBuilder;
+import org.ehcache.config.builders.ResourcePoolsBuilder;
+import org.ehcache.jsr107.Eh107Configuration;
+import org.hibernate.cache.jcache.ConfigSettings;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.cache.JCacheManagerCustomizer;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.info.GitProperties;
-import org.springframework.cache.interceptor.KeyGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
-import io.github.jhipster.config.cache.PrefixedKeyGenerator;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.*;
+import org.springframework.cache.interceptor.KeyGenerator;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.time.Duration;
 
 @Configuration
 @EnableCaching
@@ -67,6 +68,8 @@ public class CacheConfiguration {
             createCache(cm, fr.openent.moisson.domain.ArticlePapier.class.getName() + ".tvas");
             createCache(cm, fr.openent.moisson.domain.Disponibilite.class.getName());
             createCache(cm, fr.openent.moisson.domain.Licence.class.getName());
+            createCache(cm, fr.openent.moisson.domain.ArticlePapier.class.getName() + ".disciplines");
+            createCache(cm, fr.openent.moisson.domain.ArticlePapier.class.getName() + ".niveaus");
             // jhipster-needle-ehcache-add-entry
         };
     }

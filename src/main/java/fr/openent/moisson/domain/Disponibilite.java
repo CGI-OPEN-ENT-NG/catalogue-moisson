@@ -1,24 +1,17 @@
 package fr.openent.moisson.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.InstantSerializer;
+import fr.openent.moisson.domain.enumeration.DisponibiliteEnum;
 import fr.openent.moisson.service.mapper.json.MoissonCustomInstantDeserializer;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.time.Instant;
-
-import fr.openent.moisson.domain.enumeration.DisponibiliteEnum;
 
 /**
  * A Disponibilite.
@@ -57,12 +50,10 @@ public class Disponibilite implements Serializable {
 
     @OneToOne(mappedBy = "disponibilite")
     @JsonIgnore
-
     private ArticlePapier articlePapier;
 
     @OneToOne(mappedBy = "disponibilite")
     @JsonIgnore
-
     private ArticleNumerique articleNumerique;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

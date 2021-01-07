@@ -18,6 +18,7 @@ logging:
     ROOT: DEBUG
     io.github.jhipster: DEBUG
     fr.openent.moisson: DEBUG
+    javax.management.mbeanserver: off
     io.netty.util: ERROR
 
 management:
@@ -140,8 +141,8 @@ jhipster:
 # ===================================================================
 application:
   libraire:
-    urlArticlePapier:
-    urlArticleNumerique:
+    urlArticlePapier: 'https://www.lde.fr/4dlink1/4DCGI/IDF/json_cat_pap.json'
+    urlArticleNumerique: 'https://www.lde.fr/4dlink1/4DCGI/IDF/json_cat_num.json'
   scheduler:
     # Tous les jours à 4 heures AM
     cron: 45 0 16 ? * *

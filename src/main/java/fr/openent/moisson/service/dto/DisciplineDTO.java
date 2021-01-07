@@ -6,7 +6,7 @@ import java.io.Serializable;
  * A DTO for the {@link fr.openent.moisson.domain.Discipline} entity.
  */
 public class DisciplineDTO implements Serializable {
-
+    
     private Long id;
 
     private String libelle;
@@ -15,8 +15,11 @@ public class DisciplineDTO implements Serializable {
 
     private String concept;
 
+
     private Long articleNumeriqueId;
 
+    private Long articlePapierId;
+    
     public Long getId() {
         return id;
     }
@@ -57,6 +60,14 @@ public class DisciplineDTO implements Serializable {
         this.articleNumeriqueId = articleNumeriqueId;
     }
 
+    public Long getArticlePapierId() {
+        return articlePapierId;
+    }
+
+    public void setArticlePapierId(Long articlePapierId) {
+        this.articlePapierId = articlePapierId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -83,6 +94,7 @@ public class DisciplineDTO implements Serializable {
             ", terme='" + getTerme() + "'" +
             ", concept='" + getConcept() + "'" +
             ", articleNumeriqueId=" + getArticleNumeriqueId() +
+            ", articlePapierId=" + getArticlePapierId() +
             "}";
     }
 }

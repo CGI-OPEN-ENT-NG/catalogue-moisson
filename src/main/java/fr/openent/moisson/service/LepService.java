@@ -2,7 +2,6 @@ package fr.openent.moisson.service;
 
 import fr.openent.moisson.domain.Lep;
 import fr.openent.moisson.service.dto.LepDTO;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

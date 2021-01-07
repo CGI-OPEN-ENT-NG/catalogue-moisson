@@ -17,7 +17,7 @@ application {
     enableHibernateCache true
     enableSwaggerCodegen true
     enableTranslation true
-    jhiPrefix jhi
+    jhiPrefix moisson
     jhipsterVersion "6.10.5"
     jwtSecretKey "Y2Q0MTg2OGI2NDk0NDhkNmQyNWQ3MzdjZWY1YmNmNmEyYzg4YTcyMjNjYjczYjM2MGZhMWM1ZDcxZjg3OTI2YjEwYjAzMWNiYTk3NjU5ZDJkNzFlNDQ1ZmMyMTljZWEyZDcxNTBlZTI4MmFhYjkyNTlmY2NkYjM0YzVkYmEwYmY="
     languages [fr, en]
@@ -53,10 +53,9 @@ entity ArticleNumerique {
   dateParution Instant,
   compatibleGAR Boolean,
   accessibleENT Boolean,
-  eanPapier String minlength(13) maxlength(13),
   description String,
-  type TypeArticle,
-  publicCible PublicCible
+  publicCible PublicCible,
+  eanPapier String
 }
 entity ArticlePapier {
   ean String minlength(13) maxlength(13),
@@ -90,7 +89,6 @@ entity Disponibilite {
 entity Lep {
   ean String minlength(13) maxlength(13),
   description String,
-  typeLicence TypeLicence,
   titre String,
   duree String
 }
@@ -151,10 +149,6 @@ entity Tva {
   taux BigDecimal,
   pourcent BigDecimal
 }
-enum TypeArticle {
-  NUMERIQUE,
-  PAPIER
-}
 enum PublicCible {
   ELEVE,
   ENSEIGNANT,
@@ -167,11 +161,6 @@ enum DisponibiliteEnum {
   NON_DISPONIBLE_PROVISOIREMENT,
   EPUISE,
   A_PARAITRE
-}
-enum TypeLicence {
-  ELEVE,
-  ENSEIGNANT,
-  ETABLISSEMENT
 }
 enum Technologie {
   WINDOWS,
@@ -189,6 +178,7 @@ enum TypeLicenceGAR {
 relationship OneToOne {
   ArticleNumerique{disponibilite} to Disponibilite{articleNumerique} with jpaDerivedIdentifier,
   ArticlePapier{disponibilite} to Disponibilite{articlePapier} with jpaDerivedIdentifier,
+  Lep{licence} to Licence{lep} with jpaDerivedIdentifier,
   Offre{licence} to Licence{offre} with jpaDerivedIdentifier
 }
 relationship OneToMany {

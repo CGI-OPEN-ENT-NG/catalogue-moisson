@@ -1,15 +1,16 @@
 package fr.openent.moisson.service.dto;
 
-import javax.validation.constraints.*;
-import java.io.Serializable;
 import fr.openent.moisson.domain.enumeration.Technologie;
 import fr.openent.moisson.domain.enumeration.TypeLicenceGAR;
+
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * A DTO for the {@link fr.openent.moisson.domain.Techno} entity.
  */
 public class TechnoDTO implements Serializable {
-    
+
     private Long id;
 
     private Technologie technologie;
@@ -81,7 +82,7 @@ public class TechnoDTO implements Serializable {
 
 
     private Long articleNumeriqueId;
-    
+
     public Long getId() {
         return id;
     }

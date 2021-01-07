@@ -1,14 +1,15 @@
 package fr.openent.moisson.service.dto;
 
-import java.time.Instant;
-import java.io.Serializable;
 import fr.openent.moisson.domain.enumeration.DisponibiliteEnum;
+
+import java.io.Serializable;
+import java.time.Instant;
 
 /**
  * A DTO for the {@link fr.openent.moisson.domain.Disponibilite} entity.
  */
 public class DisponibiliteDTO implements Serializable {
-    
+
     private Long id;
 
     private String commentaire;
@@ -19,7 +20,7 @@ public class DisponibiliteDTO implements Serializable {
 
     private DisponibiliteEnum valeur;
 
-    
+
     public Long getId() {
         return id;
     }

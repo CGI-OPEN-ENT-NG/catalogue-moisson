@@ -25,16 +25,15 @@ public class ApplicationWebXml extends SpringBootServletInitializer {
     private static String contextPath = "";
 
     /**
-     * Déploiement dans un conteneur de servlet de type tomcat,
-     * Le profile par défaut est positionné sur production.
+     * Déploiement dans un conteneur de servlet de type tomcat, le profile par défaut est positionné sur production.
      * Le fichier de propriétés est à l'extérieur de l'application, dans le répertoire
-     * config situé au meme niveau que le répertoire de contexte
-     * Au démarrage il y a des messages d'avertissements voir onStartup
+     * "config/" situé au meme niveau que le répertoire de contexte.
+     * Au démarrage il y a des messages d'avertissements permettant de voir si le répertoire est  valide voir onStartup
      */
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         // Profile production activé par défaut
-        servletContext.setInitParameter("spring.profiles.active", "production");
+        servletContext.setInitParameter("spring.profiles.active", "prod");
         initContextPath(servletContext);
         // Répertoire config situé au meme niveau que le répertoire de contexte
         realConfigPath = Paths.get(servletContext.getRealPath("."), "../config");
@@ -42,7 +41,7 @@ public class ApplicationWebXml extends SpringBootServletInitializer {
             "*************************************************** ATTENTION ****************************************************************");
         if (!Files.exists(realConfigPath)) {
             log.info("Le répertoire de configuration '" + realConfigPath.toAbsolutePath() + "' n'existe pas.                               ");
-            log.info("L'application ne va pas démarrer correctement. il faut le créer et y ajouter le fichier de configuration yaml fourni.");
+            log.info("L'application ne va pas démarrer correctement, il faut le créer et y ajouter le fichier de configuration yaml fourni.");
         } else {
             log.info("Le répertoire de configuration '" + realConfigPath.toUri().toString()+ "' est présent.");
         }
@@ -76,6 +75,5 @@ public class ApplicationWebXml extends SpringBootServletInitializer {
         DefaultProfileUtil.addDefaultProfile(application.application());
         // Ajout du du répertoire du fichier de propriétés de production avec .properties(getProperties())
         return application.sources(MoissoncatalogueApp.class).properties(getProperties());
-
     }
 }

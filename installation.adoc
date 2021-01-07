@@ -496,3 +496,22 @@ Validate : valide le schéma de base de données actuel par rapport aux migratio
 Repair : réparations de la table de métadonnées.
 Clean : supprime tous les objets dans un schéma configuré. Tous les objets de base de données sont supprimés. Bien sûr, vous ne devez jamais utiliser clean sur une base de données de production.
 ----
+
+== Docker
+
+=== Création des volumes
+
+Il faut créer les volumes où seront stockées les données:
+ mkdir ~/volumes/moissoncatalogue/postgresql
+ mkdir ~/volumes/moissoncatalogue/elasticsearch
+
+Mettre les droits en écriture et accès modification suppression pour autres sur la répertoires
+
+IMPORTANT: Le conteneur exécute Elasticsearch en tant qu’utilisateur elasticsearch avec uid: gid1000:1000.
+Les répertoires et fichiers hôtes montés par liaison, ~/volumes/moissoncatalogue/elasticsearch ci-dessus,
+doivent être accessibles par cet utilisateur.
+Pour les données et les répertoires de journaux, tels que /usr/share/elasticsearch/data, un accès en écriture est également requis.
+
+ chmod 777 ~/volumes/moissoncatalogue/elasticsearch
+
+1 - Elasticsearch s'exécute à l'intérieur du conteneur en tant qu'utilisateur elasticsearch à l'aide de uid: gid 1000: 1000. Si vous montez en liaison un répertoire ou un fichier local, assurez-vous qu'il est lisible par cet utilisateur, tandis que les données et les répertoires de journaux nécessitent en outre un accès en écriture.

@@ -1,7 +1,6 @@
 package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.service.AuditEventService;
-
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.springframework.boot.actuate.audit.AuditEvent;

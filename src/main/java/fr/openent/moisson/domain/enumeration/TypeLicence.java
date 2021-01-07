@@ -13,7 +13,7 @@ public enum TypeLicence {
     @JsonValue
     private String value;
 
-    private TypeLicence(String value) {
+    TypeLicence(String value) {
         this.value=value;
     }
 

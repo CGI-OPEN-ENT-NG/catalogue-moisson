@@ -50,7 +50,7 @@ public class JsonEntityServiceImpl implements JsonEntityService {
     @PostConstruct
     public void initParam() {
         urlArticlePapier = applicationProperties.getLibraire().getUrlArticlePapier();
-        urlArticleNumerique = applicationProperties.getLibraire().getUrlArticlePapier();
+        urlArticleNumerique = applicationProperties.getLibraire().getUrlArticleNumerique();
     }
 
     @Override
@@ -78,6 +78,8 @@ public class JsonEntityServiceImpl implements JsonEntityService {
                     articlePapierRepository.deleteById(existArticlePapier.get().getId());
                 }
                 articlePapier.getTvas().forEach(articlePapier::addTva);
+                articlePapier.getNiveaus().forEach(articlePapier::addNiveau);
+                articlePapier.getDisciplines().forEach(articlePapier::addDiscipline);
                 articlePapierRepository.save(articlePapier);
                 counter.getAndSet(counter.get() + 1);
             }
@@ -90,8 +92,8 @@ public class JsonEntityServiceImpl implements JsonEntityService {
         AtomicInteger counter = new AtomicInteger(0);
         ObjectMapper objectMapper = new ObjectMapper();
         List<ArticleNumerique> articleNumeriques;
-        if(urlArticlePapier.startsWith("http://") || urlArticlePapier.startsWith("https://")){
-            InputStream inputStream = getJsonFromUrl(urlArticlePapier);
+        if(urlArticleNumerique.startsWith("http://") || urlArticleNumerique.startsWith("https://")){
+            InputStream inputStream = getJsonFromUrl(urlArticleNumerique);
             articleNumeriques = objectMapper.readValue(inputStream, new TypeReference<>() {
             });
         } else {
@@ -103,7 +105,7 @@ public class JsonEntityServiceImpl implements JsonEntityService {
         articleNumeriques.forEach(articleNumerique ->
             {
                 Optional<ArticleNumerique> existArticleNumerique = articleNumeriqueRepository.findByEan(articleNumerique.getEan());
-                existArticleNumerique.ifPresent(numerique -> articleNumeriqueRepository.deleteById(numerique.getId()));
+                existArticleNumerique.ifPresent(numerique -> articleNumeriqueRepository.deleteById(existArticleNumerique.get().getId()));
                 for (Offre offre : articleNumerique.getOffres()) {
                     for (Lep lep : offre.getLeps()) {
                         lep.getConditions().forEach(lep::addCondition);
@@ -140,7 +142,7 @@ public class JsonEntityServiceImpl implements JsonEntityService {
             }
 
             if (redirect) {
-                // Obtention de l'url de redirection dans le header : "location" header field
+                // Obtention de l'URL de redirection dans le header : "location" header field
                 String newUrl = httpURLConnection.getHeaderField("Location");
 
                 // Obtention des cookies si nécessaire pour le login

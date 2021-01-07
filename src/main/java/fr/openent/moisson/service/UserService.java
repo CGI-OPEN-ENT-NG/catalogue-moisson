@@ -9,9 +9,7 @@ import fr.openent.moisson.repository.search.UserSearchRepository;
 import fr.openent.moisson.security.AuthoritiesConstants;
 import fr.openent.moisson.security.SecurityUtils;
 import fr.openent.moisson.service.dto.UserDTO;
-
 import io.github.jhipster.security.RandomUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;

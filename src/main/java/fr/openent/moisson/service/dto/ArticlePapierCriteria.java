@@ -1,17 +1,10 @@
 package fr.openent.moisson.service.dto;
 
+import io.github.jhipster.service.Criteria;
+import io.github.jhipster.service.filter.*;
+
 import java.io.Serializable;
 import java.util.Objects;
-import io.github.jhipster.service.Criteria;
-import io.github.jhipster.service.filter.BooleanFilter;
-import io.github.jhipster.service.filter.DoubleFilter;
-import io.github.jhipster.service.filter.Filter;
-import io.github.jhipster.service.filter.FloatFilter;
-import io.github.jhipster.service.filter.IntegerFilter;
-import io.github.jhipster.service.filter.LongFilter;
-import io.github.jhipster.service.filter.StringFilter;
-import io.github.jhipster.service.filter.BigDecimalFilter;
-import io.github.jhipster.service.filter.InstantFilter;
 
 /**
  * Criteria class for the {@link fr.openent.moisson.domain.ArticlePapier} entity. This class is used
@@ -56,6 +49,10 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
 
     private LongFilter disponibiliteId;
 
+    private LongFilter disciplineId;
+
+    private LongFilter niveauId;
+
     public ArticlePapierCriteria() {
     }
 
@@ -75,6 +72,8 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         this.description = other.description == null ? null : other.description.copy();
         this.tvaId = other.tvaId == null ? null : other.tvaId.copy();
         this.disponibiliteId = other.disponibiliteId == null ? null : other.disponibiliteId.copy();
+        this.disciplineId = other.disciplineId == null ? null : other.disciplineId.copy();
+        this.niveauId = other.niveauId == null ? null : other.niveauId.copy();
     }
 
     @Override
@@ -202,6 +201,22 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         this.disponibiliteId = disponibiliteId;
     }
 
+    public LongFilter getDisciplineId() {
+        return disciplineId;
+    }
+
+    public void setDisciplineId(LongFilter disciplineId) {
+        this.disciplineId = disciplineId;
+    }
+
+    public LongFilter getNiveauId() {
+        return niveauId;
+    }
+
+    public void setNiveauId(LongFilter niveauId) {
+        this.niveauId = niveauId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -227,7 +242,9 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
             Objects.equals(prixHT, that.prixHT) &&
             Objects.equals(description, that.description) &&
             Objects.equals(tvaId, that.tvaId) &&
-            Objects.equals(disponibiliteId, that.disponibiliteId);
+            Objects.equals(disponibiliteId, that.disponibiliteId) &&
+            Objects.equals(disciplineId, that.disciplineId) &&
+            Objects.equals(niveauId, that.niveauId);
     }
 
     @Override
@@ -247,7 +264,9 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         prixHT,
         description,
         tvaId,
-        disponibiliteId
+        disponibiliteId,
+        disciplineId,
+        niveauId
         );
     }
 
@@ -270,6 +289,8 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
                 (description != null ? "description=" + description + ", " : "") +
                 (tvaId != null ? "tvaId=" + tvaId + ", " : "") +
                 (disponibiliteId != null ? "disponibiliteId=" + disponibiliteId + ", " : "") +
+                (disciplineId != null ? "disciplineId=" + disciplineId + ", " : "") +
+                (niveauId != null ? "niveauId=" + niveauId + ", " : "") +
             "}";
     }
 

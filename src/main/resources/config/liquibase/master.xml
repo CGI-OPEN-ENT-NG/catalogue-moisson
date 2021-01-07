@@ -26,7 +26,7 @@
     <include file="config/liquibase/changelog/20201126102500_added_entity_ArticleNumerique.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20201203103333_added_entity_Disponibilite.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20201203131843_added_entity_Licence.xml" relativeToChangelogFile="false"/>
-    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <!--  - Moisson will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20201126101853_added_entity_constraints_Niveau.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20201126102012_added_entity_constraints_Discipline.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20201126093844_added_entity_constraints_Offre.xml" relativeToChangelogFile="false"/>
@@ -36,6 +36,6 @@
     <include file="config/liquibase/changelog/20201126091754_added_entity_constraints_Techno.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20201126095206_added_entity_constraints_ArticlePapier.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20201126102500_added_entity_constraints_ArticleNumerique.xml" relativeToChangelogFile="false"/>
-    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
-    <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
+    <!-- Moisson will add liquibase constraints changelogs here -->
+    <!-- Moisson will add incremental liquibase changelogs here -->
 </databaseChangeLog>

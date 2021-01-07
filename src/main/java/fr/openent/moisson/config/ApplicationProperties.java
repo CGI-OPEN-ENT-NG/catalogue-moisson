@@ -23,8 +23,8 @@ public class ApplicationProperties {
     }
 
     public static class Libraire{
-        private String urlArticlePapier;
-        private String urlArticleNumerique;
+        private final String urlArticlePapier;
+        private final String urlArticleNumerique;
 
         public Libraire(String urlArticlePapier,
                              String urlArticleNumerique) {
@@ -46,7 +46,7 @@ public class ApplicationProperties {
     }
 
     public static class Scheduler{
-        private String cron;
+        private final String cron;
         public Scheduler(String cron) {
             this.cron = cron;
         }

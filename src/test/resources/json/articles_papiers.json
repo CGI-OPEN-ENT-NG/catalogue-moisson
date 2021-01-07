@@ -17,12 +17,279 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2019-08-20T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2019-08-20T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3kMDXo4pf5O_sgfIIhm3Z_oGbRWrhKPDCA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Numérique et Sciences Informatiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2019-08-20T22:00:00.000Z"
+  },
+  {
+    "EAN": "9782278083305",
+    "TITRE": "AHDAF A1",
+    "TVA": [
+      {
+        "TAUX": 5.5,
+        "POURCENT": 100
+      }
+    ],
+    "PXHT": 27.77,
+    "EDITEUR": "DIDIER",
+    "REF_EDITEUR": "1684244",
+    "AUTEUR": "TAHHAN",
+    "COLLECTION": "AHDAF",
+    "DISTRIBUTEUR": "HACHETTE",
+    "DISPONIBILITE": {
+      "DATE_DISPO": "",
+      "COMMANDABLE": true,
+      "COMMENTAIRE": "Disponible",
+      "VALEUR": "Disponible"
+    },
+    "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s90G541jaaMMhO8DzTtDvvL69pXHYN1anJ3Efcbexb1_A-cover-large.jpg",
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Langue - Arabe"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "A1"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2015-09-01T22:00:00.000Z"
+  },
+  {
+    "EAN": "9782278083510",
+    "TITRE": "AHDAF A2 2016",
+    "TVA": [
+      {
+        "TAUX": 5.5,
+        "POURCENT": 100
+      }
+    ],
+    "PXHT": 27.77,
+    "EDITEUR": "DIDIER",
+    "REF_EDITEUR": "6509085",
+    "AUTEUR": "TAHHAN",
+    "COLLECTION": "AHDAF",
+    "DISTRIBUTEUR": "HACHETTE",
+    "DISPONIBILITE": {
+      "DATE_DISPO": "",
+      "COMMANDABLE": true,
+      "COMMENTAIRE": "Disponible",
+      "VALEUR": "Disponible"
+    },
+    "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s90G541jaaMMgYXEvXRxfw_4cqvK2czJQoHp5F80rPh_w-cover-large.jpg",
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Langue - Arabe"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "A2"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2016-02-02T23:00:00.000Z"
+  },
+  {
+    "EAN": "9782278076185",
+    "TITRE": "NI SHUO BA !  CHINOIS A2-B1",
+    "TVA": [
+      {
+        "TAUX": 5.5,
+        "POURCENT": 81.727574750831
+      },
+      {
+        "TAUX": 20,
+        "POURCENT": 18.272425249169
+      }
+    ],
+    "PXHT": 27.09,
+    "EDITEUR": "DIDIER",
+    "REF_EDITEUR": "4748612",
+    "AUTEUR": "PILLET/ARSLANGUL/JIN",
+    "COLLECTION": "NI SHUO BA !",
+    "DISTRIBUTEUR": "HACHETTE",
+    "DISPONIBILITE": {
+      "DATE_DISPO": "",
+      "COMMANDABLE": true,
+      "COMMENTAIRE": "Disponible",
+      "VALEUR": "Disponible"
+    },
+    "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s90G541jaaMMqLkERJ782SZUfNXZsPBJRoPQ3Rj_OBOrQ-cover-large.jpg",
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Langue - Chinois"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "A2-B1"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2013-05-07T22:00:00.000Z"
+  },
+  {
+    "EAN": "9782278065721",
+    "TITRE": "NI SHUO NE ? CHINOIS A1 A2",
+    "TVA": [
+      {
+        "TAUX": 5.5,
+        "POURCENT": 81.727574750831
+      },
+      {
+        "TAUX": 20,
+        "POURCENT": 18.272425249169
+      }
+    ],
+    "PXHT": 27.09,
+    "EDITEUR": "DIDIER",
+    "REF_EDITEUR": "4748604",
+    "AUTEUR": "PILLET/ARSLANGUL",
+    "COLLECTION": "NI SHUO NE",
+    "DISTRIBUTEUR": "HACHETTE",
+    "DISPONIBILITE": {
+      "DATE_DISPO": "",
+      "COMMANDABLE": true,
+      "COMMENTAIRE": "Disponible",
+      "VALEUR": "Disponible"
+    },
+    "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s90G541jaaMMkfYAYaIowLV4RwiQw1fN05U3BaPpRXnMQ-cover-large.jpg",
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Langue - Chinois"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "A1-A2"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2009-05-19T22:00:00.000Z"
+  },
+  {
+    "EAN": "9782278083299",
+    "TITRE": "NI SHUO YA ! NIVEAU A1-A2 2016",
+    "TVA": [
+      {
+        "TAUX": 5.5,
+        "POURCENT": 100
+      }
+    ],
+    "PXHT": 25.88,
+    "EDITEUR": "DIDIER",
+    "REF_EDITEUR": "1671803",
+    "AUTEUR": "PILLET/LAMOUROUX/JIN",
+    "COLLECTION": "NI SHUO YA !",
+    "DISTRIBUTEUR": "HACHETTE",
+    "DISPONIBILITE": {
+      "DATE_DISPO": "",
+      "COMMANDABLE": true,
+      "COMMENTAIRE": "Disponible",
+      "VALEUR": "Disponible"
+    },
+    "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s90G541jaaMMqcN8gcnLqpEqUnE0PBotBdrkFYyS17k5g-cover-large.jpg",
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Langue - Chinois"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "A1-A2"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2016-04-12T22:00:00.000Z"
+  },
+  {
+    "EAN": "9782091654010",
+    "TITRE": "MANAG & GESTION 2DE - LIV +LIC",
+    "TVA": [
+      {
+        "TAUX": 5.5,
+        "POURCENT": 93.978615644344
+      },
+      {
+        "TAUX": 20,
+        "POURCENT": 6.0213843556556
+      }
+    ],
+    "PXHT": 17.77,
+    "EDITEUR": "NATHAN",
+    "REF_EDITEUR": "717365",
+    "AUTEUR": "BARANES/LAGORCE",
+    "COLLECTION": "OPTIONS LYC GEN",
+    "DISTRIBUTEUR": "INTERFORUM",
+    "DISPONIBILITE": {
+      "DATE_DISPO": "2019-06-26T22:00:00.000Z",
+      "COMMANDABLE": true,
+      "COMMENTAIRE": "Disponible",
+      "VALEUR": "Disponible"
+    },
+    "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AcqTTTKZWUt1Q9zGPn3SQb7KCuDRM8LdfQ-cover-large.jpg",
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Options - Management et gestion"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "2de"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2019-05-26T22:00:00.000Z"
+  },
+  {
+    "EAN": "9782011808530",
+    "TITRE": "VENGA 1ERE",
+    "TVA": [
+      {
+        "TAUX": 5.5,
+        "POURCENT": 100
+      }
+    ],
+    "PXHT": 23.13,
+    "EDITEUR": "HACHETTE",
+    "REF_EDITEUR": "1808534",
+    "AUTEUR": "BREVART/HAREUX/LEROY",
+    "COLLECTION": "VENGA !",
+    "DISTRIBUTEUR": "HACHETTE",
+    "DISPONIBILITE": {
+      "DATE_DISPO": "",
+      "COMMANDABLE": false,
+      "COMMENTAIRE": "Epuisé",
+      "VALEUR": "Epuisé"
+    },
+    "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s97e8aevAGCVB6tBaaTZViTwRi9d59rr_EfaMvEz3kXsQ-cover-large.jpg",
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Langue - Espagnol"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ères technologiques"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2011-05-03T22:00:00.000Z"
   },
   {
     "EAN": "9782744630439",
@@ -30,11 +297,7 @@
     "TVA": [
       {
         "TAUX": 5.5,
-        "POURCENT": 93.980280228334
-      },
-      {
-        "TAUX": 20,
-        "POURCENT": 6.0197197716658
+        "POURCENT": 100
       }
     ],
     "PXHT": 22.27,
@@ -46,12 +309,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2019-06-29T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2019-05-05T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Sciences de gestion"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère STMG"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2019-05-05T22:00:00.000Z"
   },
   {
     "EAN": "9782340038363",
@@ -59,11 +332,7 @@
     "TVA": [
       {
         "TAUX": 5.5,
-        "POURCENT": 93.980280228334
-      },
-      {
-        "TAUX": 20,
-        "POURCENT": 6.0197197716658
+        "POURCENT": 100
       }
     ],
     "PXHT": 17.06,
@@ -75,12 +344,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-07-27T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-08-02T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Sciences physique - chimie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-08-02T22:00:00.000Z"
   },
   {
     "EAN": "9782340039223",
@@ -88,11 +367,7 @@
     "TVA": [
       {
         "TAUX": 5.5,
-        "POURCENT": 93.980280228334
-      },
-      {
-        "TAUX": 20,
-        "POURCENT": 6.0197197716658
+        "POURCENT": 100
       }
     ],
     "PXHT": 13.74,
@@ -104,12 +379,25 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-08-03T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-08-03T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Humanités"
+      },
+      {
+        "LIBELLE": "Littérature et Philosophie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-08-03T22:00:00.000Z"
   },
   {
     "EAN": "9782340038257",
@@ -117,11 +405,7 @@
     "TVA": [
       {
         "TAUX": 5.5,
-        "POURCENT": 93.980280228334
-      },
-      {
-        "TAUX": 20,
-        "POURCENT": 6.0197197716658
+        "POURCENT": 100
       }
     ],
     "PXHT": 12.32,
@@ -133,12 +417,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-08-31T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-08-31T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Sciences physique - chimie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-08-31T22:00:00.000Z"
   },
   {
     "EAN": "9782340038370",
@@ -146,11 +440,7 @@
     "TVA": [
       {
         "TAUX": 5.5,
-        "POURCENT": 93.980280228334
-      },
-      {
-        "TAUX": 20,
-        "POURCENT": 6.0197197716658
+        "POURCENT": 100
       }
     ],
     "PXHT": 17.06,
@@ -162,12 +452,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-08-31T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-08-31T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-08-31T22:00:00.000Z"
   },
   {
     "EAN": "9782340039131",
@@ -187,12 +487,31 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-15T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-15T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités- Histoire"
+      },
+      {
+        "LIBELLE": "Géographie"
+      },
+      {
+        "LIBELLE": "géopolitique"
+      },
+      {
+        "LIBELLE": "sciences"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-15T22:00:00.000Z"
   },
   {
     "EAN": "9782340039032",
@@ -212,12 +531,31 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-01T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3i232Hi4Aj2r-IaSvPGECbR9YPScXaRsDg-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités- Histoire"
+      },
+      {
+        "LIBELLE": "Géographie"
+      },
+      {
+        "LIBELLE": "géopolitique"
+      },
+      {
+        "LIBELLE": "sciences"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-01T22:00:00.000Z"
   },
   {
     "EAN": "9782340039124",
@@ -237,12 +575,31 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-25T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3r7VhEBer865yrDviYA4pXni-0SZzK1gtA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités- Histoire"
+      },
+      {
+        "LIBELLE": "Géographie"
+      },
+      {
+        "LIBELLE": "géopolitique"
+      },
+      {
+        "LIBELLE": "sciences"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-18T22:00:00.000Z"
   },
   {
     "EAN": "9782340031135",
@@ -262,12 +619,31 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2019-05-13T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2019-06-12T22:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3gfSpx6LXDSzOV_TBKcaCvjOVx6o7jtPSA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités- Histoire"
+      },
+      {
+        "LIBELLE": "Géographie"
+      },
+      {
+        "LIBELLE": "géopolitique"
+      },
+      {
+        "LIBELLE": "sciences"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2019-06-12T22:00:00.000Z"
   },
   {
     "EAN": "9782340032330",
@@ -287,12 +663,31 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2019-06-29T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2019-06-13T22:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3jJRm5eWi0YQi9xlvzR93NH8L_3BBRxamw-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités- Histoire"
+      },
+      {
+        "LIBELLE": "Géographie"
+      },
+      {
+        "LIBELLE": "géopolitique"
+      },
+      {
+        "LIBELLE": "sciences"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2019-06-13T22:00:00.000Z"
   },
   {
     "EAN": "9782340031012",
@@ -312,12 +707,31 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2019-05-13T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2019-05-14T22:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3jAS9pBhtQYkbp8zKBNkZrgkpMcxpU4Bjw-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités- Histoire"
+      },
+      {
+        "LIBELLE": "Géographie"
+      },
+      {
+        "LIBELLE": "géopolitique"
+      },
+      {
+        "LIBELLE": "sciences"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2019-05-14T22:00:00.000Z"
   },
   {
     "EAN": "9782340031180",
@@ -337,12 +751,31 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2019-05-13T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2019-04-29T22:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3jRbVlC12EgK84oh-F8ZZlKok0G93OPnwQ-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités- Histoire"
+      },
+      {
+        "LIBELLE": "Géographie"
+      },
+      {
+        "LIBELLE": "géopolitique"
+      },
+      {
+        "LIBELLE": "sciences"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2019-04-29T22:00:00.000Z"
   },
   {
     "EAN": "9782340039063",
@@ -362,12 +795,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-01T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3ptItB2DGZeDlUG2jzsxWXtJslM1J5KzLg-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Histoire - Géographie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-01T22:00:00.000Z"
   },
   {
     "EAN": "9782340037403",
@@ -387,12 +830,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-18T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3joLrwLfGfADjyD3jODeTKbfb19tP-8aRA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Histoire - Géographie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-18T22:00:00.000Z"
   },
   {
     "EAN": "9782340039193",
@@ -412,12 +865,25 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-08-18T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3o9_7umdU0sqMov_lol1w0z8tf8hMbxrag-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Economie"
+      },
+      {
+        "LIBELLE": "Droit"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-18T22:00:00.000Z"
   },
   {
     "EAN": "9782340020085",
@@ -435,14 +901,33 @@
     "COLLECTION": "CONTROLE CONTIN",
     "DISTRIBUTEUR": "ELLIPSES MARKETING",
     "DISPONIBILITE": {
-      "DATE_DISPO": "1971-01-01T00:00:00.000Z",
+      "DATE_DISPO": "",
       "COMMANDABLE": false,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Epuisé",
       "VALEUR": "Epuisé"
     },
-    "DATE_PARUTION": "2017-07-03T22:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3hExenmgzE2H6OZfPkEBd4l15ax1FX95kQ-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Economie"
+      },
+      {
+        "LIBELLE": "Droit"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminale ES"
+      },
+      {
+        "LIBELLE": "L"
+      },
+      {
+        "LIBELLE": "S"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2017-07-03T22:00:00.000Z"
   },
   {
     "EAN": "9782340039261",
@@ -462,12 +947,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-01T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3upw8frwdVNUjNVw3dAFfQvLecatrM09zQ-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-01T22:00:00.000Z"
   },
   {
     "EAN": "9782340038226",
@@ -487,12 +982,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-18T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3tzdEZAoo5J_T9yfdvvDRLNVITBjLNM5Pg-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-18T22:00:00.000Z"
   },
   {
     "EAN": "9782340038356",
@@ -512,12 +1017,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-07-27T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-04-20T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3gDn5zOELF4tEMDBmyOZatgFeoDn5efWOw-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-04-20T22:00:00.000Z"
   },
   {
     "EAN": "9782340038479",
@@ -537,12 +1052,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-01T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3vD0UUzQN4-XzwghuJ-R76fA0iSJ26ftsg-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-01T22:00:00.000Z"
   },
   {
     "EAN": "9782340038264",
@@ -562,12 +1087,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-08T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-08T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3mKBLR1JhuOufPmQB_Hicvjxe32QpU4ukg-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-08T22:00:00.000Z"
   },
   {
     "EAN": "9782340038349",
@@ -587,12 +1122,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-18T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3q1hKArI02XkAuVCxGhcmuzU6UvuX82Tuw-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-18T22:00:00.000Z"
   },
   {
     "EAN": "9782340037564",
@@ -612,12 +1157,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-04-13T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-04-13T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3rBCX6x4oQnVKQC6Mh1_7V-XUD7B_OJOaA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-04-13T22:00:00.000Z"
   },
   {
     "EAN": "9782340035935",
@@ -637,12 +1192,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-01-27T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-01-27T23:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3hiTWq9d8_tWZqOQVS_I5pow00u1Ios-Pg-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-01-27T23:00:00.000Z"
   },
   {
     "EAN": "9782340038271",
@@ -662,12 +1227,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-08T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-08T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3meTVazzmNEbCvUIRhlvjYk5MYm-YeMvgw-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Enseignement scientifique"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-08T22:00:00.000Z"
   },
   {
     "EAN": "9782340038288",
@@ -687,12 +1262,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-08T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-08T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3jm7TP_i_K1WxwNNHLCZhiVLS-ldCH6Wjw-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - SVT"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-08T22:00:00.000Z"
   },
   {
     "EAN": "9782340039605",
@@ -712,12 +1297,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-15T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-15T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Français"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-15T22:00:00.000Z"
   },
   {
     "EAN": "9782340039612",
@@ -737,12 +1332,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-15T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-15T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Français"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-15T22:00:00.000Z"
   },
   {
     "EAN": "9782340038578",
@@ -762,12 +1367,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-11T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-11T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3gDwSVZRdkeuP8qbIoWHWBfggBGqPOz18g-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Numérique et Sciences Informatiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-11T22:00:00.000Z"
   },
   {
     "EAN": "9782340038240",
@@ -787,12 +1402,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-18T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3k_3naEObZ1e6u9ZaC3brRiiWwDrNnBwHA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Sciences physique - chimie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-18T22:00:00.000Z"
   },
   {
     "EAN": "9782340038332",
@@ -812,12 +1437,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-18T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3tgc9yGNhiuPLPNQFuA47zkVhqG5Y5uB-A-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Sciences physique - chimie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-18T22:00:00.000Z"
   },
   {
     "EAN": "9782340031920",
@@ -837,12 +1472,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2019-09-30T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2019-10-28T23:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3lkIwGdHe9jANerwNbZhUobg4625_bOknQ-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Sciences physique - chimie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2019-10-28T23:00:00.000Z"
   },
   {
     "EAN": "9782340039087",
@@ -862,12 +1507,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-01T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3nX_o4FIAApcGXJ3azbUpyPb-g1J--O50A-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Histoire - Géographie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-01T22:00:00.000Z"
   },
   {
     "EAN": "9782340037397",
@@ -887,12 +1542,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-25T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-25T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3rUSEh1lCq33veDv7IZu6mJFm3ojwJjkyg-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Histoire - Géographie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-25T22:00:00.000Z"
   },
   {
     "EAN": "9782340037373",
@@ -912,12 +1577,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-25T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3p3U6-ZHY8qMKPsrx418Cw_whndrdu7cTQ-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Histoire - Géographie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-18T22:00:00.000Z"
   },
   {
     "EAN": "9782340038196",
@@ -937,12 +1612,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-18T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3q8y2JA97a6zt75L70uRJw_vi72yKMtgEw-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-18T22:00:00.000Z"
   },
   {
     "EAN": "9782340038486",
@@ -962,12 +1647,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-25T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3gMnBchRV7rU3mae0pxKIseI3GpCB1VzcQ-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-18T22:00:00.000Z"
   },
   {
     "EAN": "9782340038592",
@@ -987,12 +1682,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-01T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3rNJXKss8xjEt4PK_HIZMs5HSvIwr-lNKg-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Options - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère/Tle"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-01T22:00:00.000Z"
   },
   {
     "EAN": "9782340038608",
@@ -1012,12 +1717,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-01T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3n34KA7fMa2wtLCiaYBT2Dt1ar-P_njcKA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "2de/1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-01T22:00:00.000Z"
   },
   {
     "EAN": "9782340038615",
@@ -1037,12 +1752,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-01T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3tkMg4G61t8TSp1Q9_AMb_QfHLLhaMjleg-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "2de"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-01T22:00:00.000Z"
   },
   {
     "EAN": "9782340038462",
@@ -1062,12 +1787,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-18T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3oBClaJNPgZdpwjomH9HAtr3AXzdsSfPHA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-18T22:00:00.000Z"
   },
   {
     "EAN": "9782340038431",
@@ -1087,12 +1822,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-18T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3nQk5qXuUICVQF0fjbQmJIrBmNyxbUPYUg-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-18T22:00:00.000Z"
   },
   {
     "EAN": "9782340039308",
@@ -1112,12 +1857,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-11T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-11T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3ojDopUBDWQ3r-6FED5pONVBg7IRAbQNhA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-11T22:00:00.000Z"
   },
   {
     "EAN": "9782340035942",
@@ -1137,12 +1892,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-03-02T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-03-02T23:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3mUob3tEjkL4VQaahBiAz0TQd1D-JMBFDQ-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-03-02T23:00:00.000Z"
   },
   {
     "EAN": "9782340038516",
@@ -1162,12 +1927,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-01T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3hw9DzwftemUT8HKEnNQKjVHArPOzrYbhg-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Enseignement scientifique"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-01T22:00:00.000Z"
   },
   {
     "EAN": "9782340037861",
@@ -1187,12 +1962,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-18T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3s2us8yCHWday3HbSUCOQvUM0xC0NvbgnA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Langue - Allemand"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "B1-B2"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-18T22:00:00.000Z"
   },
   {
     "EAN": "9782340036284",
@@ -1212,12 +1997,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-02-17T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-02-17T23:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3tOPjYyW61f467hboXfWiNedU1koWZc6BA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Langue - Allemand"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "A1-A2"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-02-17T23:00:00.000Z"
   },
   {
     "EAN": "9782340036109",
@@ -1237,12 +2032,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-02-10T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-02-10T23:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3ryQVQwurp31iUXH7IclfAEByAPqXekbCg-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Langue - Allemand"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "A1-A2"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-02-10T23:00:00.000Z"
   },
   {
     "EAN": "9782340037571",
@@ -1262,12 +2067,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-18T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-18T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3sQHz6Feh5iYh7d3VqaAQ-zm-Ise7_ZL1g-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Langue - Anglais"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "A1-A2"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-18T22:00:00.000Z"
   },
   {
     "EAN": "9782340038684",
@@ -1287,12 +2102,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-01T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3s3wQfWvFP-En47iUf8CcWISNQ4V8ihiXg-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Chinois"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "A1-A2"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-01T22:00:00.000Z"
   },
   {
     "EAN": "9782340037908",
@@ -1312,12 +2137,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-11T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-11T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3g2Lp4rhZwnLhnHmy3jr0rjg0ocNqHTQVQ-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Chinois"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "A1"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-11T22:00:00.000Z"
   },
   {
     "EAN": "9782340037892",
@@ -1337,12 +2172,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-22T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-22T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Langue - Espagnol"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "A1"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-22T22:00:00.000Z"
   },
   {
     "EAN": "9782340039575",
@@ -1362,12 +2207,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-29T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-29T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Français"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-29T22:00:00.000Z"
   },
   {
     "EAN": "9782340039582",
@@ -1387,12 +2242,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-29T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-29T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Français"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-29T22:00:00.000Z"
   },
   {
     "EAN": "9782340039599",
@@ -1412,12 +2277,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-29T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-29T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Français"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-29T22:00:00.000Z"
   },
   {
     "EAN": "9782340031517",
@@ -1437,12 +2312,25 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-02-17T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-02-17T23:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3skomQEcS0d0l27zqg6k_xE40sv29DzcYA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Humanités"
+      },
+      {
+        "LIBELLE": "Littérature et Philosophie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-02-17T23:00:00.000Z"
   },
   {
     "EAN": "9782340031456",
@@ -1462,12 +2350,25 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-02-03T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-02-03T23:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3s8hLCecHFPKGRDiAzpJaqoi-wwLV1fbAw-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Langues"
+      },
+      {
+        "LIBELLE": "littératures et cultures étrangè"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-02-03T23:00:00.000Z"
   },
   {
     "EAN": "9782340038554",
@@ -1487,12 +2388,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-07-20T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-07-20T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Numérique et Sciences Informatiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-07-20T22:00:00.000Z"
   },
   {
     "EAN": "9782340038639",
@@ -1512,12 +2423,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-07-27T22:00:00.000Z",
       "COMMANDABLE": false,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Epuisé",
       "VALEUR": "Epuisé"
     },
-    "DATE_PARUTION": "2020-07-22T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Langue - Anglais"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-07-22T22:00:00.000Z"
   },
   {
     "EAN": "9782340038417",
@@ -1537,12 +2458,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-07-27T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-07-27T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-07-27T22:00:00.000Z"
   },
   {
     "EAN": "9782340038448",
@@ -1562,12 +2493,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-07-27T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-07-27T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Numérique et Sciences Informatiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-07-27T22:00:00.000Z"
   },
   {
     "EAN": "9782340040281",
@@ -1587,12 +2528,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-08-03T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-08-03T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "ECJS"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "BTS"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-08-03T22:00:00.000Z"
   },
   {
     "EAN": "9782340039070",
@@ -1612,12 +2563,31 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-15T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-08-03T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités- Histoire"
+      },
+      {
+        "LIBELLE": "Géographie"
+      },
+      {
+        "LIBELLE": "géopolitique"
+      },
+      {
+        "LIBELLE": "sciences"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-08-03T22:00:00.000Z"
   },
   {
     "EAN": "9782340038455",
@@ -1635,14 +2605,24 @@
     "COLLECTION": "PREPAS SCIENCES",
     "DISTRIBUTEUR": "ELLIPSES MARKETING",
     "DISPONIBILITE": {
-      "DATE_DISPO": "2020-10-12T22:00:00.000Z",
+      "DATE_DISPO": "2020-12-21T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "L'éditeur ne nous a fourni aucune date",
+      "COMMENTAIRE": "À paraître\rDispo prévisionnelle le 29/12/2020",
       "VALEUR": "À paraître"
     },
-    "DATE_PARUTION": "2020-12-07T23:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2021-01-04T23:00:00.000Z"
   },
   {
     "EAN": "9782340039216",
@@ -1662,12 +2642,28 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-08-31T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-08-31T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - SES"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminale ES"
+      },
+      {
+        "LIBELLE": "L"
+      },
+      {
+        "LIBELLE": "S"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-08-31T22:00:00.000Z"
   },
   {
     "EAN": "9782340032156",
@@ -1685,14 +2681,30 @@
     "COLLECTION": "",
     "DISTRIBUTEUR": "ELLIPSES MARKETING",
     "DISPONIBILITE": {
-      "DATE_DISPO": "2020-08-31T22:00:00.000Z",
+      "DATE_DISPO": "2021-01-04T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "À paraître\rDispo prévisionnelle le 12/01/2021",
       "VALEUR": "À paraître"
     },
-    "DATE_PARUTION": "2020-11-30T23:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3l2iiS314NhRxaUZIyyXSuw6GaehjrJN0Q-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - SES"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminale ES"
+      },
+      {
+        "LIBELLE": "L"
+      },
+      {
+        "LIBELLE": "S"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2021-03-29T22:00:00.000Z"
   },
   {
     "EAN": "9782340031555",
@@ -1710,14 +2722,27 @@
     "COLLECTION": "OBJECTIF MENTIO",
     "DISTRIBUTEUR": "ELLIPSES MARKETING",
     "DISPONIBILITE": {
-      "DATE_DISPO": "2020-09-21T22:00:00.000Z",
+      "DATE_DISPO": "2021-02-22T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "À paraître\rDispo prévisionnelle le 02/03/2021",
       "VALEUR": "À paraître"
     },
-    "DATE_PARUTION": "2021-01-04T23:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3srvfmBKAT1-huvF-9Sd9rYDgkWoJoU3cA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Humanités"
+      },
+      {
+        "LIBELLE": "Littérature et Philosophie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2021-03-22T23:00:00.000Z"
   },
   {
     "EAN": "9782340032200",
@@ -1737,12 +2762,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2021-03-08T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "Dispo prévisionnelle le 16/03/2021",
+      "COMMENTAIRE": "À paraître\rDispo prévisionnelle le 16/03/2021",
       "VALEUR": "À paraître"
     },
-    "DATE_PARUTION": "2021-03-08T23:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3luIwGa4oGUQTv_BE_kL1QCtK1ZgVt6lsQ-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - SES"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "2de"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2021-03-08T23:00:00.000Z"
   },
   {
     "EAN": "9782340032194",
@@ -1762,12 +2797,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2021-03-08T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "Dispo prévisionnelle le 16/03/2021",
+      "COMMENTAIRE": "À paraître\rDispo prévisionnelle le 16/03/2021",
       "VALEUR": "À paraître"
     },
-    "DATE_PARUTION": "2021-03-08T23:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3i0ULLwKiZtIAkqkNtuzY0JDu9lD7NdaOA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - SES"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2021-03-08T23:00:00.000Z"
   },
   {
     "EAN": "9782340039377",
@@ -1785,14 +2830,27 @@
     "COLLECTION": "OBJECTIF MENTIO",
     "DISTRIBUTEUR": "ELLIPSES MARKETING",
     "DISPONIBILITE": {
-      "DATE_DISPO": "2020-11-09T23:00:00.000Z",
+      "DATE_DISPO": "2021-03-22T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "À paraître\rDispo prévisionnelle le 30/03/2021",
       "VALEUR": "À paraître"
     },
-    "DATE_PARUTION": "2021-01-11T23:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Humanités"
+      },
+      {
+        "LIBELLE": "Littérature et Philosophie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2021-03-22T23:00:00.000Z"
   },
   {
     "EAN": "9782340039001",
@@ -1810,14 +2868,30 @@
     "COLLECTION": "COMPETENCES ATT",
     "DISTRIBUTEUR": "ELLIPSES MARKETING",
     "DISPONIBILITE": {
-      "DATE_DISPO": "2020-10-12T22:00:00.000Z",
+      "DATE_DISPO": "2020-11-02T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
-      "VALEUR": "À paraître"
+      "COMMENTAIRE": "Disponible",
+      "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-10-12T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - SES"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminale ES"
+      },
+      {
+        "LIBELLE": "L"
+      },
+      {
+        "LIBELLE": "S"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-11-02T23:00:00.000Z"
   },
   {
     "EAN": "9782340039315",
@@ -1837,12 +2911,25 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-10-26T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
-      "VALEUR": "À paraître"
+      "COMMENTAIRE": "Disponible",
+      "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-10-26T23:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Langues"
+      },
+      {
+        "LIBELLE": "littératures et cultures étrangè"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-10-26T23:00:00.000Z"
   },
   {
     "EAN": "9782340031647",
@@ -1862,12 +2949,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2021-01-04T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "Dispo prévisionnelle le 12/01/2021",
+      "COMMENTAIRE": "À paraître\rDispo prévisionnelle le 12/01/2021",
       "VALEUR": "À paraître"
     },
-    "DATE_PARUTION": "2021-01-04T23:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3pXYoL5o4qC6InjFIzxkkYmQLXJbQ44PTQ-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Français"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "2de"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2021-02-22T23:00:00.000Z"
   },
   {
     "EAN": "9782340039049",
@@ -1885,14 +2982,27 @@
     "COLLECTION": "PARCOURS ET MET",
     "DISTRIBUTEUR": "ELLIPSES MARKETING",
     "DISPONIBILITE": {
-      "DATE_DISPO": "2020-11-16T23:00:00.000Z",
+      "DATE_DISPO": "2021-02-15T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "À paraître\rDispo prévisionnelle le 23/02/2021",
       "VALEUR": "À paraître"
     },
-    "DATE_PARUTION": "2021-01-11T23:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Humanités"
+      },
+      {
+        "LIBELLE": "Littérature et Philosophie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2021-04-19T22:00:00.000Z"
   },
   {
     "EAN": "9782340040656",
@@ -1912,12 +3022,28 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-09-14T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-09-14T22:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Histoire"
+      },
+      {
+        "LIBELLE": "géographie"
+      },
+      {
+        "LIBELLE": "EMC"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Tous niveaux"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-09-14T22:00:00.000Z"
   },
   {
     "EAN": "9782340038394",
@@ -1935,14 +3061,24 @@
     "COLLECTION": "OBJECTIF MENTIO",
     "DISTRIBUTEUR": "ELLIPSES MARKETING",
     "DISPONIBILITE": {
-      "DATE_DISPO": "2020-11-30T23:00:00.000Z",
+      "DATE_DISPO": "2020-12-07T23:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "Dispo prévisionnelle le 08/12/2020",
-      "VALEUR": "À paraître"
+      "COMMENTAIRE": "Disponible",
+      "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-11-30T23:00:00.000Z",
     "URL_COUVERTURE": "",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - SVT"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-12-07T23:00:00.000Z"
   },
   {
     "EAN": "9782340038158",
@@ -1962,12 +3098,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-18T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-11T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3vLQEHW8yVRUyNV9IyX0I0fT2WnU7_SGjg-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Numérique et Sciences Informatiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales générales"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-11T22:00:00.000Z"
   },
   {
     "EAN": "9782340037847",
@@ -1987,12 +3133,31 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-01T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-01T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3hfekwSwh8HYT3uzUIwm3CCZwNnvkft3mQ-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités- Histoire"
+      },
+      {
+        "LIBELLE": "Géographie"
+      },
+      {
+        "LIBELLE": "géopolitique"
+      },
+      {
+        "LIBELLE": "sciences"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-01T22:00:00.000Z"
   },
   {
     "EAN": "9782340031203",
@@ -2012,12 +3177,31 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2019-06-29T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2019-06-27T22:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3iawGsXrLkygCINXR7Q6CnbEZ-39adxMUQ-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités- Histoire"
+      },
+      {
+        "LIBELLE": "Géographie"
+      },
+      {
+        "LIBELLE": "géopolitique"
+      },
+      {
+        "LIBELLE": "sciences"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2019-06-27T22:00:00.000Z"
   },
   {
     "EAN": "9782340027992",
@@ -2037,12 +3221,28 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2018-10-01T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2018-10-01T22:00:00.000Z",
     "URL_COUVERTURE": "http://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3nyxVEKtKrgulQ7KfLvNWyChBBgKr8AyIg-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - Mathématiques"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminale ES"
+      },
+      {
+        "LIBELLE": "L"
+      },
+      {
+        "LIBELLE": "S"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2018-10-01T22:00:00.000Z"
   },
   {
     "EAN": "9782340039629",
@@ -2062,12 +3262,25 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-06-08T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-06-08T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s936u3yATII3sS1xUHjJ2hxDT9rFDCDVb4sRhD86PbZHA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Humanités"
+      },
+      {
+        "LIBELLE": "Littérature et Philosophie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales toutes séries"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-06-08T22:00:00.000Z"
   },
   {
     "EAN": "9782091654218",
@@ -2091,12 +3304,25 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2019-06-26T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2019-05-26T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30Acin2x22qjkoyHVKW-F0CuAevg0jRl9iPQ-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens tronc commun - sciences numeriques"
+      },
+      {
+        "LIBELLE": "technologie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "1ère STMG"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2019-05-26T22:00:00.000Z"
   },
   {
     "EAN": "9782091670485",
@@ -2120,12 +3346,25 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AdxN4vygH58a8XgModAGnIk9FcIJeEVr1g-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Management"
+      },
+      {
+        "LIBELLE": "Sciences de Gestion et Numérique"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminale STMG"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-06T22:00:00.000Z"
   },
   {
     "EAN": "9782091670515",
@@ -2149,12 +3388,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AWZI-sVi6urwp7qsy6ddJ4U4fYzcN7EVPA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécifique - Gestion et Finance"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminale STMG"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-06T22:00:00.000Z"
   },
   {
     "EAN": "9782091670577",
@@ -2178,12 +3427,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AdofHXoDK6VaVDgJXv6NpSxdI27T5NJWyw-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ressources humaines - Communication"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminale STMG"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-06T22:00:00.000Z"
   },
   {
     "EAN": "9782091670546",
@@ -2207,12 +3466,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AX2aU-N7NXPGZPlpbFvlbDmYAqd4XR8obA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécifique - Mercatique"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminale STMG"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-06T22:00:00.000Z"
   },
   {
     "EAN": "9782091670454",
@@ -2236,12 +3505,25 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AdVHmKBHNfrgYbr8viFE5jJYMroDa9XKIQ-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Economie"
+      },
+      {
+        "LIBELLE": "Droit"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminale STMG"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-06T22:00:00.000Z"
   },
   {
     "EAN": "9782091670423",
@@ -2265,12 +3547,25 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AaCHa_kBPnF6UT3YRQ52jdpcAjrYKFcqpA-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Economie"
+      },
+      {
+        "LIBELLE": "Droit"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminale STMG"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-06T22:00:00.000Z"
   },
   {
     "EAN": "9782091670607",
@@ -2294,12 +3589,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-05-03T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-03T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AbD0GoA3act8wrhQTAGQUUK22SD8Y7PbqQ-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Technique - Biologie et physiopathologie humaines"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminale ST2S"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-03T22:00:00.000Z"
   },
   {
     "EAN": "9782091670928",
@@ -2323,12 +3628,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-08-17T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-03T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AZqzbU7m2Ow2N9GoSc1Xc-lKwK8jzf3GEw-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Technique - Philosophie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminales technologiques"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-03T22:00:00.000Z"
   },
   {
     "EAN": "9782017100393",
@@ -2348,12 +3663,22 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-04-30T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-15T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s-sjUN977-FgCmJ2hmISQuHiUu7nMw41CRbz3ahFq7nVg-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DISCIPLINE": [
+      {
+        "LIBELLE": "Ens. spécialités - Sciences physique - chimie"
+      }
+    ],
+    "NIVEAU": [
+      {
+        "LIBELLE": "Terminale STI2D"
+      }
+    ],
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-15T22:00:00.000Z"
   },
   {
     "EAN": "9782017100379",
@@ -2373,214 +3698,21 @@
     "DISPONIBILITE": {
       "DATE_DISPO": "2020-04-30T22:00:00.000Z",
       "COMMANDABLE": true,
-      "COMMENTAIRE": "",
+      "COMMENTAIRE": "Disponible",
       "VALEUR": "Disponible"
     },
-    "DATE_PARUTION": "2020-05-15T22:00:00.000Z",
     "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s-sjUN977-FgPtZF-5Ap7BwN9qCAGFKNJvhbUN7od4Acw-cover-large.jpg",
-    "DESCRIPTION": ""
-  },
-  {
-    "EAN": "9782091670478",
-    "TITRE": "DROIT TERM STMG (MANUEL REF) L",
-    "TVA": [
+    "DISCIPLINE": [
       {
-        "TAUX": 5.5,
-        "POURCENT": 93.977659057795
-      },
-      {
-        "TAUX": 20,
-        "POURCENT": 6.022340942205
+        "LIBELLE": "Ens tronc commun - Philosophie"
       }
     ],
-    "PXHT": 20.59,
-    "EDITEUR": "NATHAN",
-    "REF_EDITEUR": "743003",
-    "AUTEUR": "COLLECTIF",
-    "COLLECTION": "DROIT BAC TECHN",
-    "DISTRIBUTEUR": "INTERFORUM",
-    "DISPONIBILITE": {
-      "DATE_DISPO": "",
-      "COMMANDABLE": true,
-      "COMMENTAIRE": "",
-      "VALEUR": "Disponible"
-    },
-    "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
-    "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AXWoNAHSMVYheXNHddM4nKyKFE-q7j3TjQ-cover-large.jpg",
-    "DESCRIPTION": ""
-  },
-  {
-    "EAN": "9782091670447",
-    "TITRE": "ECO TERM STMG (MANUEL REF) LIC",
-    "TVA": [
+    "NIVEAU": [
       {
-        "TAUX": 5.5,
-        "POURCENT": 93.977659057795
-      },
-      {
-        "TAUX": 20,
-        "POURCENT": 6.022340942205
+        "LIBELLE": "Terminales technologiques"
       }
     ],
-    "PXHT": 20.59,
-    "EDITEUR": "NATHAN",
-    "REF_EDITEUR": "742972",
-    "AUTEUR": "BUF/DELZANT",
-    "COLLECTION": "ECO BAC TECHNIQ",
-    "DISTRIBUTEUR": "INTERFORUM",
-    "DISPONIBILITE": {
-      "DATE_DISPO": "",
-      "COMMANDABLE": true,
-      "COMMENTAIRE": "",
-      "VALEUR": "Disponible"
-    },
-    "DATE_PARUTION": "2020-05-03T22:00:00.000Z",
-    "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AVoAmd7BMtlBVRWeNDjURDaHoiT0lRAOrQ-cover-large.jpg",
-    "DESCRIPTION": ""
-  },
-  {
-    "EAN": "9782091670508",
-    "TITRE": "MANA GEST NUM TER STMG (MANUEL",
-    "TVA": [
-      {
-        "TAUX": 5.5,
-        "POURCENT": 94.008360427311
-      },
-      {
-        "TAUX": 20,
-        "POURCENT": 5.9916395726893
-      }
-    ],
-    "PXHT": 21.53,
-    "EDITEUR": "NATHAN",
-    "REF_EDITEUR": "743004",
-    "AUTEUR": "COLLECTIF",
-    "COLLECTION": "MANAG BAC TECHN",
-    "DISTRIBUTEUR": "INTERFORUM",
-    "DISPONIBILITE": {
-      "DATE_DISPO": "",
-      "COMMANDABLE": true,
-      "COMMENTAIRE": "L'éditeur ne nous a fourni aucune date",
-      "VALEUR": "En cours de réimpression"
-    },
-    "DATE_PARUTION": "2020-05-17T22:00:00.000Z",
-    "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30Ad6YcbT3rANu4qnhQ1Coeuz8oUQCkssbjA-cover-large.jpg",
-    "DESCRIPTION": ""
-  },
-  {
-    "EAN": "9782091670560",
-    "TITRE": "MERCATIQUE TERM STMG (MAN REF)",
-    "TVA": [
-      {
-        "TAUX": 5.5,
-        "POURCENT": 94.004106776181
-      },
-      {
-        "TAUX": 20,
-        "POURCENT": 5.9958932238193
-      }
-    ],
-    "PXHT": 24.35,
-    "EDITEUR": "NATHAN",
-    "REF_EDITEUR": "743082",
-    "AUTEUR": "JOUANARD/ORTOLAN",
-    "COLLECTION": "RH COMM MERCALT",
-    "DISTRIBUTEUR": "INTERFORUM",
-    "DISPONIBILITE": {
-      "DATE_DISPO": "",
-      "COMMANDABLE": true,
-      "COMMENTAIRE": "",
-      "VALEUR": "Disponible"
-    },
-    "DATE_PARUTION": "2020-05-10T22:00:00.000Z",
-    "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AaE2655ASZVw-X-9f0UZaDK5zdEPWcjMEg-cover-large.jpg",
-    "DESCRIPTION": ""
-  },
-  {
-    "EAN": "9782091670591",
-    "TITRE": "RH COMMUNIC TERM STMG (MAN REF",
-    "TVA": [
-      {
-        "TAUX": 5.5,
-        "POURCENT": 94.004106776181
-      },
-      {
-        "TAUX": 20,
-        "POURCENT": 5.9958932238193
-      }
-    ],
-    "PXHT": 24.35,
-    "EDITEUR": "NATHAN",
-    "REF_EDITEUR": "743086",
-    "AUTEUR": "DELALIX/GROSSEMY",
-    "COLLECTION": "RH COMM MERCALT",
-    "DISTRIBUTEUR": "INTERFORUM",
-    "DISPONIBILITE": {
-      "DATE_DISPO": "",
-      "COMMANDABLE": true,
-      "COMMENTAIRE": "L'éditeur ne nous a fourni aucune date",
-      "VALEUR": "Non disponible provisoirement"
-    },
-    "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
-    "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AV6BCMdzjb1OvSs_snH4jgHD9bdFGEYnLQ-cover-large.jpg",
-    "DESCRIPTION": ""
-  },
-  {
-    "EAN": "9782091670539",
-    "TITRE": "GEST FINANCE TERM STMG (MAN RE",
-    "TVA": [
-      {
-        "TAUX": 5.5,
-        "POURCENT": 94.004106776181
-      },
-      {
-        "TAUX": 20,
-        "POURCENT": 5.9958932238193
-      }
-    ],
-    "PXHT": 24.35,
-    "EDITEUR": "NATHAN",
-    "REF_EDITEUR": "743078",
-    "AUTEUR": "DARLAY/DUSSAUX-COLLO",
-    "COLLECTION": "GEST FINANCE LT",
-    "DISTRIBUTEUR": "INTERFORUM",
-    "DISPONIBILITE": {
-      "DATE_DISPO": "2020-09-03T22:00:00.000Z",
-      "COMMANDABLE": true,
-      "COMMENTAIRE": "",
-      "VALEUR": "Disponible"
-    },
-    "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
-    "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AZPwR7ZI1oVaWFfEwudM60TPT0vWcfbueQ-cover-large.jpg",
-    "DESCRIPTION": ""
-  },
-  {
-    "EAN": "9782091670621",
-    "TITRE": "SC TECH SANIT SOC TERM ST2S L",
-    "TVA": [
-      {
-        "TAUX": 5.5,
-        "POURCENT": 93.980280228334
-      },
-      {
-        "TAUX": 20,
-        "POURCENT": 6.0197197716658
-      }
-    ],
-    "PXHT": 19.27,
-    "EDITEUR": "NATHAN",
-    "REF_EDITEUR": "743089",
-    "AUTEUR": "COLLECTIF",
-    "COLLECTION": "SCSANITSOCST2S",
-    "DISTRIBUTEUR": "INTERFORUM",
-    "DISPONIBILITE": {
-      "DATE_DISPO": "2020-05-03T22:00:00.000Z",
-      "COMMANDABLE": true,
-      "COMMENTAIRE": "",
-      "VALEUR": "Disponible"
-    },
-    "DATE_PARUTION": "2020-05-06T22:00:00.000Z",
-    "URL_COUVERTURE": "https://images1.centprod.com/3027194434104/Mz4Eohvz5s8NDwMgsT30AW74WAo6fUADbwBzPTVpH1k0sfSlHSUa1w-cover-large.jpg",
-    "DESCRIPTION": ""
+    "DESCRIPTION": "",
+    "DATE_PARUTION": "2020-05-15T22:00:00.000Z"
   }
 ]

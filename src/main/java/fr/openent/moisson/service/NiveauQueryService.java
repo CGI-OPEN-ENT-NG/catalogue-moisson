@@ -108,6 +108,10 @@ public class NiveauQueryService extends QueryService<Niveau> {
                 specification = specification.and(buildSpecification(criteria.getArticleNumeriqueId(),
                     root -> root.join(Niveau_.articleNumerique, JoinType.LEFT).get(ArticleNumerique_.id)));
             }
+            if (criteria.getArticlePapierId() != null) {
+                specification = specification.and(buildSpecification(criteria.getArticlePapierId(),
+                    root -> root.join(Niveau_.articlePapier, JoinType.LEFT).get(ArticlePapier_.id)));
+            }
         }
         return specification;
     }

@@ -1,9 +1,9 @@
 package fr.openent.moisson.service.dto;
 
-import java.time.Instant;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Set;
 
 /**
