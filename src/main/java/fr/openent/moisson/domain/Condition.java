@@ -5,8 +5,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 
 /**
@@ -34,7 +32,7 @@ public class Condition implements Serializable {
     @JsonProperty("CONDITIONGRATUITE")
     private Integer conditionGratuite;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "conditions", allowSetters = true)
     @JsonIgnore
     @JoinColumn(name = "lep_id", nullable = false)

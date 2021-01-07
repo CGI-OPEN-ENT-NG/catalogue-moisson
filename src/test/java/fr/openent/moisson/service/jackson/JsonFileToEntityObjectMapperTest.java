@@ -6,8 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.openent.moisson.domain.*;
 import fr.openent.moisson.repository.ArticleNumeriqueRepository;
 import fr.openent.moisson.repository.ArticlePapierRepository;
-import fr.openent.moisson.repository.TvaRepository;
-import fr.openent.moisson.service.*;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -46,6 +44,8 @@ class JsonFileToEntityObjectMapperTest {
                     articlePapierRepository.deleteById(existArticlePapier.get().getId());
                 }
                     articlePapier.getTvas().forEach(articlePapier::addTva);
+                    articlePapier.getNiveaus().forEach(articlePapier::addNiveau);
+                    articlePapier.getDisciplines().forEach(articlePapier::addDiscipline);
                     articlePapierRepository.save(articlePapier);
             }
         );

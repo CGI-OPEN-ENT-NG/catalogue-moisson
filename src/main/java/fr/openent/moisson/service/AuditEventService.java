@@ -1,8 +1,8 @@
 package fr.openent.moisson.service;
 
-import io.github.jhipster.config.JHipsterProperties;
 import fr.openent.moisson.config.audit.AuditEventConverter;
 import fr.openent.moisson.repository.PersistenceAuditEventRepository;
+import io.github.jhipster.config.JHipsterProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.audit.AuditEvent;

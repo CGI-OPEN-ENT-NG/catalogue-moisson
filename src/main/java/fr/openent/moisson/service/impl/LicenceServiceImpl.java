@@ -1,14 +1,13 @@
 package fr.openent.moisson.service.impl;
 
-import fr.openent.moisson.service.LicenceService;
 import fr.openent.moisson.domain.Licence;
 import fr.openent.moisson.repository.LicenceRepository;
 import fr.openent.moisson.repository.search.LicenceSearchRepository;
+import fr.openent.moisson.service.LicenceService;
 import fr.openent.moisson.service.dto.LicenceDTO;
 import fr.openent.moisson.service.mapper.LicenceMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing {@link Licence}.
@@ -67,7 +66,7 @@ public class LicenceServiceImpl implements LicenceService {
      *  Get all the licences where Offre is {@code null}.
      *  @return the list of entities.
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<LicenceDTO> findAllWhereOffreIsNull() {
         log.debug("Request to get all licences where Offre is null");
         return StreamSupport
@@ -82,7 +81,7 @@ public class LicenceServiceImpl implements LicenceService {
      *  Get all the licences where Lep is {@code null}.
      *  @return the list of entities.
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<LicenceDTO> findAllWhereLepIsNull() {
         log.debug("Request to get all licences where Lep is null");
         return StreamSupport

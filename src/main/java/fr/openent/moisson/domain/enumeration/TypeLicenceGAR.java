@@ -12,7 +12,7 @@ public enum TypeLicenceGAR {
     @JsonValue
     private String value;
 
-    private TypeLicenceGAR(String value) {
+    TypeLicenceGAR(String value) {
         this.value=value;
     }
 

@@ -139,6 +139,14 @@ public class ArticlePapierQueryService extends QueryService<ArticlePapier> {
                 specification = specification.and(buildSpecification(criteria.getDisponibiliteId(),
                     root -> root.join(ArticlePapier_.disponibilite, JoinType.LEFT).get(Disponibilite_.id)));
             }
+            if (criteria.getDisciplineId() != null) {
+                specification = specification.and(buildSpecification(criteria.getDisciplineId(),
+                    root -> root.join(ArticlePapier_.disciplines, JoinType.LEFT).get(Discipline_.id)));
+            }
+            if (criteria.getNiveauId() != null) {
+                specification = specification.and(buildSpecification(criteria.getNiveauId(),
+                    root -> root.join(ArticlePapier_.niveaus, JoinType.LEFT).get(Niveau_.id)));
+            }
         }
         return specification;
     }

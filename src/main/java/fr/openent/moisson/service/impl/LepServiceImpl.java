@@ -1,15 +1,14 @@
 package fr.openent.moisson.service.impl;
 
-import fr.openent.moisson.service.LepService;
 import fr.openent.moisson.domain.Lep;
 import fr.openent.moisson.repository.LepRepository;
 import fr.openent.moisson.repository.LicenceRepository;
 import fr.openent.moisson.repository.search.LepSearchRepository;
+import fr.openent.moisson.service.LepService;
 import fr.openent.moisson.service.dto.LepDTO;
 import fr.openent.moisson.service.mapper.LepMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing {@link Lep}.

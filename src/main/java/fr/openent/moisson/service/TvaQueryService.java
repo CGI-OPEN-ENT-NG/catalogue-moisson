@@ -1,9 +1,15 @@
 package fr.openent.moisson.service;
 
-import java.util.List;
-
-import javax.persistence.criteria.JoinType;
-
+import fr.openent.moisson.domain.ArticlePapier_;
+import fr.openent.moisson.domain.Offre_;
+import fr.openent.moisson.domain.Tva;
+import fr.openent.moisson.domain.Tva_;
+import fr.openent.moisson.repository.TvaRepository;
+import fr.openent.moisson.repository.search.TvaSearchRepository;
+import fr.openent.moisson.service.dto.TvaCriteria;
+import fr.openent.moisson.service.dto.TvaDTO;
+import fr.openent.moisson.service.mapper.TvaMapper;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -12,15 +18,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import fr.openent.moisson.domain.Tva;
-import fr.openent.moisson.domain.*; // for static metamodels
-import fr.openent.moisson.repository.TvaRepository;
-import fr.openent.moisson.repository.search.TvaSearchRepository;
-import fr.openent.moisson.service.dto.TvaCriteria;
-import fr.openent.moisson.service.dto.TvaDTO;
-import fr.openent.moisson.service.mapper.TvaMapper;
+import javax.persistence.criteria.JoinType;
+import java.util.List;
 
 /**
  * Service for executing complex queries for {@link Tva} entities in the database.

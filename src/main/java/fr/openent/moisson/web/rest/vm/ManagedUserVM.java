@@ -1,6 +1,7 @@
 package fr.openent.moisson.web.rest.vm;
 
 import fr.openent.moisson.service.dto.UserDTO;
+
 import javax.validation.constraints.Size;
 
 /**

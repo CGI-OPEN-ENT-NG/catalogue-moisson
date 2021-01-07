@@ -1,13 +1,14 @@
 package fr.openent.moisson.domain;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -60,17 +61,17 @@ public class Offre implements Serializable {
     @JsonProperty("REF_EDITEUR")
     private String referenceEditeur;
 
-    @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("TVA")
     private Set<Tva> tvas = new HashSet<>();
 
-    @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "offre",  cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("LEP")
     private Set<Lep> leps = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "offres", allowSetters = true)
     @JoinColumn(name = "article_numerique_id", nullable = false)
     private ArticleNumerique articleNumerique;

@@ -1,7 +1,7 @@
 package fr.openent.moisson.service.mapper;
 
 
-import fr.openent.moisson.domain.*;
+import fr.openent.moisson.domain.Condition;
 import fr.openent.moisson.service.dto.ConditionDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

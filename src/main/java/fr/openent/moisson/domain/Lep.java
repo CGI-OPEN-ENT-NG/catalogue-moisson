@@ -3,17 +3,13 @@ package fr.openent.moisson.domain;
 import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
-import org.hibernate.annotations.NaturalId;
-import org.springframework.data.elasticsearch.annotations.FieldType;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
-import fr.openent.moisson.domain.enumeration.TypeLicence;
 
 /**
  * A Lep.
@@ -55,7 +51,7 @@ public class Lep implements Serializable {
     @JsonProperty("CONDITIONS")
     private Set<Condition> conditions = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "offre_id", nullable = false)
     @JsonIgnoreProperties(value = "leps", allowSetters = true)
     @JsonIgnore

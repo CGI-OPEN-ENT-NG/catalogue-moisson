@@ -1,7 +1,6 @@
 package fr.openent.moisson.aop.logging;
 
 import io.github.jhipster.config.JHipsterConstants;
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -70,7 +69,7 @@ public class LoggingAspect {
         if (env.acceptsProfiles(Profiles.of(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT))) {
             logger(joinPoint)
                 .error(
-                    "Exception in {}() with cause = \'{}\' and exception = \'{}\'",
+                    "Exception in {}() with cause = '{}' and exception = '{}'",
                     joinPoint.getSignature().getName(),
                     e.getCause() != null ? e.getCause() : "NULL",
                     e.getMessage(),

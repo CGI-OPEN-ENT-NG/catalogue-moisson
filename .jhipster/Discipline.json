@@ -8,6 +8,13 @@
       "relationshipType": "many-to-one",
       "otherEntityField": "id",
       "otherEntityRelationshipName": "discipline"
+    },
+    {
+      "relationshipName": "articlePapier",
+      "otherEntityName": "articlePapier",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id",
+      "otherEntityRelationshipName": "discipline"
     }
   ],
   "fields": [

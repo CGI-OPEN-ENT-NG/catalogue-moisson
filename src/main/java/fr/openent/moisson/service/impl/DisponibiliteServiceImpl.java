@@ -1,14 +1,13 @@
 package fr.openent.moisson.service.impl;
 
-import fr.openent.moisson.service.DisponibiliteService;
 import fr.openent.moisson.domain.Disponibilite;
 import fr.openent.moisson.repository.DisponibiliteRepository;
 import fr.openent.moisson.repository.search.DisponibiliteSearchRepository;
+import fr.openent.moisson.service.DisponibiliteService;
 import fr.openent.moisson.service.dto.DisponibiliteDTO;
 import fr.openent.moisson.service.mapper.DisponibiliteMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing {@link Disponibilite}.
@@ -67,7 +66,7 @@ public class DisponibiliteServiceImpl implements DisponibiliteService {
      *  Get all the disponibilites where ArticlePapier is {@code null}.
      *  @return the list of entities.
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<DisponibiliteDTO> findAllWhereArticlePapierIsNull() {
         log.debug("Request to get all disponibilites where ArticlePapier is null");
         return StreamSupport
@@ -82,7 +81,7 @@ public class DisponibiliteServiceImpl implements DisponibiliteService {
      *  Get all the disponibilites where ArticleNumerique is {@code null}.
      *  @return the list of entities.
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<DisponibiliteDTO> findAllWhereArticleNumeriqueIsNull() {
         log.debug("Request to get all disponibilites where ArticleNumerique is null");
         return StreamSupport

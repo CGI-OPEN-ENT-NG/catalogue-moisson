@@ -1,13 +1,11 @@
 package fr.openent.moisson.domain;
 
-import fr.openent.moisson.config.Constants;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import fr.openent.moisson.config.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

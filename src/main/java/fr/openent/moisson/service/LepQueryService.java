@@ -1,9 +1,12 @@
 package fr.openent.moisson.service;
 
-import java.util.List;
-
-import javax.persistence.criteria.JoinType;
-
+import fr.openent.moisson.domain.*;
+import fr.openent.moisson.repository.LepRepository;
+import fr.openent.moisson.repository.search.LepSearchRepository;
+import fr.openent.moisson.service.dto.LepCriteria;
+import fr.openent.moisson.service.dto.LepDTO;
+import fr.openent.moisson.service.mapper.LepMapper;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -12,15 +15,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import fr.openent.moisson.domain.Lep;
-import fr.openent.moisson.domain.*; // for static metamodels
-import fr.openent.moisson.repository.LepRepository;
-import fr.openent.moisson.repository.search.LepSearchRepository;
-import fr.openent.moisson.service.dto.LepCriteria;
-import fr.openent.moisson.service.dto.LepDTO;
-import fr.openent.moisson.service.mapper.LepMapper;
+import javax.persistence.criteria.JoinType;
+import java.util.List;
 
 /**
  * Service for executing complex queries for {@link Lep} entities in the database.

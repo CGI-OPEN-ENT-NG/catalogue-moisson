@@ -1,7 +1,6 @@
 package fr.openent.moisson.config.audit;
 
 import fr.openent.moisson.domain.PersistentAuditEvent;
-
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;

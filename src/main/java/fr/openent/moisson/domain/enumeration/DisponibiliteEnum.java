@@ -12,12 +12,14 @@ public enum DisponibiliteEnum {
     EN_COURS_DE_REIMPRESSION("En cours de réimpression"),
     NON_DISPONIBLE_PROVISOIREMENT("Non disponible provisoirement"),
     EPUISE("Epuisé"),
-    A_PARAITRE("À paraître");
+    A_PARAITRE("À paraître"),
+    TRUE("true"),
+    FALSE("false");
 
     @JsonValue
     private String value;
 
-    private DisponibiliteEnum(String value) {
+    DisponibiliteEnum(String value) {
         this.value=value;
     }
 

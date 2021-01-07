@@ -2,19 +2,14 @@ package fr.openent.moisson.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.openent.moisson.domain.enumeration.Technologie;
+import fr.openent.moisson.domain.enumeration.TypeLicenceGAR;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-
-import fr.openent.moisson.domain.enumeration.Technologie;
-
-import fr.openent.moisson.domain.enumeration.TypeLicenceGAR;
 
 /**
  * A Techno.
@@ -167,7 +162,7 @@ public class Techno implements Serializable {
     @JsonProperty("DispositifDYS")
     private Boolean dispositifDYS;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "technos", allowSetters = true)
     private ArticleNumerique articleNumerique;
 

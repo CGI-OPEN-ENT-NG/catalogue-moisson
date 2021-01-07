@@ -1,15 +1,12 @@
 package fr.openent.moisson.service.dto;
 
-import java.io.Serializable;
-import java.util.Objects;
 import io.github.jhipster.service.Criteria;
-import io.github.jhipster.service.filter.BooleanFilter;
-import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
-import io.github.jhipster.service.filter.FloatFilter;
-import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
+
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Criteria class for the {@link fr.openent.moisson.domain.Discipline} entity. This class is used
@@ -34,6 +31,8 @@ public class DisciplineCriteria implements Serializable, Criteria {
 
     private LongFilter articleNumeriqueId;
 
+    private LongFilter articlePapierId;
+
     public DisciplineCriteria() {
     }
 
@@ -43,6 +42,7 @@ public class DisciplineCriteria implements Serializable, Criteria {
         this.terme = other.terme == null ? null : other.terme.copy();
         this.concept = other.concept == null ? null : other.concept.copy();
         this.articleNumeriqueId = other.articleNumeriqueId == null ? null : other.articleNumeriqueId.copy();
+        this.articlePapierId = other.articlePapierId == null ? null : other.articlePapierId.copy();
     }
 
     @Override
@@ -90,6 +90,14 @@ public class DisciplineCriteria implements Serializable, Criteria {
         this.articleNumeriqueId = articleNumeriqueId;
     }
 
+    public LongFilter getArticlePapierId() {
+        return articlePapierId;
+    }
+
+    public void setArticlePapierId(LongFilter articlePapierId) {
+        this.articlePapierId = articlePapierId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -105,7 +113,8 @@ public class DisciplineCriteria implements Serializable, Criteria {
             Objects.equals(libelle, that.libelle) &&
             Objects.equals(terme, that.terme) &&
             Objects.equals(concept, that.concept) &&
-            Objects.equals(articleNumeriqueId, that.articleNumeriqueId);
+            Objects.equals(articleNumeriqueId, that.articleNumeriqueId) &&
+            Objects.equals(articlePapierId, that.articlePapierId);
     }
 
     @Override
@@ -115,7 +124,8 @@ public class DisciplineCriteria implements Serializable, Criteria {
         libelle,
         terme,
         concept,
-        articleNumeriqueId
+        articleNumeriqueId,
+        articlePapierId
         );
     }
 
@@ -128,6 +138,7 @@ public class DisciplineCriteria implements Serializable, Criteria {
                 (terme != null ? "terme=" + terme + ", " : "") +
                 (concept != null ? "concept=" + concept + ", " : "") +
                 (articleNumeriqueId != null ? "articleNumeriqueId=" + articleNumeriqueId + ", " : "") +
+                (articlePapierId != null ? "articlePapierId=" + articlePapierId + ", " : "") +
             "}";
     }
 

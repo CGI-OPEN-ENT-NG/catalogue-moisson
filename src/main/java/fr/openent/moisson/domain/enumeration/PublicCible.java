@@ -13,7 +13,7 @@ public enum PublicCible {
     @JsonValue
     private String value;
 
-    private PublicCible(String value) {
+    PublicCible(String value) {
         this.value=value;
     }
 

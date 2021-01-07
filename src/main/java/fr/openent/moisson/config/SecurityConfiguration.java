@@ -1,8 +1,8 @@
 package fr.openent.moisson.config;
 
-import fr.openent.moisson.security.*;
-import fr.openent.moisson.security.jwt.*;
-
+import fr.openent.moisson.security.AuthoritiesConstants;
+import fr.openent.moisson.security.jwt.JWTConfigurer;
+import fr.openent.moisson.security.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;

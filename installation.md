@@ -279,9 +279,9 @@ Attention si context="test" est conservé au niveau du pom.xml il faut modifier 
         <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
         <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
         <driver>org.postgresql.Driver</driver>
-        <url>jdbc:postgresql://localhost:5432/catalogue-ng-jhipster</url>
+        <url>jdbc:postgresql://localhost:5432/moissoncatalogue</url>
         <defaultSchemaName></defaultSchemaName>
-        <username>catalogue</username>
+        <username>usercatalogue</username>
         <password>catalogue</password>
         <referenceUrl>hibernate:spring:fr.tech.corree.domain?dialect=io.github.jhipster.domain.util.FixedPostgreSQL10Dialect
         &amp;hibernate.physical_naming_strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

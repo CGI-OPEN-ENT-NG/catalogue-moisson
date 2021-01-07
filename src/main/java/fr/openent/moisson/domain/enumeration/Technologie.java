@@ -16,7 +16,7 @@ public enum Technologie {
     @JsonValue
     private String value;
 
-    private Technologie(String value) {
+    Technologie(String value) {
         this.value=value;
     }
 

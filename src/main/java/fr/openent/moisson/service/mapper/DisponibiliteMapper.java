@@ -1,7 +1,7 @@
 package fr.openent.moisson.service.mapper;
 
 
-import fr.openent.moisson.domain.*;
+import fr.openent.moisson.domain.Disponibilite;
 import fr.openent.moisson.service.dto.DisponibiliteDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

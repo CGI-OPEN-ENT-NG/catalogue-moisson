@@ -3,6 +3,7 @@ package fr.openent.moisson.web.rest;
 import fr.openent.moisson.MoissoncatalogueApp;
 import fr.openent.moisson.domain.Discipline;
 import fr.openent.moisson.domain.ArticleNumerique;
+import fr.openent.moisson.domain.ArticlePapier;
 import fr.openent.moisson.repository.DisciplineRepository;
 import fr.openent.moisson.repository.search.DisciplineSearchRepository;
 import fr.openent.moisson.service.DisciplineService;
@@ -464,6 +465,26 @@ public class DisciplineResourceIT {
 
         // Get all the disciplineList where articleNumerique equals to articleNumeriqueId + 1
         defaultDisciplineShouldNotBeFound("articleNumeriqueId.equals=" + (articleNumeriqueId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllDisciplinesByArticlePapierIsEqualToSomething() throws Exception {
+        // Initialize the database
+        disciplineRepository.saveAndFlush(discipline);
+        ArticlePapier articlePapier = ArticlePapierResourceIT.createEntity(em);
+        em.persist(articlePapier);
+        em.flush();
+        discipline.setArticlePapier(articlePapier);
+        disciplineRepository.saveAndFlush(discipline);
+        Long articlePapierId = articlePapier.getId();
+
+        // Get all the disciplineList where articlePapier equals to articlePapierId
+        defaultDisciplineShouldBeFound("articlePapierId.equals=" + articlePapierId);
+
+        // Get all the disciplineList where articlePapier equals to articlePapierId + 1
+        defaultDisciplineShouldNotBeFound("articlePapierId.equals=" + (articlePapierId + 1));
     }
 
     /**

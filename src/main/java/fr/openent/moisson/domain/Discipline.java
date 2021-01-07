@@ -1,6 +1,5 @@
 package fr.openent.moisson.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,8 +7,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 
 /**
@@ -40,11 +37,15 @@ public class Discipline implements Serializable {
     @JsonIgnore
     private String concept;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "disciplines", allowSetters = true)
-
     @JoinColumn(name = "article_numerique_id", nullable = false)
     private ArticleNumerique articleNumerique;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = "disciplines", allowSetters = true)
+    @JoinColumn(name = "article_papier_id", nullable = false)
+    private ArticlePapier articlePapier;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -106,6 +107,20 @@ public class Discipline implements Serializable {
     public void setArticleNumerique(ArticleNumerique articleNumerique) {
         this.articleNumerique = articleNumerique;
     }
+
+    public ArticlePapier getArticlePapier() {
+        return articlePapier;
+    }
+
+    public Discipline articlePapier(ArticlePapier articlePapier) {
+        this.articlePapier = articlePapier;
+        return this;
+    }
+
+    public void setArticlePapier(ArticlePapier articlePapier) {
+        this.articlePapier = articlePapier;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

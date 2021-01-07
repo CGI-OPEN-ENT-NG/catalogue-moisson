@@ -1,6 +1,7 @@
 version: '2'
 services:
   moissoncatalogue-postgresql:
+    container_name: moissoncatalogue-postgresql
     image: postgres:12.4
     volumes:
       - ~/volumes/moissoncatalogue/postgresql/:/var/lib/postgresql/data/

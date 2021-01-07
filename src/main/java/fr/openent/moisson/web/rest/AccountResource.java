@@ -7,10 +7,11 @@ import fr.openent.moisson.service.MailService;
 import fr.openent.moisson.service.UserService;
 import fr.openent.moisson.service.dto.PasswordChangeDTO;
 import fr.openent.moisson.service.dto.UserDTO;
-import fr.openent.moisson.web.rest.errors.*;
+import fr.openent.moisson.web.rest.errors.EmailAlreadyUsedException;
+import fr.openent.moisson.web.rest.errors.InvalidPasswordException;
+import fr.openent.moisson.web.rest.errors.LoginAlreadyUsedException;
 import fr.openent.moisson.web.rest.vm.KeyAndPasswordVM;
 import fr.openent.moisson.web.rest.vm.ManagedUserVM;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.*;
+import java.util.Optional;
 
 /**
  * REST controller for managing the current user's account.

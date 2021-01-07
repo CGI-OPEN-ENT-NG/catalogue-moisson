@@ -108,6 +108,10 @@ public class DisciplineQueryService extends QueryService<Discipline> {
                 specification = specification.and(buildSpecification(criteria.getArticleNumeriqueId(),
                     root -> root.join(Discipline_.articleNumerique, JoinType.LEFT).get(ArticleNumerique_.id)));
             }
+            if (criteria.getArticlePapierId() != null) {
+                specification = specification.and(buildSpecification(criteria.getArticlePapierId(),
+                    root -> root.join(Discipline_.articlePapier, JoinType.LEFT).get(ArticlePapier_.id)));
+            }
         }
         return specification;
     }

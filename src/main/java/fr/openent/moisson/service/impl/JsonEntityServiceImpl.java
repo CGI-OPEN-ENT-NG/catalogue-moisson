@@ -50,7 +50,7 @@ public class JsonEntityServiceImpl implements JsonEntityService {
     @PostConstruct
     public void initParam() {
         urlArticlePapier = applicationProperties.getLibraire().getUrlArticlePapier();
-        urlArticleNumerique = applicationProperties.getLibraire().getUrlArticlePapier();
+        urlArticleNumerique = applicationProperties.getLibraire().getUrlArticleNumerique();
     }
 
     @Override
@@ -60,7 +60,7 @@ public class JsonEntityServiceImpl implements JsonEntityService {
         List<ArticlePapier> articlePapiers;
         if(urlArticlePapier.startsWith("http://") || urlArticlePapier.startsWith("https://")){
             InputStream inputStream = getJsonFromUrl(urlArticlePapier);
-            articlePapiers = objectMapper.readValue(inputStream, new TypeReference<>() {
+            articlePapiers = objectMapper.readValue(inputStream,  new TypeReference<List<ArticlePapier>>() {
             });
         } else {
             articlePapiers = objectMapper.readValue(new File("src/test/resources/json/articles_papiers.json"),
@@ -78,6 +78,8 @@ public class JsonEntityServiceImpl implements JsonEntityService {
                     articlePapierRepository.deleteById(existArticlePapier.get().getId());
                 }
                 articlePapier.getTvas().forEach(articlePapier::addTva);
+                articlePapier.getNiveaus().forEach(articlePapier::addNiveau);
+                articlePapier.getDisciplines().forEach(articlePapier::addDiscipline);
                 articlePapierRepository.save(articlePapier);
                 counter.getAndSet(counter.get() + 1);
             }
@@ -90,9 +92,9 @@ public class JsonEntityServiceImpl implements JsonEntityService {
         AtomicInteger counter = new AtomicInteger(0);
         ObjectMapper objectMapper = new ObjectMapper();
         List<ArticleNumerique> articleNumeriques;
-        if(urlArticlePapier.startsWith("http://") || urlArticlePapier.startsWith("https://")){
-            InputStream inputStream = getJsonFromUrl(urlArticlePapier);
-            articleNumeriques = objectMapper.readValue(inputStream, new TypeReference<>() {
+        if(urlArticleNumerique.startsWith("http://") || urlArticleNumerique.startsWith("https://")){
+            InputStream inputStream = getJsonFromUrl(urlArticleNumerique);
+            articleNumeriques = objectMapper.readValue(inputStream,  new TypeReference<List<ArticleNumerique>>() {
             });
         } else {
             articleNumeriques = objectMapper.readValue(new File("src/test/resources/json/articles_numeriques.json"),
@@ -103,7 +105,7 @@ public class JsonEntityServiceImpl implements JsonEntityService {
         articleNumeriques.forEach(articleNumerique ->
             {
                 Optional<ArticleNumerique> existArticleNumerique = articleNumeriqueRepository.findByEan(articleNumerique.getEan());
-                existArticleNumerique.ifPresent(numerique -> articleNumeriqueRepository.deleteById(numerique.getId()));
+                existArticleNumerique.ifPresent(numerique -> articleNumeriqueRepository.deleteById(existArticleNumerique.get().getId()));
                 for (Offre offre : articleNumerique.getOffres()) {
                     for (Lep lep : offre.getLeps()) {
                         lep.getConditions().forEach(lep::addCondition);

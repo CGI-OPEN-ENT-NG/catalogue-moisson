@@ -1,6 +1,6 @@
 package fr.openent.moisson.service.dto;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  * A DTO for the {@link fr.openent.moisson.domain.Offre} entity.
  */
 public class OffreDTO implements Serializable {
-    
+
     private Long id;
 
     @Size(min = 13, max = 13)
@@ -32,7 +32,7 @@ public class OffreDTO implements Serializable {
     private Long articleNumeriqueId;
 
     private Long licenceId;
-    
+
     public Long getId() {
         return id;
     }

@@ -3,6 +3,7 @@ package fr.openent.moisson.web.rest;
 import fr.openent.moisson.MoissoncatalogueApp;
 import fr.openent.moisson.domain.Niveau;
 import fr.openent.moisson.domain.ArticleNumerique;
+import fr.openent.moisson.domain.ArticlePapier;
 import fr.openent.moisson.repository.NiveauRepository;
 import fr.openent.moisson.repository.search.NiveauSearchRepository;
 import fr.openent.moisson.service.NiveauService;
@@ -464,6 +465,26 @@ public class NiveauResourceIT {
 
         // Get all the niveauList where articleNumerique equals to articleNumeriqueId + 1
         defaultNiveauShouldNotBeFound("articleNumeriqueId.equals=" + (articleNumeriqueId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllNiveausByArticlePapierIsEqualToSomething() throws Exception {
+        // Initialize the database
+        niveauRepository.saveAndFlush(niveau);
+        ArticlePapier articlePapier = ArticlePapierResourceIT.createEntity(em);
+        em.persist(articlePapier);
+        em.flush();
+        niveau.setArticlePapier(articlePapier);
+        niveauRepository.saveAndFlush(niveau);
+        Long articlePapierId = articlePapier.getId();
+
+        // Get all the niveauList where articlePapier equals to articlePapierId
+        defaultNiveauShouldBeFound("articlePapierId.equals=" + articlePapierId);
+
+        // Get all the niveauList where articlePapier equals to articlePapierId + 1
+        defaultNiveauShouldNotBeFound("articlePapierId.equals=" + (articlePapierId + 1));
     }
 
     /**

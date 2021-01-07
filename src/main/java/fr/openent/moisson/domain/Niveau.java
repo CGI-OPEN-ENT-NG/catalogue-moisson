@@ -1,6 +1,5 @@
 package fr.openent.moisson.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,8 +7,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 
 /**
@@ -40,11 +37,16 @@ public class Niveau implements Serializable {
     @JsonIgnore
     private String concept;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "niveaus", allowSetters = true)
-
     @JoinColumn(name = "article_numerique_id", nullable = false)
     private ArticleNumerique articleNumerique;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = "niveaus", allowSetters = true)
+    @JoinColumn(name = "article_papier_id", nullable = false)
+    private ArticlePapier articlePapier;
+
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -59,17 +61,21 @@ public class Niveau implements Serializable {
         return libelle;
     }
 
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
     public Niveau libelle(String libelle) {
         this.libelle = libelle;
         return this;
     }
 
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
-    }
-
     public String getTerme() {
         return terme;
+    }
+
+    public void setTerme(String terme) {
+        this.terme = terme;
     }
 
     public Niveau terme(String terme) {
@@ -77,12 +83,12 @@ public class Niveau implements Serializable {
         return this;
     }
 
-    public void setTerme(String terme) {
-        this.terme = terme;
-    }
-
     public String getConcept() {
         return concept;
+    }
+
+    public void setConcept(String concept) {
+        this.concept = concept;
     }
 
     public Niveau concept(String concept) {
@@ -90,12 +96,12 @@ public class Niveau implements Serializable {
         return this;
     }
 
-    public void setConcept(String concept) {
-        this.concept = concept;
-    }
-
     public ArticleNumerique getArticleNumerique() {
         return articleNumerique;
+    }
+
+    public void setArticleNumerique(ArticleNumerique articleNumerique) {
+        this.articleNumerique = articleNumerique;
     }
 
     public Niveau articleNumerique(ArticleNumerique articleNumerique) {
@@ -103,9 +109,20 @@ public class Niveau implements Serializable {
         return this;
     }
 
-    public void setArticleNumerique(ArticleNumerique articleNumerique) {
-        this.articleNumerique = articleNumerique;
+    public ArticlePapier getArticlePapier() {
+        return articlePapier;
     }
+
+    public void setArticlePapier(ArticlePapier articlePapier) {
+        this.articlePapier = articlePapier;
+    }
+
+    public Niveau articlePapier(ArticlePapier articlePapier) {
+        this.articlePapier = articlePapier;
+        return this;
+    }
+
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

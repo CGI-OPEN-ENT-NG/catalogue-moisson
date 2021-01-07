@@ -37,7 +37,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     # Domaine (nom d'hôte à modifier, par défaut : localhost) et port éventuellement mais généralement c'est le port par défaut.
     # Ne pas modifier le nom de la base  : moissoncatalogue
-    url: jdbc:postgresql://localhost:5432/moissoncatalogue
+    url: jdbc:postgresql://moissoncatalogue-postgresql:5432/moissoncatalogue
     # Ne pas modifier username: usercatalogue
     username: usercatalogue
     password: catalogue
@@ -49,12 +49,12 @@ spring:
     show-sql: false
   data:
     jest:
-      uri: http://localhost:9200
+      uri: http://moissoncatalogue-elasticsearch:9200
   # see https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-nosql.html#boot-features-connecting-to-elasticsearch-jest
   elasticsearch:
     rest:
       # A modifier
-      uris: localhost:9200
+      uris: moissoncatalogue-elasticsearch:9200
       # A modifier si il y a une authentification ne pas décommenter sinon car l'appliaction ne démarre pas
       # username: admin
       # password: admin
@@ -63,7 +63,7 @@ spring:
     contexts: prod
     # Domaine (nom d'hôte à modifier, par défaut : localhost) et port éventuellement mais généralement c'est le port par défaut.
     # Ne pas modifier le nom de la base  : moissoncatalogue
-    url: jdbc:postgresql://localhost:5432/moissoncatalogue
+    url: jdbc:postgresql://moissoncatalogue-postgresql:5432/moissoncatalogue
   mail:
     host: localhost
     port: 25
@@ -150,8 +150,8 @@ jhipster:
 # ===================================================================
 application:
   libraire:
-    urlArticlePapier: 'https://www.lde.fr/4dlink1/4DCGI/IDF/json_cat_pap.json'
-    urlArticleNumerique: 'https://www.lde.fr/4dlink1/4DCGI/IDF/json_cat_num.json'
+    urlArticlePapier:
+    urlArticleNumerique:
   scheduler:
     # Tous les jours à 4 heures AM
     cron: 0 0 4 ? * *
