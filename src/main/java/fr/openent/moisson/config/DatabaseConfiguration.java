@@ -15,6 +15,5 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableElasticsearchRepositories("fr.openent.moisson.repository.search")
 public class DatabaseConfiguration {
-
     private final Logger log = LoggerFactory.getLogger(DatabaseConfiguration.class);
 }

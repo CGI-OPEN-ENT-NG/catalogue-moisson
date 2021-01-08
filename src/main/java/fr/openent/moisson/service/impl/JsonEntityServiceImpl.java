@@ -74,7 +74,6 @@ public class JsonEntityServiceImpl implements JsonEntityService {
             {
                 Optional<ArticlePapier> existArticlePapier = articlePapierRepository.findByEan(articlePapier.getEan());
                 if (existArticlePapier.isPresent()) {
-                    System.out.println(existArticlePapier.get().getPrixTTC());
                     articlePapierRepository.deleteById(existArticlePapier.get().getId());
                 }
                 articlePapier.getTvas().forEach(articlePapier::addTva);

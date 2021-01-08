@@ -6,21 +6,43 @@ Avant de déployer il faut impérativement configurer l’application et créer 
 
 # Configuration du fichier de propriétés.
 
-Le fichier de configuration est fourni indépendamment du fichier .war:
+## Comportement par défaut
 
-    Fichier de configuation:
-      application-prod.yml
+Les fichiers de configuration sont fournis indépendamment du fichier ".jar", il faudra changer les paramètres du fichier spécifique à la production (voir ci-après) :
 
-Une fois les paramètres fixer il faut le déposer dans un répertoire config créé au meme niveau que le répertoire de contexte de l’application:
+    Fichiers de configuation:
+        application.yml
+        application-prod.yml
 
-Exemple pour tomcat 9 :
+Une fois les paramètres fixer il faut le déposer dans un répertoire qui peut etre soit :
 
+1 - Dans un répertoire "config/" créé au meme niveau que le répertoire de base de l’application :
+2 - Dans le répertoire de base de l’application.
+
+Le répertoire de base est le répertoire de lacement du fichier ".jar".
+
+Si les fichiers sont créés dans les deux répertoires, le répertoire config/ (1) à la précédence sur le répertoire de base (2) et ce sont donc les paramètres du fichier du répertoire config/ qui seront prius en compte
+
+Exemple pour  :
+
+    répertoire de base:
+        /chemin/de/repertoire/de/base/
     répertoire de config:
-      /tomcat9/webapps/config
-    répertoire de contexte:
-      /tomcat9/webapps/moisooncatalogue
+        /chemin/de/repertoire/de/base/config
 
-# Paramètres du fichier de configuration :
+Remarque : si aucun des deux répertoires n’est créé, il y a des fichiers par défaut au niveau du jar qui permettent de lancer l’application en "localhost" sur le port "8088"
+
+## Modification du comportement par défaut
+
+Il est possible de surcharger le comportement par défaut en précisant le chemin du répertoire lors du lacement de l’application :
+
+    Dem manière absolue
+        java -Dspring.config.location=/chemin/du/repertoire/config -jar moissoncatalogue.jar
+    Ou relative par exemple
+        java -Dspring.config.location=../config -jar moissoncatalogue.jar
+        java -Dspring.config.location=chemin/relatif/complexe/vers/le/repertoire/config -jar moissoncatalogue.jar
+
+# Paramètres du fichier de configuration application-prod.yml :
 
 ## Base de données
 
@@ -55,7 +77,7 @@ Il faut modifier l’hôte le port et définir login et password :
 
     # Hôte et port à modifier sans les scheme (http ou https)
     uris: localhost:9200
-    # A modifier s’il y a une authentification ne pas dé commenter sinon car l’application ne démarre pas.
+    # A modifier s’il y a une authentification ne pas dé-commenter sans authetification dans ElasticSerch sinon l’application ne démarre pas.
     # username: admin
     # password: admin
 
@@ -77,13 +99,13 @@ Optionnel car non utilisé pour le moment :
       username:
       password:
 
-# Création de la ase de données.
+# Création de la base de données.
 
-## Créations de la base et des rôles.
+## Avec une instance postgres installée
+
+### Créations de la base et des rôles.
 
 Par défaut les tables sont créées avec Liquibase qui est une librairie open-source permettant de tracer et gérer les modifications d’une base de données. Liquibase est paramétré pour la mise en place des tables et séquences au premier démarrage de l’application, cependant avant de lancer l’application il faut créer les roles et la base correspondante.
-
-Il faut installer postgres sur le serveur
 
 Puis en se connectant en root :
 
@@ -93,13 +115,60 @@ Il faut jouer les scripts qui sont dans le fichier :
 
     V0__init_user_role_database.sql est le fichier de création de la base de données
 
-## Création des tables
+### Création des tables
 
 L’application utilise Liquibase pour la création des tables. Ces dernières sont donc créées automatiquement lors du déploiement de l’application.
 
 Les scripts SQL sont fournis et situés dans le répertoire db/migration et peuvent être utilisés "As is" ou avec Flyway
 
 Les noms de fichier de scripts sont au format FlyWay et sont stockés dans le répertoire de recherche par défaut de Flyway bien que celui-ci n’est pas installé par défaut, main/resources/db/migration. La procédure d’installation et d’utilisation de Flyway est fournie à la fin du document.
+
+## Avec docker
+
+Un fichier docker-compose est fourni et après avoir remplacé les bons paramètres, il faut lancer la commande suivante dans le meme répertoire que ce fichier :
+
+    docker-compose -f postgresql.yml up -d
+
+le paramètre -d permet de lancer l'instance de docker en background
+
+Pour arrêter le conteneur :
+
+    docker-compose -f postgresql.yml down
+
+Bien entendu il faut que docker et docker-compose soient installés, voir l'adresse suivante pour les instructions :
+
+    https://docs.docker.com/compose/install/
+
+Il est préférable de créer un volume afin de conserver les données losr de l'arret du conteneur
+Il faut, dans ce cas, dé-commenter les lignes du fichier et remplacer
+
+    ~/volumes/moissoncatalogue/postgresql/
+
+par le chemin du volume
+
+# Elasticsearch
+
+Comme pour la base il est possible de créer un docker :
+
+Un fichier docker-compose est fourni et après avoir remplacé les bons paramètres, il faut lancer la commande suivante dans le meme répertoire que ce fichier : docker-compose -f elasticsearch.yml up -d
+
+le paramètre -d permet de lancer l'instance de docker en background
+
+Pour arrêter le conteneur :
+
+    docker-compose -f elasticsearch.yml down
+
+Il est préférable de créer un volume afin de conserver les données lors de l'arrêt du conteneur
+Il faut, dans ce cas, dé-commenter les lignes du fichier et remplacer
+
+    ~/volumes/moissoncatalogue/elasticsearch/
+
+par le chemin du volume
+
+Mais avant de relancer le docker il faut créer le répertoire et modifier le propriétaire
+
+    sudo mkdir -p ~/volumes/moissoncatalogue/elasticsearch/
+    sudo chown -R 1000:1000 ~/volumes/moissoncatalogue/elasticsearch/
 
 # Déploiement de l’application
 
@@ -149,7 +218,7 @@ Dans l’onglet authentication ou auth il faut saisir le login et le mot de pass
 
 L’api est livrée avec une authentification par token JWT.
 
-Il faut dan un premier temps générer le token, avec le endpoint <http://user:user@localhost:8080/api/authenticate> et le verbe POST
+Il faut dan un premier temps générer le token, avec l’endpoint <http://user:user@localhost:8080/api/authenticate> et le verbe POST
 
     curl  -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate
     le curl génère un token.
@@ -212,7 +281,7 @@ Les paramètres de sauvegarde sont num, pap ou all, ils doivent être ajoutés �
 
     TOKEN=$(curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate | jq -r '.id_token')
 
-puis pour avoir les articles papiers et numériques (all :
+Puis pour avoir les articles papiers et numériques (all :
 
     curl -X POST -H 'Accept: application/json' -H "Authorization: Bearer $TOKEN" http://localhost:8080/api/json/all
 
