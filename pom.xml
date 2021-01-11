@@ -431,7 +431,6 @@
 <!--             <version>${spring.data.commons.version}</version> -->
 <!--         </dependency> -->
     </dependencies>
-
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>
         <testResources>

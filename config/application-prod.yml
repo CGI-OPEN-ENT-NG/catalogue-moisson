@@ -27,7 +27,7 @@ management:
 
 spring:
   banner:
-    locations: classpath:image_moisson_catalogue.txt
+    locations: image_moisson_catalogue.txt
   devtools:
     restart:
       enabled: false
@@ -37,7 +37,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     # Domaine (nom d'hôte à modifier, par défaut : localhost) et port éventuellement mais généralement c'est le port par défaut.
     # Ne pas modifier le nom de la base  : moissoncatalogue
-    url: jdbc:postgresql://moissoncatalogue-postgresql:5432/moissoncatalogue
+    url: jdbc:postgresql://localhost:5432/moissoncatalogue
     # Ne pas modifier username: usercatalogue
     username: usercatalogue
     password: catalogue
@@ -49,12 +49,12 @@ spring:
     show-sql: false
   data:
     jest:
-      uri: http://moissoncatalogue-elasticsearch:9200
+      uri: http://localhost:9200
   # see https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-nosql.html#boot-features-connecting-to-elasticsearch-jest
   elasticsearch:
     rest:
       # A modifier
-      uris: moissoncatalogue-elasticsearch:9200
+      uris: localhost:9200
       # A modifier si il y a une authentification ne pas décommenter sinon car l'appliaction ne démarre pas
       # username: admin
       # password: admin
@@ -63,7 +63,7 @@ spring:
     contexts: prod
     # Domaine (nom d'hôte à modifier, par défaut : localhost) et port éventuellement mais généralement c'est le port par défaut.
     # Ne pas modifier le nom de la base  : moissoncatalogue
-    url: jdbc:postgresql://moissoncatalogue-postgresql:5432/moissoncatalogue
+    url: jdbc:postgresql://localhost:5432/moissoncatalogue
   mail:
     host: localhost
     port: 25
@@ -92,7 +92,7 @@ spring:
 #     ciphers: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 ,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA,TLS_RSA_WITH_CAMELLIA_128_CBC_SHA
 # ===================================================================
 server:
-  port: 8080
+  port: 8085
   compression:
     enabled: true
     mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
@@ -150,8 +150,8 @@ jhipster:
 # ===================================================================
 application:
   libraire:
-    urlArticlePapier:
-    urlArticleNumerique:
+    urlArticlePapier: 'https://www.lde.fr/4dlink1/4DCGI/IDF/json_cat_pap.json'
+    urlArticleNumerique: 'https://www.lde.fr/4dlink1/4DCGI/IDF/json_cat_num.json'
   scheduler:
     # Tous les jours à 4 heures AM
     cron: 0 0 4 ? * *

@@ -58,6 +58,8 @@ To package your application as a war in order to deploy it to an application ser
 
 ./mvnw -Pprod,war clean verify
 
+./mvnw -Pprod -Dmaven.test.skip=true clean
+
 
 ```
 
