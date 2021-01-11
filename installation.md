@@ -101,6 +101,109 @@ Les scripts SQL sont fournis et situés dans le répertoire db/migration et peuv
 
 Les noms de fichier de scripts sont au format FlyWay et sont stockés dans le répertoire de recherche par défaut de Flyway bien que celui-ci n’est pas installé par défaut, main/resources/db/migration. La procédure d’installation et d’utilisation de Flyway est fournie à la fin du document.
 
+# <<<<<<< Updated upstream
+
+## Avec docker
+
+### Création du conteneur
+
+Un fichier docker-compose est fourni et après avoir remplacé les bons paramètres, il faut lancer la commande suivante dans le meme répertoire que ce fichier :
+
+    docker-compose -f postgresql.yml up -d
+
+le paramètre -d permet de lancer l'instance de docker en background
+
+Pour arrêter le conteneur :
+
+    docker-compose -f postgresql.yml down
+
+Bien entendu il faut que docker et docker-compose soient installés, voir l’adresse suivante pour les instructions :
+
+    https://docs.docker.com/compose/install/
+
+Il est préférable de créer un volume afin de conserver les données lors de l’arrêt du conteneur
+Il faut, dans ce cas, dé-commenter les lignes du fichier et remplacer
+
+    ~/volumes/moissoncatalogue/postgresql/
+
+par le chemin du volume
+
+### Connexion au conteneur et création de la base de données
+
+L’utilisateur usercatalogue a été créé lors de la création du conteneur.
+
+#### Création du conteneur avec locale "fr"
+
+Il faut créer le conteneur avec les bonnes locales, à partir de l’image officielle
+
+    docker build -t  postgres-moissoncatalogue:12.5 -f ../config/Dockerfile-postgres-moissoncatalogue .
+
+(le point à la fin de la commande doit etre conservé)
+
+#### Démarrer le conteneur
+
+    docker-compose -f ../config/postgresql.yml up -d
+
+#### Connexion au conteneur
+
+Connexion au conteneur avec une console :
+
+    docker exec -it moissoncatalogue-postgresql  bash
+
+Connexion à la base de données au sein du conteneur
+
+    psql -U usercatalogue
+
+Jouer les scripts dans le fichier :
+
+    V0__init_user_role_database_for_docker.sql
+
+Il est possible de laisser le conteneur ou vert ou le fermer avec exit (après s'tre déconnecté de labase avec \q)
+
+# Démarrage de l'application
+
+    java -jar moissoncatalogue-0.0.2-SNAPSHOT.jar
+
+Vérification de la base de données
+
+Se connecter au conteneur postgres si non connecté
+
+Se connecter à la base puis
+
+    \connect moissoncatalogue
+
+Lister les tables
+
+    \dt ou \d
+
+# Elasticsearch
+
+Comme pour la base il est possible de créer un docker :
+
+Un fichier docker-compose est fourni et après avoir remplacé les bons paramètres, il faut lancer la commande suivante dans le meme répertoire que ce fichier :
+
+    docker-compose -f elasticsearch.yml up -d
+
+le paramètre -d permet de lancer l'instance de docker en background
+
+Pour arrêter le conteneur :
+
+    docker-compose -f elasticsearch.yml down
+
+Il est préférable de créer un volume afin de conserver les données lors de l'arrêt du conteneur
+Il faut, dans ce cas, dé-commenter les lignes du fichier et remplacer
+
+    ~/volumes/moissoncatalogue/elasticsearch/
+
+par le chemin du volume
+
+Mais avant de relancer le docker il faut créer le répertoire et modifier le propriétaire
+
+    sudo mkdir -p ~/volumes/moissoncatalogue/elasticsearch/
+    sudo chown -R 1000:1000 ~/volumes/moissoncatalogue/elasticsearch/
+
+> > > > > > > Stashed changes
+
 # Déploiement de l’application
 
 # Rest api
@@ -143,7 +246,7 @@ Pour accéder aux apis il faut utiliser curl, postman ou insomnia designer
 Dans l’onglet authentication ou auth il faut saisir le login et le mot de passe
 
     Le endpoint suivant retourne le login de l'utilisateur authentifié avec le verbe GET
-    http://user:user@localhost:8080/api/authenticate
+    http://user:passwortd@localhost:8080/api/authenticate
 
 ### Authentification avec token JWT
 
@@ -196,11 +299,9 @@ Pour visualiser les spécifications d’API au format JSON :
 
     curl -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/v2/api-docs
 
-Pour visualiser les spécifications d’API avec SwaggerN :
+Pour visualiser les spécifications d’API savec Swagger l’URL suivante dans un navigateur :
 
     http://localhost:8080/swagger-ui/index.html
-
-    dans un navigateur
 
 Remplacer _localhost:8080_ par le bon _host_ et le bon _port_.
 
@@ -216,7 +317,7 @@ puis pour avoir les articles papiers et numériques (all :
 
     curl -X POST -H 'Accept: application/json' -H "Authorization: Bearer $TOKEN" http://localhost:8080/api/json/all
 
-# Testing
+# Testing Pour les développeurs
 
 ## Création des tables du contexte test
 
@@ -236,7 +337,7 @@ La table correspondante est dans le package :
 
 Procédure de rattrapage :
 
-créer un fichier yyyyMMddHHmmss_initial_schema_test.xml avec le contenu suivant (les changeset doivent avoir des id différents qui n’existent pas dans la table databasechangelog)
+Créer un fichier yyyyMMddHHmmss_initial_schema_test.xml avec le contenu suivant (les changeset doivent avoir des id différents qui n’existent pas dans la table databasechangelog)
 
     <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
@@ -267,9 +368,9 @@ créer un fichier yyyyMMddHHmmss_initial_schema_test.xml avec le contenu suivant
 
 Rajouter la ligne dans master.xml :
 
-&lt;include file="config/liquibase/changelog/yyyyMMddHHmmss_initial_schema_test.xml" relativeToChangelogFile="false"/&gt;
+    <include file="config/liquibase/changelog/yyyyMMddHHmmss_initial_schema_test.xml" relativeToChangelogFile="false">
 
-Attention si context="test" est conservé au niveau du pom.xml il faut modifier le pom.xml en conséquense au niveau du plugin liquibase :
+Attention si context="test" est conservé au niveau du pom.xml il faut modifier le pom.xml en conséquence au niveau du plugin liquibase :
 
     <plugin>
     <groupId>org.liquibase</groupId>

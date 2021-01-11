@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+  moissoncatalogue-postgresql:
+    container_name: moissoncatalogue-postgresql
+    image: postgres-moissoncatalogue:12.5
+    volumes:
+      - ~/volumes/moissoncatalogue/postgresql/:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: usercatalogue
+      POSTGRES_PASSWORD: catalogue
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - 5432:5432
+

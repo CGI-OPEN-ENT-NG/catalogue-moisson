@@ -1037,24 +1037,24 @@
                     <executions>
                         <execution>
                             <id>output-html</id>
-                            <phase>install</phase>
+                            <phase>test</phase>
                             <goals>
                                 <goal>process-asciidoc</goal>
                             </goals>
                             <configuration>
                                 <backend>html5</backend>
-                                <outputDirectory>${project.basedir}/target/asciidoc/html5</outputDirectory>
+                                <outputDirectory>${project.build.directory}/docs/html</outputDirectory>
                             </configuration>
                         </execution>
                         <execution>
                             <id>output-pdf</id>
-                            <phase>process-resources</phase>
+                            <phase>test</phase>
                             <goals>
                                 <goal>process-asciidoc</goal>
                             </goals>
                             <configuration>
                                 <backend>pdf</backend>
-                                <outputDirectory>${project.basedir}/target/asciidoc/pdf</outputDirectory>
+                                <outputDirectory>${project.build.directory}/docs/pdf</outputDirectory>
                             </configuration>
                         </execution>
                     </executions>
@@ -1065,7 +1065,7 @@
                             <doctype>book</doctype>
                             <toc>left</toc>
                             <toclevels>3</toclevels>
-                            <generated>${project.basedir}/target/docs/asciidoc</generated>
+                            <generated>${project.build.directory}/docs/asciidoc/generated</generated>
                         </attributes>
                     </configuration>
                 </plugin>

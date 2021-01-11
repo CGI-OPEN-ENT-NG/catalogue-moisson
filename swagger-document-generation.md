@@ -1,6 +1,7 @@
 # Génération des fichiers de contrat d'API
 
 ## Génération du Json
+
 Jouer la classe de tests :
 
     Swagger2MarkupIntTest
@@ -49,19 +50,18 @@ Les fichiers adoc sont générés
     [INFO] Markup document written to: {project-directory}/target/docs/asciidoc/definitions.adoc
     [INFO] Markup document written to: {project-directory}/target/docs/asciidoc/security.adoc
 
- Dans le répertoire :
+Dans le répertoire :
 
      src/docs/asciidoc/
 
- Créer un fichier
+Créer un fichier
 
     index.adoc
 
- Avec le contenu suivant
+Avec le contenu suivant
 
     include::{generated}/overview.adoc[]
     include::{generated}/paths.adoc[]
     include::{generated}/definitions.adoc[]
 
     {generated}: ${project.basedir}/target/docs/asciidoc
-
