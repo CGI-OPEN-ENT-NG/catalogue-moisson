@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.data.elasticsearch.annotations.Field;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -32,18 +33,22 @@ public class Lep implements Serializable {
     @Size(min = 13, max = 13)
     @Column(name = "ean", length = 13)
     @JsonProperty("EAN")
+   @Field
     private String ean;
 
     @Column(name = "description", length = 65000)
     @JsonProperty("DESCRIPTION")
+   @Field
     private String description;
 
     @Column(name = "titre")
     @JsonProperty("TITRE")
+   @Field
     private String titre;
 
     @Column(name = "duree")
     @JsonProperty("DUREE")
+   @Field
     private String duree;
 
     @OneToMany(mappedBy = "lep", cascade = CascadeType.ALL, orphanRemoval = true)

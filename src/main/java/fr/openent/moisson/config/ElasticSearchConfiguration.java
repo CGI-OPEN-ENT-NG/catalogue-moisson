@@ -15,6 +15,8 @@ import org.springframework.data.elasticsearch.client.RestClients;
 import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfiguration;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+
 
 import javax.annotation.PreDestroy;
 import javax.net.ssl.HostnameVerifier;
@@ -29,8 +31,8 @@ import static javax.net.ssl.HttpsURLConnection.setDefaultSSLSocketFactory;
 import static javax.net.ssl.SSLContext.getInstance;
 
 @Configuration
+@EnableElasticsearchRepositories(basePackages = "fr.openent.moisson.repository.search")
 @EnableConfigurationProperties(ElasticsearchProperties.class)
-
 public class ElasticSearchConfiguration extends AbstractElasticsearchConfiguration {
     private final Logger logger = LoggerFactory.getLogger(ElasticSearchConfiguration.class);
 

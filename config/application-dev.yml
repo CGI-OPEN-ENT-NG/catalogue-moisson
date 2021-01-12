@@ -81,7 +81,7 @@ spring:
   elasticsearch:
     rest:
       # A modifier si autre
-      uris: dev.tech.fr:9200
+      uris: localhost:9200
       # A modifier si il y a une authentification ne pas décommenter sinon car l'appliaction ne démarre pas
       # username: admin
       # password: admin

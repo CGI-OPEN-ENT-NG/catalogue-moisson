@@ -8,6 +8,9 @@ import fr.openent.moisson.domain.enumeration.DisponibiliteEnum;
 import fr.openent.moisson.service.mapper.json.MoissonCustomInstantDeserializer;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -31,21 +34,25 @@ public class Disponibilite implements Serializable {
 
     @Column(name = "commentaire")
     @JsonProperty("COMMENTAIRE")
+   @Field
     private String commentaire;
 
     @Column(name = "date_disponibilite")
     @JsonProperty("DATE_DISPO")
     @JsonDeserialize(using = MoissonCustomInstantDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern= "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
+    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "uuuu-MM-dd'T'HH:mm:ss.SSSX || uuuu-MM-dd'T'HH:mm:ss.SSSXX || uuuu-MM-dd'T'HH:mm:ss.SSSXXX || uuuu-MM-dd'T'HH:mm:ss.SSSXXXX || uuuu-MM-dd'T'HH:mm:ss.SSSXXXXX")
     private Instant dateDisponibilite;
 
     @Column(name = "commandable")
     @JsonProperty("COMMANDABLE")
+   @Field
     private Boolean commandable;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "valeur")
     @JsonProperty("VALEUR")
+   @Field
     private DisponibiliteEnum valeur;
 
     @OneToOne(mappedBy = "disponibilite")

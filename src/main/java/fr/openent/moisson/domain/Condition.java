@@ -3,6 +3,7 @@ package fr.openent.moisson.domain;
 import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.Field;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,10 +27,12 @@ public class Condition implements Serializable {
 
     @Column(name = "gratuite")
     @JsonProperty("GRATUITE")
+   @Field
     private Integer gratuite;
 
     @Column(name = "condition_gratuite")
     @JsonProperty("CONDITIONGRATUITE")
+   @Field
     private Integer conditionGratuite;
 
     @ManyToOne(fetch = FetchType.LAZY)

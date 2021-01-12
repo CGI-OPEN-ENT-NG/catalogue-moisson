@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.Field;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -27,14 +28,17 @@ public class Discipline implements Serializable {
 
     @Column(name = "libelle")
     @JsonProperty("LIBELLE")
+   @Field
     private String libelle;
 
     @Column(name = "terme")
     @JsonIgnore
+   @Field
     private String terme;
 
     @Column(name = "concept")
     @JsonIgnore
+   @Field
     private String concept;
 
     @ManyToOne(fetch = FetchType.LAZY)

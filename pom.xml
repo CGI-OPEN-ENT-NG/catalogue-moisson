@@ -56,7 +56,6 @@
     </pluginRepositories>
 
     <!-- jhipster-needle-distribution-management -->
-
     <properties>
         <!-- Build properties -->
         <maven.version>3.3.9</maven.version>
@@ -79,16 +78,16 @@
         <jhipster-dependencies.version>3.9.1</jhipster-dependencies.version>
         <!-- The spring-boot version should match the one managed by
         https://mvnrepository.com/artifact/io.github.jhipster/jhipster-dependencies/${jhipster-dependencies.version} -->
-        <spring-boot.version>2.2.7.RELEASE</spring-boot.version>
+        <spring-boot.version>2.4.1</spring-boot.version>
         <!-- The hibernate version should match the one managed by
         https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies/${spring-boot.version} -->
-        <hibernate.version>5.4.15.Final</hibernate.version>
+        <hibernate.version>5.4.27.Final</hibernate.version>
         <!-- The javassist version should match the one managed by
         https://mvnrepository.com/artifact/org.hibernate/hibernate-core/${hibernate.version} -->
-        <javassist.version>3.24.0-GA</javassist.version>
+        <javassist.version>3.27.0-GA</javassist.version>
         <!-- The liquibase version should match the one managed by
         https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies/${spring-boot.version} -->
-        <liquibase.version>3.9.0</liquibase.version>
+        <liquibase.version>4.2.2</liquibase.version>
         <liquibase-hibernate5.version>3.8</liquibase-hibernate5.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <jaxb-runtime.version>2.3.3</jaxb-runtime.version>
@@ -126,9 +125,13 @@
         <!-- jhipster-needle-maven-property -->
         <gitflow-maven-plugin.version>1.15.0</gitflow-maven-plugin.version>
         <!-- Version spécifique d'Elasticsearch supérieur à la version JHipster -->
-        <elasticsearch.version>7.9.3</elasticsearch.version>
-        <spring.data.commons.version>2.3.4.RELEASE</spring.data.commons.version>
-        <spring.data.elasticsearch.version>4.0.4.RELEASE</spring.data.elasticsearch.version>
+        <elasticsearch.version>7.10.1</elasticsearch.version>
+        <!-- Version spécifique de transport-netty4-client qui doit être la même que Elasticsearch
+        voir dans la déclaration <version>${transport-netty4-client}</version>
+        remplacé par <version>${elasticsearch.version}</version>-->
+        <!--<transport-netty4-client>7.10.1</transport-netty4-client>-->
+        <spring.data.commons.version>2.4.2</spring.data.commons.version>
+        <spring.data.elasticsearch.version>4.1.2</spring.data.elasticsearch.version>
         <start-class>fr.openent.moisson.MoissoncatalogueApp</start-class>
     </properties>
 
@@ -414,32 +417,39 @@
             <version>2.4.1</version>
         </dependency>
         <!-- Pas d'utilisation de l'intégration elasticsearch Spring Data pour utiliser Elastic version 7 -->
-<!--         <dependency> -->
-<!--             <groupId>org.elasticsearch.client</groupId> -->
-<!--             <artifactId>elasticsearch-rest-high-level-client</artifactId> -->
-<!--             <version>${elasticsearch.version}</version> -->
-<!--         </dependency> -->
-<!--         <dependency> -->
-<!--             <groupId>org.elasticsearch</groupId> -->
-<!--             <artifactId>elasticsearch</artifactId> -->
-<!--             <version>${elasticsearch.version}</version> -->
-<!--         </dependency> -->
-<!--         <dependency> -->
-<!--             <groupId>org.elasticsearch.client</groupId> -->
-<!--             <artifactId>elasticsearch-rest-client</artifactId> -->
-<!--             <version>${elasticsearch.version}</version> -->
-<!--         </dependency> -->
-<!--         La version supportée par spring data est Elasticsearch 7.6.2 -->
-<!--         <dependency> -->
-<!--             <groupId>org.springframework.data</groupId> -->
-<!--             <artifactId>spring-data-elasticsearch</artifactId> -->
-<!--             <version>${spring.data.elasticsearch.version}</version> -->
-<!--         </dependency> -->
-<!--         <dependency> -->
-<!--             <groupId>org.springframework.data</groupId> -->
-<!--             <artifactId>spring-data-commons</artifactId> -->
-<!--             <version>${spring.data.commons.version}</version> -->
-<!--         </dependency> -->
+         <dependency>
+             <groupId>org.elasticsearch.client</groupId>
+             <artifactId>elasticsearch-rest-high-level-client</artifactId>
+             <version>${elasticsearch.version}</version>
+         </dependency>
+         <dependency>
+             <groupId>org.elasticsearch</groupId>
+             <artifactId>elasticsearch</artifactId>
+             <version>${elasticsearch.version}</version>
+         </dependency>
+         <dependency>
+             <groupId>org.elasticsearch.client</groupId>
+             <artifactId>elasticsearch-rest-client</artifactId>
+             <version>${elasticsearch.version}</version>
+         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.elasticsearch.plugin/transport-netty4-client -->
+        <dependency>
+            <groupId>org.elasticsearch.plugin</groupId>
+            <artifactId>transport-netty4-client</artifactId>
+<!--            <version>${transport-netty4-client}</version>-->
+            <version>${elasticsearch.version}</version>
+        </dependency>
+<!--         La version supportée par spring data est Elasticsearch 7.6.2-->
+         <dependency>
+             <groupId>org.springframework.data</groupId>
+             <artifactId>spring-data-elasticsearch</artifactId>
+             <version>${spring.data.elasticsearch.version}</version>
+         </dependency>
+         <dependency>
+             <groupId>org.springframework.data</groupId>
+             <artifactId>spring-data-commons</artifactId>
+             <version>${spring.data.commons.version}</version>
+         </dependency>
     </dependencies>
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>

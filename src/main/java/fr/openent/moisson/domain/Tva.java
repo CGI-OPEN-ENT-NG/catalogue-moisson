@@ -3,6 +3,8 @@ package fr.openent.moisson.domain;
 import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -31,10 +33,12 @@ public class Tva implements Serializable {
 
     @Column(name = "taux", precision = 21, scale = 2)
     @JsonProperty("TAUX")
+    @Field(type = FieldType.Scaled_Float, scalingFactor = 100)
     private BigDecimal taux;
 
     @Column(name = "pourcent", precision = 21, scale = 2)
     @JsonProperty("POURCENT")
+    @Field(type = FieldType.Scaled_Float, scalingFactor = 100)
     private BigDecimal pourcent;
 
     // Eager par défaut mettre donc lazy pour éviter récupération offre

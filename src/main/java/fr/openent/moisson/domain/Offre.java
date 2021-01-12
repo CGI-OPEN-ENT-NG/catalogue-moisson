@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -31,44 +33,54 @@ public class Offre implements Serializable {
     @Size(min = 13, max = 13)
     @Column(name = "ean_libraire", length = 13)
     @JsonProperty("EANLDE")
+   @Field
     private String eanLibraire;
 
     @Column(name = "quantite_minimale_achat")
     @JsonProperty("QTE_MINI")
+   @Field
     private Integer quantiteMinimaleAchat;
 
     @Column(name = "prescripteur")
     @JsonProperty("PRESCRIPTEUR")
+   @Field
     private Boolean prescripteur;
 
     @Column(name = "libelle")
     @JsonProperty("LIBELLE")
+   @Field
     private String libelle;
 
     @Column(name = "prix_ht", precision = 21, scale = 2)
     @JsonProperty("PXHT")
+    @Field(type = FieldType.Scaled_Float, scalingFactor = 100)
     private BigDecimal prixHT;
 
     @Column(name = "adoptant")
     @JsonProperty("ADOPTANT")
+   @Field
     private Boolean adoptant;
 
     @Column(name = "duree")
     @JsonProperty("DUREE")
+   @Field
     private String duree;
 
     @Column(name = "reference_editeur")
     @JsonProperty("REF_EDITEUR")
+   @Field
     private String referenceEditeur;
 
     @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("TVA")
+    @Field(type = FieldType.Nested)
     private Set<Tva> tvas = new HashSet<>();
 
     @OneToMany(mappedBy = "offre",  cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("LEP")
+    @Field(type = FieldType.Nested)
     private Set<Lep> leps = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -80,6 +92,7 @@ public class Offre implements Serializable {
     @MapsId
     @JoinColumn(name = "id")
     @JsonProperty("LICENCE")
+    @Field(type = FieldType.Nested)
     private Licence licence;
 
     @Transient
