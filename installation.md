@@ -307,23 +307,29 @@ Récapitulatif :
 
 # Swagger
 
-Les composants front-end et back-end étant séparés, l’API expose le composant back-end pour le composant frontal ou des intégrations d’applications tierces.
+Les composants front-end et back-end étant séparés, l’API expose le composant back-end pour le composant frontal.
 
-Les spécifications des API back-end sont exposées par l’intermédiaire de Swagger.
+Le fichier d'Api est fourni dans le répertoire env/
 
-Pour visualiser les spécifications d’API au format JSON :
+Pour modifier le fichier de définition api.yml, Swagger-Editor. Il est possible d’utiliser l’outil en ligne ou bien
 
-    http://localhost:8080/v2/api-docs
+Démarrez une instance locale de swagger-editor à l'aide de docker en exécutant :
 
-    dans un navigateur ou
+    docker-compose -f src env/swagger-editor.yml up -d.
 
-    curl -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/v2/api-docs
+L’éditeur sera adressable à l’adresse http://localhost:7742.
 
-Pour visualiser les spécifications d’API avec l’URL suivante dans un navigateur :
+## Visualisation de l'Api au format json
 
-    http://localhost:8080/swagger-ui/index.html
+Pour visualiser les spécifications d’API au format JSON dans un navigateur :
 
-Remplacer _localhost:8080_ par le bon _host_ et le bon _port_.
+    http://localhost:8088/v2/api-docs
+
+Pour visualiser les spécifications d’API au format JSON dans la console :
+
+    curl -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8088/v2/api-docs
+
+Remplacer _localhost:8088_ par le bon _host_ et le bon _port_.
 
 # Endpoints
 
@@ -337,7 +343,7 @@ Puis pour avoir les articles papiers et numériques (all :
 
     curl -X POST -H 'Accept: application/json' -H "Authorization: Bearer $TOKEN" http://localhost:8080/api/json/all
 
-# Testing Pour les développeurs
+# Testing Pour les développeurs (optionnel))
 
 ## Création des tables du contexte test
 

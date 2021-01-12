@@ -29,7 +29,6 @@ management:
 spring:
   banner:
     location: classpath:image_moisson_catalogue.txt
-    charset:
   profiles:
     active: dev
     include:
