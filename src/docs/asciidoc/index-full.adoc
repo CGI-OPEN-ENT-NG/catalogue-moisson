@@ -1,3 +1,3 @@
-include::/home/jean-marc/projets/catalogue-idf/moissoncatalogue-backend-jwt/moissoncatalogue/target/docs/asciidoc/overview.adoc[]
-include::/home/jean-marc/projets/catalogue-idf/moissoncatalogue-backend-jwt/moissoncatalogue/target/docs/asciidoc/paths.adoc[]
-include::/home/jean-marc/projets/catalogue-idf/moissoncatalogue-backend-jwt/moissoncatalogue/target/docs/asciidoc/definitions.adoc[]
+include::/home/jean-marc/projets/catalogue-idf/moissoncatalogue-backend-jwt/moissoncatalogue/target.bak/docs/asciidoc/overview.adoc[]
+include::/home/jean-marc/projets/catalogue-idf/moissoncatalogue-backend-jwt/moissoncatalogue/target.bak/docs/asciidoc/paths.adoc[]
+include::/home/jean-marc/projets/catalogue-idf/moissoncatalogue-backend-jwt/moissoncatalogue/target.bak/docs/asciidoc/definitions.adoc[]

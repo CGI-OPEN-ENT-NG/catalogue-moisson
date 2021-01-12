@@ -1,8 +1,4 @@
--- Créer le role : usercatalogue
-
--- DROP ROLE usercatalogue;
-
-CREATE ROLE usercatalogue LOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION PASSWORD 'catalogue';
+-- Mise à jour du role catalogue déjà créé lors de la création de l'instance de docker : usercatalogue
 
 -- Database: moissoncatalogue
 
@@ -18,6 +14,6 @@ CREATE DATABASE moissoncatalogue
 
 -- Grant pour public et usercatalogue
 -- En postgres GRANT ALL et GRANT ALL PRIVILEGES sont équivalents
-
 GRANT CONNECT, TEMPORARY ON DATABASE moissoncatalogue TO public;
 GRANT ALL ON DATABASE moissoncatalogue TO usercatalogue;
+

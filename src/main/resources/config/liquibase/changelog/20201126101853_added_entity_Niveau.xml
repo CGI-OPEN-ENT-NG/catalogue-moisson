@@ -47,7 +47,7 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20201126101853-1-data" author="moisson" context="faker">
+<!--    <changeSet id="20201126101853-1-data" author="moisson" context="faker">
         <loadData
                   file="config/liquibase/fake-data/niveau.csv"
                   separator=";"
@@ -56,8 +56,8 @@
             <column name="libelle" type="string"/>
             <column name="terme" type="string"/>
             <column name="concept" type="string"/>
-            <!-- Moisson (and/or extensions) can add load columns here -->
+            &lt;!&ndash; Moisson (and/or extensions) can add load columns here &ndash;&gt;
         </loadData>
-    </changeSet>
+    </changeSet>-->
 
 </databaseChangeLog>

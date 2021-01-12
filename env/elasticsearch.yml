@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  moissoncatalogue-elasticsearch:
+    container_name: moissoncatalogue-elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
+    volumes:
+      - ~/volumes/moissoncatalogue/elasticsearch/:/usr/share/elasticsearch/data/
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - ES_JAVA_OPTS=-Xms1024m -Xmx1024m
+      - discovery.type=single-node

@@ -27,7 +27,7 @@ management:
 
 spring:
   banner:
-    locations: image_moisson_catalogue.txt
+    locations: classpath:image_moisson_catalogue.txt
   devtools:
     restart:
       enabled: false

@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MoissoncatalogueApp.class)
 @AutoConfigureMockMvc
-@ActiveProfiles("swagger,s2m")
+@ActiveProfiles("dev,s2m")
 public class Swagger2MarkupIntTest {
 
     @Autowired

@@ -78,7 +78,7 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20201126102500-1-data" author="moisson" context="faker">
+<!--    <changeSet id="20201126102500-1-data" author="moisson" context="faker">
         <loadData
                   file="config/liquibase/fake-data/article_numerique.csv"
                   separator=";"
@@ -99,8 +99,8 @@
             <column name="description" type="string"/>
             <column name="public_cible" type="string"/>
             <column name="ean_papier" type="string"/>
-            <!-- Add load columns here -->
+            &lt;!&ndash; Add load columns here &ndash;&gt;
         </loadData>
-    </changeSet>
+    </changeSet>-->
 
 </databaseChangeLog>
