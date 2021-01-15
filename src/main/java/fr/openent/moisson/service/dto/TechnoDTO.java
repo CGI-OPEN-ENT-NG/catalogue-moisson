@@ -1,16 +1,15 @@
 package fr.openent.moisson.service.dto;
 
+import javax.validation.constraints.*;
+import java.io.Serializable;
 import fr.openent.moisson.domain.enumeration.Technologie;
 import fr.openent.moisson.domain.enumeration.TypeLicenceGAR;
-
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 /**
  * A DTO for the {@link fr.openent.moisson.domain.Techno} entity.
  */
 public class TechnoDTO implements Serializable {
-
+    
     private Long id;
 
     private Technologie technologie;
@@ -41,10 +40,6 @@ public class TechnoDTO implements Serializable {
     private Boolean annotations;
 
     private Boolean creationCours;
-
-    private Integer nbMaxiInstall;
-
-    private Integer nbMaxSimultConnexions;
 
     private Boolean webAdaptatif;
 
@@ -80,9 +75,13 @@ public class TechnoDTO implements Serializable {
 
     private Boolean dispositifDYS;
 
+    private String nbMaxiInstall;
+
+    private String nbMaxSimultConnexions;
+
 
     private Long articleNumeriqueId;
-
+    
     public Long getId() {
         return id;
     }
@@ -201,22 +200,6 @@ public class TechnoDTO implements Serializable {
 
     public void setCreationCours(Boolean creationCours) {
         this.creationCours = creationCours;
-    }
-
-    public Integer getNbMaxiInstall() {
-        return nbMaxiInstall;
-    }
-
-    public void setNbMaxiInstall(Integer nbMaxiInstall) {
-        this.nbMaxiInstall = nbMaxiInstall;
-    }
-
-    public Integer getNbMaxSimultConnexions() {
-        return nbMaxSimultConnexions;
-    }
-
-    public void setNbMaxSimultConnexions(Integer nbMaxSimultConnexions) {
-        this.nbMaxSimultConnexions = nbMaxSimultConnexions;
     }
 
     public Boolean isWebAdaptatif() {
@@ -355,6 +338,22 @@ public class TechnoDTO implements Serializable {
         this.dispositifDYS = dispositifDYS;
     }
 
+    public String getNbMaxiInstall() {
+        return nbMaxiInstall;
+    }
+
+    public void setNbMaxiInstall(String nbMaxiInstall) {
+        this.nbMaxiInstall = nbMaxiInstall;
+    }
+
+    public String getNbMaxSimultConnexions() {
+        return nbMaxSimultConnexions;
+    }
+
+    public void setNbMaxSimultConnexions(String nbMaxSimultConnexions) {
+        this.nbMaxSimultConnexions = nbMaxSimultConnexions;
+    }
+
     public Long getArticleNumeriqueId() {
         return articleNumeriqueId;
     }
@@ -399,8 +398,6 @@ public class TechnoDTO implements Serializable {
             ", needFlash='" + isNeedFlash() + "'" +
             ", annotations='" + isAnnotations() + "'" +
             ", creationCours='" + isCreationCours() + "'" +
-            ", nbMaxiInstall=" + getNbMaxiInstall() +
-            ", nbMaxSimultConnexions=" + getNbMaxSimultConnexions() +
             ", webAdaptatif='" + isWebAdaptatif() + "'" +
             ", marquePage='" + isMarquePage() + "'" +
             ", captureImage='" + isCaptureImage() + "'" +
@@ -418,6 +415,8 @@ public class TechnoDTO implements Serializable {
             ", personnalisationUserInterface='" + isPersonnalisationUserInterface() + "'" +
             ", modifContenuEditorial='" + isModifContenuEditorial() + "'" +
             ", dispositifDYS='" + isDispositifDYS() + "'" +
+            ", nbMaxiInstall='" + getNbMaxiInstall() + "'" +
+            ", nbMaxSimultConnexions='" + getNbMaxSimultConnexions() + "'" +
             ", articleNumeriqueId=" + getArticleNumeriqueId() +
             "}";
     }

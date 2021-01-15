@@ -28,17 +28,17 @@ public class Discipline implements Serializable {
 
     @Column(name = "libelle")
     @JsonProperty("LIBELLE")
-   @Field
+    @Field
     private String libelle;
 
     @Column(name = "terme")
     @JsonIgnore
-   @Field
+    @Field
     private String terme;
 
     @Column(name = "concept")
     @JsonIgnore
-   @Field
+    @Field
     private String concept;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -64,17 +64,21 @@ public class Discipline implements Serializable {
         return libelle;
     }
 
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
     public Discipline libelle(String libelle) {
         this.libelle = libelle;
         return this;
     }
 
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
-    }
-
     public String getTerme() {
         return terme;
+    }
+
+    public void setTerme(String terme) {
+        this.terme = terme;
     }
 
     public Discipline terme(String terme) {
@@ -82,12 +86,12 @@ public class Discipline implements Serializable {
         return this;
     }
 
-    public void setTerme(String terme) {
-        this.terme = terme;
-    }
-
     public String getConcept() {
         return concept;
+    }
+
+    public void setConcept(String concept) {
+        this.concept = concept;
     }
 
     public Discipline concept(String concept) {
@@ -95,12 +99,12 @@ public class Discipline implements Serializable {
         return this;
     }
 
-    public void setConcept(String concept) {
-        this.concept = concept;
-    }
-
     public ArticleNumerique getArticleNumerique() {
         return articleNumerique;
+    }
+
+    public void setArticleNumerique(ArticleNumerique articleNumerique) {
+        this.articleNumerique = articleNumerique;
     }
 
     public Discipline articleNumerique(ArticleNumerique articleNumerique) {
@@ -108,21 +112,17 @@ public class Discipline implements Serializable {
         return this;
     }
 
-    public void setArticleNumerique(ArticleNumerique articleNumerique) {
-        this.articleNumerique = articleNumerique;
-    }
-
     public ArticlePapier getArticlePapier() {
         return articlePapier;
+    }
+
+    public void setArticlePapier(ArticlePapier articlePapier) {
+        this.articlePapier = articlePapier;
     }
 
     public Discipline articlePapier(ArticlePapier articlePapier) {
         this.articlePapier = articlePapier;
         return this;
-    }
-
-    public void setArticlePapier(ArticlePapier articlePapier) {
-        this.articlePapier = articlePapier;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

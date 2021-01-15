@@ -33,22 +33,22 @@ public class Offre implements Serializable {
     @Size(min = 13, max = 13)
     @Column(name = "ean_libraire", length = 13)
     @JsonProperty("EANLDE")
-   @Field
+    @Field
     private String eanLibraire;
 
     @Column(name = "quantite_minimale_achat")
     @JsonProperty("QTE_MINI")
-   @Field
+    @Field
     private Integer quantiteMinimaleAchat;
 
     @Column(name = "prescripteur")
     @JsonProperty("PRESCRIPTEUR")
-   @Field
+    @Field
     private Boolean prescripteur;
 
     @Column(name = "libelle")
     @JsonProperty("LIBELLE")
-   @Field
+    @Field
     private String libelle;
 
     @Column(name = "prix_ht", precision = 21, scale = 2)
@@ -58,17 +58,17 @@ public class Offre implements Serializable {
 
     @Column(name = "adoptant")
     @JsonProperty("ADOPTANT")
-   @Field
+    @Field
     private Boolean adoptant;
 
     @Column(name = "duree")
     @JsonProperty("DUREE")
-   @Field
+    @Field
     private String duree;
 
     @Column(name = "reference_editeur")
     @JsonProperty("REF_EDITEUR")
-   @Field
+    @Field
     private String referenceEditeur;
 
     @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -77,7 +77,7 @@ public class Offre implements Serializable {
     @Field(type = FieldType.Nested)
     private Set<Tva> tvas = new HashSet<>();
 
-    @OneToMany(mappedBy = "offre",  cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("LEP")
     @Field(type = FieldType.Nested)
@@ -111,26 +111,26 @@ public class Offre implements Serializable {
         return eanLibraire;
     }
 
+    public void setEanLibraire(String eanLibraire) {
+        this.eanLibraire = eanLibraire;
+    }
+
     public Offre eanLibraire(String eanLibraire) {
         this.eanLibraire = eanLibraire;
         return this;
-    }
-
-    public void setEanLibraire(String eanLibraire) {
-        this.eanLibraire = eanLibraire;
     }
 
     public Integer getQuantiteMinimaleAchat() {
         return quantiteMinimaleAchat;
     }
 
+    public void setQuantiteMinimaleAchat(Integer quantiteMinimaleAchat) {
+        this.quantiteMinimaleAchat = quantiteMinimaleAchat;
+    }
+
     public Offre quantiteMinimaleAchat(Integer quantiteMinimaleAchat) {
         this.quantiteMinimaleAchat = quantiteMinimaleAchat;
         return this;
-    }
-
-    public void setQuantiteMinimaleAchat(Integer quantiteMinimaleAchat) {
-        this.quantiteMinimaleAchat = quantiteMinimaleAchat;
     }
 
     public Boolean isPrescripteur() {
@@ -150,26 +150,26 @@ public class Offre implements Serializable {
         return libelle;
     }
 
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
     public Offre libelle(String libelle) {
         this.libelle = libelle;
         return this;
-    }
-
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
     }
 
     public BigDecimal getPrixHT() {
         return prixHT;
     }
 
+    public void setPrixHT(BigDecimal prixHT) {
+        this.prixHT = prixHT;
+    }
+
     public Offre prixHT(BigDecimal prixHT) {
         this.prixHT = prixHT;
         return this;
-    }
-
-    public void setPrixHT(BigDecimal prixHT) {
-        this.prixHT = prixHT;
     }
 
     public Boolean isAdoptant() {
@@ -189,17 +189,21 @@ public class Offre implements Serializable {
         return duree;
     }
 
+    public void setDuree(String duree) {
+        this.duree = duree;
+    }
+
     public Offre duree(String duree) {
         this.duree = duree;
         return this;
     }
 
-    public void setDuree(String duree) {
-        this.duree = duree;
-    }
-
     public String getReferenceEditeur() {
         return referenceEditeur;
+    }
+
+    public void setReferenceEditeur(String referenceEditeur) {
+        this.referenceEditeur = referenceEditeur;
     }
 
     public Offre referenceEditeur(String referenceEditeur) {
@@ -207,12 +211,12 @@ public class Offre implements Serializable {
         return this;
     }
 
-    public void setReferenceEditeur(String referenceEditeur) {
-        this.referenceEditeur = referenceEditeur;
-    }
-
     public Set<Tva> getTvas() {
         return tvas;
+    }
+
+    public void setTvas(Set<Tva> tvas) {
+        this.tvas = tvas;
     }
 
     public Offre tvas(Set<Tva> tvas) {
@@ -232,12 +236,12 @@ public class Offre implements Serializable {
         return this;
     }
 
-    public void setTvas(Set<Tva> tvas) {
-        this.tvas = tvas;
-    }
-
     public Set<Lep> getLeps() {
         return leps;
+    }
+
+    public void setLeps(Set<Lep> leps) {
+        this.leps = leps;
     }
 
     public Offre leps(Set<Lep> leps) {
@@ -257,12 +261,12 @@ public class Offre implements Serializable {
         return this;
     }
 
-    public void setLeps(Set<Lep> leps) {
-        this.leps = leps;
-    }
-
     public ArticleNumerique getArticleNumerique() {
         return articleNumerique;
+    }
+
+    public void setArticleNumerique(ArticleNumerique articleNumerique) {
+        this.articleNumerique = articleNumerique;
     }
 
     public Offre articleNumerique(ArticleNumerique articleNumerique) {
@@ -270,21 +274,17 @@ public class Offre implements Serializable {
         return this;
     }
 
-    public void setArticleNumerique(ArticleNumerique articleNumerique) {
-        this.articleNumerique = articleNumerique;
-    }
-
     public Licence getLicence() {
         return licence;
+    }
+
+    public void setLicence(Licence licence) {
+        this.licence = licence;
     }
 
     public Offre licence(Licence licence) {
         this.licence = licence;
         return this;
-    }
-
-    public void setLicence(Licence licence) {
-        this.licence = licence;
     }
 
     @PostLoad
@@ -295,7 +295,7 @@ public class Offre implements Serializable {
             var innerTva = prixHT.multiply(tva.getTaux().multiply(tva.getPourcent())).divide(new BigDecimal("10000"));
             pxTTC = pxTTC.add(innerTva);
         }
-        this.prixTTC=pxTTC;
+        this.prixTTC = pxTTC;
     }
 
     public BigDecimal getPrixTTC() {

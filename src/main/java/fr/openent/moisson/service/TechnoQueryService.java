@@ -137,12 +137,6 @@ public class TechnoQueryService extends QueryService<Techno> {
             if (criteria.getCreationCours() != null) {
                 specification = specification.and(buildSpecification(criteria.getCreationCours(), Techno_.creationCours));
             }
-            if (criteria.getNbMaxiInstall() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getNbMaxiInstall(), Techno_.nbMaxiInstall));
-            }
-            if (criteria.getNbMaxSimultConnexions() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getNbMaxSimultConnexions(), Techno_.nbMaxSimultConnexions));
-            }
             if (criteria.getWebAdaptatif() != null) {
                 specification = specification.and(buildSpecification(criteria.getWebAdaptatif(), Techno_.webAdaptatif));
             }
@@ -193,6 +187,12 @@ public class TechnoQueryService extends QueryService<Techno> {
             }
             if (criteria.getDispositifDYS() != null) {
                 specification = specification.and(buildSpecification(criteria.getDispositifDYS(), Techno_.dispositifDYS));
+            }
+            if (criteria.getNbMaxiInstall() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getNbMaxiInstall(), Techno_.nbMaxiInstall));
+            }
+            if (criteria.getNbMaxSimultConnexions() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getNbMaxSimultConnexions(), Techno_.nbMaxSimultConnexions));
             }
             if (criteria.getArticleNumeriqueId() != null) {
                 specification = specification.and(buildSpecification(criteria.getArticleNumeriqueId(),

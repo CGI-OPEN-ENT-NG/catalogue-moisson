@@ -1,16 +1,15 @@
 package fr.openent.moisson.service.dto;
 
-import fr.openent.moisson.domain.enumeration.PublicCible;
-
-import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.time.Instant;
+import javax.validation.constraints.*;
+import java.io.Serializable;
+import fr.openent.moisson.domain.enumeration.PublicCible;
 
 /**
  * A DTO for the {@link fr.openent.moisson.domain.ArticleNumerique} entity.
  */
 public class ArticleNumeriqueDTO implements Serializable {
-
+    
     private Long id;
 
     @Size(min = 13, max = 13)
@@ -46,7 +45,7 @@ public class ArticleNumeriqueDTO implements Serializable {
 
 
     private Long disponibiliteId;
-
+    
     public Long getId() {
         return id;
     }

@@ -276,7 +276,7 @@ public class ArticleNumeriqueResourceIT {
         em.detach(updatedArticleNumerique);
 
         // Update the Disponibilite with new association value
-        updatedArticleNumerique.setDisponibilite(updatedArticleNumerique.getDisponibilite());
+        updatedArticleNumerique.setDisponibilite(articleNumerique.getDisponibilite());
         ArticleNumeriqueDTO updatedArticleNumeriqueDTO = articleNumeriqueMapper.toDto(updatedArticleNumerique);
 
         // Update the entity

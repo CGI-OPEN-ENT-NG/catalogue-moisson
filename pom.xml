@@ -124,14 +124,20 @@
         <junit.itReportFolder>${project.testresult.directory}/integrationTest</junit.itReportFolder>
         <!-- jhipster-needle-maven-property -->
         <gitflow-maven-plugin.version>1.15.0</gitflow-maven-plugin.version>
+
         <!-- Version spécifique d'Elasticsearch supérieur à la version JHipster -->
         <elasticsearch.version>7.10.1</elasticsearch.version>
+        <!--<elasticsearch.version>6.3.0</elasticsearch.version>-->
         <!-- Version spécifique de transport-netty4-client qui doit être la même que Elasticsearch
         voir dans la déclaration <version>${transport-netty4-client}</version>
         remplacé par <version>${elasticsearch.version}</version>-->
         <!--<transport-netty4-client>7.10.1</transport-netty4-client>-->
-        <spring.data.commons.version>2.4.2</spring.data.commons.version>
+
         <spring.data.elasticsearch.version>4.1.2</spring.data.elasticsearch.version>
+        <spring.data.commons.version>2.4.2</spring.data.commons.version>
+        <!--<spring.data.elasticsearch.version>3.1.21.RELEASE</spring.data.elasticsearch.version>-->
+        <!--<spring.data.commons.version>2.1.21.RELEASE</spring.data.commons.version>-->
+
         <start-class>fr.openent.moisson.MoissoncatalogueApp</start-class>
     </properties>
 
@@ -417,14 +423,14 @@
             <version>2.4.1</version>
         </dependency>
         <!-- Pas d'utilisation de l'intégration elasticsearch Spring Data pour utiliser Elastic version 7 -->
-         <dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>${elasticsearch.version}</version>
+        </dependency>
+        <dependency>
              <groupId>org.elasticsearch.client</groupId>
              <artifactId>elasticsearch-rest-high-level-client</artifactId>
-             <version>${elasticsearch.version}</version>
-         </dependency>
-         <dependency>
-             <groupId>org.elasticsearch</groupId>
-             <artifactId>elasticsearch</artifactId>
              <version>${elasticsearch.version}</version>
          </dependency>
          <dependency>
@@ -432,6 +438,11 @@
              <artifactId>elasticsearch-rest-client</artifactId>
              <version>${elasticsearch.version}</version>
          </dependency>
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>transport</artifactId>
+            <version>${elasticsearch.version}</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.elasticsearch.plugin/transport-netty4-client -->
         <dependency>
             <groupId>org.elasticsearch.plugin</groupId>

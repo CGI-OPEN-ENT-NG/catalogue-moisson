@@ -30,25 +30,24 @@ public class Lep implements Serializable {
     private Long id;
 
     @NaturalId
-    @Size(min = 13, max = 13)
-    @Column(name = "ean", length = 13)
+    @Column(name = "ean")
     @JsonProperty("EAN")
-   @Field
+    @Field
     private String ean;
 
     @Column(name = "description", length = 65000)
     @JsonProperty("DESCRIPTION")
-   @Field
+    @Field
     private String description;
 
     @Column(name = "titre")
     @JsonProperty("TITRE")
-   @Field
+    @Field
     private String titre;
 
     @Column(name = "duree")
     @JsonProperty("DUREE")
-   @Field
+    @Field
     private String duree;
 
     @OneToMany(mappedBy = "lep", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -82,17 +81,21 @@ public class Lep implements Serializable {
         return ean;
     }
 
+    public void setEan(String ean) {
+        this.ean = ean;
+    }
+
     public Lep ean(String ean) {
         this.ean = ean;
         return this;
     }
 
-    public void setEan(String ean) {
-        this.ean = ean;
-    }
-
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Lep description(String description) {
@@ -100,12 +103,12 @@ public class Lep implements Serializable {
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getTitre() {
         return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
     public Lep titre(String titre) {
@@ -113,12 +116,12 @@ public class Lep implements Serializable {
         return this;
     }
 
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
     public String getDuree() {
         return duree;
+    }
+
+    public void setDuree(String duree) {
+        this.duree = duree;
     }
 
     public Lep duree(String duree) {
@@ -126,12 +129,12 @@ public class Lep implements Serializable {
         return this;
     }
 
-    public void setDuree(String duree) {
-        this.duree = duree;
-    }
-
     public Set<Condition> getConditions() {
         return conditions;
+    }
+
+    public void setConditions(Set<Condition> conditions) {
+        this.conditions = conditions;
     }
 
     public Lep conditions(Set<Condition> conditions) {
@@ -151,12 +154,12 @@ public class Lep implements Serializable {
         return this;
     }
 
-    public void setConditions(Set<Condition> conditions) {
-        this.conditions = conditions;
-    }
-
     public Offre getOffre() {
         return offre;
+    }
+
+    public void setOffre(Offre offre) {
+        this.offre = offre;
     }
 
     public Lep offre(Offre offre) {
@@ -164,21 +167,17 @@ public class Lep implements Serializable {
         return this;
     }
 
-    public void setOffre(Offre offre) {
-        this.offre = offre;
-    }
-
     public Licence getLicence() {
         return licence;
+    }
+
+    public void setLicence(Licence licence) {
+        this.licence = licence;
     }
 
     public Lep licence(Licence licence) {
         this.licence = licence;
         return this;
-    }
-
-    public void setLicence(Licence licence) {
-        this.licence = licence;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

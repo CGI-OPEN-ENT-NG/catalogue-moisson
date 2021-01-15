@@ -31,169 +31,169 @@ public class Techno implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "technologie")
     @JsonProperty("Technologie")
-   @Field
+    @Field
     private Technologie technologie;
 
     @Column(name = "version_reader")
     @JsonProperty("VersionReader")
-   @Field
+    @Field
     private String versionReader;
 
     @Column(name = "available_hors_ent")
     @JsonProperty("AvailableHorsENT")
-   @Field
+    @Field
     private Boolean availableHorsENT;
 
     @Column(name = "available_via_ent")
     @JsonProperty("AvailableViaENT")
-   @Field
+    @Field
     private Boolean availableViaENT;
 
     @Column(name = "available_via_gar")
     @JsonProperty("AvailableViaGAR")
-   @Field
+    @Field
     private Boolean availableViaGAR;
 
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "type_licence_gar", nullable = false)
     @JsonProperty("TypeLicenceGAR")
-   @Field
+    @Field
     private TypeLicenceGAR typeLicenceGAR;
 
     @Column(name = "can_use_offline")
     @JsonProperty("CanUseOffline")
-   @Field
+    @Field
     private Boolean canUseOffline;
 
     @Column(name = "one_clic")
     @JsonProperty("Oneclic")
-   @Field
+    @Field
     private Boolean oneClic;
 
     @Column(name = "export_cle_usb")
     @JsonProperty("ExportCleUSB")
-   @Field
+    @Field
     private Boolean exportCleUSB;
 
     @Column(name = "deploiement_masse")
     @JsonProperty("DeploiementMasse")
-   @Field
+    @Field
     private Boolean deploiementMasse;
 
     @Column(name = "configuration_mini_os")
     @JsonProperty("ConfigurationMiniOS")
-   @Field
+    @Field
     private String configurationMiniOS;
 
     @Column(name = "need_flash")
     @JsonProperty("NeedFlash")
-   @Field
+    @Field
     private Boolean needFlash;
 
     @Column(name = "annotations")
     @JsonProperty("Annotations")
-   @Field
+    @Field
     private Boolean annotations;
 
     @Column(name = "creation_cours")
     @JsonProperty("CreationCours")
-   @Field
+    @Field
     private Boolean creationCours;
 
     @Column(name = "nb_maxi_install")
     @JsonProperty("NbMaxiInstall")
-   @Field
-    private Integer nbMaxiInstall;
+    @Field
+    private String nbMaxiInstall;
 
     @Column(name = "nb_max_simult_connexions")
     @JsonProperty("NbMaxSimultConnexions")
-   @Field
-    private Integer nbMaxSimultConnexions;
+    @Field
+    private String nbMaxSimultConnexions;
 
     @Column(name = "web_adaptatif")
     @JsonProperty("WebAdaptatif")
-   @Field
+    @Field
     private Boolean webAdaptatif;
 
     @Column(name = "marque_page")
     @JsonProperty("MarquePage")
-   @Field
+    @Field
     private Boolean marquePage;
 
     @Column(name = "capture_image")
     @JsonProperty("CaptureImage")
-   @Field
+    @Field
     private Boolean captureImage;
 
     @Column(name = "zoom")
     @JsonProperty("Zoom")
-   @Field
+    @Field
     private Boolean zoom;
 
     @Column(name = "fonctions_recherche")
     @JsonProperty("FonctionsRecherche")
-   @Field
+    @Field
     private Boolean fonctionsRecherche;
 
     @Column(name = "corriges_pour_enseignants")
     @JsonProperty("CorrigesPourEnseignants")
-   @Field
+    @Field
     private Boolean corrigesPourEnseignants;
 
     @Column(name = "assignation_taches_eleves")
     @JsonProperty("AssignationTachesEleves")
-   @Field
+    @Field
     private Boolean assignationTachesEleves;
 
     @Column(name = "partage_contenu_eleves")
     @JsonProperty("PartageContenuEleves")
-   @Field
+    @Field
     private Boolean partageContenuEleves;
 
     @Column(name = "exercices_interactifs")
     @JsonProperty("ExercicesInteractifs")
-   @Field
+    @Field
     private Boolean exercicesInteractifs;
 
     @Column(name = "exercices_auto_corriges")
     @JsonProperty("ExercicesAutoCorriges")
-   @Field
+    @Field
     private Boolean exercicesAutoCorriges;
 
     @Column(name = "export_reponses_eleves")
     @JsonProperty("ExportReponsesEleves")
-   @Field
+    @Field
     private Boolean exportReponsesEleves;
 
     @Column(name = "import_document")
     @JsonProperty("ImportDocument")
-   @Field
+    @Field
     private Boolean importDocument;
 
     @Column(name = "export_document")
     @JsonProperty("ExportDocument")
-   @Field
+    @Field
     private Boolean exportDocument;
 
     @Column(name = "export_scorm")
     @JsonProperty("ExportSCORM")
-   @Field
+    @Field
     private Boolean exportSCORM;
 
     @Column(name = "personnalisation_user_interface")
     @JsonProperty("PersonnalisationUserInterface")
-   @Field
+    @Field
     private Boolean personnalisationUserInterface;
 
     @Column(name = "modif_contenu_editorial")
     @JsonProperty("ModifContenuEditorial")
-   @Field
+    @Field
     private Boolean modifContenuEditorial;
 
     @Column(name = "dispositif_dys")
     @JsonProperty("DispositifDYS")
-   @Field
+    @Field
     private Boolean dispositifDYS;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -391,28 +391,28 @@ public class Techno implements Serializable {
         this.creationCours = creationCours;
     }
 
-    public Integer getNbMaxiInstall() {
+    public String getNbMaxiInstall() {
         return nbMaxiInstall;
     }
 
-    public void setNbMaxiInstall(Integer nbMaxiInstall) {
+    public void setNbMaxiInstall(String nbMaxiInstall) {
         this.nbMaxiInstall = nbMaxiInstall;
     }
 
-    public Techno nbMaxiInstall(Integer nbMaxiInstall) {
+    public Techno nbMaxiInstall(String nbMaxiInstall) {
         this.nbMaxiInstall = nbMaxiInstall;
         return this;
     }
 
-    public Integer getNbMaxSimultConnexions() {
+    public String getNbMaxSimultConnexions() {
         return nbMaxSimultConnexions;
     }
 
-    public void setNbMaxSimultConnexions(Integer nbMaxSimultConnexions) {
+    public void setNbMaxSimultConnexions(String nbMaxSimultConnexions) {
         this.nbMaxSimultConnexions = nbMaxSimultConnexions;
     }
 
-    public Techno nbMaxSimultConnexions(Integer nbMaxSimultConnexions) {
+    public Techno nbMaxSimultConnexions(String nbMaxSimultConnexions) {
         this.nbMaxSimultConnexions = nbMaxSimultConnexions;
         return this;
     }

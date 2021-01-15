@@ -89,14 +89,6 @@ public class TechnoResourceIT {
     private static final Boolean DEFAULT_CREATION_COURS = false;
     private static final Boolean UPDATED_CREATION_COURS = true;
 
-    private static final Integer DEFAULT_NB_MAXI_INSTALL = 1;
-    private static final Integer UPDATED_NB_MAXI_INSTALL = 2;
-    private static final Integer SMALLER_NB_MAXI_INSTALL = 1 - 1;
-
-    private static final Integer DEFAULT_NB_MAX_SIMULT_CONNEXIONS = 1;
-    private static final Integer UPDATED_NB_MAX_SIMULT_CONNEXIONS = 2;
-    private static final Integer SMALLER_NB_MAX_SIMULT_CONNEXIONS = 1 - 1;
-
     private static final Boolean DEFAULT_WEB_ADAPTATIF = false;
     private static final Boolean UPDATED_WEB_ADAPTATIF = true;
 
@@ -148,6 +140,12 @@ public class TechnoResourceIT {
     private static final Boolean DEFAULT_DISPOSITIF_DYS = false;
     private static final Boolean UPDATED_DISPOSITIF_DYS = true;
 
+    private static final String DEFAULT_NB_MAXI_INSTALL = "AAAAAAAAAA";
+    private static final String UPDATED_NB_MAXI_INSTALL = "BBBBBBBBBB";
+
+    private static final String DEFAULT_NB_MAX_SIMULT_CONNEXIONS = "AAAAAAAAAA";
+    private static final String UPDATED_NB_MAX_SIMULT_CONNEXIONS = "BBBBBBBBBB";
+
     @Autowired
     private TechnoRepository technoRepository;
 
@@ -198,8 +196,6 @@ public class TechnoResourceIT {
             .needFlash(DEFAULT_NEED_FLASH)
             .annotations(DEFAULT_ANNOTATIONS)
             .creationCours(DEFAULT_CREATION_COURS)
-            .nbMaxiInstall(DEFAULT_NB_MAXI_INSTALL)
-            .nbMaxSimultConnexions(DEFAULT_NB_MAX_SIMULT_CONNEXIONS)
             .webAdaptatif(DEFAULT_WEB_ADAPTATIF)
             .marquePage(DEFAULT_MARQUE_PAGE)
             .captureImage(DEFAULT_CAPTURE_IMAGE)
@@ -216,7 +212,9 @@ public class TechnoResourceIT {
             .exportSCORM(DEFAULT_EXPORT_SCORM)
             .personnalisationUserInterface(DEFAULT_PERSONNALISATION_USER_INTERFACE)
             .modifContenuEditorial(DEFAULT_MODIF_CONTENU_EDITORIAL)
-            .dispositifDYS(DEFAULT_DISPOSITIF_DYS);
+            .dispositifDYS(DEFAULT_DISPOSITIF_DYS)
+            .nbMaxiInstall(DEFAULT_NB_MAXI_INSTALL)
+            .nbMaxSimultConnexions(DEFAULT_NB_MAX_SIMULT_CONNEXIONS);
         return techno;
     }
     /**
@@ -241,8 +239,6 @@ public class TechnoResourceIT {
             .needFlash(UPDATED_NEED_FLASH)
             .annotations(UPDATED_ANNOTATIONS)
             .creationCours(UPDATED_CREATION_COURS)
-            .nbMaxiInstall(UPDATED_NB_MAXI_INSTALL)
-            .nbMaxSimultConnexions(UPDATED_NB_MAX_SIMULT_CONNEXIONS)
             .webAdaptatif(UPDATED_WEB_ADAPTATIF)
             .marquePage(UPDATED_MARQUE_PAGE)
             .captureImage(UPDATED_CAPTURE_IMAGE)
@@ -259,7 +255,9 @@ public class TechnoResourceIT {
             .exportSCORM(UPDATED_EXPORT_SCORM)
             .personnalisationUserInterface(UPDATED_PERSONNALISATION_USER_INTERFACE)
             .modifContenuEditorial(UPDATED_MODIF_CONTENU_EDITORIAL)
-            .dispositifDYS(UPDATED_DISPOSITIF_DYS);
+            .dispositifDYS(UPDATED_DISPOSITIF_DYS)
+            .nbMaxiInstall(UPDATED_NB_MAXI_INSTALL)
+            .nbMaxSimultConnexions(UPDATED_NB_MAX_SIMULT_CONNEXIONS);
         return techno;
     }
 
@@ -297,8 +295,6 @@ public class TechnoResourceIT {
         assertThat(testTechno.isNeedFlash()).isEqualTo(DEFAULT_NEED_FLASH);
         assertThat(testTechno.isAnnotations()).isEqualTo(DEFAULT_ANNOTATIONS);
         assertThat(testTechno.isCreationCours()).isEqualTo(DEFAULT_CREATION_COURS);
-        assertThat(testTechno.getNbMaxiInstall()).isEqualTo(DEFAULT_NB_MAXI_INSTALL);
-        assertThat(testTechno.getNbMaxSimultConnexions()).isEqualTo(DEFAULT_NB_MAX_SIMULT_CONNEXIONS);
         assertThat(testTechno.isWebAdaptatif()).isEqualTo(DEFAULT_WEB_ADAPTATIF);
         assertThat(testTechno.isMarquePage()).isEqualTo(DEFAULT_MARQUE_PAGE);
         assertThat(testTechno.isCaptureImage()).isEqualTo(DEFAULT_CAPTURE_IMAGE);
@@ -316,6 +312,8 @@ public class TechnoResourceIT {
         assertThat(testTechno.isPersonnalisationUserInterface()).isEqualTo(DEFAULT_PERSONNALISATION_USER_INTERFACE);
         assertThat(testTechno.isModifContenuEditorial()).isEqualTo(DEFAULT_MODIF_CONTENU_EDITORIAL);
         assertThat(testTechno.isDispositifDYS()).isEqualTo(DEFAULT_DISPOSITIF_DYS);
+        assertThat(testTechno.getNbMaxiInstall()).isEqualTo(DEFAULT_NB_MAXI_INSTALL);
+        assertThat(testTechno.getNbMaxSimultConnexions()).isEqualTo(DEFAULT_NB_MAX_SIMULT_CONNEXIONS);
 
         // Validate the Techno in Elasticsearch
         verify(mockTechnoSearchRepository, times(1)).save(testTechno);
@@ -390,8 +388,6 @@ public class TechnoResourceIT {
             .andExpect(jsonPath("$.[*].needFlash").value(hasItem(DEFAULT_NEED_FLASH.booleanValue())))
             .andExpect(jsonPath("$.[*].annotations").value(hasItem(DEFAULT_ANNOTATIONS.booleanValue())))
             .andExpect(jsonPath("$.[*].creationCours").value(hasItem(DEFAULT_CREATION_COURS.booleanValue())))
-            .andExpect(jsonPath("$.[*].nbMaxiInstall").value(hasItem(DEFAULT_NB_MAXI_INSTALL)))
-            .andExpect(jsonPath("$.[*].nbMaxSimultConnexions").value(hasItem(DEFAULT_NB_MAX_SIMULT_CONNEXIONS)))
             .andExpect(jsonPath("$.[*].webAdaptatif").value(hasItem(DEFAULT_WEB_ADAPTATIF.booleanValue())))
             .andExpect(jsonPath("$.[*].marquePage").value(hasItem(DEFAULT_MARQUE_PAGE.booleanValue())))
             .andExpect(jsonPath("$.[*].captureImage").value(hasItem(DEFAULT_CAPTURE_IMAGE.booleanValue())))
@@ -408,7 +404,9 @@ public class TechnoResourceIT {
             .andExpect(jsonPath("$.[*].exportSCORM").value(hasItem(DEFAULT_EXPORT_SCORM.booleanValue())))
             .andExpect(jsonPath("$.[*].personnalisationUserInterface").value(hasItem(DEFAULT_PERSONNALISATION_USER_INTERFACE.booleanValue())))
             .andExpect(jsonPath("$.[*].modifContenuEditorial").value(hasItem(DEFAULT_MODIF_CONTENU_EDITORIAL.booleanValue())))
-            .andExpect(jsonPath("$.[*].dispositifDYS").value(hasItem(DEFAULT_DISPOSITIF_DYS.booleanValue())));
+            .andExpect(jsonPath("$.[*].dispositifDYS").value(hasItem(DEFAULT_DISPOSITIF_DYS.booleanValue())))
+            .andExpect(jsonPath("$.[*].nbMaxiInstall").value(hasItem(DEFAULT_NB_MAXI_INSTALL)))
+            .andExpect(jsonPath("$.[*].nbMaxSimultConnexions").value(hasItem(DEFAULT_NB_MAX_SIMULT_CONNEXIONS)));
     }
     
     @Test
@@ -436,8 +434,6 @@ public class TechnoResourceIT {
             .andExpect(jsonPath("$.needFlash").value(DEFAULT_NEED_FLASH.booleanValue()))
             .andExpect(jsonPath("$.annotations").value(DEFAULT_ANNOTATIONS.booleanValue()))
             .andExpect(jsonPath("$.creationCours").value(DEFAULT_CREATION_COURS.booleanValue()))
-            .andExpect(jsonPath("$.nbMaxiInstall").value(DEFAULT_NB_MAXI_INSTALL))
-            .andExpect(jsonPath("$.nbMaxSimultConnexions").value(DEFAULT_NB_MAX_SIMULT_CONNEXIONS))
             .andExpect(jsonPath("$.webAdaptatif").value(DEFAULT_WEB_ADAPTATIF.booleanValue()))
             .andExpect(jsonPath("$.marquePage").value(DEFAULT_MARQUE_PAGE.booleanValue()))
             .andExpect(jsonPath("$.captureImage").value(DEFAULT_CAPTURE_IMAGE.booleanValue()))
@@ -454,7 +450,9 @@ public class TechnoResourceIT {
             .andExpect(jsonPath("$.exportSCORM").value(DEFAULT_EXPORT_SCORM.booleanValue()))
             .andExpect(jsonPath("$.personnalisationUserInterface").value(DEFAULT_PERSONNALISATION_USER_INTERFACE.booleanValue()))
             .andExpect(jsonPath("$.modifContenuEditorial").value(DEFAULT_MODIF_CONTENU_EDITORIAL.booleanValue()))
-            .andExpect(jsonPath("$.dispositifDYS").value(DEFAULT_DISPOSITIF_DYS.booleanValue()));
+            .andExpect(jsonPath("$.dispositifDYS").value(DEFAULT_DISPOSITIF_DYS.booleanValue()))
+            .andExpect(jsonPath("$.nbMaxiInstall").value(DEFAULT_NB_MAXI_INSTALL))
+            .andExpect(jsonPath("$.nbMaxSimultConnexions").value(DEFAULT_NB_MAX_SIMULT_CONNEXIONS));
     }
 
 
@@ -1256,216 +1254,6 @@ public class TechnoResourceIT {
         // Get all the technoList where creationCours is null
         defaultTechnoShouldNotBeFound("creationCours.specified=false");
     }
-
-    @Test
-    @Transactional
-    public void getAllTechnosByNbMaxiInstallIsEqualToSomething() throws Exception {
-        // Initialize the database
-        technoRepository.saveAndFlush(techno);
-
-        // Get all the technoList where nbMaxiInstall equals to DEFAULT_NB_MAXI_INSTALL
-        defaultTechnoShouldBeFound("nbMaxiInstall.equals=" + DEFAULT_NB_MAXI_INSTALL);
-
-        // Get all the technoList where nbMaxiInstall equals to UPDATED_NB_MAXI_INSTALL
-        defaultTechnoShouldNotBeFound("nbMaxiInstall.equals=" + UPDATED_NB_MAXI_INSTALL);
-    }
-
-    @Test
-    @Transactional
-    public void getAllTechnosByNbMaxiInstallIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        technoRepository.saveAndFlush(techno);
-
-        // Get all the technoList where nbMaxiInstall not equals to DEFAULT_NB_MAXI_INSTALL
-        defaultTechnoShouldNotBeFound("nbMaxiInstall.notEquals=" + DEFAULT_NB_MAXI_INSTALL);
-
-        // Get all the technoList where nbMaxiInstall not equals to UPDATED_NB_MAXI_INSTALL
-        defaultTechnoShouldBeFound("nbMaxiInstall.notEquals=" + UPDATED_NB_MAXI_INSTALL);
-    }
-
-    @Test
-    @Transactional
-    public void getAllTechnosByNbMaxiInstallIsInShouldWork() throws Exception {
-        // Initialize the database
-        technoRepository.saveAndFlush(techno);
-
-        // Get all the technoList where nbMaxiInstall in DEFAULT_NB_MAXI_INSTALL or UPDATED_NB_MAXI_INSTALL
-        defaultTechnoShouldBeFound("nbMaxiInstall.in=" + DEFAULT_NB_MAXI_INSTALL + "," + UPDATED_NB_MAXI_INSTALL);
-
-        // Get all the technoList where nbMaxiInstall equals to UPDATED_NB_MAXI_INSTALL
-        defaultTechnoShouldNotBeFound("nbMaxiInstall.in=" + UPDATED_NB_MAXI_INSTALL);
-    }
-
-    @Test
-    @Transactional
-    public void getAllTechnosByNbMaxiInstallIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        technoRepository.saveAndFlush(techno);
-
-        // Get all the technoList where nbMaxiInstall is not null
-        defaultTechnoShouldBeFound("nbMaxiInstall.specified=true");
-
-        // Get all the technoList where nbMaxiInstall is null
-        defaultTechnoShouldNotBeFound("nbMaxiInstall.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllTechnosByNbMaxiInstallIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        technoRepository.saveAndFlush(techno);
-
-        // Get all the technoList where nbMaxiInstall is greater than or equal to DEFAULT_NB_MAXI_INSTALL
-        defaultTechnoShouldBeFound("nbMaxiInstall.greaterThanOrEqual=" + DEFAULT_NB_MAXI_INSTALL);
-
-        // Get all the technoList where nbMaxiInstall is greater than or equal to UPDATED_NB_MAXI_INSTALL
-        defaultTechnoShouldNotBeFound("nbMaxiInstall.greaterThanOrEqual=" + UPDATED_NB_MAXI_INSTALL);
-    }
-
-    @Test
-    @Transactional
-    public void getAllTechnosByNbMaxiInstallIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        technoRepository.saveAndFlush(techno);
-
-        // Get all the technoList where nbMaxiInstall is less than or equal to DEFAULT_NB_MAXI_INSTALL
-        defaultTechnoShouldBeFound("nbMaxiInstall.lessThanOrEqual=" + DEFAULT_NB_MAXI_INSTALL);
-
-        // Get all the technoList where nbMaxiInstall is less than or equal to SMALLER_NB_MAXI_INSTALL
-        defaultTechnoShouldNotBeFound("nbMaxiInstall.lessThanOrEqual=" + SMALLER_NB_MAXI_INSTALL);
-    }
-
-    @Test
-    @Transactional
-    public void getAllTechnosByNbMaxiInstallIsLessThanSomething() throws Exception {
-        // Initialize the database
-        technoRepository.saveAndFlush(techno);
-
-        // Get all the technoList where nbMaxiInstall is less than DEFAULT_NB_MAXI_INSTALL
-        defaultTechnoShouldNotBeFound("nbMaxiInstall.lessThan=" + DEFAULT_NB_MAXI_INSTALL);
-
-        // Get all the technoList where nbMaxiInstall is less than UPDATED_NB_MAXI_INSTALL
-        defaultTechnoShouldBeFound("nbMaxiInstall.lessThan=" + UPDATED_NB_MAXI_INSTALL);
-    }
-
-    @Test
-    @Transactional
-    public void getAllTechnosByNbMaxiInstallIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        technoRepository.saveAndFlush(techno);
-
-        // Get all the technoList where nbMaxiInstall is greater than DEFAULT_NB_MAXI_INSTALL
-        defaultTechnoShouldNotBeFound("nbMaxiInstall.greaterThan=" + DEFAULT_NB_MAXI_INSTALL);
-
-        // Get all the technoList where nbMaxiInstall is greater than SMALLER_NB_MAXI_INSTALL
-        defaultTechnoShouldBeFound("nbMaxiInstall.greaterThan=" + SMALLER_NB_MAXI_INSTALL);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllTechnosByNbMaxSimultConnexionsIsEqualToSomething() throws Exception {
-        // Initialize the database
-        technoRepository.saveAndFlush(techno);
-
-        // Get all the technoList where nbMaxSimultConnexions equals to DEFAULT_NB_MAX_SIMULT_CONNEXIONS
-        defaultTechnoShouldBeFound("nbMaxSimultConnexions.equals=" + DEFAULT_NB_MAX_SIMULT_CONNEXIONS);
-
-        // Get all the technoList where nbMaxSimultConnexions equals to UPDATED_NB_MAX_SIMULT_CONNEXIONS
-        defaultTechnoShouldNotBeFound("nbMaxSimultConnexions.equals=" + UPDATED_NB_MAX_SIMULT_CONNEXIONS);
-    }
-
-    @Test
-    @Transactional
-    public void getAllTechnosByNbMaxSimultConnexionsIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        technoRepository.saveAndFlush(techno);
-
-        // Get all the technoList where nbMaxSimultConnexions not equals to DEFAULT_NB_MAX_SIMULT_CONNEXIONS
-        defaultTechnoShouldNotBeFound("nbMaxSimultConnexions.notEquals=" + DEFAULT_NB_MAX_SIMULT_CONNEXIONS);
-
-        // Get all the technoList where nbMaxSimultConnexions not equals to UPDATED_NB_MAX_SIMULT_CONNEXIONS
-        defaultTechnoShouldBeFound("nbMaxSimultConnexions.notEquals=" + UPDATED_NB_MAX_SIMULT_CONNEXIONS);
-    }
-
-    @Test
-    @Transactional
-    public void getAllTechnosByNbMaxSimultConnexionsIsInShouldWork() throws Exception {
-        // Initialize the database
-        technoRepository.saveAndFlush(techno);
-
-        // Get all the technoList where nbMaxSimultConnexions in DEFAULT_NB_MAX_SIMULT_CONNEXIONS or UPDATED_NB_MAX_SIMULT_CONNEXIONS
-        defaultTechnoShouldBeFound("nbMaxSimultConnexions.in=" + DEFAULT_NB_MAX_SIMULT_CONNEXIONS + "," + UPDATED_NB_MAX_SIMULT_CONNEXIONS);
-
-        // Get all the technoList where nbMaxSimultConnexions equals to UPDATED_NB_MAX_SIMULT_CONNEXIONS
-        defaultTechnoShouldNotBeFound("nbMaxSimultConnexions.in=" + UPDATED_NB_MAX_SIMULT_CONNEXIONS);
-    }
-
-    @Test
-    @Transactional
-    public void getAllTechnosByNbMaxSimultConnexionsIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        technoRepository.saveAndFlush(techno);
-
-        // Get all the technoList where nbMaxSimultConnexions is not null
-        defaultTechnoShouldBeFound("nbMaxSimultConnexions.specified=true");
-
-        // Get all the technoList where nbMaxSimultConnexions is null
-        defaultTechnoShouldNotBeFound("nbMaxSimultConnexions.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllTechnosByNbMaxSimultConnexionsIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        technoRepository.saveAndFlush(techno);
-
-        // Get all the technoList where nbMaxSimultConnexions is greater than or equal to DEFAULT_NB_MAX_SIMULT_CONNEXIONS
-        defaultTechnoShouldBeFound("nbMaxSimultConnexions.greaterThanOrEqual=" + DEFAULT_NB_MAX_SIMULT_CONNEXIONS);
-
-        // Get all the technoList where nbMaxSimultConnexions is greater than or equal to UPDATED_NB_MAX_SIMULT_CONNEXIONS
-        defaultTechnoShouldNotBeFound("nbMaxSimultConnexions.greaterThanOrEqual=" + UPDATED_NB_MAX_SIMULT_CONNEXIONS);
-    }
-
-    @Test
-    @Transactional
-    public void getAllTechnosByNbMaxSimultConnexionsIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        technoRepository.saveAndFlush(techno);
-
-        // Get all the technoList where nbMaxSimultConnexions is less than or equal to DEFAULT_NB_MAX_SIMULT_CONNEXIONS
-        defaultTechnoShouldBeFound("nbMaxSimultConnexions.lessThanOrEqual=" + DEFAULT_NB_MAX_SIMULT_CONNEXIONS);
-
-        // Get all the technoList where nbMaxSimultConnexions is less than or equal to SMALLER_NB_MAX_SIMULT_CONNEXIONS
-        defaultTechnoShouldNotBeFound("nbMaxSimultConnexions.lessThanOrEqual=" + SMALLER_NB_MAX_SIMULT_CONNEXIONS);
-    }
-
-    @Test
-    @Transactional
-    public void getAllTechnosByNbMaxSimultConnexionsIsLessThanSomething() throws Exception {
-        // Initialize the database
-        technoRepository.saveAndFlush(techno);
-
-        // Get all the technoList where nbMaxSimultConnexions is less than DEFAULT_NB_MAX_SIMULT_CONNEXIONS
-        defaultTechnoShouldNotBeFound("nbMaxSimultConnexions.lessThan=" + DEFAULT_NB_MAX_SIMULT_CONNEXIONS);
-
-        // Get all the technoList where nbMaxSimultConnexions is less than UPDATED_NB_MAX_SIMULT_CONNEXIONS
-        defaultTechnoShouldBeFound("nbMaxSimultConnexions.lessThan=" + UPDATED_NB_MAX_SIMULT_CONNEXIONS);
-    }
-
-    @Test
-    @Transactional
-    public void getAllTechnosByNbMaxSimultConnexionsIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        technoRepository.saveAndFlush(techno);
-
-        // Get all the technoList where nbMaxSimultConnexions is greater than DEFAULT_NB_MAX_SIMULT_CONNEXIONS
-        defaultTechnoShouldNotBeFound("nbMaxSimultConnexions.greaterThan=" + DEFAULT_NB_MAX_SIMULT_CONNEXIONS);
-
-        // Get all the technoList where nbMaxSimultConnexions is greater than SMALLER_NB_MAX_SIMULT_CONNEXIONS
-        defaultTechnoShouldBeFound("nbMaxSimultConnexions.greaterThan=" + SMALLER_NB_MAX_SIMULT_CONNEXIONS);
-    }
-
 
     @Test
     @Transactional
@@ -2353,6 +2141,162 @@ public class TechnoResourceIT {
 
     @Test
     @Transactional
+    public void getAllTechnosByNbMaxiInstallIsEqualToSomething() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+
+        // Get all the technoList where nbMaxiInstall equals to DEFAULT_NB_MAXI_INSTALL
+        defaultTechnoShouldBeFound("nbMaxiInstall.equals=" + DEFAULT_NB_MAXI_INSTALL);
+
+        // Get all the technoList where nbMaxiInstall equals to UPDATED_NB_MAXI_INSTALL
+        defaultTechnoShouldNotBeFound("nbMaxiInstall.equals=" + UPDATED_NB_MAXI_INSTALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTechnosByNbMaxiInstallIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+
+        // Get all the technoList where nbMaxiInstall not equals to DEFAULT_NB_MAXI_INSTALL
+        defaultTechnoShouldNotBeFound("nbMaxiInstall.notEquals=" + DEFAULT_NB_MAXI_INSTALL);
+
+        // Get all the technoList where nbMaxiInstall not equals to UPDATED_NB_MAXI_INSTALL
+        defaultTechnoShouldBeFound("nbMaxiInstall.notEquals=" + UPDATED_NB_MAXI_INSTALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTechnosByNbMaxiInstallIsInShouldWork() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+
+        // Get all the technoList where nbMaxiInstall in DEFAULT_NB_MAXI_INSTALL or UPDATED_NB_MAXI_INSTALL
+        defaultTechnoShouldBeFound("nbMaxiInstall.in=" + DEFAULT_NB_MAXI_INSTALL + "," + UPDATED_NB_MAXI_INSTALL);
+
+        // Get all the technoList where nbMaxiInstall equals to UPDATED_NB_MAXI_INSTALL
+        defaultTechnoShouldNotBeFound("nbMaxiInstall.in=" + UPDATED_NB_MAXI_INSTALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTechnosByNbMaxiInstallIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+
+        // Get all the technoList where nbMaxiInstall is not null
+        defaultTechnoShouldBeFound("nbMaxiInstall.specified=true");
+
+        // Get all the technoList where nbMaxiInstall is null
+        defaultTechnoShouldNotBeFound("nbMaxiInstall.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllTechnosByNbMaxiInstallContainsSomething() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+
+        // Get all the technoList where nbMaxiInstall contains DEFAULT_NB_MAXI_INSTALL
+        defaultTechnoShouldBeFound("nbMaxiInstall.contains=" + DEFAULT_NB_MAXI_INSTALL);
+
+        // Get all the technoList where nbMaxiInstall contains UPDATED_NB_MAXI_INSTALL
+        defaultTechnoShouldNotBeFound("nbMaxiInstall.contains=" + UPDATED_NB_MAXI_INSTALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTechnosByNbMaxiInstallNotContainsSomething() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+
+        // Get all the technoList where nbMaxiInstall does not contain DEFAULT_NB_MAXI_INSTALL
+        defaultTechnoShouldNotBeFound("nbMaxiInstall.doesNotContain=" + DEFAULT_NB_MAXI_INSTALL);
+
+        // Get all the technoList where nbMaxiInstall does not contain UPDATED_NB_MAXI_INSTALL
+        defaultTechnoShouldBeFound("nbMaxiInstall.doesNotContain=" + UPDATED_NB_MAXI_INSTALL);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllTechnosByNbMaxSimultConnexionsIsEqualToSomething() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+
+        // Get all the technoList where nbMaxSimultConnexions equals to DEFAULT_NB_MAX_SIMULT_CONNEXIONS
+        defaultTechnoShouldBeFound("nbMaxSimultConnexions.equals=" + DEFAULT_NB_MAX_SIMULT_CONNEXIONS);
+
+        // Get all the technoList where nbMaxSimultConnexions equals to UPDATED_NB_MAX_SIMULT_CONNEXIONS
+        defaultTechnoShouldNotBeFound("nbMaxSimultConnexions.equals=" + UPDATED_NB_MAX_SIMULT_CONNEXIONS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTechnosByNbMaxSimultConnexionsIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+
+        // Get all the technoList where nbMaxSimultConnexions not equals to DEFAULT_NB_MAX_SIMULT_CONNEXIONS
+        defaultTechnoShouldNotBeFound("nbMaxSimultConnexions.notEquals=" + DEFAULT_NB_MAX_SIMULT_CONNEXIONS);
+
+        // Get all the technoList where nbMaxSimultConnexions not equals to UPDATED_NB_MAX_SIMULT_CONNEXIONS
+        defaultTechnoShouldBeFound("nbMaxSimultConnexions.notEquals=" + UPDATED_NB_MAX_SIMULT_CONNEXIONS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTechnosByNbMaxSimultConnexionsIsInShouldWork() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+
+        // Get all the technoList where nbMaxSimultConnexions in DEFAULT_NB_MAX_SIMULT_CONNEXIONS or UPDATED_NB_MAX_SIMULT_CONNEXIONS
+        defaultTechnoShouldBeFound("nbMaxSimultConnexions.in=" + DEFAULT_NB_MAX_SIMULT_CONNEXIONS + "," + UPDATED_NB_MAX_SIMULT_CONNEXIONS);
+
+        // Get all the technoList where nbMaxSimultConnexions equals to UPDATED_NB_MAX_SIMULT_CONNEXIONS
+        defaultTechnoShouldNotBeFound("nbMaxSimultConnexions.in=" + UPDATED_NB_MAX_SIMULT_CONNEXIONS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTechnosByNbMaxSimultConnexionsIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+
+        // Get all the technoList where nbMaxSimultConnexions is not null
+        defaultTechnoShouldBeFound("nbMaxSimultConnexions.specified=true");
+
+        // Get all the technoList where nbMaxSimultConnexions is null
+        defaultTechnoShouldNotBeFound("nbMaxSimultConnexions.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllTechnosByNbMaxSimultConnexionsContainsSomething() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+
+        // Get all the technoList where nbMaxSimultConnexions contains DEFAULT_NB_MAX_SIMULT_CONNEXIONS
+        defaultTechnoShouldBeFound("nbMaxSimultConnexions.contains=" + DEFAULT_NB_MAX_SIMULT_CONNEXIONS);
+
+        // Get all the technoList where nbMaxSimultConnexions contains UPDATED_NB_MAX_SIMULT_CONNEXIONS
+        defaultTechnoShouldNotBeFound("nbMaxSimultConnexions.contains=" + UPDATED_NB_MAX_SIMULT_CONNEXIONS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTechnosByNbMaxSimultConnexionsNotContainsSomething() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+
+        // Get all the technoList where nbMaxSimultConnexions does not contain DEFAULT_NB_MAX_SIMULT_CONNEXIONS
+        defaultTechnoShouldNotBeFound("nbMaxSimultConnexions.doesNotContain=" + DEFAULT_NB_MAX_SIMULT_CONNEXIONS);
+
+        // Get all the technoList where nbMaxSimultConnexions does not contain UPDATED_NB_MAX_SIMULT_CONNEXIONS
+        defaultTechnoShouldBeFound("nbMaxSimultConnexions.doesNotContain=" + UPDATED_NB_MAX_SIMULT_CONNEXIONS);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllTechnosByArticleNumeriqueIsEqualToSomething() throws Exception {
         // Initialize the database
         technoRepository.saveAndFlush(techno);
@@ -2392,8 +2336,6 @@ public class TechnoResourceIT {
             .andExpect(jsonPath("$.[*].needFlash").value(hasItem(DEFAULT_NEED_FLASH.booleanValue())))
             .andExpect(jsonPath("$.[*].annotations").value(hasItem(DEFAULT_ANNOTATIONS.booleanValue())))
             .andExpect(jsonPath("$.[*].creationCours").value(hasItem(DEFAULT_CREATION_COURS.booleanValue())))
-            .andExpect(jsonPath("$.[*].nbMaxiInstall").value(hasItem(DEFAULT_NB_MAXI_INSTALL)))
-            .andExpect(jsonPath("$.[*].nbMaxSimultConnexions").value(hasItem(DEFAULT_NB_MAX_SIMULT_CONNEXIONS)))
             .andExpect(jsonPath("$.[*].webAdaptatif").value(hasItem(DEFAULT_WEB_ADAPTATIF.booleanValue())))
             .andExpect(jsonPath("$.[*].marquePage").value(hasItem(DEFAULT_MARQUE_PAGE.booleanValue())))
             .andExpect(jsonPath("$.[*].captureImage").value(hasItem(DEFAULT_CAPTURE_IMAGE.booleanValue())))
@@ -2410,7 +2352,9 @@ public class TechnoResourceIT {
             .andExpect(jsonPath("$.[*].exportSCORM").value(hasItem(DEFAULT_EXPORT_SCORM.booleanValue())))
             .andExpect(jsonPath("$.[*].personnalisationUserInterface").value(hasItem(DEFAULT_PERSONNALISATION_USER_INTERFACE.booleanValue())))
             .andExpect(jsonPath("$.[*].modifContenuEditorial").value(hasItem(DEFAULT_MODIF_CONTENU_EDITORIAL.booleanValue())))
-            .andExpect(jsonPath("$.[*].dispositifDYS").value(hasItem(DEFAULT_DISPOSITIF_DYS.booleanValue())));
+            .andExpect(jsonPath("$.[*].dispositifDYS").value(hasItem(DEFAULT_DISPOSITIF_DYS.booleanValue())))
+            .andExpect(jsonPath("$.[*].nbMaxiInstall").value(hasItem(DEFAULT_NB_MAXI_INSTALL)))
+            .andExpect(jsonPath("$.[*].nbMaxSimultConnexions").value(hasItem(DEFAULT_NB_MAX_SIMULT_CONNEXIONS)));
 
         // Check, that the count call also returns 1
         restTechnoMockMvc.perform(get("/api/technos/count?sort=id,desc&" + filter))
@@ -2471,8 +2415,6 @@ public class TechnoResourceIT {
             .needFlash(UPDATED_NEED_FLASH)
             .annotations(UPDATED_ANNOTATIONS)
             .creationCours(UPDATED_CREATION_COURS)
-            .nbMaxiInstall(UPDATED_NB_MAXI_INSTALL)
-            .nbMaxSimultConnexions(UPDATED_NB_MAX_SIMULT_CONNEXIONS)
             .webAdaptatif(UPDATED_WEB_ADAPTATIF)
             .marquePage(UPDATED_MARQUE_PAGE)
             .captureImage(UPDATED_CAPTURE_IMAGE)
@@ -2489,7 +2431,9 @@ public class TechnoResourceIT {
             .exportSCORM(UPDATED_EXPORT_SCORM)
             .personnalisationUserInterface(UPDATED_PERSONNALISATION_USER_INTERFACE)
             .modifContenuEditorial(UPDATED_MODIF_CONTENU_EDITORIAL)
-            .dispositifDYS(UPDATED_DISPOSITIF_DYS);
+            .dispositifDYS(UPDATED_DISPOSITIF_DYS)
+            .nbMaxiInstall(UPDATED_NB_MAXI_INSTALL)
+            .nbMaxSimultConnexions(UPDATED_NB_MAX_SIMULT_CONNEXIONS);
         TechnoDTO technoDTO = technoMapper.toDto(updatedTechno);
 
         restTechnoMockMvc.perform(put("/api/technos")
@@ -2515,8 +2459,6 @@ public class TechnoResourceIT {
         assertThat(testTechno.isNeedFlash()).isEqualTo(UPDATED_NEED_FLASH);
         assertThat(testTechno.isAnnotations()).isEqualTo(UPDATED_ANNOTATIONS);
         assertThat(testTechno.isCreationCours()).isEqualTo(UPDATED_CREATION_COURS);
-        assertThat(testTechno.getNbMaxiInstall()).isEqualTo(UPDATED_NB_MAXI_INSTALL);
-        assertThat(testTechno.getNbMaxSimultConnexions()).isEqualTo(UPDATED_NB_MAX_SIMULT_CONNEXIONS);
         assertThat(testTechno.isWebAdaptatif()).isEqualTo(UPDATED_WEB_ADAPTATIF);
         assertThat(testTechno.isMarquePage()).isEqualTo(UPDATED_MARQUE_PAGE);
         assertThat(testTechno.isCaptureImage()).isEqualTo(UPDATED_CAPTURE_IMAGE);
@@ -2534,6 +2476,8 @@ public class TechnoResourceIT {
         assertThat(testTechno.isPersonnalisationUserInterface()).isEqualTo(UPDATED_PERSONNALISATION_USER_INTERFACE);
         assertThat(testTechno.isModifContenuEditorial()).isEqualTo(UPDATED_MODIF_CONTENU_EDITORIAL);
         assertThat(testTechno.isDispositifDYS()).isEqualTo(UPDATED_DISPOSITIF_DYS);
+        assertThat(testTechno.getNbMaxiInstall()).isEqualTo(UPDATED_NB_MAXI_INSTALL);
+        assertThat(testTechno.getNbMaxSimultConnexions()).isEqualTo(UPDATED_NB_MAX_SIMULT_CONNEXIONS);
 
         // Validate the Techno in Elasticsearch
         verify(mockTechnoSearchRepository, times(1)).save(testTechno);
@@ -2610,8 +2554,6 @@ public class TechnoResourceIT {
             .andExpect(jsonPath("$.[*].needFlash").value(hasItem(DEFAULT_NEED_FLASH.booleanValue())))
             .andExpect(jsonPath("$.[*].annotations").value(hasItem(DEFAULT_ANNOTATIONS.booleanValue())))
             .andExpect(jsonPath("$.[*].creationCours").value(hasItem(DEFAULT_CREATION_COURS.booleanValue())))
-            .andExpect(jsonPath("$.[*].nbMaxiInstall").value(hasItem(DEFAULT_NB_MAXI_INSTALL)))
-            .andExpect(jsonPath("$.[*].nbMaxSimultConnexions").value(hasItem(DEFAULT_NB_MAX_SIMULT_CONNEXIONS)))
             .andExpect(jsonPath("$.[*].webAdaptatif").value(hasItem(DEFAULT_WEB_ADAPTATIF.booleanValue())))
             .andExpect(jsonPath("$.[*].marquePage").value(hasItem(DEFAULT_MARQUE_PAGE.booleanValue())))
             .andExpect(jsonPath("$.[*].captureImage").value(hasItem(DEFAULT_CAPTURE_IMAGE.booleanValue())))
@@ -2628,6 +2570,8 @@ public class TechnoResourceIT {
             .andExpect(jsonPath("$.[*].exportSCORM").value(hasItem(DEFAULT_EXPORT_SCORM.booleanValue())))
             .andExpect(jsonPath("$.[*].personnalisationUserInterface").value(hasItem(DEFAULT_PERSONNALISATION_USER_INTERFACE.booleanValue())))
             .andExpect(jsonPath("$.[*].modifContenuEditorial").value(hasItem(DEFAULT_MODIF_CONTENU_EDITORIAL.booleanValue())))
-            .andExpect(jsonPath("$.[*].dispositifDYS").value(hasItem(DEFAULT_DISPOSITIF_DYS.booleanValue())));
+            .andExpect(jsonPath("$.[*].dispositifDYS").value(hasItem(DEFAULT_DISPOSITIF_DYS.booleanValue())))
+            .andExpect(jsonPath("$.[*].nbMaxiInstall").value(hasItem(DEFAULT_NB_MAXI_INSTALL)))
+            .andExpect(jsonPath("$.[*].nbMaxSimultConnexions").value(hasItem(DEFAULT_NB_MAX_SIMULT_CONNEXIONS)));
     }
 }

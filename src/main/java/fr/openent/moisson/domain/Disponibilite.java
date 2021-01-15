@@ -34,25 +34,25 @@ public class Disponibilite implements Serializable {
 
     @Column(name = "commentaire")
     @JsonProperty("COMMENTAIRE")
-   @Field
+    @Field
     private String commentaire;
 
     @Column(name = "date_disponibilite")
     @JsonProperty("DATE_DISPO")
     @JsonDeserialize(using = MoissonCustomInstantDeserializer.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern= "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
     @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "uuuu-MM-dd'T'HH:mm:ss.SSSX || uuuu-MM-dd'T'HH:mm:ss.SSSXX || uuuu-MM-dd'T'HH:mm:ss.SSSXXX || uuuu-MM-dd'T'HH:mm:ss.SSSXXXX || uuuu-MM-dd'T'HH:mm:ss.SSSXXXXX")
     private Instant dateDisponibilite;
 
     @Column(name = "commandable")
     @JsonProperty("COMMANDABLE")
-   @Field
+    @Field
     private Boolean commandable;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "valeur")
     @JsonProperty("VALEUR")
-   @Field
+    @Field
     private DisponibiliteEnum valeur;
 
     @OneToOne(mappedBy = "disponibilite")
@@ -76,26 +76,26 @@ public class Disponibilite implements Serializable {
         return commentaire;
     }
 
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
+
     public Disponibilite commentaire(String commentaire) {
         this.commentaire = commentaire;
         return this;
-    }
-
-    public void setCommentaire(String commentaire) {
-        this.commentaire = commentaire;
     }
 
     public Instant getDateDisponibilite() {
         return dateDisponibilite;
     }
 
+    public void setDateDisponibilite(Instant dateDisponibilite) {
+        this.dateDisponibilite = dateDisponibilite;
+    }
+
     public Disponibilite dateDisponibilite(Instant dateDisponibilite) {
         this.dateDisponibilite = dateDisponibilite;
         return this;
-    }
-
-    public void setDateDisponibilite(Instant dateDisponibilite) {
-        this.dateDisponibilite = dateDisponibilite;
     }
 
     public Boolean isCommandable() {
@@ -115,17 +115,21 @@ public class Disponibilite implements Serializable {
         return valeur;
     }
 
+    public void setValeur(DisponibiliteEnum valeur) {
+        this.valeur = valeur;
+    }
+
     public Disponibilite valeur(DisponibiliteEnum valeur) {
         this.valeur = valeur;
         return this;
     }
 
-    public void setValeur(DisponibiliteEnum valeur) {
-        this.valeur = valeur;
-    }
-
     public ArticlePapier getArticlePapier() {
         return articlePapier;
+    }
+
+    public void setArticlePapier(ArticlePapier articlePapier) {
+        this.articlePapier = articlePapier;
     }
 
     public Disponibilite articlePapier(ArticlePapier articlePapier) {
@@ -133,21 +137,17 @@ public class Disponibilite implements Serializable {
         return this;
     }
 
-    public void setArticlePapier(ArticlePapier articlePapier) {
-        this.articlePapier = articlePapier;
-    }
-
     public ArticleNumerique getArticleNumerique() {
         return articleNumerique;
+    }
+
+    public void setArticleNumerique(ArticleNumerique articleNumerique) {
+        this.articleNumerique = articleNumerique;
     }
 
     public Disponibilite articleNumerique(ArticleNumerique articleNumerique) {
         this.articleNumerique = articleNumerique;
         return this;
-    }
-
-    public void setArticleNumerique(ArticleNumerique articleNumerique) {
-        this.articleNumerique = articleNumerique;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

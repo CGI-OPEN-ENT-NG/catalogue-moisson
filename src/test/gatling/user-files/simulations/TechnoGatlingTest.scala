@@ -86,8 +86,6 @@ class TechnoGatlingTest extends Simulation {
                 , "needFlash":null
                 , "annotations":null
                 , "creationCours":null
-                , "nbMaxiInstall":"0"
-                , "nbMaxSimultConnexions":"0"
                 , "webAdaptatif":null
                 , "marquePage":null
                 , "captureImage":null
@@ -105,6 +103,8 @@ class TechnoGatlingTest extends Simulation {
                 , "personnalisationUserInterface":null
                 , "modifContenuEditorial":null
                 , "dispositifDYS":null
+                , "nbMaxiInstall":"SAMPLE_TEXT"
+                , "nbMaxSimultConnexions":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_techno_url"))).exitHereIfFailed

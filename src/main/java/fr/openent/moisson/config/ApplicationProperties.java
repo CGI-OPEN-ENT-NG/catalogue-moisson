@@ -12,22 +12,56 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 @ConstructorBinding
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
-    private final Libraire libraire;
 
+    private final Indices indices;
+    private final Libraire libraire;
     private final Scheduler scheduler;
 
-    public ApplicationProperties(Libraire libraire,
+    public ApplicationProperties(Indices indices, Libraire libraire,
                                  Scheduler scheduler) {
+        this.indices = indices;
         this.libraire = libraire;
         this.scheduler = scheduler;
     }
 
-    public static class Libraire{
+    public Indices getIndices() {
+        return indices;
+    }
+
+    public Libraire getLibraire() {
+        return libraire;
+    }
+
+    public Scheduler getScheduler() {
+        return scheduler;
+    }
+
+    public static class Indices {
+        private final String indexArticlePapier;
+        private final String indexArticleNumerique;
+
+        public Indices(String indexArticlePapier,
+                       String indexArticleNumerique) {
+            this.indexArticlePapier = indexArticlePapier;
+            this.indexArticleNumerique = indexArticleNumerique;
+        }
+
+        public String getIndexArticlePapier() {
+            return indexArticlePapier;
+        }
+
+        public String getIndexArticleNumerique() {
+            return indexArticleNumerique;
+        }
+
+    }
+
+    public static class Libraire {
         private final String urlArticlePapier;
         private final String urlArticleNumerique;
 
         public Libraire(String urlArticlePapier,
-                             String urlArticleNumerique) {
+                        String urlArticleNumerique) {
             this.urlArticlePapier = urlArticlePapier;
             this.urlArticleNumerique = urlArticleNumerique;
         }
@@ -41,12 +75,9 @@ public class ApplicationProperties {
         }
     }
 
-    public Libraire getLibraire() {
-        return libraire;
-    }
-
-    public static class Scheduler{
+    public static class Scheduler {
         private final String cron;
+
         public Scheduler(String cron) {
             this.cron = cron;
         }
@@ -54,9 +85,5 @@ public class ApplicationProperties {
         public String getCron() {
             return cron;
         }
-    }
-
-    public Scheduler getScheduler() {
-        return scheduler;
     }
 }

@@ -5,7 +5,7 @@ import fr.openent.moisson.domain.search.ElasticSearchConstants;
 public enum TvaESEnum {
 
     /*
-     * CONSTANTES pour TitrePublieES
+     * CONSTANTES pour TvaESEnum
      */
     ID("id", ElasticSearchConstants.TEXT),
     TAUX("taux", ElasticSearchConstants.SCALED_FLOAT),

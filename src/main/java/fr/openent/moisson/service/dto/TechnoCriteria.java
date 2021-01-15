@@ -1,12 +1,17 @@
 package fr.openent.moisson.service.dto;
 
-import fr.openent.moisson.domain.enumeration.Technologie;
-import fr.openent.moisson.domain.enumeration.TypeLicenceGAR;
-import io.github.jhipster.service.Criteria;
-import io.github.jhipster.service.filter.*;
-
 import java.io.Serializable;
 import java.util.Objects;
+import io.github.jhipster.service.Criteria;
+import fr.openent.moisson.domain.enumeration.Technologie;
+import fr.openent.moisson.domain.enumeration.TypeLicenceGAR;
+import io.github.jhipster.service.filter.BooleanFilter;
+import io.github.jhipster.service.filter.DoubleFilter;
+import io.github.jhipster.service.filter.Filter;
+import io.github.jhipster.service.filter.FloatFilter;
+import io.github.jhipster.service.filter.IntegerFilter;
+import io.github.jhipster.service.filter.LongFilter;
+import io.github.jhipster.service.filter.StringFilter;
 
 /**
  * Criteria class for the {@link fr.openent.moisson.domain.Techno} entity. This class is used
@@ -87,10 +92,6 @@ public class TechnoCriteria implements Serializable, Criteria {
 
     private BooleanFilter creationCours;
 
-    private IntegerFilter nbMaxiInstall;
-
-    private IntegerFilter nbMaxSimultConnexions;
-
     private BooleanFilter webAdaptatif;
 
     private BooleanFilter marquePage;
@@ -125,6 +126,10 @@ public class TechnoCriteria implements Serializable, Criteria {
 
     private BooleanFilter dispositifDYS;
 
+    private StringFilter nbMaxiInstall;
+
+    private StringFilter nbMaxSimultConnexions;
+
     private LongFilter articleNumeriqueId;
 
     public TechnoCriteria() {
@@ -146,8 +151,6 @@ public class TechnoCriteria implements Serializable, Criteria {
         this.needFlash = other.needFlash == null ? null : other.needFlash.copy();
         this.annotations = other.annotations == null ? null : other.annotations.copy();
         this.creationCours = other.creationCours == null ? null : other.creationCours.copy();
-        this.nbMaxiInstall = other.nbMaxiInstall == null ? null : other.nbMaxiInstall.copy();
-        this.nbMaxSimultConnexions = other.nbMaxSimultConnexions == null ? null : other.nbMaxSimultConnexions.copy();
         this.webAdaptatif = other.webAdaptatif == null ? null : other.webAdaptatif.copy();
         this.marquePage = other.marquePage == null ? null : other.marquePage.copy();
         this.captureImage = other.captureImage == null ? null : other.captureImage.copy();
@@ -165,6 +168,8 @@ public class TechnoCriteria implements Serializable, Criteria {
         this.personnalisationUserInterface = other.personnalisationUserInterface == null ? null : other.personnalisationUserInterface.copy();
         this.modifContenuEditorial = other.modifContenuEditorial == null ? null : other.modifContenuEditorial.copy();
         this.dispositifDYS = other.dispositifDYS == null ? null : other.dispositifDYS.copy();
+        this.nbMaxiInstall = other.nbMaxiInstall == null ? null : other.nbMaxiInstall.copy();
+        this.nbMaxSimultConnexions = other.nbMaxSimultConnexions == null ? null : other.nbMaxSimultConnexions.copy();
         this.articleNumeriqueId = other.articleNumeriqueId == null ? null : other.articleNumeriqueId.copy();
     }
 
@@ -291,22 +296,6 @@ public class TechnoCriteria implements Serializable, Criteria {
 
     public void setCreationCours(BooleanFilter creationCours) {
         this.creationCours = creationCours;
-    }
-
-    public IntegerFilter getNbMaxiInstall() {
-        return nbMaxiInstall;
-    }
-
-    public void setNbMaxiInstall(IntegerFilter nbMaxiInstall) {
-        this.nbMaxiInstall = nbMaxiInstall;
-    }
-
-    public IntegerFilter getNbMaxSimultConnexions() {
-        return nbMaxSimultConnexions;
-    }
-
-    public void setNbMaxSimultConnexions(IntegerFilter nbMaxSimultConnexions) {
-        this.nbMaxSimultConnexions = nbMaxSimultConnexions;
     }
 
     public BooleanFilter getWebAdaptatif() {
@@ -445,6 +434,22 @@ public class TechnoCriteria implements Serializable, Criteria {
         this.dispositifDYS = dispositifDYS;
     }
 
+    public StringFilter getNbMaxiInstall() {
+        return nbMaxiInstall;
+    }
+
+    public void setNbMaxiInstall(StringFilter nbMaxiInstall) {
+        this.nbMaxiInstall = nbMaxiInstall;
+    }
+
+    public StringFilter getNbMaxSimultConnexions() {
+        return nbMaxSimultConnexions;
+    }
+
+    public void setNbMaxSimultConnexions(StringFilter nbMaxSimultConnexions) {
+        this.nbMaxSimultConnexions = nbMaxSimultConnexions;
+    }
+
     public LongFilter getArticleNumeriqueId() {
         return articleNumeriqueId;
     }
@@ -479,8 +484,6 @@ public class TechnoCriteria implements Serializable, Criteria {
             Objects.equals(needFlash, that.needFlash) &&
             Objects.equals(annotations, that.annotations) &&
             Objects.equals(creationCours, that.creationCours) &&
-            Objects.equals(nbMaxiInstall, that.nbMaxiInstall) &&
-            Objects.equals(nbMaxSimultConnexions, that.nbMaxSimultConnexions) &&
             Objects.equals(webAdaptatif, that.webAdaptatif) &&
             Objects.equals(marquePage, that.marquePage) &&
             Objects.equals(captureImage, that.captureImage) &&
@@ -498,6 +501,8 @@ public class TechnoCriteria implements Serializable, Criteria {
             Objects.equals(personnalisationUserInterface, that.personnalisationUserInterface) &&
             Objects.equals(modifContenuEditorial, that.modifContenuEditorial) &&
             Objects.equals(dispositifDYS, that.dispositifDYS) &&
+            Objects.equals(nbMaxiInstall, that.nbMaxiInstall) &&
+            Objects.equals(nbMaxSimultConnexions, that.nbMaxSimultConnexions) &&
             Objects.equals(articleNumeriqueId, that.articleNumeriqueId);
     }
 
@@ -519,8 +524,6 @@ public class TechnoCriteria implements Serializable, Criteria {
         needFlash,
         annotations,
         creationCours,
-        nbMaxiInstall,
-        nbMaxSimultConnexions,
         webAdaptatif,
         marquePage,
         captureImage,
@@ -538,6 +541,8 @@ public class TechnoCriteria implements Serializable, Criteria {
         personnalisationUserInterface,
         modifContenuEditorial,
         dispositifDYS,
+        nbMaxiInstall,
+        nbMaxSimultConnexions,
         articleNumeriqueId
         );
     }
@@ -561,8 +566,6 @@ public class TechnoCriteria implements Serializable, Criteria {
                 (needFlash != null ? "needFlash=" + needFlash + ", " : "") +
                 (annotations != null ? "annotations=" + annotations + ", " : "") +
                 (creationCours != null ? "creationCours=" + creationCours + ", " : "") +
-                (nbMaxiInstall != null ? "nbMaxiInstall=" + nbMaxiInstall + ", " : "") +
-                (nbMaxSimultConnexions != null ? "nbMaxSimultConnexions=" + nbMaxSimultConnexions + ", " : "") +
                 (webAdaptatif != null ? "webAdaptatif=" + webAdaptatif + ", " : "") +
                 (marquePage != null ? "marquePage=" + marquePage + ", " : "") +
                 (captureImage != null ? "captureImage=" + captureImage + ", " : "") +
@@ -580,6 +583,8 @@ public class TechnoCriteria implements Serializable, Criteria {
                 (personnalisationUserInterface != null ? "personnalisationUserInterface=" + personnalisationUserInterface + ", " : "") +
                 (modifContenuEditorial != null ? "modifContenuEditorial=" + modifContenuEditorial + ", " : "") +
                 (dispositifDYS != null ? "dispositifDYS=" + dispositifDYS + ", " : "") +
+                (nbMaxiInstall != null ? "nbMaxiInstall=" + nbMaxiInstall + ", " : "") +
+                (nbMaxSimultConnexions != null ? "nbMaxSimultConnexions=" + nbMaxSimultConnexions + ", " : "") +
                 (articleNumeriqueId != null ? "articleNumeriqueId=" + articleNumeriqueId + ", " : "") +
             "}";
     }

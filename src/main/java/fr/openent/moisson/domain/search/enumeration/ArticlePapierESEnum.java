@@ -5,7 +5,7 @@ import fr.openent.moisson.domain.search.ElasticSearchConstants;
 public enum ArticlePapierESEnum {
 
     /*
-     * CONSTANTES pour TitrePublieES
+     * CONSTANTES pour ArticlePapierESEnum
      */
     ID("id", ElasticSearchConstants.TEXT),
     EAN("ean", ElasticSearchConstants.KEYWORD),
@@ -19,12 +19,13 @@ public enum ArticlePapierESEnum {
     DISTRIBUTEUR("distributeur", ElasticSearchConstants.MULTI),
     URL_COUVERTURE("urlcouverture", ElasticSearchConstants.KEYWORD),
     DATE_PARUTION("dateparution", ElasticSearchConstants.DATE),
-    PRIXHT("pxht", ElasticSearchConstants.SCALED_FLOAT),
+    PRIXHT("prixht", ElasticSearchConstants.SCALED_FLOAT),
+
+    // Others Entities ES
     TVA("tvas", ElasticSearchConstants.NESTED),
     DISCIPLINE("disciplines", ElasticSearchConstants.NESTED),
-    NIVEAU("niveaus", ElasticSearchConstants.NESTED),
-    DISPONIBILITE("disponibilite", ElasticSearchConstants.NESTED),
-    PRIXTTC("prixttc", ElasticSearchConstants.SCALED_FLOAT);
+    NIVEAU("niveaux", ElasticSearchConstants.NESTED),
+    DISPONIBILITE("disponibilite", ElasticSearchConstants.NESTED);
 
 
     /**
