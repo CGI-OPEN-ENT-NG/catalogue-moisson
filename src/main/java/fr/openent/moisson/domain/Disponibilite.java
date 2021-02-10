@@ -22,7 +22,7 @@ import java.time.Instant;
 @Entity
 @Table(name = "disponibilite")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "disponibilite")
+// @org.springframework.data.elasticsearch.annotations.Document(indexName = "disponibilite")
 public class Disponibilite implements Serializable {
 
     private static final long serialVersionUID = 1L;

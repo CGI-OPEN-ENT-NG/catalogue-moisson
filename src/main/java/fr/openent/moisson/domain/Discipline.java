@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.Setting;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,7 +18,8 @@ import java.io.Serializable;
 @Entity
 @Table(name = "discipline")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "discipline")
+// @org.springframework.data.elasticsearch.annotations.Document(indexName = "discipline")
+@Setting(settingPath = "/settings/settings.json")
 public class Discipline implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,7 +31,7 @@ public class Discipline implements Serializable {
 
     @Column(name = "libelle")
     @JsonProperty("LIBELLE")
-    @Field
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String libelle;
 
     @Column(name = "terme")

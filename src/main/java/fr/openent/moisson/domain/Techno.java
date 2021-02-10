@@ -7,6 +7,8 @@ import fr.openent.moisson.domain.enumeration.TypeLicenceGAR;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.Setting;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,7 +20,8 @@ import java.io.Serializable;
 @Entity
 @Table(name = "techno")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "techno")
+// @org.springframework.data.elasticsearch.annotations.Document(indexName = "techno")
+@Setting(settingPath = "/settings/settings.json")
 public class Techno implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,7 +34,7 @@ public class Techno implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "technologie")
     @JsonProperty("Technologie")
-    @Field
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private Technologie technologie;
 
     @Column(name = "version_reader")
@@ -83,7 +86,7 @@ public class Techno implements Serializable {
 
     @Column(name = "configuration_mini_os")
     @JsonProperty("ConfigurationMiniOS")
-    @Field
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String configurationMiniOS;
 
     @Column(name = "need_flash")

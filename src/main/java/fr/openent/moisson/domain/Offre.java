@@ -22,7 +22,7 @@ import java.util.Set;
 @Entity
 @Table(name = "offre")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "offre")
+// @org.springframework.data.elasticsearch.annotations.Document(indexName = "offre")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Offre implements Serializable {
 

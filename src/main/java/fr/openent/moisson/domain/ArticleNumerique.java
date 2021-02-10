@@ -11,6 +11,7 @@ import org.hibernate.annotations.NaturalId;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.Setting;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -26,6 +27,7 @@ import java.util.Set;
 @Table(name = "article_numerique")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "articlenumerique")
+@Setting(settingPath = "/settings/settings.json")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ArticleNumerique implements Serializable {
 
@@ -47,22 +49,22 @@ public class ArticleNumerique implements Serializable {
 
     @Column(name = "ark")
     @JsonProperty("ARK")
-    @Field
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String ark;
 
     @Column(name = "titre")
     @JsonProperty("TITRE")
-    @Field
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String titre;
 
     @Column(name = "editeur")
     @JsonProperty("EDITEUR")
-    @Field
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String editeur;
 
     @Column(name = "auteur", length = 1024)
     @JsonProperty("AUTEUR")
-    @Field
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String auteur;
 
     @Column(name = "collection")
@@ -72,7 +74,7 @@ public class ArticleNumerique implements Serializable {
 
     @Column(name = "distributeur")
     @JsonProperty("DISTRIBUTEUR")
-    @Field
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String distributeur;
 
     @Column(name = "url_couverture")

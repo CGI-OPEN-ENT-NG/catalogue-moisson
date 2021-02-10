@@ -15,17 +15,23 @@ import fr.openent.moisson.service.ArticlePapierService;
 import fr.openent.moisson.service.JsonEntityService;
 import fr.openent.moisson.service.impl.JsonEntityServiceImpl;
 import org.elasticsearch.ElasticsearchException;
+import org.elasticsearch.action.admin.indices.open.OpenIndexRequest;
 import org.elasticsearch.action.admin.indices.refresh.RefreshRequest;
 import org.elasticsearch.action.admin.indices.refresh.RefreshResponse;
+import org.elasticsearch.action.admin.indices.settings.put.UpdateSettingsRequest;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 
+import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.indices.CloseIndexRequest;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
+import org.elasticsearch.common.xcontent.XContentType;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -129,8 +135,8 @@ class JsonFileToEntityObjectMapperTest {
         XContentBuilder articleNumeriqueBuilder = XContentFactory.jsonBuilder();
         articleNumeriqueBuilder.startObject();
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.EAN.getFieldName(), articleNumerique.getEan());
-        articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.ARK.getFieldName(), articleNumerique.getTitre());
-        articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.TITRE.getFieldName(), articleNumerique.getArk());
+        articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.ARK.getFieldName(), articleNumerique.getArk());
+        articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.TITRE.getFieldName(), articleNumerique.getTitre());
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.EDITEUR.getFieldName(), articleNumerique.getEditeur());
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.AUTEUR.getFieldName(), articleNumerique.getAuteur());
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.COLLECTION.getFieldName(), articleNumerique.getCollection());
@@ -152,7 +158,7 @@ class JsonFileToEntityObjectMapperTest {
             innerOffres.put(OffreESEnum.QTE_MINI.getFieldName(), offre.getQuantiteMinimaleAchat());
             innerOffres.put(OffreESEnum.PRESCRIPTEUR.getFieldName(), offre.isPrescripteur());
             innerOffres.put(OffreESEnum.LIBELLE.getFieldName(), offre.getLibelle());
-            innerOffres.put(OffreESEnum.PRIXHT.getFieldName(), offre.getEanLibraire());
+            innerOffres.put(OffreESEnum.PRIXHT.getFieldName(), offre.getPrixHT());
             innerOffres.put(OffreESEnum.ADOPTANT.getFieldName(), offre.isAdoptant());
             innerOffres.put(OffreESEnum.DUREE.getFieldName(), offre.getDuree());
             innerOffres.put(OffreESEnum.REF_EDITEUR.getFieldName(), offre.getReferenceEditeur());
@@ -284,7 +290,7 @@ class JsonFileToEntityObjectMapperTest {
      */
     @Test
     public void jacksonArticlePapierTest() throws IOException {
-
+        // Jackson
         ObjectMapper objectMapper = new ObjectMapper();
         //var articlePapiers = objectMapper.readValue(new File("src/test/resources/json/articles_papiers.json"), new TypeReference<List<ArticlePapier>>() {
         var articlePapiers = objectMapper.readValue(jsonEntityService.getJsonFromUrl("https://www.lde.fr/4dlink1/4DCGI/IDF/json_cat_pap.json"), new TypeReference<List<ArticlePapier>>() {
@@ -323,9 +329,13 @@ class JsonFileToEntityObjectMapperTest {
      */
     @Test
     public void jacksonArticleNumeriqueTest() throws IOException {
+        // Jackson
         ObjectMapper objectMapper = new ObjectMapper();
         var articleNumeriques = objectMapper.readValue(jsonEntityService.getJsonFromUrl("https://www.lde.fr/4dlink1/4DCGI/IDF/json_cat_num.json"), new TypeReference<List<ArticleNumerique>>() {
         });
+//        var articleNumeriques = objectMapper.readValue(new File("src/test/resources/json/articles_numeriques.json"),
+//            new TypeReference<List<ArticleNumerique>>() {
+//            });
         articleNumeriques.forEach(articleNumerique ->
             {
                 Optional<ArticleNumerique> existArticleNumerique = articleNumeriqueRepository.findByEan(articleNumerique.getEan());
@@ -377,7 +387,7 @@ class JsonFileToEntityObjectMapperTest {
         XContentBuilder builder = createDocumentFromArticleNumerique(articleNumerique);
 
         // Request
-        UpdateRequest request = new UpdateRequest("articlenumerique", articleNumerique.getEan()).doc(builder);
+        var request = new UpdateRequest("articlenumerique", articleNumerique.getEan()).doc(builder);
 
         // Create or update
         request.upsert(builder);
@@ -423,4 +433,5 @@ class JsonFileToEntityObjectMapperTest {
         RefreshRequest request = new RefreshRequest(indexName);
         return elasticsearchClient.indices().refresh(request, RequestOptions.DEFAULT);
     }
+
 }

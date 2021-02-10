@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "condition")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "condition")
+// @org.springframework.data.elasticsearch.annotations.Document(indexName = "condition")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Condition implements Serializable {
 

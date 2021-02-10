@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "tva")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "tva")
+// @org.springframework.data.elasticsearch.annotations.Document(indexName = "tva")
 // Pour les gérer références cycliques au lieu de  @JsonManagedReference et @JsonBackReference
 // Il faut ajouter  @JsonProperty("id") au niveau de l'id
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")

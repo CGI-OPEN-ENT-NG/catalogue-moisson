@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "licence")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "licence")
+// @org.springframework.data.elasticsearch.annotations.Document(indexName = "licence")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Licence implements Serializable {
 
