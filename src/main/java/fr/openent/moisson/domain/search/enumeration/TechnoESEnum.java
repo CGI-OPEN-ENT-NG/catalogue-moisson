@@ -1,14 +1,6 @@
 package fr.openent.moisson.domain.search.enumeration;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import fr.openent.moisson.domain.enumeration.TypeLicenceGAR;
 import fr.openent.moisson.domain.search.ElasticSearchConstants;
-import org.springframework.data.elasticsearch.annotations.Field;
-
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.validation.constraints.NotNull;
 
 public enum TechnoESEnum {
 

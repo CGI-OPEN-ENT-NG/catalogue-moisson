@@ -1,19 +1,18 @@
 package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
-import fr.openent.moisson.domain.Techno;
 import fr.openent.moisson.domain.ArticleNumerique;
+import fr.openent.moisson.domain.Techno;
+import fr.openent.moisson.domain.enumeration.Technologie;
+import fr.openent.moisson.domain.enumeration.TypeLicenceGAR;
 import fr.openent.moisson.repository.TechnoRepository;
 import fr.openent.moisson.repository.search.TechnoSearchRepository;
+import fr.openent.moisson.service.TechnoQueryService;
 import fr.openent.moisson.service.TechnoService;
 import fr.openent.moisson.service.dto.TechnoDTO;
 import fr.openent.moisson.service.mapper.TechnoMapper;
-import fr.openent.moisson.service.dto.TechnoCriteria;
-import fr.openent.moisson.service.TechnoQueryService;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.Collections;
 import java.util.List;
@@ -35,9 +35,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import fr.openent.moisson.domain.enumeration.Technologie;
-import fr.openent.moisson.domain.enumeration.TypeLicenceGAR;
 /**
  * Integration tests for the {@link TechnoResource} REST controller.
  */
@@ -408,7 +405,7 @@ public class TechnoResourceIT {
             .andExpect(jsonPath("$.[*].nbMaxiInstall").value(hasItem(DEFAULT_NB_MAXI_INSTALL)))
             .andExpect(jsonPath("$.[*].nbMaxSimultConnexions").value(hasItem(DEFAULT_NB_MAX_SIMULT_CONNEXIONS)));
     }
-    
+
     @Test
     @Transactional
     public void getTechno() throws Exception {

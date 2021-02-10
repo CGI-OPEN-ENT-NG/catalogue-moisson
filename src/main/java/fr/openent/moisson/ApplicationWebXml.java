@@ -1,7 +1,6 @@
 package fr.openent.moisson;
 
 import io.github.jhipster.config.DefaultProfileUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.builder.SpringApplicationBuilder;

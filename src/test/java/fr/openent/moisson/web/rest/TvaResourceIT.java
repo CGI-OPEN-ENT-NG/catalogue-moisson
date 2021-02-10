@@ -1,20 +1,17 @@
 package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
-import fr.openent.moisson.domain.Tva;
-import fr.openent.moisson.domain.Offre;
 import fr.openent.moisson.domain.ArticlePapier;
+import fr.openent.moisson.domain.Offre;
+import fr.openent.moisson.domain.Tva;
 import fr.openent.moisson.repository.TvaRepository;
 import fr.openent.moisson.repository.search.TvaSearchRepository;
+import fr.openent.moisson.service.TvaQueryService;
 import fr.openent.moisson.service.TvaService;
 import fr.openent.moisson.service.dto.TvaDTO;
 import fr.openent.moisson.service.mapper.TvaMapper;
-import fr.openent.moisson.service.dto.TvaCriteria;
-import fr.openent.moisson.service.TvaQueryService;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +23,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -173,7 +171,7 @@ public class TvaResourceIT {
             .andExpect(jsonPath("$.[*].taux").value(hasItem(DEFAULT_TAUX.intValue())))
             .andExpect(jsonPath("$.[*].pourcent").value(hasItem(DEFAULT_POURCENT.intValue())));
     }
-    
+
     @Test
     @Transactional
     public void getTva() throws Exception {

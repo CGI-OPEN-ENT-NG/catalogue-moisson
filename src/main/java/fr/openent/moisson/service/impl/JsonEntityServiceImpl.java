@@ -12,8 +12,6 @@ import fr.openent.moisson.repository.ArticlePapierRepository;
 import fr.openent.moisson.service.JsonEntityService;
 import fr.openent.moisson.service.builder.MoissonESBuilder;
 import org.elasticsearch.ElasticsearchException;
-import org.elasticsearch.action.admin.indices.refresh.RefreshRequest;
-import org.elasticsearch.action.admin.indices.refresh.RefreshResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.update.UpdateRequest;

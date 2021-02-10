@@ -4,7 +4,6 @@ package fr.openent.moisson.service.jackson
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.openent.moisson.domain.*;
-import fr.openent.moisson.domain.search.ElasticSearchConstants;
 import fr.openent.moisson.domain.search.enumeration.*;
 import fr.openent.moisson.repository.ArticleNumeriqueRepository;
 import fr.openent.moisson.repository.ArticlePapierRepository;
@@ -13,25 +12,17 @@ import fr.openent.moisson.repository.search.ArticlePapierSearchRepository;
 import fr.openent.moisson.service.ArticleNumeriqueService;
 import fr.openent.moisson.service.ArticlePapierService;
 import fr.openent.moisson.service.JsonEntityService;
-import fr.openent.moisson.service.impl.JsonEntityServiceImpl;
 import org.elasticsearch.ElasticsearchException;
-import org.elasticsearch.action.admin.indices.open.OpenIndexRequest;
 import org.elasticsearch.action.admin.indices.refresh.RefreshRequest;
 import org.elasticsearch.action.admin.indices.refresh.RefreshResponse;
-import org.elasticsearch.action.admin.indices.settings.put.UpdateSettingsRequest;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
-
-import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.client.indices.CloseIndexRequest;
-import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
-import org.elasticsearch.common.xcontent.XContentType;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -39,7 +30,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 

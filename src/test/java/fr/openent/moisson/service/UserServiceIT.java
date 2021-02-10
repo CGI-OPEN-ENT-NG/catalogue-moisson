@@ -3,12 +3,10 @@ package fr.openent.moisson.service;
 import fr.openent.moisson.MoissoncatalogueApp;
 import fr.openent.moisson.config.Constants;
 import fr.openent.moisson.domain.User;
-import fr.openent.moisson.repository.search.UserSearchRepository;
 import fr.openent.moisson.repository.UserRepository;
+import fr.openent.moisson.repository.search.UserSearchRepository;
 import fr.openent.moisson.service.dto.UserDTO;
-
 import io.github.jhipster.security.RandomUtil;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,16 +20,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Integration tests for {@link UserService}.

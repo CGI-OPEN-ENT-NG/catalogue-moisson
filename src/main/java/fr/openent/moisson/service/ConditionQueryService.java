@@ -1,9 +1,14 @@
 package fr.openent.moisson.service;
 
-import java.util.List;
-
-import javax.persistence.criteria.JoinType;
-
+import fr.openent.moisson.domain.Condition;
+import fr.openent.moisson.domain.Condition_;
+import fr.openent.moisson.domain.Lep_;
+import fr.openent.moisson.repository.ConditionRepository;
+import fr.openent.moisson.repository.search.ConditionSearchRepository;
+import fr.openent.moisson.service.dto.ConditionCriteria;
+import fr.openent.moisson.service.dto.ConditionDTO;
+import fr.openent.moisson.service.mapper.ConditionMapper;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -12,15 +17,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import fr.openent.moisson.domain.Condition;
-import fr.openent.moisson.domain.*; // for static metamodels
-import fr.openent.moisson.repository.ConditionRepository;
-import fr.openent.moisson.repository.search.ConditionSearchRepository;
-import fr.openent.moisson.service.dto.ConditionCriteria;
-import fr.openent.moisson.service.dto.ConditionDTO;
-import fr.openent.moisson.service.mapper.ConditionMapper;
+import javax.persistence.criteria.JoinType;
+import java.util.List;
 
 /**
  * Service for executing complex queries for {@link Condition} entities in the database.

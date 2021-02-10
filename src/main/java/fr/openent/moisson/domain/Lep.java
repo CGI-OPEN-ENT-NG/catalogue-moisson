@@ -7,7 +7,6 @@ import org.hibernate.annotations.NaturalId;
 import org.springframework.data.elasticsearch.annotations.Field;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;

@@ -1,10 +1,10 @@
 package fr.openent.moisson.service.mapper;
 
 
-import fr.openent.moisson.domain.*;
+import fr.openent.moisson.domain.ArticleNumerique;
 import fr.openent.moisson.service.dto.ArticleNumeriqueDTO;
-
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 /**
  * Mapper for the entity {@link ArticleNumerique} and its DTO {@link ArticleNumeriqueDTO}.

@@ -1,22 +1,15 @@
 package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
-import fr.openent.moisson.domain.Offre;
-import fr.openent.moisson.domain.Tva;
-import fr.openent.moisson.domain.Lep;
-import fr.openent.moisson.domain.ArticleNumerique;
-import fr.openent.moisson.domain.Licence;
+import fr.openent.moisson.domain.*;
 import fr.openent.moisson.repository.OffreRepository;
 import fr.openent.moisson.repository.search.OffreSearchRepository;
+import fr.openent.moisson.service.OffreQueryService;
 import fr.openent.moisson.service.OffreService;
 import fr.openent.moisson.service.dto.OffreDTO;
 import fr.openent.moisson.service.mapper.OffreMapper;
-import fr.openent.moisson.service.dto.OffreCriteria;
-import fr.openent.moisson.service.OffreQueryService;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +21,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.Collections;

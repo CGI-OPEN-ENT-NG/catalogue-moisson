@@ -1,8 +1,9 @@
 package fr.openent.moisson.service.dto;
 
-import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
 import fr.openent.moisson.web.rest.TestUtil;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ArticlePapierDTOTest {
 

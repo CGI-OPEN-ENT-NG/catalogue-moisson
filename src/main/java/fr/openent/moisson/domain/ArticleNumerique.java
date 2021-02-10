@@ -8,10 +8,7 @@ import fr.openent.moisson.domain.enumeration.PublicCible;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
-import org.springframework.data.elasticsearch.annotations.DateFormat;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
-import org.springframework.data.elasticsearch.annotations.Setting;
+import org.springframework.data.elasticsearch.annotations.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -60,6 +57,7 @@ public class ArticleNumerique implements Serializable {
     @Column(name = "editeur")
     @JsonProperty("EDITEUR")
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
+    // @MultiField(mainField = @Field(type = FieldType.Text,fielddata = true),otherFields = @InnerField(suffix = "keyword",type = FieldType.Keyword,normalizer ="lower_normalizer" ))
     private String editeur;
 
     @Column(name = "auteur", length = 1024)

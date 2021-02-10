@@ -2,7 +2,6 @@ package fr.openent.moisson.service;
 
 import fr.openent.moisson.domain.ArticlePapier;
 import fr.openent.moisson.service.dto.ArticlePapierDTO;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
