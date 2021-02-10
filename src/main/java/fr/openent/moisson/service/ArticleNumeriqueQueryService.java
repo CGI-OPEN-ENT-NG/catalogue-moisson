@@ -1,9 +1,12 @@
 package fr.openent.moisson.service;
 
-import java.util.List;
-
-import javax.persistence.criteria.JoinType;
-
+import fr.openent.moisson.domain.*;
+import fr.openent.moisson.repository.ArticleNumeriqueRepository;
+import fr.openent.moisson.repository.search.ArticleNumeriqueSearchRepository;
+import fr.openent.moisson.service.dto.ArticleNumeriqueCriteria;
+import fr.openent.moisson.service.dto.ArticleNumeriqueDTO;
+import fr.openent.moisson.service.mapper.ArticleNumeriqueMapper;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -12,15 +15,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import fr.openent.moisson.domain.ArticleNumerique;
-import fr.openent.moisson.domain.*; // for static metamodels
-import fr.openent.moisson.repository.ArticleNumeriqueRepository;
-import fr.openent.moisson.repository.search.ArticleNumeriqueSearchRepository;
-import fr.openent.moisson.service.dto.ArticleNumeriqueCriteria;
-import fr.openent.moisson.service.dto.ArticleNumeriqueDTO;
-import fr.openent.moisson.service.mapper.ArticleNumeriqueMapper;
+import javax.persistence.criteria.JoinType;
+import java.util.List;
 
 /**
  * Service for executing complex queries for {@link ArticleNumerique} entities in the database.

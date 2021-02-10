@@ -1,20 +1,17 @@
 package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
-import fr.openent.moisson.domain.Discipline;
 import fr.openent.moisson.domain.ArticleNumerique;
 import fr.openent.moisson.domain.ArticlePapier;
+import fr.openent.moisson.domain.Discipline;
 import fr.openent.moisson.repository.DisciplineRepository;
 import fr.openent.moisson.repository.search.DisciplineSearchRepository;
+import fr.openent.moisson.service.DisciplineQueryService;
 import fr.openent.moisson.service.DisciplineService;
 import fr.openent.moisson.service.dto.DisciplineDTO;
 import fr.openent.moisson.service.mapper.DisciplineMapper;
-import fr.openent.moisson.service.dto.DisciplineCriteria;
-import fr.openent.moisson.service.DisciplineQueryService;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +23,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.Collections;
 import java.util.List;
@@ -177,7 +175,7 @@ public class DisciplineResourceIT {
             .andExpect(jsonPath("$.[*].terme").value(hasItem(DEFAULT_TERME)))
             .andExpect(jsonPath("$.[*].concept").value(hasItem(DEFAULT_CONCEPT)));
     }
-    
+
     @Test
     @Transactional
     public void getDiscipline() throws Exception {

@@ -1,23 +1,16 @@
 package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
-import fr.openent.moisson.domain.ArticleNumerique;
-import fr.openent.moisson.domain.Discipline;
-import fr.openent.moisson.domain.Niveau;
-import fr.openent.moisson.domain.Offre;
-import fr.openent.moisson.domain.Techno;
-import fr.openent.moisson.domain.Disponibilite;
+import fr.openent.moisson.domain.*;
+import fr.openent.moisson.domain.enumeration.PublicCible;
 import fr.openent.moisson.repository.ArticleNumeriqueRepository;
 import fr.openent.moisson.repository.search.ArticleNumeriqueSearchRepository;
+import fr.openent.moisson.service.ArticleNumeriqueQueryService;
 import fr.openent.moisson.service.ArticleNumeriqueService;
 import fr.openent.moisson.service.dto.ArticleNumeriqueDTO;
 import fr.openent.moisson.service.mapper.ArticleNumeriqueMapper;
-import fr.openent.moisson.service.dto.ArticleNumeriqueCriteria;
-import fr.openent.moisson.service.ArticleNumeriqueQueryService;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +22,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -41,8 +35,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import fr.openent.moisson.domain.enumeration.PublicCible;
 /**
  * Integration tests for the {@link ArticleNumeriqueResource} REST controller.
  */
@@ -276,7 +268,7 @@ public class ArticleNumeriqueResourceIT {
         em.detach(updatedArticleNumerique);
 
         // Update the Disponibilite with new association value
-        updatedArticleNumerique.setDisponibilite(updatedArticleNumerique.getDisponibilite());
+        updatedArticleNumerique.setDisponibilite(articleNumerique.getDisponibilite());
         ArticleNumeriqueDTO updatedArticleNumeriqueDTO = articleNumeriqueMapper.toDto(updatedArticleNumerique);
 
         // Update the entity

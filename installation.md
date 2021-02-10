@@ -1,52 +1,106 @@
-Avant de déployer il faut impérativement configurer l’application et créer la base de données et les rôles
+Ce fichier expose la procédure d’installation
+
+# Installation en production
+
+Fichiers fournis dans le fichier env.zip :
+
+    Fichiers de configuration de l'application
+        application.yml
+        application-prod.yml
+    Fichiers Docker :
+        Dockerfile-postgres-moissoncatalogue
+        elasticsearch.yml
+        postgresql.yml
+        swagger-editor.yml
+        V0__init_user_role_database_for_docker.sql
+    Fichiers d'initialisation de la base
+        V0__init_user_role_database.sql
+        V0__init_user_role_database_for_docker.sql
+    Fichiers de création des tables et séquences .sql au format liquibase
+        V1_0__premiere_migration_des_tables_de_base.sql
+        V1_1__create_tva_table.sql
+        V1_2__create_techno_cible_table.sql
+        V1_3__create_offre_table.sql
+        V1_4__create_discipline_table.sql
+        V1_5__create_niveau_table.sql
+        V1_6__create_condition_table.sql
+        V1_7__create_article_papier_table.sql
+        V1_8__create_article_numerique_table.sql
+        V1_9__create_lep_table.sql
+        V1_10__create_disponibilite_table.sql
+        V1_11__create_licence_table.sql
+
+Le fichier V0\_\_init_user_role_database_for_docker.sql est fourni
+deux fois, par commodité, dans deux répertoires différents : docker et
+initialisation_de_la_base_de_donnees
+
+Avant de lancer l’application, il faut **impérativement** configurer
+l’application et créer la base de données et les rôles
 
     1 - Configuration du fichier de propriétés
     2 . Création de la base et des scripts
-    3 . déploiement de l'application
+    3 . Créationde l'instance ElaticSearc
+    4 . Déploiement et urtilisation  de l'application
 
-# Configuration du fichier de propriétés.
+# Répertoire de configuration
 
 ## Comportement par défaut
 
-Les fichiers de configuration sont fournis indépendamment du fichier ".jar", il faudra changer les paramètres du fichier spécifique à la production (voir ci-après) :
+Les fichiers de configuration sont fournis indépendamment du fichier
+".jar", il faudra changer les paramètres du fichier spécifique à la
+production (voir ci-après) :
 
     Fichiers de configuation:
         application.yml
         application-prod.yml
 
-Une fois les paramètres fixer il faut le déposer dans un répertoire qui peut etre soit :
+Une fois les paramètres fixer il faut le déposer dans un répertoire qui
+peut être soit :
 
-1 - Dans un répertoire "config/" créé au meme niveau que le répertoire de base de l’application :
-2 - Dans le répertoire de base de l’application.
+1 - Dans un répertoire "config/" créé au meme niveau que le répertoire
+de base de l’application : 2 - Dans le répertoire de base de
+l’application.
 
 Le répertoire de base est le répertoire de lacement du fichier ".jar".
 
-Si les fichiers sont créés dans les deux répertoires, le répertoire config/ (1) à la précédence sur le répertoire de base (2) et ce sont donc les paramètres du fichier du répertoire config/ qui seront prius en compte
+Si les fichiers sont créés dans les deux répertoires, le répertoire
+config/ (1) à la précédence sur le répertoire de base (2), ce sont donc
+les paramètres du fichier du répertoire config/ qui seront pris en
+compte
 
-Exemple pour  :
+Si répertoire config:
 
     répertoire de base:
         /chemin/de/repertoire/de/base/
     répertoire de config:
         /chemin/de/repertoire/de/base/config
 
-Remarque : si aucun des deux répertoires n’est créé, il y a des fichiers par défaut au niveau du jar qui permettent de lancer l’application en "localhost" sur le port "8088"
+Remarque : si aucun des deux répertoires n’est créé, l’application est
+lancée en "localhost" sur le port "808"
 
 ## Modification du comportement par défaut
 
-Il est possible de surcharger le comportement par défaut en précisant le chemin du répertoire lors du lacement de l’application :
+Il est possible de surcharger le comportement par défaut en précisant le
+chemin du répertoire lors du lacement de l’application :
 
     Dem manière absolue
-        java -Dspring.config.location=/chemin/du/repertoire/config -jar moissoncatalogue.jar
+        java -Dspring.config.location=/chemin/du/repertoire/config -jar moissoncatalogue.jar --spring.profiles.active
+        ou
+        java -jar moissoncatalogue.jar --spring.config.location=/chemin/du/repertoire/config
+
     Ou relative par exemple
-        java -Dspring.config.location=../config -jar moissoncatalogue.jar
+        java -Dspring.config.location=../config -jar moissoncatalogue.jar --spring.profiles.active/ ou
+        java -jar moissoncatalogue.jar --spring.config.location=../config --spring.profiles.active
+
         java -Dspring.config.location=chemin/relatif/complexe/vers/le/repertoire/config -jar moissoncatalogue.jar
+        java -jar moissoncatalogue.jar --spring.config.location==chemin/relatif/complexe/vers/le/repertoire/config
 
 # Paramètres du fichier de configuration application-prod.yml :
 
 ## Base de données
 
-Il faut modifier le nom d’hôte at éventuellement le port :
+Dans le cas d’utilisation avec une instance postgres Il faut modifier le
+nom d’hôte at éventuellement le port :
 
     datasource:
       type: com.zaxxer.hikari.HikariDataSource
@@ -59,7 +113,9 @@ Il faut modifier le nom d’hôte at éventuellement le port :
 
 Il est possible de changer le mot de passe au sein du fichier.
 
-Si le mot de passe est changé, Il faut, le changer également dans le script d’initialisation de la base avant de le jour (voir explication dans création de la base de données ci-après) :
+Si le mot de passe est changé, Il faut, le changer également dans le
+script d’initialisation de la base avant de le jour (voir explication
+dans création de la base de données ci-après) :
 
     V0__init_user_role_database.sql
 
@@ -71,9 +127,21 @@ par le NOUVEAU_MOT_DE_PASSE :
 
     CREATE ROLE usercatalogue LOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION PASSWORD 'NOUVEAU_MOT_DE_PASSE';
 
+Remarque : Dans le cas d’utilisation avec postgres sous la forme de
+conteneur docker Il ne faut pas modifier le nom d’hôte, mais
+éventuellement le port pour le mettre en correspondance avec le fichier
+postgres.yaml :
+
+    Si dans le fichier postgresql.yml
+        ports:
+          - 5433:5432
+    Dans le fichier application-prod.yml dans datasource
+        url: jdbc:postgresql://localhost:5433/moissoncatalogue
+
 ## ElasticSearch
 
-Il faut modifier l’hôte le port et définir login et password :
+Dans le cas d’utilisation avec une instance, il faut modifier l’hôte le
+port et définir login et password :
 
     # Hôte et port à modifier sans les scheme (http ou https)
     uris: localhost:9200
@@ -81,13 +149,37 @@ Il faut modifier l’hôte le port et définir login et password :
     # username: admin
     # password: admin
 
-## Liquibase
+Remarque : Dans le cas d’utilisation avec postgres sous la forme de
+conteneur docker Il ne faut pas modifier le nom d’hôte, mais
+éventuellement le port pour le mettre en correspondance avec le fichier
+elasticsearch.yml :
+
+    Si dans le fichier pelasticsearch.yml
+        ports:
+          - 9201:9200
+    Dans le fichier application-prod.yml
+      elasticsearch:
+        rest:
+          uris: localhost:9201
+
+### Liquibase
 
     liquibase:
       contexts: prod
       # Domaine (nom d'hôte à modifier par défaut : localhost).
       # Ne pas modifier le nom de la base  : moissoncatalogue
       url: jdbc:postgresql://localhost:5432/moissoncatalogue
+
+Remarque : Dans le cas d’utilisation avec postgres sous la forme de
+conteneur docker Il ne faut pas modifier le nom d’hôte, mais
+éventuellement le port pour le mettre en correspondance avec le fichier
+postgresql.yaml :
+
+    Si dans le fichier postgresql.yml
+        ports:
+          - 5433:5432
+    Dans le fichier application-prod.yml dans liquibase
+        url: jdbc:postgresql://localhost:5433/moissoncatalogue
 
 ## Mail
 
@@ -103,11 +195,16 @@ Optionnel car non utilisé pour le moment :
 
 ## Avec une instance postgres installée
 
-### Créations de la base et des rôles.
+Une instance de postgres est accessible.
 
-Par défaut les tables sont créées avec Liquibase qui est une librairie open-source permettant de tracer et gérer les modifications d’une base de données. Liquibase est paramétré pour la mise en place des tables et séquences au premier démarrage de l’application, cependant avant de lancer l’application il faut créer les roles et la base correspondante.
+### Création de la base et des rôles.
 
-Il faut installer postgres sur le serveur
+Par défaut les tables sont créées avec Liquibase qui est une librairie
+open-source permettant de tracer et gérer les modifications d’une base
+de données. Liquibase est paramétré pour la mise en place des tables et
+séquences au premier démarrage de l’application, cependant avant de
+lancer l’application, il faut, cependant créer les roles et la base
+correspondante.
 
 Puis en se connectant en root :
 
@@ -117,54 +214,66 @@ Il faut jouer les scripts qui sont dans le fichier :
 
     V0__init_user_role_database.sql est le fichier de création de la base de données
 
-### Création des tables
+Il dit être possible de se connecter à la base créée :
 
-L’application utilise Liquibase pour la création des tables. Ces dernières sont donc créées automatiquement lors du déploiement de l’application.
+        \connect moissoncatalogue
 
-Les scripts SQL sont fournis et situés dans le répertoire db/migration et peuvent être utilisés "As is" ou avec Flyway
+### Création des tables automatique avec liquibase
 
-Les noms de fichier de scripts sont au format FlyWay et sont stockés dans le répertoire de recherche par défaut de Flyway bien que celui-ci n’est pas installé par défaut, main/resources/db/migration. La procédure d’installation et d’utilisation de Flyway est fournie à la fin du document.
+L’application utilise Liquibase pour la création des tables. Ces
+dernières sont donc créées automatiquement lors du déploiement de
+l’application.
+
+Remarque : Les scripts SQL sont fournis et situés dans le répertoire sql
+du fichier ".zip" et peuvent être utilisés tels quels pour générer
+l’ensemble des tables.
+
+Pour les développeurs, les noms de fichier de scripts sont au format
+FlyWay et sont stockés dans le répertoire de recherche par défaut de
+Flyway bien que celui-ci n’est pas installé par défaut,
+main/resources/db/migration. La procédure d’installation et
+d’utilisation de Flyway est fournie à la fin du document.
 
 ## Avec docker
 
-### Création du conteneur
-
-Un fichier docker-compose est fourni et après avoir remplacé les bons paramètres, il faut lancer la commande suivante dans le meme répertoire que ce fichier :
-
-    docker-compose -f postgresql.yml up -d
-
-le paramètre -d permet de lancer l'instance de docker en background
-
-Pour arrêter le conteneur :
-
-    docker-compose -f postgresql.yml down
-
-Bien entendu il faut que docker et docker-compose soient installés, voir l’adresse suivante pour les instructions :
+Il faut que docker et docker-compose soient installés, voir l’adresse
+suivante pour les instructions :
 
     https://docs.docker.com/compose/install/
 
-Il est préférable de créer un volume afin de conserver les données lors de l’arrêt du conteneur
-Il faut, dans ce cas, dé-commenter les lignes du fichier et remplacer
+### Création du conteneur
+
+Au préalable, il est préférable de créer un volume afin de conserver les
+données lors de l’arrêt du conteneur Il faut, dans ce cas, dé-commenter
+les lignes du fichier docker-compose postgresql.yml fourni et
+remplacer :
 
     ~/volumes/moissoncatalogue/postgresql/
 
-par le chemin du volume
+Par le chemin du volume où il est souhaité de conserver les données.
 
 ### Connexion au conteneur et création de la base de données
 
-L’utilisateur usercatalogue a été créé lors de la création du conteneur.
+L’utilisateur "usercatalogue" a été créé lors de la création du
+conteneur.
 
 #### Création du conteneur avec locale "fr"
 
-Il faut créer le conteneur avec les bonnes locales, à partir de l’image officielle
+Il faut créer le conteneur avec les bonnes locales, à partir de l’image
+officielle
 
     docker build -t  postgres-moissoncatalogue:12.5 -f ../config/Dockerfile-postgres-moissoncatalogue .
 
-(le point à la fin de la commande doit etre conservé)
+(le point à la fin de la commande doit être conservé)
 
 #### Démarrer le conteneur
 
-    docker-compose -f ../config/postgresql.yml up -d
+Après avoir remplacé les bons paramètres, il faut lancer la commande
+suivante dans le meme répertoire que ce fichier :
+
+    docker-compose -f postgresql.yml up -d
+
+le paramètre -d permet de lancer l’instance de docker en background
 
 #### Connexion au conteneur
 
@@ -180,11 +289,53 @@ Jouer les scripts dans le fichier :
 
     V0__init_user_role_database_for_docker.sql
 
-Il est possible de laisser le conteneur ou vert ou le fermer avec exit (après s'tre déconnecté de labase avec \q)
+Il est possible de laisser le conteneur ou vert ou le fermer avec exit
+(après s’être déconnecté de la base de données avec \\q)
 
-# Démarrage de l'application
+### Arrêt du conteneur
 
-    java -jar moissoncatalogue-0.0.2-SNAPSHOT.jar
+Pour arrêter le conteneur :
+
+    docker-compose -f postgresql.yml down
+
+# Elasticsearch
+
+## Création du conteneur
+
+Comme pour la base il est possible de créer un docker :
+
+Il est préférable de créer un volume afin de conserver les données lors
+de l’arrêt du conteneur Il faut, dans ce cas, dé-commenter les lignes du
+fichier docker-compose elasticsearch.yml fourni et remplacer :
+
+    ~/volumes/moissoncatalogue/elasticsearch/
+
+par le chemin du volume
+
+Après avoir créé le répertoire et modifier le propriétaire
+
+    sudo mkdir -p ~/volumes/moissoncatalogue/elasticsearch/
+    sudo chown -R 1000:1000 ~/volumes/moissoncatalogue/elasticsearch/
+
+## Connexion au conteneur
+
+Un fichier docker-compose est fourni et après avoir remplacé les bons
+paramètres, il faut lancer la commande suivante dans le meme répertoire
+que ce fichier :
+
+    docker-compose -f elasticsearch.yml up -d
+
+Le paramètre -d permet de lancer l’instance de docker en background
+
+## Arrêt au conteneur
+
+Pour arrêter le conteneur :
+
+    docker-compose -f elasticsearch.yml down
+
+# Démarrage de l’application
+
+    java -Dspring.config.location=../config -jar moissoncatalogue.jar
 
 Vérification de la base de données
 
@@ -198,34 +349,6 @@ Lister les tables
 
     \dt ou \d
 
-# Elasticsearch
-
-Comme pour la base il est possible de créer un docker :
-
-Un fichier docker-compose est fourni et après avoir remplacé les bons paramètres, il faut lancer la commande suivante dans le meme répertoire que ce fichier :
-
-    docker-compose -f elasticsearch.yml up -d
-
-le paramètre -d permet de lancer l'instance de docker en background
-
-Pour arrêter le conteneur :
-
-    docker-compose -f elasticsearch.yml down
-
-Il est préférable de créer un volume afin de conserver les données lors de l'arrêt du conteneur
-Il faut, dans ce cas, dé-commenter les lignes du fichier et remplacer
-
-    ~/volumes/moissoncatalogue/elasticsearch/
-
-par le chemin du volume
-
-Mais avant de relancer le docker il faut créer le répertoire et modifier le propriétaire
-
-    sudo mkdir -p ~/volumes/moissoncatalogue/elasticsearch/
-    sudo chown -R 1000:1000 ~/volumes/moissoncatalogue/elasticsearch/
-
-# Déploiement de l’application
-
 # Rest api
 
 Les endpoints des Apis sont fournis dans le contrat d’Api fourni.
@@ -238,15 +361,19 @@ Les Apis étant sécurisées il faut s’authentifier pour y accéder.
 
 Il existe deux utilisateurs qui permettent de s’identifier :
 
-1.  l’utilisateur "admin" avec le password "admin" par défaut qui possède les roles ROLE_USER et ROLE_ADMIN
+1.  l’utilisateur "admin" avec le password "admin" par défaut qui
+    possède les roles ROLE_USER et ROLE_ADMIN
 
-2.  l’utilisateur "user" avec le password "user" par défaut qui possède le role ROLE_USER
+2.  l’utilisateur "user" avec le password "user" par défaut qui possède
+    le role ROLE_USER
 
-L’administrateur "admin" peut accéder aux apis en lecture écriture et suppression.
+L’administrateur "admin" peut accéder aux apis en lecture écriture et
+suppression.
 
 L’utilisateur "user" peut accéder aux apis en lecture seule.
 
-Pour accéder aux apis il faut utiliser curl, postman ou insomnia designer
+Pour accéder aux apis il faut utiliser curl, postman ou insomnia
+designer
 
 1 - Avec curl pour accéder il faut préciser l’"user" et le "password" :
 
@@ -261,9 +388,11 @@ Pour accéder aux apis il faut utiliser curl, postman ou insomnia designer
 
 -v permet d’activer le mode verbose -vu étant équivalent à -v -u
 
-2 - Avec Postman ou Insomnia il faut saisir les url en prenant soin de bien spécifier le verbe (GET, POST, PUT etc…​)
+2 - Avec Postman ou Insomnia il faut saisir les url en prenant soin de
+bien spécifier le verbe (GET, POST, PUT etc…​)
 
-Dans l’onglet authentication ou auth il faut saisir le login et le mot de passe
+Dans l’onglet authentication ou auth il faut saisir le login et le mot
+de passe
 
     Le endpoint suivant retourne le login de l'utilisateur authentifié avec le verbe GET
     http://user:passwortd@localhost:8080/api/authenticate
@@ -272,7 +401,8 @@ Dans l’onglet authentication ou auth il faut saisir le login et le mot de pass
 
 L’api est livrée avec une authentification par token JWT.
 
-Il faut dans un premier temps générer le token, avec l’endpoint <http://user:user@localhost:8080/api/authenticate> et le verbe POST
+Il faut dans un premier temps générer le token, avec l’endpoint
+<http://user:user@localhost:8080/api/authenticate> et le verbe POST
 
     curl  -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate
     le curl génère un token.
@@ -283,15 +413,19 @@ Il faut ensuite le passer en paramètre dans le header de la requête
 
     curl -H 'Accept: application/json' -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTYwOTAwMzc2M30.bh8fQMGXawP354wGS1qG_KxSCD1_7hmthQej6DZmUWQdlW8J2Lo1j0EH27m9FJiv_o6vS6hu1iUzAi4lt8uegw" http://localhost:8080/api/account
 
-Sous linux il est possible d’automatiser il faut au préalable installer un parser Json. Par exemple après avoir installé le parser jq il est possible de stocker le token dans une variable d’environnement
+Sous linux il est possible d’automatiser il faut au préalable installer
+un "parser" Json. Par exemple après avoir installé le parser jq il est
+possible de stocker le token dans une variable d’environnement (ici
+TOKEN)
 
     TOKEN=$(curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate | jq -r '.id_token')
 
-Il suffit en suite de passer le token de la manière suivante :
+Il suffit en suite de passer le token de la manière suivante :
 
     curl -H 'Accept: application/json' -H "Authorization: Bearer $TOKEN" http://localhost:8080/api/account
 
-Sous postman ou insomnia il faut faire le POST avec l’url et ajouter dans le body ce qui correspond au --data du curl (format json):
+Sous postman ou insomnia il faut faire le POST avec l’url et ajouter
+dans le body ce qui correspond au –data du curl (format json) :
 
     {"username":"admin","password":"admin"}
 
@@ -307,49 +441,64 @@ Récapitulatif :
 
 # Swagger
 
-Les composants front-end et back-end étant séparés, l’API expose le composant back-end pour le composant frontal.
+Les composants front-end et back-end étant séparés, l’API expose le
+composant back-end pour le composant frontal.
 
-Le fichier d'Api est fourni dans le répertoire env/
+Le fichier d’Api est fourni dans le répertoire env/
 
-Pour modifier le fichier de définition api.yml, Swagger-Editor. Il est possible d’utiliser l’outil en ligne ou bien
+Pour modifier le fichier de définition api.yml, Swagger-Editor. Il est
+possible d’utiliser l’outil en ligne ou bien
 
-Démarrez une instance locale de swagger-editor à l'aide de docker en exécutant :
+Démarrez une instance locale de swagger-editor à l’aide de docker en
+exécutant :
 
     docker-compose -f src env/swagger-editor.yml up -d.
 
-L’éditeur sera adressable à l’adresse http://localhost:7742.
+L’éditeur sera adressable à l’adresse <http://localhost:7742>.
 
-## Visualisation de l'Api au format json
+## Visualisation de l’Api au format json
 
-Pour visualiser les spécifications d’API au format JSON dans un navigateur :
+Pour visualiser les spécifications d’API au format JSON dans un
+navigateur :
 
-    http://localhost:8088/v2/api-docs
+    http://localhost:8080/v2/api-docs
 
-Pour visualiser les spécifications d’API au format JSON dans la console :
+Pour visualiser les spécifications d’API au format JSON dans la
+console :
 
-    curl -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8088/v2/api-docs
+    curl -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/v2/api-docs
 
-Remplacer _localhost:8088_ par le bon _host_ et le bon _port_.
+Remplacer _localhost:8080_ par le bon _host_ et le bon _port_.
 
 # Endpoints
 
 ## Lancer la sauvegarde des json en base de donnée.
 
-Les paramètres de sauvegarde sont num, pap ou all, ils doivent être ajoutés à la find du endpoint :
+Les paramètres de sauvegarde sont num, pap ou all, ils doivent être
+ajoutés à la find du endpoint :
 
     TOKEN=$(curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate | jq -r '.id_token')
 
-Puis pour avoir les articles papiers et numériques (all :
+Puis pour avoir les articles papiers et numériques (all) :
 
     curl -X POST -H 'Accept: application/json' -H "Authorization: Bearer $TOKEN" http://localhost:8080/api/json/all
 
-# Testing Pour les développeurs (optionnel))
+# Installations optionnelles pour les développeurs.
 
-## Création des tables du contexte test
+Ces étapes sont optionnelles et ne sont pas nécessaires pour démarrer
+l’application en production.
 
-Lors de la création des tables avec liquibase, le pom possède un &lt;contexts&gt;!test&lt;/contexts&gt; il faut donc le modifier car la table jhi_date_time_wrapper est absente de la base or elle est nécessaire aux tests &lt;contexts&gt;test&lt;/contexts&gt;.
+## Testing Pour les développeurs (optionnel)
 
-Si le préfixe n’est pas jhi il faut adapter le nom de la table avec le bon préfixe, par ex avec préfixe moisson:
+### Création des tables du contexte test
+
+Lors de la création des tables avec liquibase, le pom possède un
+&lt;contexts&gt;!test&gt;&lt;/contexts&gt; il faut donc le modifier car
+la table jhi_date_time_wrapper est absente de la base or elle est
+nécessaire aux tests &lt;contexts&gt;test&gt;&lt;/contexts&gt;.
+
+Si le préfixe n’est pas jhi il faut adapter le nom de la table avec le
+bon préfixe, par ex avec préfixe moisson :
 
     moisson_date_time_wrapper
 
@@ -363,7 +512,9 @@ La table correspondante est dans le package :
 
 Procédure de rattrapage :
 
-Créer un fichier yyyyMMddHHmmss_initial_schema_test.xml avec le contenu suivant (les changeset doivent avoir des id différents qui n’existent pas dans la table databasechangelog)
+Créer un fichier yyyyMMddHHmmss_initial_schema_test.xml avec le
+contenu suivant (les changeset doivent avoir des id différents qui
+n’existent pas dans la table databasechangelog)
 
     <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
@@ -372,11 +523,11 @@ Créer un fichier yyyyMMddHHmmss_initial_schema_test.xml avec le contenu suivant
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <!-- <changeSet author="jhipster" id="yyyyMMddHHmmss" context="test">
+    <!-- <changeSet author="moisson" id="yyyyMMddHHmmss" context="test">
     Il faut supprimer context="test" pour la génération
     ou bien de modifier le pom en transformant <contexts>!test</contexts> en <contexts>test</contexts> dans le pom.xml-->
 
-        <changeSet author="jhipster" id="yyyyMMddHHmmss">
+        <changeSet author="moisson" id="yyyyMMddHHmmss">
             <createTable tableName="jhi_date_time_wrapper">
                 <column  name="id" type="BIGINT">
                     <constraints primaryKey="true" primaryKeyName="jhi_date_time_wrapperPK"/>
@@ -392,11 +543,12 @@ Créer un fichier yyyyMMddHHmmss_initial_schema_test.xml avec le contenu suivant
         </changeSet>
     </databaseChangeLog>
 
-Rajouter la ligne dans master.xml :
+Rajouter la ligne dans master.xml :
 
     <include file="config/liquibase/changelog/yyyyMMddHHmmss_initial_schema_test.xml" relativeToChangelogFile="false">
 
-Attention si context="test" est conservé au niveau du pom.xml il faut modifier le pom.xml en conséquence au niveau du plugin liquibase :
+Attention si context="test" est conservé au niveau du pom.xml il faut
+modifier le pom.xml en conséquence au niveau du plugin liquibase :
 
     <plugin>
     <groupId>org.liquibase</groupId>
@@ -425,19 +577,27 @@ Attention si context="test" est conservé au niveau du pom.xml il faut modifier 
     </dependencies>
     </plugin>
 
+La table est créée
+
 Puis en ligne de commande :
 
     mvn liquibase:update
 
-si la table est bloquée avec l’erreur mvn tourne en boucle en attendant la libération du verrou il faut, passer cette requête: UPDATE DATABASECHANGELOGLOCK SET LOCKED=false, LOCKGRANTED=null, LOCKEDBY=null where ID=1;
+Si la table est bloquée avec l’erreur mvn tourne en boucle en attendant
+la libération du verrou il faut, passer cette requête :
 
-La table est créée
+    UPDATE DATABASECHANGELOGLOCK SET LOCKED=false, LOCKGRANTED=null, LOCKEDBY=null where ID=1;
 
-# Installation Flyway (Optionnel)
+## Installation Flyway (Optionnel)
 
-Il est possible de jouer les scripts avec Flyway au lieu de Liquibase. Flyway gère la "convention over configuration, c’est-à-dire que une fois le plug-in installer il va scruter conventionnellement dans main/resources/db/migration et jouer les cripts qui s’y trouvent avec un ordre prédéfini par les noms de fichiers(voir plus bas)
+Il est possible de jouer les scripts avec Flyway au lieu de Liquibase.
+Flyway gère la "convention over configuration, c’est-à-dire que une fois
+le plug-in installer il va scruter conventionnellement dans
+main/resources/db/migration et jouer les scripts qui s’y trouvent avec
+un ordre prédéfini par les noms de fichiers(voir plus bas)
 
-Pour installer un plugin Flyway Maven, il faut ajouter la définition de plugin suivante dans le pom.xml :
+Pour installer un plugin Flyway Maven, il faut ajouter la définition de
+plugin suivante dans le pom.xml :
 
     <plugin>
         <groupId>org.flywaydb</groupId>
@@ -445,11 +605,16 @@ Pour installer un plugin Flyway Maven, il faut ajouter la définition de plugin 
         <version>4.0.3</version>
     </plugin>
 
-Il faut vérifier la dernière version du plugin disponible sur Maven Central. Ce plugin Maven peut être configuré de quatre manières différentes. Consulter la documentation pour obtenir une liste de toutes les propriétés configurables.
+Il faut vérifier la dernière version du plugin disponible sur Maven
+Central. Ce plugin Maven peut être configuré de quatre manières
+différentes. Consulter la documentation pour obtenir une liste de toutes
+les propriétés configurables.
 
 1.  Configuration du plugin
 
-Configurer le plugin directement via la balise &lt;configuration&gt; dans la définition du plugin de notre pom.xml:
+Configurer le plugin directement via la balise
+&lt;configuration&gt;&lt;/configuration&gt; dans la définition du plugin
+de notre pom.xml :
 
     <plugin>
         <groupId>org.flywaydb</groupId>
@@ -467,7 +632,8 @@ Configurer le plugin directement via la balise &lt;configuration&gt; dans la dé
 
 1.  Propriétés Maven
 
-Configurer le plugin en spécifiant des propriétés configurables comme propriétés Maven dans notre pom:
+Configurer le plugin en spécifiant des propriétés configurables comme
+propriétés Maven dans notre pom :
 
     <project>
         ...
@@ -482,36 +648,44 @@ Configurer le plugin en spécifiant des propriétés configurables comme propri�
 
 1.  Fichier de configuration externe
 
-Configuration du plugin dans un fichier.properties séparé :
+Configuration du plugin dans un fichier.properties séparé :
 
     flyway.user=databaseUser
     flyway.password=databasePassword
     flyway.schemas=schemaName
     ...
 
-Le nom du fichier de configuration par défaut est flyway.properties et doit résider dans le même répertoire que le fichier pom.xml. Le codage est spécifié par flyway.encoding (la valeur par défaut est UTF-8).
+Le nom du fichier de configuration par défaut est flyway.properties et
+doit résider dans le même répertoire que le fichier pom.xml. Le codage
+est spécifié par flyway.encoding (la valeur par défaut est UTF-8).
 
-Pour utiliser un autre nom (par exemple customConfig.properties) comme fichier de configuration, il doit être spécifié explicitement lors de l’appel de la commande Maven :
+Pour utiliser un autre nom (par exemple customConfig.properties) comme
+fichier de configuration, il doit être spécifié explicitement lors de
+l’appel de la commande Maven :
 
     $ mvn -Dflyway.configFile=customConfig.properties
 
 1.  Propriétés du système
 
-Toutes les propriétés de configuration peuvent également être spécifiées en tant que propriétés systèmes lors de l’appel de Maven sur la ligne de commande :
+Toutes les propriétés de configuration peuvent également être spécifiées
+en tant que propriétés systèmes lors de l’appel de Maven sur la ligne de
+commande :
 
     $ mvn -Dflyway.user=databaseUser -Dflyway.password=databasePassword
       -Dflyway.schemas=schemaName
 
-Voici un ordre de priorité lorsqu’une configuration est spécifiée de plusieurs manières :
+Voici un ordre de priorité lorsqu’une configuration est spécifiée de
+plusieurs manières :
 
     Propriétés du système
     Fichier de configuration externe
     Propriétés de Maven
     Plugin configuration
 
-## Première Migration
+### Première Migration
 
-Pour définir la première migration, Flyway adhère à la convention de dénomination suivante pour les scripts de migration :
+Pour définir la première migration, Flyway adhère à la convention de
+dénomination suivante pour les scripts de migration :
 
     <Préfixe><Version> __ <Description>.sql
 
@@ -525,49 +699,66 @@ Exemple :
 
     V1_1_0__ma_premiere_migration.sql
 
-Ensuite appeler la commande :
+Ensuite appeler la commande :
 
     mvn clean flyway:migrate
 
-## Deuxième Migration
+### Deuxième Migration
 
-Une deuxième migration est faite en créant un deuxième fichier de migration avec le nom :
+Une deuxième migration est faite en créant un deuxième fichier de
+migration avec le nom :
 
     V2_0_0_ma_deuxieme_migration.sql
 
-Le 2 est une convention, en fait toute version supérieure à la première est considérée come une deuxième migration
+Le 2 est une convention, en fait toute version supérieure à la première
+est considérée come une deuxième migration
 
-Pour vérifier que les deux migrations ont bien réussi il faut appeler la commande Maven suivante :
+Pour vérifier que les deux migrations ont bien réussi il faut appeler la
+commande Maven suivante :
 
     mvn flyway:info
 
-## Désactivation de Flyway dans Spring Boot
+### Désactivation de Flyway dans Spring Boot
 
-Il faut définir la propriété spring.flyway.enabled dans le fichier application-{profile}}.properties :
+Il faut définir la propriété spring.flyway.enabled dans le fichier
+application-{profile}.properties :
 
     spring.flyway.enabled=false
 
-## Comment fonctionne Flyway
+### Comment fonctionne Flyway
 
-Pour savoir quelles migrations ont déjà été appliquées, quand et par qui, Flyway ajoute une table de comptabilité spéciale au schéma.
+Pour savoir quelles migrations ont déjà été appliquées, quand et par
+qui, Flyway ajoute une table de comptabilité spéciale au schéma.
 
-Cette table de métadonnées suit également les sommes de contrôle de migration et indique si les migrations ont réussi ou non.
+Cette table de métadonnées suit également les sommes de contrôle de
+migration et indique si les migrations ont réussi ou non.
 
-Le framework effectue les étapes suivantes pour s’adapter aux schémas de base de données en évolution :
+Le framework effectue les étapes suivantes pour s’adapter aux schémas de
+base de données en évolution :
 
-1.  Il vérifie un schéma de base de données pour localiser sa table de métadonnées (SCHEMA_VERSION par défaut). Si la table de métadonnées n’existe pas, elle en créera une.
+1.  Il vérifie un schéma de base de données pour localiser sa table de
+    métadonnées (SCHEMA_VERSION par défaut). Si la table de métadonnées
+    n’existe pas, elle en créera une.
 
-2.  Il analyse un chemin de classe d’application pour les migrations disponibles
+2.  Il analyse un chemin de classe d’application pour les migrations
+    disponibles
 
-3.  Il compare les migrations à la table de métadonnées. Si un numéro de version est inférieur ou égal à une version marquée comme actuelle, il est ignoré : par conséquent il ne faut pas modifier la numérotation des scripts après la première migration.
+3.  Il compare les migrations à la table de métadonnées. Si un numéro de
+    version est inférieur ou égal à une version marquée comme actuelle,
+    il est ignoré : par conséquent il ne faut pas modifier la
+    numérotation des scripts après la première migration.
 
-4.  Il marque toutes les migrations restantes comme des migrations en attente. Ceux-ci sont triés en fonction du numéro de version et sont exécutés dans l’ordre.
+4.  Il marque toutes les migrations restantes comme des migrations en
+    attente. Ceux-ci sont triés en fonction du numéro de version et sont
+    exécutés dans l’ordre.
 
-5.  Au fur et à mesure que chaque migration est appliquée, la table de métadonnées est mise à jour en conséquence.
+5.  Au fur et à mesure que chaque migration est appliquée, la table de
+    métadonnées est mise à jour en conséquence.
 
-## Commandes mvn
+### Commandes mvn
 
-Flyway prend en charge les commandes de base suivantes pour gérer les migrations de bases de données.
+Flyway prend en charge les commandes de base suivantes pour gérer les
+migrations de bases de données.
 
     Info : imprime l'état / la version actuelle d'un schéma de base de données. Il imprime quelles migrations sont en attente, quelles migrations ont été appliquées, quel est l'état des migrations appliquées et quand elles ont été appliquées.
     Migrate : migre un schéma de base de données vers la version actuelle. Il analyse le chemin de classe pour les migrations disponibles et applique les migrations en attente.

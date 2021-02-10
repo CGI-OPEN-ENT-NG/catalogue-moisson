@@ -27,7 +27,7 @@ management:
 
 spring:
   banner:
-    locations: config/image_moisson_catalogue.txt
+    locations: classpath*:image_moisson_catalogue.txt
   devtools:
     restart:
       enabled: false
@@ -152,6 +152,9 @@ application:
   libraire:
     urlArticlePapier: 'https://www.lde.fr/4dlink1/4DCGI/IDF/json_cat_pap.json'
     urlArticleNumerique: 'https://www.lde.fr/4dlink1/4DCGI/IDF/json_cat_num.json'
+  indices:
+    indexArticleNumerique: 'articlenumerique'
+    indexArticlePapier: 'articlepapier'
   scheduler:
     # Tous les jours à 4 heures AM
-    cron: 0 0 4 ? * *
+    cron: 0 0 6 ? * *

@@ -81,12 +81,12 @@ spring:
   elasticsearch:
     rest:
       # A modifier si autre
-      uris: dev.tech.fr:9200
+      uris: localhost:9200
       # A modifier si il y a une authentification ne pas décommenter sinon car l'appliaction ne démarre pas
       # username: admin
       # password: admin
 server:
-  port: 8080
+  port: 8089
 
 # ===================================================================
 # JHipster specific properties
@@ -143,6 +143,9 @@ application:
   libraire:
     urlArticlePapier: 'https://www.lde.fr/4dlink1/4DCGI/IDF/json_cat_pap.json'
     urlArticleNumerique: 'https://www.lde.fr/4dlink1/4DCGI/IDF/json_cat_num.json'
+  indices:
+    indexArticleNumerique: 'articlenumerique'
+    indexArticlePapier: 'articlepapier'
   scheduler:
-    # Tous les jours à 4 heures AM
-    cron: 45 0 16 ? * *
+    # Tous les jours à 6 heures AM
+    cron: 0 0 6 ? * *

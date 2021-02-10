@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -20,7 +22,7 @@ import java.util.Set;
 @Entity
 @Table(name = "offre")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "offre")
+// @org.springframework.data.elasticsearch.annotations.Document(indexName = "offre")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Offre implements Serializable {
 
@@ -31,44 +33,54 @@ public class Offre implements Serializable {
     @Size(min = 13, max = 13)
     @Column(name = "ean_libraire", length = 13)
     @JsonProperty("EANLDE")
+    @Field
     private String eanLibraire;
 
     @Column(name = "quantite_minimale_achat")
     @JsonProperty("QTE_MINI")
+    @Field
     private Integer quantiteMinimaleAchat;
 
     @Column(name = "prescripteur")
     @JsonProperty("PRESCRIPTEUR")
+    @Field
     private Boolean prescripteur;
 
     @Column(name = "libelle")
     @JsonProperty("LIBELLE")
+    @Field
     private String libelle;
 
     @Column(name = "prix_ht", precision = 21, scale = 2)
     @JsonProperty("PXHT")
+    @Field(type = FieldType.Scaled_Float, scalingFactor = 100)
     private BigDecimal prixHT;
 
     @Column(name = "adoptant")
     @JsonProperty("ADOPTANT")
+    @Field
     private Boolean adoptant;
 
     @Column(name = "duree")
     @JsonProperty("DUREE")
+    @Field
     private String duree;
 
     @Column(name = "reference_editeur")
     @JsonProperty("REF_EDITEUR")
+    @Field
     private String referenceEditeur;
 
     @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("TVA")
+    @Field(type = FieldType.Nested)
     private Set<Tva> tvas = new HashSet<>();
 
-    @OneToMany(mappedBy = "offre",  cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("LEP")
+    @Field(type = FieldType.Nested)
     private Set<Lep> leps = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -80,6 +92,7 @@ public class Offre implements Serializable {
     @MapsId
     @JoinColumn(name = "id")
     @JsonProperty("LICENCE")
+    @Field(type = FieldType.Nested)
     private Licence licence;
 
     @Transient
@@ -98,26 +111,26 @@ public class Offre implements Serializable {
         return eanLibraire;
     }
 
+    public void setEanLibraire(String eanLibraire) {
+        this.eanLibraire = eanLibraire;
+    }
+
     public Offre eanLibraire(String eanLibraire) {
         this.eanLibraire = eanLibraire;
         return this;
-    }
-
-    public void setEanLibraire(String eanLibraire) {
-        this.eanLibraire = eanLibraire;
     }
 
     public Integer getQuantiteMinimaleAchat() {
         return quantiteMinimaleAchat;
     }
 
+    public void setQuantiteMinimaleAchat(Integer quantiteMinimaleAchat) {
+        this.quantiteMinimaleAchat = quantiteMinimaleAchat;
+    }
+
     public Offre quantiteMinimaleAchat(Integer quantiteMinimaleAchat) {
         this.quantiteMinimaleAchat = quantiteMinimaleAchat;
         return this;
-    }
-
-    public void setQuantiteMinimaleAchat(Integer quantiteMinimaleAchat) {
-        this.quantiteMinimaleAchat = quantiteMinimaleAchat;
     }
 
     public Boolean isPrescripteur() {
@@ -137,26 +150,26 @@ public class Offre implements Serializable {
         return libelle;
     }
 
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
     public Offre libelle(String libelle) {
         this.libelle = libelle;
         return this;
-    }
-
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
     }
 
     public BigDecimal getPrixHT() {
         return prixHT;
     }
 
+    public void setPrixHT(BigDecimal prixHT) {
+        this.prixHT = prixHT;
+    }
+
     public Offre prixHT(BigDecimal prixHT) {
         this.prixHT = prixHT;
         return this;
-    }
-
-    public void setPrixHT(BigDecimal prixHT) {
-        this.prixHT = prixHT;
     }
 
     public Boolean isAdoptant() {
@@ -176,17 +189,21 @@ public class Offre implements Serializable {
         return duree;
     }
 
+    public void setDuree(String duree) {
+        this.duree = duree;
+    }
+
     public Offre duree(String duree) {
         this.duree = duree;
         return this;
     }
 
-    public void setDuree(String duree) {
-        this.duree = duree;
-    }
-
     public String getReferenceEditeur() {
         return referenceEditeur;
+    }
+
+    public void setReferenceEditeur(String referenceEditeur) {
+        this.referenceEditeur = referenceEditeur;
     }
 
     public Offre referenceEditeur(String referenceEditeur) {
@@ -194,12 +211,12 @@ public class Offre implements Serializable {
         return this;
     }
 
-    public void setReferenceEditeur(String referenceEditeur) {
-        this.referenceEditeur = referenceEditeur;
-    }
-
     public Set<Tva> getTvas() {
         return tvas;
+    }
+
+    public void setTvas(Set<Tva> tvas) {
+        this.tvas = tvas;
     }
 
     public Offre tvas(Set<Tva> tvas) {
@@ -219,12 +236,12 @@ public class Offre implements Serializable {
         return this;
     }
 
-    public void setTvas(Set<Tva> tvas) {
-        this.tvas = tvas;
-    }
-
     public Set<Lep> getLeps() {
         return leps;
+    }
+
+    public void setLeps(Set<Lep> leps) {
+        this.leps = leps;
     }
 
     public Offre leps(Set<Lep> leps) {
@@ -244,12 +261,12 @@ public class Offre implements Serializable {
         return this;
     }
 
-    public void setLeps(Set<Lep> leps) {
-        this.leps = leps;
-    }
-
     public ArticleNumerique getArticleNumerique() {
         return articleNumerique;
+    }
+
+    public void setArticleNumerique(ArticleNumerique articleNumerique) {
+        this.articleNumerique = articleNumerique;
     }
 
     public Offre articleNumerique(ArticleNumerique articleNumerique) {
@@ -257,21 +274,17 @@ public class Offre implements Serializable {
         return this;
     }
 
-    public void setArticleNumerique(ArticleNumerique articleNumerique) {
-        this.articleNumerique = articleNumerique;
-    }
-
     public Licence getLicence() {
         return licence;
+    }
+
+    public void setLicence(Licence licence) {
+        this.licence = licence;
     }
 
     public Offre licence(Licence licence) {
         this.licence = licence;
         return this;
-    }
-
-    public void setLicence(Licence licence) {
-        this.licence = licence;
     }
 
     @PostLoad
@@ -282,7 +295,7 @@ public class Offre implements Serializable {
             var innerTva = prixHT.multiply(tva.getTaux().multiply(tva.getPourcent())).divide(new BigDecimal("10000"));
             pxTTC = pxTTC.add(innerTva);
         }
-        this.prixTTC=pxTTC;
+        this.prixTTC = pxTTC;
     }
 
     public BigDecimal getPrixTTC() {

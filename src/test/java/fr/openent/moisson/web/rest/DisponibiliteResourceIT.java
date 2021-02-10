@@ -1,20 +1,18 @@
 package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
-import fr.openent.moisson.domain.Disponibilite;
-import fr.openent.moisson.domain.ArticlePapier;
 import fr.openent.moisson.domain.ArticleNumerique;
+import fr.openent.moisson.domain.ArticlePapier;
+import fr.openent.moisson.domain.Disponibilite;
+import fr.openent.moisson.domain.enumeration.DisponibiliteEnum;
 import fr.openent.moisson.repository.DisponibiliteRepository;
 import fr.openent.moisson.repository.search.DisponibiliteSearchRepository;
+import fr.openent.moisson.service.DisponibiliteQueryService;
 import fr.openent.moisson.service.DisponibiliteService;
 import fr.openent.moisson.service.dto.DisponibiliteDTO;
 import fr.openent.moisson.service.mapper.DisponibiliteMapper;
-import fr.openent.moisson.service.dto.DisponibiliteCriteria;
-import fr.openent.moisson.service.DisponibiliteQueryService;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +24,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -38,8 +37,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import fr.openent.moisson.domain.enumeration.DisponibiliteEnum;
 /**
  * Integration tests for the {@link DisponibiliteResource} REST controller.
  */
@@ -187,7 +184,7 @@ public class DisponibiliteResourceIT {
             .andExpect(jsonPath("$.[*].commandable").value(hasItem(DEFAULT_COMMANDABLE.booleanValue())))
             .andExpect(jsonPath("$.[*].valeur").value(hasItem(DEFAULT_VALEUR.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getDisponibilite() throws Exception {

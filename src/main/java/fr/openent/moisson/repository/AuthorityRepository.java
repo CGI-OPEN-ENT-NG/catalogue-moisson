@@ -1,7 +1,6 @@
 package fr.openent.moisson.repository;
 
 import fr.openent.moisson.domain.Authority;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

@@ -3,6 +3,8 @@ package fr.openent.moisson.domain;
 import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,7 +16,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "tva")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "tva")
+// @org.springframework.data.elasticsearch.annotations.Document(indexName = "tva")
 // Pour les gérer références cycliques au lieu de  @JsonManagedReference et @JsonBackReference
 // Il faut ajouter  @JsonProperty("id") au niveau de l'id
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -31,10 +33,12 @@ public class Tva implements Serializable {
 
     @Column(name = "taux", precision = 21, scale = 2)
     @JsonProperty("TAUX")
+    @Field(type = FieldType.Scaled_Float, scalingFactor = 100)
     private BigDecimal taux;
 
     @Column(name = "pourcent", precision = 21, scale = 2)
     @JsonProperty("POURCENT")
+    @Field(type = FieldType.Scaled_Float, scalingFactor = 100)
     private BigDecimal pourcent;
 
     // Eager par défaut mettre donc lazy pour éviter récupération offre

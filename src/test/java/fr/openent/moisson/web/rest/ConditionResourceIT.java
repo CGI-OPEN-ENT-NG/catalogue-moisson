@@ -5,15 +5,12 @@ import fr.openent.moisson.domain.Condition;
 import fr.openent.moisson.domain.Lep;
 import fr.openent.moisson.repository.ConditionRepository;
 import fr.openent.moisson.repository.search.ConditionSearchRepository;
+import fr.openent.moisson.service.ConditionQueryService;
 import fr.openent.moisson.service.ConditionService;
 import fr.openent.moisson.service.dto.ConditionDTO;
 import fr.openent.moisson.service.mapper.ConditionMapper;
-import fr.openent.moisson.service.dto.ConditionCriteria;
-import fr.openent.moisson.service.ConditionQueryService;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +22,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.Collections;
 import java.util.List;
@@ -171,7 +169,7 @@ public class ConditionResourceIT {
             .andExpect(jsonPath("$.[*].gratuite").value(hasItem(DEFAULT_GRATUITE)))
             .andExpect(jsonPath("$.[*].conditionGratuite").value(hasItem(DEFAULT_CONDITION_GRATUITE)));
     }
-    
+
     @Test
     @Transactional
     public void getCondition() throws Exception {

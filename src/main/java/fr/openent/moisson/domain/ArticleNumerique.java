@@ -8,6 +8,7 @@ import fr.openent.moisson.domain.enumeration.PublicCible;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.data.elasticsearch.annotations.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -23,6 +24,7 @@ import java.util.Set;
 @Table(name = "article_numerique")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "articlenumerique")
+@Setting(settingPath = "/settings/settings.json")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ArticleNumerique implements Serializable {
 
@@ -39,89 +41,110 @@ public class ArticleNumerique implements Serializable {
     @Size(min = 13, max = 13)
     @Column(name = "ean", length = 13)
     @JsonProperty("EAN")
+    @Field
     private String ean;
 
     @Column(name = "ark")
     @JsonProperty("ARK")
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String ark;
 
     @Column(name = "titre")
     @JsonProperty("TITRE")
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String titre;
 
     @Column(name = "editeur")
     @JsonProperty("EDITEUR")
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
+    // @MultiField(mainField = @Field(type = FieldType.Text,fielddata = true),otherFields = @InnerField(suffix = "keyword",type = FieldType.Keyword,normalizer ="lower_normalizer" ))
     private String editeur;
 
     @Column(name = "auteur", length = 1024)
     @JsonProperty("AUTEUR")
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String auteur;
 
     @Column(name = "collection")
     @JsonProperty("COLLECTION")
+    @Field
     private String collection;
 
     @Column(name = "distributeur")
     @JsonProperty("DISTRIBUTEUR")
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String distributeur;
 
     @Column(name = "url_couverture")
     @JsonProperty("URL_COUVERTURE")
+    @Field
     private String urlCouverture;
 
     @Column(name = "url_demo")
     @JsonProperty("URL_DEMO")
+    @Field
     private String urlDemo;
 
     @Column(name = "description", length = 65000)
     @JsonProperty("DESCRIPTION")
+    @Field
     private String description;
 
     @Column(name = "date_parution")
     @JsonProperty("DATE_PARUTION")
+    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "uuuu-MM-dd'T'HH:mm:ss.SSSX || uuuu-MM-dd'T'HH:mm:ss.SSSXX || uuuu-MM-dd'T'HH:mm:ss.SSSXXX || uuuu-MM-dd'T'HH:mm:ss.SSSXXXX || uuuu-MM-dd'T'HH:mm:ss.SSSXXXXX")
     private Instant dateParution;
 
     @Column(name = "compatible_gar")
     @JsonProperty("COMPATIBLE_GAR")
+    @Field
     private Boolean compatibleGAR;
 
     @Column(name = "accessible_ent")
     @JsonProperty("ACCESSIBLE_ENT")
+    @Field
     private Boolean accessibleENT;
 
     @Column(name = "ean_papier")
     @JsonProperty("EAN_PAPIER")
+    @Field
     private String eanPapier;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "public_cible")
     @JsonProperty("PUBLIC")
+    @Field
     private PublicCible publicCible;
 
     @OneToMany(mappedBy = "articleNumerique", cascade = CascadeType.ALL, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("DISCIPLINE")
+    @Field(type = FieldType.Nested)
     private Set<Discipline> disciplines = new HashSet<>();
 
     @OneToMany(mappedBy = "articleNumerique",cascade = CascadeType.ALL, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("NIVEAU")
+    @Field(type = FieldType.Nested)
     private Set<Niveau> niveaus = new HashSet<>();
 
     @OneToMany(mappedBy = "articleNumerique", cascade = CascadeType.ALL, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("OFFRES")
+    @Field(type = FieldType.Nested)
     private Set<Offre> offres = new HashSet<>();
 
     @OneToMany(mappedBy = "articleNumerique", cascade = CascadeType.ALL, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("TECHNO")
+    @Field(type = FieldType.Nested)
     private Set<Techno> technos = new HashSet<>();
 
     @OneToOne
     @MapsId
     @JoinColumn(name = "id")
     @JsonProperty("DISPONIBILITE")
+    @Field(type = FieldType.Nested)
     private Disponibilite disponibilite;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

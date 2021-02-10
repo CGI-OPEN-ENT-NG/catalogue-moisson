@@ -1,21 +1,18 @@
 package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
-import fr.openent.moisson.domain.Lep;
 import fr.openent.moisson.domain.Condition;
-import fr.openent.moisson.domain.Offre;
+import fr.openent.moisson.domain.Lep;
 import fr.openent.moisson.domain.Licence;
+import fr.openent.moisson.domain.Offre;
 import fr.openent.moisson.repository.LepRepository;
 import fr.openent.moisson.repository.search.LepSearchRepository;
+import fr.openent.moisson.service.LepQueryService;
 import fr.openent.moisson.service.LepService;
 import fr.openent.moisson.service.dto.LepDTO;
 import fr.openent.moisson.service.mapper.LepMapper;
-import fr.openent.moisson.service.dto.LepCriteria;
-import fr.openent.moisson.service.LepQueryService;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +24,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.Collections;
 import java.util.List;

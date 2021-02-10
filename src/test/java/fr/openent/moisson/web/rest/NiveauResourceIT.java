@@ -1,20 +1,17 @@
 package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
-import fr.openent.moisson.domain.Niveau;
 import fr.openent.moisson.domain.ArticleNumerique;
 import fr.openent.moisson.domain.ArticlePapier;
+import fr.openent.moisson.domain.Niveau;
 import fr.openent.moisson.repository.NiveauRepository;
 import fr.openent.moisson.repository.search.NiveauSearchRepository;
+import fr.openent.moisson.service.NiveauQueryService;
 import fr.openent.moisson.service.NiveauService;
 import fr.openent.moisson.service.dto.NiveauDTO;
 import fr.openent.moisson.service.mapper.NiveauMapper;
-import fr.openent.moisson.service.dto.NiveauCriteria;
-import fr.openent.moisson.service.NiveauQueryService;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +23,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.Collections;
 import java.util.List;
@@ -177,7 +175,7 @@ public class NiveauResourceIT {
             .andExpect(jsonPath("$.[*].terme").value(hasItem(DEFAULT_TERME)))
             .andExpect(jsonPath("$.[*].concept").value(hasItem(DEFAULT_CONCEPT)));
     }
-    
+
     @Test
     @Transactional
     public void getNiveau() throws Exception {

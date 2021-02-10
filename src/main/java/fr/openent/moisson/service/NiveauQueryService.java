@@ -1,9 +1,15 @@
 package fr.openent.moisson.service;
 
-import java.util.List;
-
-import javax.persistence.criteria.JoinType;
-
+import fr.openent.moisson.domain.ArticleNumerique_;
+import fr.openent.moisson.domain.ArticlePapier_;
+import fr.openent.moisson.domain.Niveau;
+import fr.openent.moisson.domain.Niveau_;
+import fr.openent.moisson.repository.NiveauRepository;
+import fr.openent.moisson.repository.search.NiveauSearchRepository;
+import fr.openent.moisson.service.dto.NiveauCriteria;
+import fr.openent.moisson.service.dto.NiveauDTO;
+import fr.openent.moisson.service.mapper.NiveauMapper;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -12,15 +18,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import fr.openent.moisson.domain.Niveau;
-import fr.openent.moisson.domain.*; // for static metamodels
-import fr.openent.moisson.repository.NiveauRepository;
-import fr.openent.moisson.repository.search.NiveauSearchRepository;
-import fr.openent.moisson.service.dto.NiveauCriteria;
-import fr.openent.moisson.service.dto.NiveauDTO;
-import fr.openent.moisson.service.mapper.NiveauMapper;
+import javax.persistence.criteria.JoinType;
+import java.util.List;
 
 /**
  * Service for executing complex queries for {@link Niveau} entities in the database.

@@ -1,9 +1,14 @@
 package fr.openent.moisson.service;
 
-import java.util.List;
-
-import javax.persistence.criteria.JoinType;
-
+import fr.openent.moisson.domain.ArticleNumerique_;
+import fr.openent.moisson.domain.Techno;
+import fr.openent.moisson.domain.Techno_;
+import fr.openent.moisson.repository.TechnoRepository;
+import fr.openent.moisson.repository.search.TechnoSearchRepository;
+import fr.openent.moisson.service.dto.TechnoCriteria;
+import fr.openent.moisson.service.dto.TechnoDTO;
+import fr.openent.moisson.service.mapper.TechnoMapper;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -12,15 +17,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import fr.openent.moisson.domain.Techno;
-import fr.openent.moisson.domain.*; // for static metamodels
-import fr.openent.moisson.repository.TechnoRepository;
-import fr.openent.moisson.repository.search.TechnoSearchRepository;
-import fr.openent.moisson.service.dto.TechnoCriteria;
-import fr.openent.moisson.service.dto.TechnoDTO;
-import fr.openent.moisson.service.mapper.TechnoMapper;
+import javax.persistence.criteria.JoinType;
+import java.util.List;
 
 /**
  * Service for executing complex queries for {@link Techno} entities in the database.
@@ -137,12 +135,6 @@ public class TechnoQueryService extends QueryService<Techno> {
             if (criteria.getCreationCours() != null) {
                 specification = specification.and(buildSpecification(criteria.getCreationCours(), Techno_.creationCours));
             }
-            if (criteria.getNbMaxiInstall() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getNbMaxiInstall(), Techno_.nbMaxiInstall));
-            }
-            if (criteria.getNbMaxSimultConnexions() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getNbMaxSimultConnexions(), Techno_.nbMaxSimultConnexions));
-            }
             if (criteria.getWebAdaptatif() != null) {
                 specification = specification.and(buildSpecification(criteria.getWebAdaptatif(), Techno_.webAdaptatif));
             }
@@ -193,6 +185,12 @@ public class TechnoQueryService extends QueryService<Techno> {
             }
             if (criteria.getDispositifDYS() != null) {
                 specification = specification.and(buildSpecification(criteria.getDispositifDYS(), Techno_.dispositifDYS));
+            }
+            if (criteria.getNbMaxiInstall() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getNbMaxiInstall(), Techno_.nbMaxiInstall));
+            }
+            if (criteria.getNbMaxSimultConnexions() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getNbMaxSimultConnexions(), Techno_.nbMaxSimultConnexions));
             }
             if (criteria.getArticleNumeriqueId() != null) {
                 specification = specification.and(buildSpecification(criteria.getArticleNumeriqueId(),

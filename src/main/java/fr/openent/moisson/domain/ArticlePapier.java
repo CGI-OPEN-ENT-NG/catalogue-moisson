@@ -11,6 +11,10 @@ import fr.openent.moisson.service.mapper.json.MoissonCustomInstantDeserializer;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.Setting;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -29,6 +33,7 @@ import java.util.Set;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "articlepapier")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Setting(settingPath = "/settings/settings.json")
 public class ArticlePapier implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,80 +43,97 @@ public class ArticlePapier implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     @JsonIgnore
     @JsonProperty("id")
+    @Field
     private Long id;
 
     @Size(min = 13, max = 13)
     @Column(name = "ean", length = 13)
     @NaturalId
     @JsonProperty("EAN")
+    @Field
     private String ean;
 
     @Column(name = "ark")
     @JsonProperty("ARK")
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String ark;
 
     @Column(name = "titre")
     @JsonProperty("TITRE")
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String titre;
 
     @Column(name = "editeur")
     @JsonProperty("EDITEUR")
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String editeur;
 
     @Column(name = "auteur", length = 102)
     @JsonProperty("AUTEUR")
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String auteur;
 
     @Column(name = "reference_editeur")
     @JsonProperty("REF_EDITEUR")
+    @Field
     private String referenceEditeur;
 
     @Column(name = "collection")
     @JsonProperty("COLLECTION")
+    @Field
     private String collection;
 
     @Column(name = "distributeur")
     @JsonProperty("DISTRIBUTEUR")
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String distributeur;
 
     @Column(name = "url_couverture")
     @JsonProperty("URL_COUVERTURE")
+    @Field
     private String urlCouverture;
 
     @Column(name = "date_parution")
     @JsonProperty("DATE_PARUTION")
     @JsonSerialize(using = InstantSerializer.class)
     @JsonDeserialize(using = MoissonCustomInstantDeserializer.class)
+    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "uuuu-MM-dd'T'HH:mm:ss.SSSX || uuuu-MM-dd'T'HH:mm:ss.SSSXX || uuuu-MM-dd'T'HH:mm:ss.SSSXXX || uuuu-MM-dd'T'HH:mm:ss.SSSXXXX || uuuu-MM-dd'T'HH:mm:ss.SSSXXXXX")
     private Instant dateParution;
 
     @Column(name = "prix_ht", precision = 21, scale = 2)
     @JsonProperty("PXHT")
+    @Field(type = FieldType.Scaled_Float, scalingFactor = 100)
     private BigDecimal prixHT;
 
     @Column(name = "description", length = 65000)
     @JsonProperty("DESCRIPTION")
+    @Field
     private String description;
 
     @OneToMany(mappedBy = "articlePapier", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("TVA")
+    @Field(type = FieldType.Nested)
     // @JsonManagedReference // @JsonManagedReference sur la collection et @JsonBackReference sur la référence (Tva)
     private Set<Tva> tvas = new HashSet<>();
 
     @OneToMany(mappedBy = "articlePapier",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("DISCIPLINE")
+    @Field(type = FieldType.Nested)
     private Set<Discipline> disciplines = new HashSet<>();
 
     @OneToMany(mappedBy = "articlePapier",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("NIVEAU")
+    @Field(type = FieldType.Nested)
     private Set<Niveau> niveaus = new HashSet<>();
 
     @OneToOne
     @MapsId
     @JoinColumn(name = "id")
     @JsonProperty("DISPONIBILITE")
+    @Field(type = FieldType.Nested )
     private Disponibilite disponibilite;
 
     @Transient

@@ -10,6 +10,15 @@ import fr.openent.moisson.domain.Offre;
 import fr.openent.moisson.repository.ArticleNumeriqueRepository;
 import fr.openent.moisson.repository.ArticlePapierRepository;
 import fr.openent.moisson.service.JsonEntityService;
+import fr.openent.moisson.service.builder.MoissonESBuilder;
+import org.elasticsearch.ElasticsearchException;
+import org.elasticsearch.action.delete.DeleteRequest;
+import org.elasticsearch.action.delete.DeleteResponse;
+import org.elasticsearch.action.update.UpdateRequest;
+import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -30,27 +39,34 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Service
 public class JsonEntityServiceImpl implements JsonEntityService {
 
-    private final Logger log = LoggerFactory.getLogger(JsonEntityServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(JsonEntityServiceImpl.class);
 
     private final ArticlePapierRepository articlePapierRepository;
     private final ArticleNumeriqueRepository articleNumeriqueRepository;
     private final ApplicationProperties applicationProperties;
+    private final RestHighLevelClient elasticsearchClient;
 
     public JsonEntityServiceImpl(ArticlePapierRepository articlePapierRepository,
                                  ArticleNumeriqueRepository articleNumeriqueRepository,
-                                 ApplicationProperties applicationProperties) {
+                                 ApplicationProperties applicationProperties,
+                                 RestHighLevelClient elasticsearchClient) {
         this.articlePapierRepository = articlePapierRepository;
         this.articleNumeriqueRepository = articleNumeriqueRepository;
         this.applicationProperties = applicationProperties;
+        this.elasticsearchClient = elasticsearchClient;
     }
 
     String urlArticlePapier;
     String urlArticleNumerique;
+    String indexArticlePapier;
+    String indexArticleNumerique;
 
     @PostConstruct
     public void initParam() {
         urlArticlePapier = applicationProperties.getLibraire().getUrlArticlePapier();
         urlArticleNumerique = applicationProperties.getLibraire().getUrlArticleNumerique();
+        indexArticlePapier = applicationProperties.getIndices().getIndexArticlePapier();
+        indexArticleNumerique = applicationProperties.getIndices().getIndexArticleNumerique();
     }
 
     @Override
@@ -73,13 +89,23 @@ public class JsonEntityServiceImpl implements JsonEntityService {
         articlePapiers.forEach(articlePapier ->
             {
                 Optional<ArticlePapier> existArticlePapier = articlePapierRepository.findByEan(articlePapier.getEan());
-                if (existArticlePapier.isPresent()) {
-                    articlePapierRepository.deleteById(existArticlePapier.get().getId());
-                }
+                existArticlePapier.ifPresent(presentPapier -> {
+                    articlePapierRepository.deleteById(presentPapier.getId());
+                    try {
+                        deleteArticlePapier(presentPapier);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
                 articlePapier.getTvas().forEach(articlePapier::addTva);
                 articlePapier.getNiveaus().forEach(articlePapier::addNiveau);
                 articlePapier.getDisciplines().forEach(articlePapier::addDiscipline);
                 articlePapierRepository.save(articlePapier);
+                try {
+                    updateArticlePapier(articlePapier);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 counter.getAndSet(counter.get() + 1);
             }
         );
@@ -104,7 +130,14 @@ public class JsonEntityServiceImpl implements JsonEntityService {
         articleNumeriques.forEach(articleNumerique ->
             {
                 Optional<ArticleNumerique> existArticleNumerique = articleNumeriqueRepository.findByEan(articleNumerique.getEan());
-                existArticleNumerique.ifPresent(numerique -> articleNumeriqueRepository.deleteById(existArticleNumerique.get().getId()));
+                existArticleNumerique.ifPresent(presentNumerique -> {
+                    articleNumeriqueRepository.deleteById(presentNumerique.getId());
+                    try {
+                        deleteArticleNumerique(presentNumerique);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
                 for (Offre offre : articleNumerique.getOffres()) {
                     for (Lep lep : offre.getLeps()) {
                         lep.getConditions().forEach(lep::addCondition);
@@ -116,15 +149,19 @@ public class JsonEntityServiceImpl implements JsonEntityService {
                 articleNumerique.getNiveaus().forEach(articleNumerique::addNiveau);
                 articleNumerique.getDisciplines().forEach(articleNumerique::addDiscipline);
                 articleNumerique.getTechnos().forEach(articleNumerique::addTechno);
-
                 articleNumeriqueRepository.save(articleNumerique);
+                try {
+                    updateArticleNumerique(articleNumerique);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 counter.getAndSet(counter.get() + 1);
             }
         );
         return counter.get();
     }
 
-    InputStream getJsonFromUrl(String urlArticle) throws IOException {
+    public InputStream getJsonFromUrl(String urlArticle) throws IOException {
                   // Re-diriger l'utilisateur vers cette URL en passant le PT en paramètre
             URL url = new URL(urlArticle);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -158,11 +195,48 @@ public class JsonEntityServiceImpl implements JsonEntityService {
             return httpURLConnection.getInputStream();
     }
 
+    public UpdateResponse updateArticlePapier(ArticlePapier articlePapier) throws IOException {
+
+        // Builder
+        XContentBuilder builder = MoissonESBuilder.createDocumentFromArticlePapier(articlePapier);
+        // Request
+        UpdateRequest request = new UpdateRequest(indexArticlePapier, articlePapier.getEan()).doc(builder);
+        // Create or update
+        request.upsert(builder);
+
+        // Execute and return
+        return elasticsearchClient.update(request, RequestOptions.DEFAULT);
+    }
+
+    public UpdateResponse updateArticleNumerique(ArticleNumerique articleNumerique) throws IOException {
+
+        // Builder
+        XContentBuilder builder = MoissonESBuilder.createDocumentFromArticleNumerique(articleNumerique);
+
+        // Request
+        UpdateRequest request = new UpdateRequest(indexArticleNumerique, articleNumerique.getEan()).doc(builder);
+
+        // Create or update
+        request.upsert(builder);
+        // Execute and return
+        return elasticsearchClient.update(request, RequestOptions.DEFAULT);
+    }
+
+    public DeleteResponse deleteArticlePapier(ArticlePapier articlePapier) throws ElasticsearchException, IOException {
+        DeleteRequest deleteRequest = new DeleteRequest(indexArticlePapier, articlePapier.getEan().toString());
+        return elasticsearchClient.delete(deleteRequest, RequestOptions.DEFAULT);
+    }
+
+    public DeleteResponse deleteArticleNumerique(ArticleNumerique articleNumerique) throws ElasticsearchException, IOException {
+        DeleteRequest deleteRequest = new DeleteRequest(indexArticleNumerique, articleNumerique.getEan().toString());
+        return elasticsearchClient.delete(deleteRequest, RequestOptions.DEFAULT);
+    }
+
     /**
      * @Scheduled(cron = "<minute> <hour> <day-of-month> <month> <day-of-week> <command>")
      * @throws IOException
      */
-    @Scheduled(cron = "0 0 4 ? * *")
+    @Scheduled(cron = "0 0 6 ? * *")
     void moissonJson() throws IOException {
         LocalTime startTime = LocalTime.now();
         Integer result;

@@ -72,14 +72,6 @@
       "fieldType": "Boolean"
     },
     {
-      "fieldName": "nbMaxiInstall",
-      "fieldType": "Integer"
-    },
-    {
-      "fieldName": "nbMaxSimultConnexions",
-      "fieldType": "Integer"
-    },
-    {
       "fieldName": "webAdaptatif",
       "fieldType": "Boolean"
     },
@@ -146,6 +138,14 @@
     {
       "fieldName": "dispositifDYS",
       "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "nbMaxiInstall",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nbMaxSimultConnexions",
+      "fieldType": "String"
     }
   ],
   "changelogDate": "20201126091754",
