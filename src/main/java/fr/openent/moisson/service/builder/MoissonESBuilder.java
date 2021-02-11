@@ -16,8 +16,8 @@ public class MoissonESBuilder {
         XContentBuilder articlePapierBuilder = XContentFactory.jsonBuilder();
         articlePapierBuilder.startObject();
         articlePapierBuilder.field(ArticlePapierESEnum.EAN.getFieldName(), articlePapier.getEan());
-        articlePapierBuilder.field(ArticlePapierESEnum.ARK.getFieldName(), articlePapier.getTitre());
-        articlePapierBuilder.field(ArticlePapierESEnum.TITRE.getFieldName(), articlePapier.getArk());
+        articlePapierBuilder.field(ArticlePapierESEnum.ARK.getFieldName(), articlePapier.getArk());
+        articlePapierBuilder.field(ArticlePapierESEnum.TITRE.getFieldName(), articlePapier.getTitre());
         articlePapierBuilder.field(ArticlePapierESEnum.EDITEUR.getFieldName(), articlePapier.getEditeur());
         articlePapierBuilder.field(ArticlePapierESEnum.AUTEUR.getFieldName(), articlePapier.getAuteur());
         articlePapierBuilder.field(ArticlePapierESEnum.REF_EDITEUR.getFieldName(), articlePapier.getReferenceEditeur());
@@ -74,8 +74,8 @@ public class MoissonESBuilder {
         XContentBuilder articleNumeriqueBuilder = XContentFactory.jsonBuilder();
         articleNumeriqueBuilder.startObject();
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.EAN.getFieldName(), articleNumerique.getEan());
-        articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.ARK.getFieldName(), articleNumerique.getTitre());
-        articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.TITRE.getFieldName(), articleNumerique.getArk());
+        articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.ARK.getFieldName(), articleNumerique.getArk());
+        articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.TITRE.getFieldName(), articleNumerique.getTitre());
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.EDITEUR.getFieldName(), articleNumerique.getEditeur());
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.AUTEUR.getFieldName(), articleNumerique.getAuteur());
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.COLLECTION.getFieldName(), articleNumerique.getCollection());
@@ -97,7 +97,7 @@ public class MoissonESBuilder {
             innerOffres.put(OffreESEnum.QTE_MINI.getFieldName(), offre.getQuantiteMinimaleAchat());
             innerOffres.put(OffreESEnum.PRESCRIPTEUR.getFieldName(), offre.isPrescripteur());
             innerOffres.put(OffreESEnum.LIBELLE.getFieldName(), offre.getLibelle());
-            innerOffres.put(OffreESEnum.PRIXHT.getFieldName(), offre.getEanLibraire());
+            innerOffres.put(OffreESEnum.PRIXHT.getFieldName(), offre.getPrixHT());
             innerOffres.put(OffreESEnum.ADOPTANT.getFieldName(), offre.isAdoptant());
             innerOffres.put(OffreESEnum.DUREE.getFieldName(), offre.getDuree());
             innerOffres.put(OffreESEnum.REF_EDITEUR.getFieldName(), offre.getReferenceEditeur());
