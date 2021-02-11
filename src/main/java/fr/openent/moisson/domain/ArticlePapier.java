@@ -126,7 +126,7 @@ public class ArticlePapier implements Serializable {
     @OneToMany(mappedBy = "articlePapier",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("NIVEAU")
-    @Field(type = FieldType.Nested)
+    @Field(type = FieldType.Nested, name = "niveaux")
     private Set<Niveau> niveaus = new HashSet<>();
 
     @OneToOne
