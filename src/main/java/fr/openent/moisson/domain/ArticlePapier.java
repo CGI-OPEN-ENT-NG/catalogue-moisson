@@ -1,9 +1,6 @@
 package fr.openent.moisson.domain;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.InstantSerializer;
@@ -34,6 +31,7 @@ import java.util.Set;
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "articlepapier")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Setting(settingPath = "/settings/settings.json")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ArticlePapier implements Serializable {
 
     private static final long serialVersionUID = 1L;

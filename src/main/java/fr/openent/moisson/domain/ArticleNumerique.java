@@ -1,9 +1,6 @@
 package fr.openent.moisson.domain;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import fr.openent.moisson.domain.enumeration.PublicCible;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -26,6 +23,7 @@ import java.util.Set;
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "articlenumerique")
 @Setting(settingPath = "/settings/settings.json")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ArticleNumerique implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -113,8 +111,8 @@ public class ArticleNumerique implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "public_cible")
     @JsonProperty("PUBLIC")
-    @Field
-    private PublicCible publicCible;
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
+    private PublicCible publiccible;
 
     @OneToMany(mappedBy = "articleNumerique", cascade = CascadeType.ALL, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
@@ -352,17 +350,17 @@ public class ArticleNumerique implements Serializable {
         this.description = description;
     }
 
-    public PublicCible getPublicCible() {
-        return publicCible;
+    public PublicCible getPubliccible() {
+        return publiccible;
     }
 
     public ArticleNumerique publicCible(PublicCible publicCible) {
-        this.publicCible = publicCible;
+        this.publiccible = publicCible;
         return this;
     }
 
-    public void setPublicCible(PublicCible publicCible) {
-        this.publicCible = publicCible;
+    public void setPubliccible(PublicCible publicCible) {
+        this.publiccible = publicCible;
     }
 
     public Set<Discipline> getDisciplines() {
@@ -502,7 +500,7 @@ public class ArticleNumerique implements Serializable {
             ", accessibleENT='" + isAccessibleENT() + "'" +
             ", eanPapier='" + getEanPapier() + "'" +
             ", description='" + getDescription() + "'" +
-            ", publicCible='" + getPublicCible() + "'" +
+            ", publicCible='" + getPubliccible() + "'" +
             "}";
     }
 }

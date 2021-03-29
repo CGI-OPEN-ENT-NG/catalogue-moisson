@@ -131,7 +131,7 @@ public class ArticleNumeriqueQueryService extends QueryService<ArticleNumerique>
                 specification = specification.and(buildStringSpecification(criteria.getDescription(), ArticleNumerique_.description));
             }
             if (criteria.getPublicCible() != null) {
-                specification = specification.and(buildSpecification(criteria.getPublicCible(), ArticleNumerique_.publicCible));
+                specification = specification.and(buildSpecification(criteria.getPublicCible(), ArticleNumerique_.publiccible));
             }
             if (criteria.getEanPapier() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getEanPapier(), ArticleNumerique_.eanPapier));

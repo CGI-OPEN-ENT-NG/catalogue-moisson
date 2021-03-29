@@ -87,7 +87,7 @@ public class MoissonESBuilder {
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.COMPATIBLE_GAR.getFieldName(), articleNumerique.isCompatibleGAR());
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.ACCESSIBLE_ENT.getFieldName(), articleNumerique.isAccessibleENT());
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.EAN_PAPIER.getFieldName(), articleNumerique.getEanPapier());
-        articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.PUBLIC_CIBLE.getFieldName(), articleNumerique.getPublicCible());
+        articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.PUBLIC_CIBLE.getFieldName(), articleNumerique.getPubliccible());
 
 
         List<Object> offres = new ArrayList<>();

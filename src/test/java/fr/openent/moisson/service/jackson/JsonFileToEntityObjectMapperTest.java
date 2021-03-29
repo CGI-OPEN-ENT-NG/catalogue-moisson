@@ -30,6 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -138,7 +139,7 @@ class JsonFileToEntityObjectMapperTest {
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.COMPATIBLE_GAR.getFieldName(), articleNumerique.isCompatibleGAR());
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.ACCESSIBLE_ENT.getFieldName(), articleNumerique.isAccessibleENT());
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.EAN_PAPIER.getFieldName(), articleNumerique.getEanPapier());
-        articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.PUBLIC_CIBLE.getFieldName(), articleNumerique.getPublicCible());
+        articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.PUBLIC_CIBLE.getFieldName(), articleNumerique.getPubliccible());
 
 
         List<Object> offres = new ArrayList<>();
@@ -321,11 +322,10 @@ class JsonFileToEntityObjectMapperTest {
     public void jacksonArticleNumeriqueTest() throws IOException {
         // Jackson
         ObjectMapper objectMapper = new ObjectMapper();
-        var articleNumeriques = objectMapper.readValue(jsonEntityService.getJsonFromUrl("https://www.lde.fr/4dlink1/4DCGI/IDF/json_cat_num.json"), new TypeReference<List<ArticleNumerique>>() {
-        });
-//        var articleNumeriques = objectMapper.readValue(new File("src/test/resources/json/articles_numeriques.json"),
-//            new TypeReference<List<ArticleNumerique>>() {
-//            });
+        var articleNumeriques = objectMapper.readValue(jsonEntityService.getJsonFromUrl("https://www.lde.fr/4dlink1/4DCGI/IDF/json_cat_num.json"), new TypeReference<List<ArticleNumerique>>() {});
+//       var articleNumeriques = objectMapper.readValue(new File("src/test/resources/json/articles_numeriques.json"),
+//          new TypeReference<List<ArticleNumerique>>() {
+//           });
         articleNumeriques.forEach(articleNumerique ->
             {
                 Optional<ArticleNumerique> existArticleNumerique = articleNumeriqueRepository.findByEan(articleNumerique.getEan());

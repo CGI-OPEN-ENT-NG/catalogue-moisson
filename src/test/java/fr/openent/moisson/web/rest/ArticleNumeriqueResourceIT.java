@@ -221,7 +221,7 @@ public class ArticleNumeriqueResourceIT {
         assertThat(testArticleNumerique.isCompatibleGAR()).isEqualTo(DEFAULT_COMPATIBLE_GAR);
         assertThat(testArticleNumerique.isAccessibleENT()).isEqualTo(DEFAULT_ACCESSIBLE_ENT);
         assertThat(testArticleNumerique.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testArticleNumerique.getPublicCible()).isEqualTo(DEFAULT_PUBLIC_CIBLE);
+        assertThat(testArticleNumerique.getPubliccible()).isEqualTo(DEFAULT_PUBLIC_CIBLE);
         assertThat(testArticleNumerique.getEanPapier()).isEqualTo(DEFAULT_EAN_PAPIER);
 
         // Validate the id for MapsId, the ids must be same
@@ -1636,7 +1636,7 @@ public class ArticleNumeriqueResourceIT {
         assertThat(testArticleNumerique.isCompatibleGAR()).isEqualTo(UPDATED_COMPATIBLE_GAR);
         assertThat(testArticleNumerique.isAccessibleENT()).isEqualTo(UPDATED_ACCESSIBLE_ENT);
         assertThat(testArticleNumerique.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testArticleNumerique.getPublicCible()).isEqualTo(UPDATED_PUBLIC_CIBLE);
+        assertThat(testArticleNumerique.getPubliccible()).isEqualTo(UPDATED_PUBLIC_CIBLE);
         assertThat(testArticleNumerique.getEanPapier()).isEqualTo(UPDATED_EAN_PAPIER);
 
         // Validate the ArticleNumerique in Elasticsearch
