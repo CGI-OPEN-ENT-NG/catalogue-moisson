@@ -134,6 +134,12 @@ public class ArticleNumerique implements Serializable {
 
     @OneToMany(mappedBy = "articleNumerique", cascade = CascadeType.ALL, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
+    @JsonProperty("CLASSE")
+    @Field(type = FieldType.Nested)
+    private Set<Classe> classes = new HashSet<>();
+
+    @OneToMany(mappedBy = "articleNumerique", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("TECHNO")
     @Field(type = FieldType.Nested)
     private Set<Techno> technos = new HashSet<>();
@@ -354,13 +360,13 @@ public class ArticleNumerique implements Serializable {
         return publiccible;
     }
 
-    public ArticleNumerique publicCible(PublicCible publicCible) {
-        this.publiccible = publicCible;
+    public ArticleNumerique publiccible(PublicCible publiccible) {
+        this.publiccible = publiccible;
         return this;
     }
 
-    public void setPubliccible(PublicCible publicCible) {
-        this.publiccible = publicCible;
+    public void setPubliccible(PublicCible publiccible) {
+        this.publiccible = publiccible;
     }
 
     public Set<Discipline> getDisciplines() {
@@ -438,6 +444,32 @@ public class ArticleNumerique implements Serializable {
         this.offres = offres;
     }
 
+    public Set<Classe> getClasses() {
+        return classes;
+    }
+
+    public ArticleNumerique classes(Set<Classe> classes) {
+        this.classes = classes;
+        return this;
+    }
+
+    public ArticleNumerique addClasse(Classe classe) {
+        this.classes.add(classe);
+        classe.setArticleNumerique(this);
+        return this;
+    }
+
+    public ArticleNumerique removeClasse(Classe classe) {
+        this.classes.remove(classe);
+        classe.setArticleNumerique(null);
+        return this;
+    }
+
+    public void setClasses(Set<Classe> classes) {
+        this.classes = classes;
+    }
+
+
     public Set<Techno> getTechnos() {
         return technos;
     }
@@ -500,7 +532,7 @@ public class ArticleNumerique implements Serializable {
             ", accessibleENT='" + isAccessibleENT() + "'" +
             ", eanPapier='" + getEanPapier() + "'" +
             ", description='" + getDescription() + "'" +
-            ", publicCible='" + getPubliccible() + "'" +
+            ", publiccible='" + getPubliccible() + "'" +
             "}";
     }
 }

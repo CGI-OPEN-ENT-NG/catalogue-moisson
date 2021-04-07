@@ -1,10 +1,10 @@
 package fr.openent.moisson.service.mapper;
 
 
-import fr.openent.moisson.domain.ArticleNumerique;
+import fr.openent.moisson.domain.*;
 import fr.openent.moisson.service.dto.ArticleNumeriqueDTO;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+
+import org.mapstruct.*;
 
 /**
  * Mapper for the entity {@link ArticleNumerique} and its DTO {@link ArticleNumeriqueDTO}.
@@ -24,6 +24,8 @@ public interface ArticleNumeriqueMapper extends EntityMapper<ArticleNumeriqueDTO
     @Mapping(target = "technos", ignore = true)
     @Mapping(target = "removeTechno", ignore = true)
     @Mapping(source = "disponibiliteId", target = "disponibilite")
+    @Mapping(target = "classes", ignore = true)
+    @Mapping(target = "removeClasse", ignore = true)
     ArticleNumerique toEntity(ArticleNumeriqueDTO articleNumeriqueDTO);
 
     default ArticleNumerique fromId(Long id) {

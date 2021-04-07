@@ -1,16 +1,15 @@
 package fr.openent.moisson.service.dto;
 
-import fr.openent.moisson.domain.enumeration.PublicCible;
-
-import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.time.Instant;
+import javax.validation.constraints.*;
+import java.io.Serializable;
+import fr.openent.moisson.domain.enumeration.PublicCible;
 
 /**
  * A DTO for the {@link fr.openent.moisson.domain.ArticleNumerique} entity.
  */
 public class ArticleNumeriqueDTO implements Serializable {
-
+    
     private Long id;
 
     @Size(min = 13, max = 13)
@@ -40,13 +39,13 @@ public class ArticleNumeriqueDTO implements Serializable {
 
     private String description;
 
-    private PublicCible publicCible;
+    private PublicCible publiccible;
 
     private String eanPapier;
 
 
     private Long disponibiliteId;
-
+    
     public Long getId() {
         return id;
     }
@@ -159,12 +158,12 @@ public class ArticleNumeriqueDTO implements Serializable {
         this.description = description;
     }
 
-    public PublicCible getPublicCible() {
-        return publicCible;
+    public PublicCible getPubliccible() {
+        return publiccible;
     }
 
-    public void setPublicCible(PublicCible publicCible) {
-        this.publicCible = publicCible;
+    public void setPubliccible(PublicCible publiccible) {
+        this.publiccible = publiccible;
     }
 
     public String getEanPapier() {
@@ -218,7 +217,7 @@ public class ArticleNumeriqueDTO implements Serializable {
             ", compatibleGAR='" + isCompatibleGAR() + "'" +
             ", accessibleENT='" + isAccessibleENT() + "'" +
             ", description='" + getDescription() + "'" +
-            ", publicCible='" + getPublicCible() + "'" +
+            ", publiccible='" + getPubliccible() + "'" +
             ", eanPapier='" + getEanPapier() + "'" +
             ", disponibiliteId=" + getDisponibiliteId() +
             "}";

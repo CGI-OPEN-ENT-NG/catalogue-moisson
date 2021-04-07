@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the ArticleNumerique entity.
+ * Performance test for the Classe entity.
  */
-class ArticleNumeriqueGatlingTest extends Simulation {
+class ClasseGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -43,7 +43,7 @@ class ArticleNumeriqueGatlingTest extends Simulation {
         "Authorization" -> "${access_token}"
     )
 
-    val scn = scenario("Test the ArticleNumerique entity")
+    val scn = scenario("Test the Classe entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -62,43 +62,29 @@ class ArticleNumeriqueGatlingTest extends Simulation {
         .check(status.is(200)))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all articleNumeriques")
-            .get("/api/article-numeriques")
+            exec(http("Get all classes")
+            .get("/api/classes")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new articleNumerique")
-            .post("/api/article-numeriques")
+            .exec(http("Create new classe")
+            .post("/api/classes")
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "ean":"SAMPLE_TEXT"
-                , "ark":"SAMPLE_TEXT"
-                , "titre":"SAMPLE_TEXT"
-                , "editeur":"SAMPLE_TEXT"
-                , "auteur":"SAMPLE_TEXT"
-                , "collection":"SAMPLE_TEXT"
-                , "distributeur":"SAMPLE_TEXT"
-                , "urlCouverture":"SAMPLE_TEXT"
-                , "urlDemo":"SAMPLE_TEXT"
-                , "dateParution":"2020-01-01T00:00:00.000Z"
-                , "compatibleGAR":null
-                , "accessibleENT":null
-                , "description":"SAMPLE_TEXT"
-                , "publiccible":"ELEVE"
-                , "eanPapier":"SAMPLE_TEXT"
+                , "libelle":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_articleNumerique_url"))).exitHereIfFailed
+            .check(headerRegex("Location", "(.*)").saveAs("new_classe_url"))).exitHereIfFailed
             .pause(10)
             .repeat(5) {
-                exec(http("Get created articleNumerique")
-                .get("${new_articleNumerique_url}")
+                exec(http("Get created classe")
+                .get("${new_classe_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created articleNumerique")
-            .delete("${new_articleNumerique_url}")
+            .exec(http("Delete created classe")
+            .delete("${new_classe_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

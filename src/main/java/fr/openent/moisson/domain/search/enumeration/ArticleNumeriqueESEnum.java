@@ -22,6 +22,7 @@ public enum ArticleNumeriqueESEnum {
     COMPATIBLE_GAR("compatiblegar", ElasticSearchConstants.BOOLEAN),
     ACCESSIBLE_ENT("acessibleent", ElasticSearchConstants.BOOLEAN),
     EAN_PAPIER("eanpapier", ElasticSearchConstants.KEYWORD),
+    CLASSE("classe", ElasticSearchConstants.KEYWORD),
     PUBLIC_CIBLE("publiccible", ElasticSearchConstants.KEYWORD),
 
     // Others Entities ES
