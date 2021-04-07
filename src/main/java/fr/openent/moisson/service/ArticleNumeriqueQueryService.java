@@ -1,12 +1,9 @@
 package fr.openent.moisson.service;
 
-import fr.openent.moisson.domain.*;
-import fr.openent.moisson.repository.ArticleNumeriqueRepository;
-import fr.openent.moisson.repository.search.ArticleNumeriqueSearchRepository;
-import fr.openent.moisson.service.dto.ArticleNumeriqueCriteria;
-import fr.openent.moisson.service.dto.ArticleNumeriqueDTO;
-import fr.openent.moisson.service.mapper.ArticleNumeriqueMapper;
-import io.github.jhipster.service.QueryService;
+import java.util.List;
+
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -15,8 +12,15 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.JoinType;
-import java.util.List;
+import io.github.jhipster.service.QueryService;
+
+import fr.openent.moisson.domain.ArticleNumerique;
+import fr.openent.moisson.domain.*; // for static metamodels
+import fr.openent.moisson.repository.ArticleNumeriqueRepository;
+import fr.openent.moisson.repository.search.ArticleNumeriqueSearchRepository;
+import fr.openent.moisson.service.dto.ArticleNumeriqueCriteria;
+import fr.openent.moisson.service.dto.ArticleNumeriqueDTO;
+import fr.openent.moisson.service.mapper.ArticleNumeriqueMapper;
 
 /**
  * Service for executing complex queries for {@link ArticleNumerique} entities in the database.
@@ -130,8 +134,8 @@ public class ArticleNumeriqueQueryService extends QueryService<ArticleNumerique>
             if (criteria.getDescription() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDescription(), ArticleNumerique_.description));
             }
-            if (criteria.getPublicCible() != null) {
-                specification = specification.and(buildSpecification(criteria.getPublicCible(), ArticleNumerique_.publiccible));
+            if (criteria.getPubliccible() != null) {
+                specification = specification.and(buildSpecification(criteria.getPubliccible(), ArticleNumerique_.publiccible));
             }
             if (criteria.getEanPapier() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getEanPapier(), ArticleNumerique_.eanPapier));
@@ -155,6 +159,10 @@ public class ArticleNumeriqueQueryService extends QueryService<ArticleNumerique>
             if (criteria.getDisponibiliteId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDisponibiliteId(),
                     root -> root.join(ArticleNumerique_.disponibilite, JoinType.LEFT).get(Disponibilite_.id)));
+            }
+            if (criteria.getClasseId() != null) {
+                specification = specification.and(buildSpecification(criteria.getClasseId(),
+                    root -> root.join(ArticleNumerique_.classes, JoinType.LEFT).get(Classe_.id)));
             }
         }
         return specification;

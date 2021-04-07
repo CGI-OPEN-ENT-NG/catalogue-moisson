@@ -70,6 +70,8 @@ public class CacheConfiguration {
             createCache(cm, fr.openent.moisson.domain.Licence.class.getName());
             createCache(cm, fr.openent.moisson.domain.ArticlePapier.class.getName() + ".disciplines");
             createCache(cm, fr.openent.moisson.domain.ArticlePapier.class.getName() + ".niveaus");
+            createCache(cm, fr.openent.moisson.domain.Classe.class.getName());
+            createCache(cm, fr.openent.moisson.domain.ArticleNumerique.class.getName() + ".classes");
             // jhipster-needle-ehcache-add-entry
         };
     }

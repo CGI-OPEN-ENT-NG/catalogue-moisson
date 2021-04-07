@@ -1,16 +1,24 @@
 package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
-import fr.openent.moisson.domain.*;
-import fr.openent.moisson.domain.enumeration.PublicCible;
+import fr.openent.moisson.domain.ArticleNumerique;
+import fr.openent.moisson.domain.Discipline;
+import fr.openent.moisson.domain.Niveau;
+import fr.openent.moisson.domain.Offre;
+import fr.openent.moisson.domain.Techno;
+import fr.openent.moisson.domain.Disponibilite;
+import fr.openent.moisson.domain.Classe;
 import fr.openent.moisson.repository.ArticleNumeriqueRepository;
 import fr.openent.moisson.repository.search.ArticleNumeriqueSearchRepository;
-import fr.openent.moisson.service.ArticleNumeriqueQueryService;
 import fr.openent.moisson.service.ArticleNumeriqueService;
 import fr.openent.moisson.service.dto.ArticleNumeriqueDTO;
 import fr.openent.moisson.service.mapper.ArticleNumeriqueMapper;
+import fr.openent.moisson.service.dto.ArticleNumeriqueCriteria;
+import fr.openent.moisson.service.ArticleNumeriqueQueryService;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +30,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -35,6 +42,8 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import fr.openent.moisson.domain.enumeration.PublicCible;
 /**
  * Integration tests for the {@link ArticleNumeriqueResource} REST controller.
  */
@@ -83,8 +92,8 @@ public class ArticleNumeriqueResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
-    private static final PublicCible DEFAULT_PUBLIC_CIBLE = PublicCible.ELEVE;
-    private static final PublicCible UPDATED_PUBLIC_CIBLE = PublicCible.ENSEIGNANT;
+    private static final PublicCible DEFAULT_PUBLICCIBLE = PublicCible.ELEVE;
+    private static final PublicCible UPDATED_PUBLICCIBLE = PublicCible.ENSEIGNANT;
 
     private static final String DEFAULT_EAN_PAPIER = "AAAAAAAAAA";
     private static final String UPDATED_EAN_PAPIER = "BBBBBBBBBB";
@@ -138,7 +147,7 @@ public class ArticleNumeriqueResourceIT {
             .compatibleGAR(DEFAULT_COMPATIBLE_GAR)
             .accessibleENT(DEFAULT_ACCESSIBLE_ENT)
             .description(DEFAULT_DESCRIPTION)
-            .publicCible(DEFAULT_PUBLIC_CIBLE)
+            .publiccible(DEFAULT_PUBLICCIBLE)
             .eanPapier(DEFAULT_EAN_PAPIER);
         // Add required entity
         Disponibilite disponibilite;
@@ -173,7 +182,7 @@ public class ArticleNumeriqueResourceIT {
             .compatibleGAR(UPDATED_COMPATIBLE_GAR)
             .accessibleENT(UPDATED_ACCESSIBLE_ENT)
             .description(UPDATED_DESCRIPTION)
-            .publicCible(UPDATED_PUBLIC_CIBLE)
+            .publiccible(UPDATED_PUBLICCIBLE)
             .eanPapier(UPDATED_EAN_PAPIER);
         // Add required entity
         Disponibilite disponibilite;
@@ -221,7 +230,7 @@ public class ArticleNumeriqueResourceIT {
         assertThat(testArticleNumerique.isCompatibleGAR()).isEqualTo(DEFAULT_COMPATIBLE_GAR);
         assertThat(testArticleNumerique.isAccessibleENT()).isEqualTo(DEFAULT_ACCESSIBLE_ENT);
         assertThat(testArticleNumerique.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testArticleNumerique.getPubliccible()).isEqualTo(DEFAULT_PUBLIC_CIBLE);
+        assertThat(testArticleNumerique.getPubliccible()).isEqualTo(DEFAULT_PUBLICCIBLE);
         assertThat(testArticleNumerique.getEanPapier()).isEqualTo(DEFAULT_EAN_PAPIER);
 
         // Validate the id for MapsId, the ids must be same
@@ -315,10 +324,10 @@ public class ArticleNumeriqueResourceIT {
             .andExpect(jsonPath("$.[*].compatibleGAR").value(hasItem(DEFAULT_COMPATIBLE_GAR.booleanValue())))
             .andExpect(jsonPath("$.[*].accessibleENT").value(hasItem(DEFAULT_ACCESSIBLE_ENT.booleanValue())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].publicCible").value(hasItem(DEFAULT_PUBLIC_CIBLE.toString())))
+            .andExpect(jsonPath("$.[*].publiccible").value(hasItem(DEFAULT_PUBLICCIBLE.toString())))
             .andExpect(jsonPath("$.[*].eanPapier").value(hasItem(DEFAULT_EAN_PAPIER)));
     }
-
+    
     @Test
     @Transactional
     public void getArticleNumerique() throws Exception {
@@ -343,7 +352,7 @@ public class ArticleNumeriqueResourceIT {
             .andExpect(jsonPath("$.compatibleGAR").value(DEFAULT_COMPATIBLE_GAR.booleanValue()))
             .andExpect(jsonPath("$.accessibleENT").value(DEFAULT_ACCESSIBLE_ENT.booleanValue()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
-            .andExpect(jsonPath("$.publicCible").value(DEFAULT_PUBLIC_CIBLE.toString()))
+            .andExpect(jsonPath("$.publiccible").value(DEFAULT_PUBLICCIBLE.toString()))
             .andExpect(jsonPath("$.eanPapier").value(DEFAULT_EAN_PAPIER));
     }
 
@@ -1305,54 +1314,54 @@ public class ArticleNumeriqueResourceIT {
 
     @Test
     @Transactional
-    public void getAllArticleNumeriquesByPublicCibleIsEqualToSomething() throws Exception {
+    public void getAllArticleNumeriquesByPubliccibleIsEqualToSomething() throws Exception {
         // Initialize the database
         articleNumeriqueRepository.saveAndFlush(articleNumerique);
 
-        // Get all the articleNumeriqueList where publicCible equals to DEFAULT_PUBLIC_CIBLE
-        defaultArticleNumeriqueShouldBeFound("publicCible.equals=" + DEFAULT_PUBLIC_CIBLE);
+        // Get all the articleNumeriqueList where publiccible equals to DEFAULT_PUBLICCIBLE
+        defaultArticleNumeriqueShouldBeFound("publiccible.equals=" + DEFAULT_PUBLICCIBLE);
 
-        // Get all the articleNumeriqueList where publicCible equals to UPDATED_PUBLIC_CIBLE
-        defaultArticleNumeriqueShouldNotBeFound("publicCible.equals=" + UPDATED_PUBLIC_CIBLE);
+        // Get all the articleNumeriqueList where publiccible equals to UPDATED_PUBLICCIBLE
+        defaultArticleNumeriqueShouldNotBeFound("publiccible.equals=" + UPDATED_PUBLICCIBLE);
     }
 
     @Test
     @Transactional
-    public void getAllArticleNumeriquesByPublicCibleIsNotEqualToSomething() throws Exception {
+    public void getAllArticleNumeriquesByPubliccibleIsNotEqualToSomething() throws Exception {
         // Initialize the database
         articleNumeriqueRepository.saveAndFlush(articleNumerique);
 
-        // Get all the articleNumeriqueList where publicCible not equals to DEFAULT_PUBLIC_CIBLE
-        defaultArticleNumeriqueShouldNotBeFound("publicCible.notEquals=" + DEFAULT_PUBLIC_CIBLE);
+        // Get all the articleNumeriqueList where publiccible not equals to DEFAULT_PUBLICCIBLE
+        defaultArticleNumeriqueShouldNotBeFound("publiccible.notEquals=" + DEFAULT_PUBLICCIBLE);
 
-        // Get all the articleNumeriqueList where publicCible not equals to UPDATED_PUBLIC_CIBLE
-        defaultArticleNumeriqueShouldBeFound("publicCible.notEquals=" + UPDATED_PUBLIC_CIBLE);
+        // Get all the articleNumeriqueList where publiccible not equals to UPDATED_PUBLICCIBLE
+        defaultArticleNumeriqueShouldBeFound("publiccible.notEquals=" + UPDATED_PUBLICCIBLE);
     }
 
     @Test
     @Transactional
-    public void getAllArticleNumeriquesByPublicCibleIsInShouldWork() throws Exception {
+    public void getAllArticleNumeriquesByPubliccibleIsInShouldWork() throws Exception {
         // Initialize the database
         articleNumeriqueRepository.saveAndFlush(articleNumerique);
 
-        // Get all the articleNumeriqueList where publicCible in DEFAULT_PUBLIC_CIBLE or UPDATED_PUBLIC_CIBLE
-        defaultArticleNumeriqueShouldBeFound("publicCible.in=" + DEFAULT_PUBLIC_CIBLE + "," + UPDATED_PUBLIC_CIBLE);
+        // Get all the articleNumeriqueList where publiccible in DEFAULT_PUBLICCIBLE or UPDATED_PUBLICCIBLE
+        defaultArticleNumeriqueShouldBeFound("publiccible.in=" + DEFAULT_PUBLICCIBLE + "," + UPDATED_PUBLICCIBLE);
 
-        // Get all the articleNumeriqueList where publicCible equals to UPDATED_PUBLIC_CIBLE
-        defaultArticleNumeriqueShouldNotBeFound("publicCible.in=" + UPDATED_PUBLIC_CIBLE);
+        // Get all the articleNumeriqueList where publiccible equals to UPDATED_PUBLICCIBLE
+        defaultArticleNumeriqueShouldNotBeFound("publiccible.in=" + UPDATED_PUBLICCIBLE);
     }
 
     @Test
     @Transactional
-    public void getAllArticleNumeriquesByPublicCibleIsNullOrNotNull() throws Exception {
+    public void getAllArticleNumeriquesByPubliccibleIsNullOrNotNull() throws Exception {
         // Initialize the database
         articleNumeriqueRepository.saveAndFlush(articleNumerique);
 
-        // Get all the articleNumeriqueList where publicCible is not null
-        defaultArticleNumeriqueShouldBeFound("publicCible.specified=true");
+        // Get all the articleNumeriqueList where publiccible is not null
+        defaultArticleNumeriqueShouldBeFound("publiccible.specified=true");
 
-        // Get all the articleNumeriqueList where publicCible is null
-        defaultArticleNumeriqueShouldNotBeFound("publicCible.specified=false");
+        // Get all the articleNumeriqueList where publiccible is null
+        defaultArticleNumeriqueShouldNotBeFound("publiccible.specified=false");
     }
 
     @Test
@@ -1528,6 +1537,26 @@ public class ArticleNumeriqueResourceIT {
         defaultArticleNumeriqueShouldNotBeFound("disponibiliteId.equals=" + (disponibiliteId + 1));
     }
 
+
+    @Test
+    @Transactional
+    public void getAllArticleNumeriquesByClasseIsEqualToSomething() throws Exception {
+        // Initialize the database
+        articleNumeriqueRepository.saveAndFlush(articleNumerique);
+        Classe classe = ClasseResourceIT.createEntity(em);
+        em.persist(classe);
+        em.flush();
+        articleNumerique.addClasse(classe);
+        articleNumeriqueRepository.saveAndFlush(articleNumerique);
+        Long classeId = classe.getId();
+
+        // Get all the articleNumeriqueList where classe equals to classeId
+        defaultArticleNumeriqueShouldBeFound("classeId.equals=" + classeId);
+
+        // Get all the articleNumeriqueList where classe equals to classeId + 1
+        defaultArticleNumeriqueShouldNotBeFound("classeId.equals=" + (classeId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -1549,7 +1578,7 @@ public class ArticleNumeriqueResourceIT {
             .andExpect(jsonPath("$.[*].compatibleGAR").value(hasItem(DEFAULT_COMPATIBLE_GAR.booleanValue())))
             .andExpect(jsonPath("$.[*].accessibleENT").value(hasItem(DEFAULT_ACCESSIBLE_ENT.booleanValue())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].publicCible").value(hasItem(DEFAULT_PUBLIC_CIBLE.toString())))
+            .andExpect(jsonPath("$.[*].publiccible").value(hasItem(DEFAULT_PUBLICCIBLE.toString())))
             .andExpect(jsonPath("$.[*].eanPapier").value(hasItem(DEFAULT_EAN_PAPIER)));
 
         // Check, that the count call also returns 1
@@ -1610,7 +1639,7 @@ public class ArticleNumeriqueResourceIT {
             .compatibleGAR(UPDATED_COMPATIBLE_GAR)
             .accessibleENT(UPDATED_ACCESSIBLE_ENT)
             .description(UPDATED_DESCRIPTION)
-            .publicCible(UPDATED_PUBLIC_CIBLE)
+            .publiccible(UPDATED_PUBLICCIBLE)
             .eanPapier(UPDATED_EAN_PAPIER);
         ArticleNumeriqueDTO articleNumeriqueDTO = articleNumeriqueMapper.toDto(updatedArticleNumerique);
 
@@ -1636,7 +1665,7 @@ public class ArticleNumeriqueResourceIT {
         assertThat(testArticleNumerique.isCompatibleGAR()).isEqualTo(UPDATED_COMPATIBLE_GAR);
         assertThat(testArticleNumerique.isAccessibleENT()).isEqualTo(UPDATED_ACCESSIBLE_ENT);
         assertThat(testArticleNumerique.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testArticleNumerique.getPubliccible()).isEqualTo(UPDATED_PUBLIC_CIBLE);
+        assertThat(testArticleNumerique.getPubliccible()).isEqualTo(UPDATED_PUBLICCIBLE);
         assertThat(testArticleNumerique.getEanPapier()).isEqualTo(UPDATED_EAN_PAPIER);
 
         // Validate the ArticleNumerique in Elasticsearch
@@ -1713,7 +1742,7 @@ public class ArticleNumeriqueResourceIT {
             .andExpect(jsonPath("$.[*].compatibleGAR").value(hasItem(DEFAULT_COMPATIBLE_GAR.booleanValue())))
             .andExpect(jsonPath("$.[*].accessibleENT").value(hasItem(DEFAULT_ACCESSIBLE_ENT.booleanValue())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].publicCible").value(hasItem(DEFAULT_PUBLIC_CIBLE.toString())))
+            .andExpect(jsonPath("$.[*].publiccible").value(hasItem(DEFAULT_PUBLICCIBLE.toString())))
             .andExpect(jsonPath("$.[*].eanPapier").value(hasItem(DEFAULT_EAN_PAPIER)));
     }
 }

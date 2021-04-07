@@ -26,6 +26,7 @@
     <include file="config/liquibase/changelog/20201126102500_added_entity_ArticleNumerique.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20201203103333_added_entity_Disponibilite.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20201203131843_added_entity_Licence.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210406131936_added_entity_Classe.xml" relativeToChangelogFile="false"/>
     <!--  - Moisson will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20201126101853_added_entity_constraints_Niveau.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20201126102012_added_entity_constraints_Discipline.xml" relativeToChangelogFile="false"/>
@@ -36,6 +37,8 @@
     <include file="config/liquibase/changelog/20201126091754_added_entity_constraints_Techno.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20201126095206_added_entity_constraints_ArticlePapier.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20201126102500_added_entity_constraints_ArticleNumerique.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210406131936_added_entity_constraints_Classe.xml" relativeToChangelogFile="false"/>
+
     <!-- Moisson will add liquibase constraints changelogs here -->
     <!-- Moisson will add incremental liquibase changelogs here -->
 </databaseChangeLog>

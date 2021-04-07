@@ -34,6 +34,12 @@
       "ownerSide": true,
       "useJPADerivedIdentifier": true,
       "otherEntityRelationshipName": "articleNumerique"
+    },
+    {
+      "relationshipName": "classe",
+      "otherEntityName": "classe",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "articleNumerique"
     }
   ],
   "fields": [
@@ -93,7 +99,7 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "publicCible",
+      "fieldName": "publiccible",
       "fieldType": "PublicCible",
       "fieldValues": "ELEVE,ENSEIGNANT,ELEVE_ET_ENSEIGNANT"
     },

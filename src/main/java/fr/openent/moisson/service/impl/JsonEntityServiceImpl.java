@@ -147,6 +147,7 @@ public class JsonEntityServiceImpl implements JsonEntityService {
                     articleNumerique.addOffre(offre);
                 }
                 articleNumerique.getNiveaus().forEach(articleNumerique::addNiveau);
+                articleNumerique.getClasses().forEach(articleNumerique::addClasse);
                 articleNumerique.getDisciplines().forEach(articleNumerique::addDiscipline);
                 articleNumerique.getTechnos().forEach(articleNumerique::addTechno);
                 articleNumeriqueRepository.save(articleNumerique);

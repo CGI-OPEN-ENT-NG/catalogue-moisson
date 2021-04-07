@@ -1,11 +1,17 @@
 package fr.openent.moisson.service.dto;
 
-import fr.openent.moisson.domain.enumeration.PublicCible;
-import io.github.jhipster.service.Criteria;
-import io.github.jhipster.service.filter.*;
-
 import java.io.Serializable;
 import java.util.Objects;
+import io.github.jhipster.service.Criteria;
+import fr.openent.moisson.domain.enumeration.PublicCible;
+import io.github.jhipster.service.filter.BooleanFilter;
+import io.github.jhipster.service.filter.DoubleFilter;
+import io.github.jhipster.service.filter.Filter;
+import io.github.jhipster.service.filter.FloatFilter;
+import io.github.jhipster.service.filter.IntegerFilter;
+import io.github.jhipster.service.filter.LongFilter;
+import io.github.jhipster.service.filter.StringFilter;
+import io.github.jhipster.service.filter.InstantFilter;
 
 /**
  * Criteria class for the {@link fr.openent.moisson.domain.ArticleNumerique} entity. This class is used
@@ -66,7 +72,7 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
 
     private StringFilter description;
 
-    private PublicCibleFilter publicCible;
+    private PublicCibleFilter publiccible;
 
     private StringFilter eanPapier;
 
@@ -79,6 +85,8 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
     private LongFilter technoId;
 
     private LongFilter disponibiliteId;
+
+    private LongFilter classeId;
 
     public ArticleNumeriqueCriteria() {
     }
@@ -98,13 +106,14 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         this.compatibleGAR = other.compatibleGAR == null ? null : other.compatibleGAR.copy();
         this.accessibleENT = other.accessibleENT == null ? null : other.accessibleENT.copy();
         this.description = other.description == null ? null : other.description.copy();
-        this.publicCible = other.publicCible == null ? null : other.publicCible.copy();
+        this.publiccible = other.publiccible == null ? null : other.publiccible.copy();
         this.eanPapier = other.eanPapier == null ? null : other.eanPapier.copy();
         this.disciplineId = other.disciplineId == null ? null : other.disciplineId.copy();
         this.niveauId = other.niveauId == null ? null : other.niveauId.copy();
         this.offreId = other.offreId == null ? null : other.offreId.copy();
         this.technoId = other.technoId == null ? null : other.technoId.copy();
         this.disponibiliteId = other.disponibiliteId == null ? null : other.disponibiliteId.copy();
+        this.classeId = other.classeId == null ? null : other.classeId.copy();
     }
 
     @Override
@@ -224,12 +233,12 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         this.description = description;
     }
 
-    public PublicCibleFilter getPublicCible() {
-        return publicCible;
+    public PublicCibleFilter getPubliccible() {
+        return publiccible;
     }
 
-    public void setPublicCible(PublicCibleFilter publicCible) {
-        this.publicCible = publicCible;
+    public void setPubliccible(PublicCibleFilter publiccible) {
+        this.publiccible = publiccible;
     }
 
     public StringFilter getEanPapier() {
@@ -280,6 +289,14 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         this.disponibiliteId = disponibiliteId;
     }
 
+    public LongFilter getClasseId() {
+        return classeId;
+    }
+
+    public void setClasseId(LongFilter classeId) {
+        this.classeId = classeId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -305,13 +322,14 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
             Objects.equals(compatibleGAR, that.compatibleGAR) &&
             Objects.equals(accessibleENT, that.accessibleENT) &&
             Objects.equals(description, that.description) &&
-            Objects.equals(publicCible, that.publicCible) &&
+            Objects.equals(publiccible, that.publiccible) &&
             Objects.equals(eanPapier, that.eanPapier) &&
             Objects.equals(disciplineId, that.disciplineId) &&
             Objects.equals(niveauId, that.niveauId) &&
             Objects.equals(offreId, that.offreId) &&
             Objects.equals(technoId, that.technoId) &&
-            Objects.equals(disponibiliteId, that.disponibiliteId);
+            Objects.equals(disponibiliteId, that.disponibiliteId) &&
+            Objects.equals(classeId, that.classeId);
     }
 
     @Override
@@ -331,13 +349,14 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         compatibleGAR,
         accessibleENT,
         description,
-        publicCible,
+        publiccible,
         eanPapier,
         disciplineId,
         niveauId,
         offreId,
         technoId,
-        disponibiliteId
+        disponibiliteId,
+        classeId
         );
     }
 
@@ -359,13 +378,14 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
                 (compatibleGAR != null ? "compatibleGAR=" + compatibleGAR + ", " : "") +
                 (accessibleENT != null ? "accessibleENT=" + accessibleENT + ", " : "") +
                 (description != null ? "description=" + description + ", " : "") +
-                (publicCible != null ? "publicCible=" + publicCible + ", " : "") +
+                (publiccible != null ? "publiccible=" + publiccible + ", " : "") +
                 (eanPapier != null ? "eanPapier=" + eanPapier + ", " : "") +
                 (disciplineId != null ? "disciplineId=" + disciplineId + ", " : "") +
                 (niveauId != null ? "niveauId=" + niveauId + ", " : "") +
                 (offreId != null ? "offreId=" + offreId + ", " : "") +
                 (technoId != null ? "technoId=" + technoId + ", " : "") +
                 (disponibiliteId != null ? "disponibiliteId=" + disponibiliteId + ", " : "") +
+                (classeId != null ? "classeId=" + classeId + ", " : "") +
             "}";
     }
 

@@ -210,6 +210,14 @@ public class MoissonESBuilder {
         }
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.NIVEAU.getFieldName(), niveaux.toArray());
 
+        List<Object> classes = new ArrayList<>();
+        for (Classe classe : articleNumerique.getClasses()) {
+            Map<String, Object> innerClasse = new HashMap<>();
+            innerClasse.put(NiveauESEnum.LIBELLE.getFieldName(), classe.getLibelle());
+            classes.add(innerClasse);
+        }
+        articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.CLASSE.getFieldName(), classes.toArray());
+
         List<Object> Disponibilites = new ArrayList<>();
         Disponibilite disponibilite = articleNumerique.getDisponibilite();
         Map<String, Object> innerDisponibilite = new HashMap<>();
