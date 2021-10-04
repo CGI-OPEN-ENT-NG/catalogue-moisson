@@ -39,7 +39,7 @@ l’application et créer la base de données et les rôles
 
     1 - Configuration du fichier de propriétés
     2 . Création de la base et des scripts
-    3 . Créationde l'instance ElaticSearc
+    3 . Créationde l'instance ElaticSearch
     4 . Déploiement et urtilisation  de l'application
 
 # Répertoire de configuration
@@ -68,7 +68,7 @@ config/ (1) à la précédence sur le répertoire de base (2), ce sont donc
 les paramètres du fichier du répertoire config/ qui seront pris en
 compte
 
-Si répertoire config:
+Si répertoire config :
 
     répertoire de base:
         /chemin/de/repertoire/de/base/
@@ -76,14 +76,14 @@ Si répertoire config:
         /chemin/de/repertoire/de/base/config
 
 Remarque : si aucun des deux répertoires n’est créé, l’application est
-lancée en "localhost" sur le port "808"
+lancée en "localhost" sur le port "8080"
 
 ## Modification du comportement par défaut
 
 Il est possible de surcharger le comportement par défaut en précisant le
 chemin du répertoire lors du lacement de l’application :
 
-    Dem manière absolue
+    De manière absolue
         java -Dspring.config.location=/chemin/du/repertoire/config -jar moissoncatalogue.jar --spring.profiles.active
         ou
         java -jar moissoncatalogue.jar --spring.config.location=/chemin/du/repertoire/config
@@ -119,7 +119,7 @@ dans création de la base de données ci-après) :
 
     V0__init_user_role_database.sql
 
-remplacer le mot de passe "catalogue" :
+Remplacer le mot de passe "catalogue" :
 
     CREATE ROLE usercatalogue LOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION PASSWORD 'catalogue';
 
@@ -162,7 +162,7 @@ elasticsearch.yml :
         rest:
           uris: localhost:9201
 
-### Liquibase
+## Liquibase
 
     liquibase:
       contexts: prod
@@ -183,7 +183,7 @@ postgresql.yaml :
 
 ## Mail
 
-Optionnel car non utilisé pour le moment :
+Optionnel, car non utilisé pour le moment :
 
     mail:
       host: localhost
@@ -273,7 +273,7 @@ suivante dans le meme répertoire que ce fichier :
 
     docker-compose -f postgresql.yml up -d
 
-le paramètre -d permet de lancer l’instance de docker en background
+Le paramètre -d permet de lancer l’instance de docker en arrière-plan
 
 #### Connexion au conteneur
 
@@ -325,7 +325,7 @@ que ce fichier :
 
     docker-compose -f elasticsearch.yml up -d
 
-Le paramètre -d permet de lancer l’instance de docker en background
+Le paramètre -d permet de lancer l’instance de docker en arrière-plan
 
 ## Arrêt au conteneur
 
@@ -389,7 +389,7 @@ designer
 -v permet d’activer le mode verbose -vu étant équivalent à -v -u
 
 2 - Avec Postman ou Insomnia il faut saisir les url en prenant soin de
-bien spécifier le verbe (GET, POST, PUT etc…​)
+bien spécifier le verbe (GET, POST, PUT, etc.​)
 
 Dans l’onglet authentication ou auth il faut saisir le login et le mot
 de passe
@@ -475,7 +475,7 @@ Remplacer _localhost:8080_ par le bon _host_ et le bon _port_.
 ## Lancer la sauvegarde des json en base de donnée.
 
 Les paramètres de sauvegarde sont num, pap ou all, ils doivent être
-ajoutés à la find du endpoint :
+ajoutés à la find de l’endpoint :
 
     TOKEN=$(curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate | jq -r '.id_token')
 
@@ -493,8 +493,8 @@ l’application en production.
 ### Création des tables du contexte test
 
 Lors de la création des tables avec liquibase, le pom possède un
-&lt;contexts&gt;!test&gt;&lt;/contexts&gt; il faut donc le modifier car
-la table jhi_date_time_wrapper est absente de la base or elle est
+&lt;contexts&gt;!test&gt;&lt;/contexts&gt; il faut donc le modifier, car
+la table jhi_date_time_wrapper est absente de la base or, elle est
 nécessaire aux tests &lt;contexts&gt;test&gt;&lt;/contexts&gt;.
 
 Si le préfixe n’est pas jhi il faut adapter le nom de la table avec le
@@ -591,7 +591,7 @@ la libération du verrou il faut, passer cette requête :
 ## Installation Flyway (Optionnel)
 
 Il est possible de jouer les scripts avec Flyway au lieu de Liquibase.
-Flyway gère la "convention over configuration, c’est-à-dire que une fois
+Flyway gère la "convention over configuration, c’est-à-dire qu’une fois
 le plug-in installer il va scruter conventionnellement dans
 main/resources/db/migration et jouer les scripts qui s’y trouvent avec
 un ordre prédéfini par les noms de fichiers(voir plus bas)

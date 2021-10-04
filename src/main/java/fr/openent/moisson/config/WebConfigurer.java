@@ -52,5 +52,4 @@ public class WebConfigurer implements ServletContextInitializer {
         }
         return new CorsFilter(source);
     }
-
 }

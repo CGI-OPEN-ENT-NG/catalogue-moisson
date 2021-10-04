@@ -17,6 +17,7 @@ CREATE TABLE public.article_papier
     date_parution timestamp without time zone,
     prix_ht numeric(21,2),
     description character varying(65000) COLLATE pg_catalog."default",
+    type character varying(255) COLLATE pg_catalog."default",
     CONSTRAINT article_papier_pkey PRIMARY KEY (id),
     CONSTRAINT fk_article_papier_disponibilite_id FOREIGN KEY (id)
         REFERENCES public.disponibilite (id) MATCH SIMPLE

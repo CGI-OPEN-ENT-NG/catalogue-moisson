@@ -41,7 +41,7 @@ Avant de lancer l’application, il faut *impérativement* configurer l’applic
 ----
 1 - Configuration du fichier de propriétés
 2 . Création de la base et des scripts
-3 . Créationde l'instance ElaticSearc
+3 . Créationde l'instance ElaticSearch
 4 . Déploiement et urtilisation  de l'application
 ----
 
@@ -82,7 +82,7 @@ Remarque : si aucun des deux répertoires n’est créé, l’application est l
 Il est possible de surcharger le comportement par défaut en précisant le chemin du répertoire lors du lacement de l’application :
 
 ----
-Dem manière absolue
+De manière absolue
     java -Dspring.config.location=/chemin/du/repertoire/config -jar moissoncatalogue.jar --spring.profiles.active
     ou
     java -jar moissoncatalogue.jar --spring.config.location=/chemin/du/repertoire/config

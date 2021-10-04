@@ -1,14 +1,14 @@
 # Mise à jour
 
-## Supreesion des indices
+## Suppression des indices
 
-Au préalable au lancement de nouveau jar (procédure identique à celle d'installation), il faut suppprimer l'intégralité des index(indices) dans elasticSearch soit avec kibana
+Au préalable au lancement de nouveau jar (procédure identique à celle d’installation), il faut supprimer l’intégralité des index(indices) dans elasticSearch soit avec kibana
 
-exemple pour articlenumerique :
+Exemple pour articlenumerique :
 
     DELETE articlenumerique
 
-Soit avec curl en remplacant par le bon nom d'hôte et le bon port :
+Soit avec curl en remplaçant par le bon nom d’hôte et le bon port :
 
     curl -XDELETE "http://localhost:9200/articlenumerique"
 
@@ -25,7 +25,7 @@ Offre
 Techno
 Tva
 
-## Lancement de l'application
+## Lancement de l’application
 
 Renommer le fichier
 moissoncatalogue-0.0.2-2021-02-10-11-30-00.jar
@@ -33,4 +33,4 @@ en moissoncatalogue.jar
 
 Les fichiers de configurations sont inchangés
 
-Lancer l'application
+Lancer application

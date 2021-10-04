@@ -45,6 +45,8 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
 
     private StringFilter description;
 
+    private StringFilter type;
+
     private LongFilter tvaId;
 
     private LongFilter disponibiliteId;
@@ -70,6 +72,7 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         this.dateParution = other.dateParution == null ? null : other.dateParution.copy();
         this.prixHT = other.prixHT == null ? null : other.prixHT.copy();
         this.description = other.description == null ? null : other.description.copy();
+        this.type = other.type == null ? null : other.type.copy();
         this.tvaId = other.tvaId == null ? null : other.tvaId.copy();
         this.disponibiliteId = other.disponibiliteId == null ? null : other.disponibiliteId.copy();
         this.disciplineId = other.disciplineId == null ? null : other.disciplineId.copy();
@@ -185,6 +188,10 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         this.description = description;
     }
 
+    public StringFilter getType() { return type; }
+
+    public void setType(StringFilter type) { this.type = type; }
+
     public LongFilter getTvaId() {
         return tvaId;
     }
@@ -241,6 +248,7 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
             Objects.equals(dateParution, that.dateParution) &&
             Objects.equals(prixHT, that.prixHT) &&
             Objects.equals(description, that.description) &&
+            Objects.equals(type, that.type) &&
             Objects.equals(tvaId, that.tvaId) &&
             Objects.equals(disponibiliteId, that.disponibiliteId) &&
             Objects.equals(disciplineId, that.disciplineId) &&
@@ -263,6 +271,7 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
         dateParution,
         prixHT,
         description,
+        type,
         tvaId,
         disponibiliteId,
         disciplineId,
@@ -287,6 +296,7 @@ public class ArticlePapierCriteria implements Serializable, Criteria {
                 (dateParution != null ? "dateParution=" + dateParution + ", " : "") +
                 (prixHT != null ? "prixHT=" + prixHT + ", " : "") +
                 (description != null ? "description=" + description + ", " : "") +
+                (type != null ? "type=" + type + ", " : "") +
                 (tvaId != null ? "tvaId=" + tvaId + ", " : "") +
                 (disponibiliteId != null ? "disponibiliteId=" + disponibiliteId + ", " : "") +
                 (disciplineId != null ? "disciplineId=" + disciplineId + ", " : "") +
