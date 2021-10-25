@@ -10,7 +10,7 @@ public enum LicenceESEnum {
     VALEUR("valeur", ElasticSearchConstants.TEXT);
 
     /**
-     * Nom du champs
+     * Nom du champ
      */
     String fieldName;
 

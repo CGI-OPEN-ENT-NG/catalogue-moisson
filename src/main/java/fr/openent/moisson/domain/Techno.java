@@ -104,16 +104,6 @@ public class Techno implements Serializable {
     @Field
     private Boolean creationCours;
 
-    @Column(name = "nb_maxi_install")
-    @JsonProperty("NbMaxiInstall")
-    @Field
-    private String nbMaxiInstall;
-
-    @Column(name = "nb_max_simult_connexions")
-    @JsonProperty("NbMaxSimultConnexions")
-    @Field
-    private String nbMaxSimultConnexions;
-
     @Column(name = "web_adaptatif")
     @JsonProperty("WebAdaptatif")
     @Field
@@ -198,6 +188,101 @@ public class Techno implements Serializable {
     @JsonProperty("DispositifDYS")
     @Field
     private Boolean dispositifDYS;
+
+    @Column(name = "nb_maxi_install")
+    @JsonProperty("NbMaxiInstall")
+    @Field
+    private String nbMaxiInstall;
+
+    @Column(name = "nb_max_simult_connexions")
+    @JsonProperty("NbMaxSimultConnexions")
+    @Field
+    private String nbMaxSimultConnexions;
+
+    @Column(name = "messagerie")
+    @JsonProperty("Messagerie")
+    @Field
+    private Boolean messagerie;
+
+    @Column(name = "niveau_rgaa")
+    @JsonProperty("NiveauRGAA")
+    @Field
+    private String niveauRGAA;
+
+    @Column(name = "niveau_a_2_rne")
+    @JsonProperty("NiveauA2RNE")
+    @Field
+    private Integer niveauA2RNE;
+
+    @Column(name = "conforme_sco_lomfr")
+    @JsonProperty("ConformeScoLOMFR")
+    @Field
+    private Boolean conformeScoLOMFR;
+
+    @Column(name = "conforme_scorm")
+    @JsonProperty("ConformeSCORM")
+    @Field
+    private Boolean conformeSCORM;
+
+    @Column(name = "conforme_ims_qti")
+    @JsonProperty("ConformeIMS_QTI")
+    @Field
+    private Boolean conformeIMS_QTI;
+
+    @Column(name = "conformex_api")
+    @JsonProperty("ConformexAPI")
+    @Field
+    private Boolean conformexAPI;
+
+    @Column(name = "format_video")
+    @JsonProperty("FormatVideo")
+    @Field
+    private String formatVideo;
+
+    @Column(name = "ts_last_modif")
+    @JsonProperty("ts_lastModif")
+    @Field
+    private Long ts_LastModif;
+
+    @Column(name = "configuration_mini_navigateur")
+    @JsonProperty("ConfigurationMiniNavigateur")
+    @Field
+    private String configurationMiniNavigateur;
+
+    @Column(name = "parcours_eleve_personnalise")
+    @JsonProperty("ParcoursElevePersonnalise")
+    @Field
+    private Boolean parcoursElevePersonnalise;
+
+    @Column(name = "gestion_groupes_eleve")
+    @JsonProperty("GestionGroupesEleve")
+    @Field
+    private Boolean gestionGroupesEleve;
+
+    @Column(name = "personnalisation_cont_enseign")
+    @JsonProperty("PersonnalisationContEnseign")
+    @Field
+    private Boolean personnalisationContEnseign;
+
+    @Column(name = "edition_formule_math")
+    @JsonProperty("EditionFormuleMath")
+    @Field
+    private Boolean editionFormuleMath;
+
+    @Column(name = "correct_travail_eleve_par_enseign")
+    @JsonProperty("CorrectTravailEleveParEnseign")
+    @Field
+    private Boolean correctTravailEleveParEnseign;
+
+    @Column(name = "suivi_eleve")
+    @JsonProperty("SuiviEleve")
+    @Field
+    private Boolean suiviEleve;
+
+    @Column(name = "commentaire")
+    @JsonProperty("Commentaire")
+    @Field
+    private String commentaire;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "technos", allowSetters = true)
@@ -392,32 +477,6 @@ public class Techno implements Serializable {
 
     public void setCreationCours(Boolean creationCours) {
         this.creationCours = creationCours;
-    }
-
-    public String getNbMaxiInstall() {
-        return nbMaxiInstall;
-    }
-
-    public void setNbMaxiInstall(String nbMaxiInstall) {
-        this.nbMaxiInstall = nbMaxiInstall;
-    }
-
-    public Techno nbMaxiInstall(String nbMaxiInstall) {
-        this.nbMaxiInstall = nbMaxiInstall;
-        return this;
-    }
-
-    public String getNbMaxSimultConnexions() {
-        return nbMaxSimultConnexions;
-    }
-
-    public void setNbMaxSimultConnexions(String nbMaxSimultConnexions) {
-        this.nbMaxSimultConnexions = nbMaxSimultConnexions;
-    }
-
-    public Techno nbMaxSimultConnexions(String nbMaxSimultConnexions) {
-        this.nbMaxSimultConnexions = nbMaxSimultConnexions;
-        return this;
     }
 
     public Boolean isWebAdaptatif() {
@@ -637,8 +696,251 @@ public class Techno implements Serializable {
         return this;
     }
 
-    public void setDispositifDYS(Boolean dispositifDYS) {
-        this.dispositifDYS = dispositifDYS;
+    public void setDispositifDYS(Boolean dispositifDYS) {this.dispositifDYS = dispositifDYS;}
+
+    public String getNbMaxiInstall() {
+        return nbMaxiInstall;
+    }
+
+    public Techno nbMaxiInstall(String nbMaxiInstall) {
+        this.nbMaxiInstall = nbMaxiInstall;
+        return this;
+    }
+
+    public void setNbMaxiInstall(String nbMaxiInstall) {
+        this.nbMaxiInstall = nbMaxiInstall;
+    }
+
+    public String getNbMaxSimultConnexions() {
+        return nbMaxSimultConnexions;
+    }
+
+    public Techno nbMaxSimultConnexions(String nbMaxSimultConnexions) {
+        this.nbMaxSimultConnexions = nbMaxSimultConnexions;
+        return this;
+    }
+
+    public void setNbMaxSimultConnexions(String nbMaxSimultConnexions) {
+        this.nbMaxSimultConnexions = nbMaxSimultConnexions;
+    }
+
+    public Boolean isMessagerie() {
+        return messagerie;
+    }
+
+    public Techno messagerie(Boolean messagerie) {
+        this.messagerie = messagerie;
+        return this;
+    }
+
+    public void setMessagerie(Boolean messagerie) {this.messagerie = messagerie; }
+
+    public String getNiveauRGAA() {
+        return niveauRGAA;
+    }
+
+    public Techno niveauRGAA(String niveauRGAA) {
+        this.niveauRGAA = niveauRGAA;
+        return this;
+    }
+
+    public void setNiveauRGAA(String niveauRGAA) {
+        this.niveauRGAA = niveauRGAA;
+    }
+
+    public Integer getNiveauA2RNE() {
+        return niveauA2RNE;
+    }
+
+    public Techno niveauA2RNE(Integer niveauA2RNE) {
+        this.niveauA2RNE = niveauA2RNE;
+        return this;
+    }
+
+    public void setNiveauA2RNE(Integer niveauA2RNE) {
+        this.niveauA2RNE = niveauA2RNE;
+    }
+
+    public Boolean isConformeScoLOMFR() {
+        return conformeScoLOMFR;
+    }
+
+    public Techno conformeScoLOMFR(Boolean conformeScoLOMFR) {
+        this.conformeScoLOMFR = conformeScoLOMFR;
+        return this;
+    }
+
+    public void setConformeScoLOMFR(Boolean conformeScoLOMFR) {
+        this.conformeScoLOMFR = conformeScoLOMFR;
+    }
+
+    public Boolean isConformeSCORM() {
+        return conformeSCORM;
+    }
+
+    public Techno conformeSCORM(Boolean conformeSCORM) {
+        this.conformeSCORM = conformeSCORM;
+        return this;
+    }
+
+    public void setConformeSCORM(Boolean conformeSCORM) {
+        this.conformeSCORM = conformeSCORM;
+    }
+
+    public Boolean isConformeIMS_QTI() {
+        return conformeIMS_QTI;
+    }
+
+    public Techno conformeIMS_QTI(Boolean conformeIMS_QTI) {
+        this.conformeIMS_QTI = conformeIMS_QTI;
+        return this;
+    }
+
+    public void setConformeIMS_QTI(Boolean conformeIMS_QTI) {
+        this.conformeIMS_QTI = conformeIMS_QTI;
+    }
+
+    public Boolean isConformexAPI() {
+        return conformexAPI;
+    }
+
+    public Techno conformexAPI(Boolean conformexAPI) {
+        this.conformexAPI = conformexAPI;
+        return this;
+    }
+
+    public void setConformexAPI(Boolean conformexAPI) {
+        this.conformexAPI = conformexAPI;
+    }
+
+    public String getFormatVideo() {
+        return formatVideo;
+    }
+
+    public Techno formatVideo(String formatVideo) {
+        this.formatVideo = formatVideo;
+        return this;
+    }
+
+    public void setFormatVideo(String formatVideo) {
+        this.formatVideo = formatVideo;
+    }
+
+    public Long getTs_LastModif() {
+        return ts_LastModif;
+    }
+
+    public Techno ts_LastModif(Long ts_LastModif) {
+        this.ts_LastModif = ts_LastModif;
+        return this;
+    }
+
+    public void setTs_LastModif(Long ts_LastModif) {
+        this.ts_LastModif = ts_LastModif;
+    }
+
+    public String getConfigurationMiniNavigateur() {
+        return configurationMiniNavigateur;
+    }
+
+    public Techno configurationMiniNavigateur(String configurationMiniNavigateur) {
+        this.configurationMiniNavigateur = configurationMiniNavigateur;
+        return this;
+    }
+
+    public void setConfigurationMiniNavigateur(String configurationMiniNavigateur) {
+        this.configurationMiniNavigateur = configurationMiniNavigateur;
+    }
+
+    public Boolean isParcoursElevePersonnalise() {
+        return parcoursElevePersonnalise;
+    }
+
+    public Techno parcoursElevePersonnalise(Boolean parcoursElevePersonnalise) {
+        this.parcoursElevePersonnalise = parcoursElevePersonnalise;
+        return this;
+    }
+
+    public void setParcoursElevePersonnalise(Boolean parcoursElevePersonnalise) {
+        this.parcoursElevePersonnalise = parcoursElevePersonnalise;
+    }
+
+    public Boolean isGestionGroupesEleve() {
+        return gestionGroupesEleve;
+    }
+
+    public Techno gestionGroupesEleve(Boolean gestionGroupesEleve) {
+        this.gestionGroupesEleve = gestionGroupesEleve;
+        return this;
+    }
+
+    public void setGestionGroupesEleve(Boolean gestionGroupesEleve) {
+        this.gestionGroupesEleve = gestionGroupesEleve;
+    }
+
+    public Boolean isPersonnalisationContEnseign() {
+        return personnalisationContEnseign;
+    }
+
+    public Techno personnalisationContEnseign(Boolean personnalisationContEnseign) {
+        this.personnalisationContEnseign = personnalisationContEnseign;
+        return this;
+    }
+
+    public void setPersonnalisationContEnseign(Boolean personnalisationContEnseign) {
+        this.personnalisationContEnseign = personnalisationContEnseign;
+    }
+
+    public Boolean isEditionFormuleMath() {
+        return editionFormuleMath;
+    }
+
+    public Techno editionFormuleMath(Boolean editionFormuleMath) {
+        this.editionFormuleMath = editionFormuleMath;
+        return this;
+    }
+
+    public void setEditionFormuleMath(Boolean editionFormuleMath) {
+        this.editionFormuleMath = editionFormuleMath;
+    }
+
+    public Boolean isCorrectTravailEleveParEnseign() {
+        return correctTravailEleveParEnseign;
+    }
+
+    public Techno correctTravailEleveParEnseign(Boolean correctTravailEleveParEnseign) {
+        this.correctTravailEleveParEnseign = correctTravailEleveParEnseign;
+        return this;
+    }
+
+    public void setCorrectTravailEleveParEnseign(Boolean correctTravailEleveParEnseign) {
+        this.correctTravailEleveParEnseign = correctTravailEleveParEnseign;
+    }
+
+    public Boolean isSuiviEleve() {
+        return suiviEleve;
+    }
+
+    public Techno suiviEleve(Boolean suiviEleve) {
+        this.suiviEleve = suiviEleve;
+        return this;
+    }
+
+    public void setSuiviEleve(Boolean suiviEleve) {
+        this.suiviEleve = suiviEleve;
+    }
+
+    public String getCommentaire() {
+        return commentaire;
+    }
+
+    public Techno commentaire(String commentaire) {
+        this.commentaire = commentaire;
+        return this;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
     }
 
     public ArticleNumerique getArticleNumerique() {
@@ -690,8 +992,6 @@ public class Techno implements Serializable {
             ", needFlash='" + isNeedFlash() + "'" +
             ", annotations='" + isAnnotations() + "'" +
             ", creationCours='" + isCreationCours() + "'" +
-            ", nbMaxiInstall=" + getNbMaxiInstall() +
-            ", nbMaxSimultConnexions=" + getNbMaxSimultConnexions() +
             ", webAdaptatif='" + isWebAdaptatif() + "'" +
             ", marquePage='" + isMarquePage() + "'" +
             ", captureImage='" + isCaptureImage() + "'" +
@@ -709,6 +1009,25 @@ public class Techno implements Serializable {
             ", personnalisationUserInterface='" + isPersonnalisationUserInterface() + "'" +
             ", modifContenuEditorial='" + isModifContenuEditorial() + "'" +
             ", dispositifDYS='" + isDispositifDYS() + "'" +
+            ", nbMaxiInstall='" + getNbMaxiInstall() + "'" +
+            ", nbMaxSimultConnexions='" + getNbMaxSimultConnexions() + "'" +
+            ", messagerie='" + isMessagerie() + "'" +
+            ", niveauRGAA='" + getNiveauRGAA() + "'" +
+            ", niveauA2RNE=" + getNiveauA2RNE() +
+            ", conformeScoLOMFR='" + isConformeScoLOMFR() + "'" +
+            ", conformeSCORM='" + isConformeSCORM() + "'" +
+            ", conformeIMS_QTI='" + isConformeIMS_QTI() + "'" +
+            ", conformexAPI='" + isConformexAPI() + "'" +
+            ", formatVideo='" + getFormatVideo() + "'" +
+            ", ts_LastModif=" + getTs_LastModif() +
+            ", configurationMiniNavigateur='" + getConfigurationMiniNavigateur() + "'" +
+            ", parcoursElevePersonnalise='" + isParcoursElevePersonnalise() + "'" +
+            ", gestionGroupesEleve='" + isGestionGroupesEleve() + "'" +
+            ", personnalisationContEnseign='" + isPersonnalisationContEnseign() + "'" +
+            ", editionFormuleMath='" + isEditionFormuleMath() + "'" +
+            ", correctTravailEleveParEnseign='" + isCorrectTravailEleveParEnseign() + "'" +
+            ", suiviEleve='" + isSuiviEleve() + "'" +
+            ", commentaire='" + getCommentaire() + "'" +
             "}";
     }
 }

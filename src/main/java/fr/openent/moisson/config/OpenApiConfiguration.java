@@ -67,6 +67,4 @@ public class OpenApiConfiguration {
             .paths(regex(properties.getDefaultIncludePattern()))
             .build();
     }
-
-
 }

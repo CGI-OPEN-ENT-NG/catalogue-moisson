@@ -12,7 +12,7 @@ public enum DisciplineESEnum {
     TERME("terme", ElasticSearchConstants.KEYWORD),
     CONCEPT("concept", ElasticSearchConstants.KEYWORD);
     /**
-     * Nom du champs
+     * Nom du champ
      */
     String fieldName;
 

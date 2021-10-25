@@ -1,12 +1,9 @@
 package fr.openent.moisson.service;
 
-import fr.openent.moisson.domain.*;
-import fr.openent.moisson.repository.ArticlePapierRepository;
-import fr.openent.moisson.repository.search.ArticlePapierSearchRepository;
-import fr.openent.moisson.service.dto.ArticlePapierCriteria;
-import fr.openent.moisson.service.dto.ArticlePapierDTO;
-import fr.openent.moisson.service.mapper.ArticlePapierMapper;
-import io.github.jhipster.service.QueryService;
+import java.util.List;
+
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -15,8 +12,15 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.JoinType;
-import java.util.List;
+import io.github.jhipster.service.QueryService;
+
+import fr.openent.moisson.domain.ArticlePapier;
+import fr.openent.moisson.domain.*; // for static metamodels
+import fr.openent.moisson.repository.ArticlePapierRepository;
+import fr.openent.moisson.repository.search.ArticlePapierSearchRepository;
+import fr.openent.moisson.service.dto.ArticlePapierCriteria;
+import fr.openent.moisson.service.dto.ArticlePapierDTO;
+import fr.openent.moisson.service.mapper.ArticlePapierMapper;
 
 /**
  * Service for executing complex queries for {@link ArticlePapier} entities in the database.
@@ -126,6 +130,9 @@ public class ArticlePapierQueryService extends QueryService<ArticlePapier> {
             }
             if (criteria.getDescription() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDescription(), ArticlePapier_.description));
+            }
+            if (criteria.getType() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getType(), ArticlePapier_.type));
             }
             if (criteria.getTvaId() != null) {
                 specification = specification.and(buildSpecification(criteria.getTvaId(),

@@ -1,18 +1,19 @@
 package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
-import fr.openent.moisson.domain.ArticleNumerique;
 import fr.openent.moisson.domain.Techno;
-import fr.openent.moisson.domain.enumeration.Technologie;
-import fr.openent.moisson.domain.enumeration.TypeLicenceGAR;
+import fr.openent.moisson.domain.ArticleNumerique;
 import fr.openent.moisson.repository.TechnoRepository;
 import fr.openent.moisson.repository.search.TechnoSearchRepository;
-import fr.openent.moisson.service.TechnoQueryService;
 import fr.openent.moisson.service.TechnoService;
 import fr.openent.moisson.service.dto.TechnoDTO;
 import fr.openent.moisson.service.mapper.TechnoMapper;
+import fr.openent.moisson.service.dto.TechnoCriteria;
+import fr.openent.moisson.service.TechnoQueryService;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityManager;
 import java.util.Collections;
 import java.util.List;
@@ -35,6 +35,9 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import fr.openent.moisson.domain.enumeration.Technologie;
+import fr.openent.moisson.domain.enumeration.TypeLicenceGAR;
 /**
  * Integration tests for the {@link TechnoResource} REST controller.
  */
@@ -143,6 +146,9 @@ public class TechnoResourceIT {
     private static final String DEFAULT_NB_MAX_SIMULT_CONNEXIONS = "AAAAAAAAAA";
     private static final String UPDATED_NB_MAX_SIMULT_CONNEXIONS = "BBBBBBBBBB";
 
+    private static final Boolean DEFAULT_MESSAGERIE = false;
+    private static final Boolean UPDATED_MESSAGERIE = true;
+
     @Autowired
     private TechnoRepository technoRepository;
 
@@ -211,7 +217,8 @@ public class TechnoResourceIT {
             .modifContenuEditorial(DEFAULT_MODIF_CONTENU_EDITORIAL)
             .dispositifDYS(DEFAULT_DISPOSITIF_DYS)
             .nbMaxiInstall(DEFAULT_NB_MAXI_INSTALL)
-            .nbMaxSimultConnexions(DEFAULT_NB_MAX_SIMULT_CONNEXIONS);
+            .nbMaxSimultConnexions(DEFAULT_NB_MAX_SIMULT_CONNEXIONS)
+            .messagerie(DEFAULT_MESSAGERIE);
         return techno;
     }
     /**
@@ -254,7 +261,8 @@ public class TechnoResourceIT {
             .modifContenuEditorial(UPDATED_MODIF_CONTENU_EDITORIAL)
             .dispositifDYS(UPDATED_DISPOSITIF_DYS)
             .nbMaxiInstall(UPDATED_NB_MAXI_INSTALL)
-            .nbMaxSimultConnexions(UPDATED_NB_MAX_SIMULT_CONNEXIONS);
+            .nbMaxSimultConnexions(UPDATED_NB_MAX_SIMULT_CONNEXIONS)
+            .messagerie(UPDATED_MESSAGERIE);
         return techno;
     }
 
@@ -311,6 +319,7 @@ public class TechnoResourceIT {
         assertThat(testTechno.isDispositifDYS()).isEqualTo(DEFAULT_DISPOSITIF_DYS);
         assertThat(testTechno.getNbMaxiInstall()).isEqualTo(DEFAULT_NB_MAXI_INSTALL);
         assertThat(testTechno.getNbMaxSimultConnexions()).isEqualTo(DEFAULT_NB_MAX_SIMULT_CONNEXIONS);
+        assertThat(testTechno.isMessagerie()).isEqualTo(DEFAULT_MESSAGERIE);
 
         // Validate the Techno in Elasticsearch
         verify(mockTechnoSearchRepository, times(1)).save(testTechno);
@@ -403,9 +412,10 @@ public class TechnoResourceIT {
             .andExpect(jsonPath("$.[*].modifContenuEditorial").value(hasItem(DEFAULT_MODIF_CONTENU_EDITORIAL.booleanValue())))
             .andExpect(jsonPath("$.[*].dispositifDYS").value(hasItem(DEFAULT_DISPOSITIF_DYS.booleanValue())))
             .andExpect(jsonPath("$.[*].nbMaxiInstall").value(hasItem(DEFAULT_NB_MAXI_INSTALL)))
-            .andExpect(jsonPath("$.[*].nbMaxSimultConnexions").value(hasItem(DEFAULT_NB_MAX_SIMULT_CONNEXIONS)));
+            .andExpect(jsonPath("$.[*].nbMaxSimultConnexions").value(hasItem(DEFAULT_NB_MAX_SIMULT_CONNEXIONS)))
+            .andExpect(jsonPath("$.[*].messagerie").value(hasItem(DEFAULT_MESSAGERIE.booleanValue())));
     }
-
+    
     @Test
     @Transactional
     public void getTechno() throws Exception {
@@ -449,7 +459,8 @@ public class TechnoResourceIT {
             .andExpect(jsonPath("$.modifContenuEditorial").value(DEFAULT_MODIF_CONTENU_EDITORIAL.booleanValue()))
             .andExpect(jsonPath("$.dispositifDYS").value(DEFAULT_DISPOSITIF_DYS.booleanValue()))
             .andExpect(jsonPath("$.nbMaxiInstall").value(DEFAULT_NB_MAXI_INSTALL))
-            .andExpect(jsonPath("$.nbMaxSimultConnexions").value(DEFAULT_NB_MAX_SIMULT_CONNEXIONS));
+            .andExpect(jsonPath("$.nbMaxSimultConnexions").value(DEFAULT_NB_MAX_SIMULT_CONNEXIONS))
+            .andExpect(jsonPath("$.messagerie").value(DEFAULT_MESSAGERIE.booleanValue()));
     }
 
 
@@ -2294,6 +2305,58 @@ public class TechnoResourceIT {
 
     @Test
     @Transactional
+    public void getAllTechnosByMessagerieIsEqualToSomething() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+
+        // Get all the technoList where messagerie equals to DEFAULT_MESSAGERIE
+        defaultTechnoShouldBeFound("messagerie.equals=" + DEFAULT_MESSAGERIE);
+
+        // Get all the technoList where messagerie equals to UPDATED_MESSAGERIE
+        defaultTechnoShouldNotBeFound("messagerie.equals=" + UPDATED_MESSAGERIE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTechnosByMessagerieIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+
+        // Get all the technoList where messagerie not equals to DEFAULT_MESSAGERIE
+        defaultTechnoShouldNotBeFound("messagerie.notEquals=" + DEFAULT_MESSAGERIE);
+
+        // Get all the technoList where messagerie not equals to UPDATED_MESSAGERIE
+        defaultTechnoShouldBeFound("messagerie.notEquals=" + UPDATED_MESSAGERIE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTechnosByMessagerieIsInShouldWork() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+
+        // Get all the technoList where messagerie in DEFAULT_MESSAGERIE or UPDATED_MESSAGERIE
+        defaultTechnoShouldBeFound("messagerie.in=" + DEFAULT_MESSAGERIE + "," + UPDATED_MESSAGERIE);
+
+        // Get all the technoList where messagerie equals to UPDATED_MESSAGERIE
+        defaultTechnoShouldNotBeFound("messagerie.in=" + UPDATED_MESSAGERIE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTechnosByMessagerieIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        technoRepository.saveAndFlush(techno);
+
+        // Get all the technoList where messagerie is not null
+        defaultTechnoShouldBeFound("messagerie.specified=true");
+
+        // Get all the technoList where messagerie is null
+        defaultTechnoShouldNotBeFound("messagerie.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllTechnosByArticleNumeriqueIsEqualToSomething() throws Exception {
         // Initialize the database
         technoRepository.saveAndFlush(techno);
@@ -2351,7 +2414,8 @@ public class TechnoResourceIT {
             .andExpect(jsonPath("$.[*].modifContenuEditorial").value(hasItem(DEFAULT_MODIF_CONTENU_EDITORIAL.booleanValue())))
             .andExpect(jsonPath("$.[*].dispositifDYS").value(hasItem(DEFAULT_DISPOSITIF_DYS.booleanValue())))
             .andExpect(jsonPath("$.[*].nbMaxiInstall").value(hasItem(DEFAULT_NB_MAXI_INSTALL)))
-            .andExpect(jsonPath("$.[*].nbMaxSimultConnexions").value(hasItem(DEFAULT_NB_MAX_SIMULT_CONNEXIONS)));
+            .andExpect(jsonPath("$.[*].nbMaxSimultConnexions").value(hasItem(DEFAULT_NB_MAX_SIMULT_CONNEXIONS)))
+            .andExpect(jsonPath("$.[*].messagerie").value(hasItem(DEFAULT_MESSAGERIE.booleanValue())));
 
         // Check, that the count call also returns 1
         restTechnoMockMvc.perform(get("/api/technos/count?sort=id,desc&" + filter))
@@ -2430,7 +2494,8 @@ public class TechnoResourceIT {
             .modifContenuEditorial(UPDATED_MODIF_CONTENU_EDITORIAL)
             .dispositifDYS(UPDATED_DISPOSITIF_DYS)
             .nbMaxiInstall(UPDATED_NB_MAXI_INSTALL)
-            .nbMaxSimultConnexions(UPDATED_NB_MAX_SIMULT_CONNEXIONS);
+            .nbMaxSimultConnexions(UPDATED_NB_MAX_SIMULT_CONNEXIONS)
+            .messagerie(UPDATED_MESSAGERIE);
         TechnoDTO technoDTO = technoMapper.toDto(updatedTechno);
 
         restTechnoMockMvc.perform(put("/api/technos")
@@ -2475,6 +2540,7 @@ public class TechnoResourceIT {
         assertThat(testTechno.isDispositifDYS()).isEqualTo(UPDATED_DISPOSITIF_DYS);
         assertThat(testTechno.getNbMaxiInstall()).isEqualTo(UPDATED_NB_MAXI_INSTALL);
         assertThat(testTechno.getNbMaxSimultConnexions()).isEqualTo(UPDATED_NB_MAX_SIMULT_CONNEXIONS);
+        assertThat(testTechno.isMessagerie()).isEqualTo(UPDATED_MESSAGERIE);
 
         // Validate the Techno in Elasticsearch
         verify(mockTechnoSearchRepository, times(1)).save(testTechno);
@@ -2569,6 +2635,7 @@ public class TechnoResourceIT {
             .andExpect(jsonPath("$.[*].modifContenuEditorial").value(hasItem(DEFAULT_MODIF_CONTENU_EDITORIAL.booleanValue())))
             .andExpect(jsonPath("$.[*].dispositifDYS").value(hasItem(DEFAULT_DISPOSITIF_DYS.booleanValue())))
             .andExpect(jsonPath("$.[*].nbMaxiInstall").value(hasItem(DEFAULT_NB_MAXI_INSTALL)))
-            .andExpect(jsonPath("$.[*].nbMaxSimultConnexions").value(hasItem(DEFAULT_NB_MAX_SIMULT_CONNEXIONS)));
+            .andExpect(jsonPath("$.[*].nbMaxSimultConnexions").value(hasItem(DEFAULT_NB_MAX_SIMULT_CONNEXIONS)))
+            .andExpect(jsonPath("$.[*].messagerie").value(hasItem(DEFAULT_MESSAGERIE.booleanValue())));
     }
 }

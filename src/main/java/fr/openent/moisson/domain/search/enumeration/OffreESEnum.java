@@ -16,6 +16,8 @@ public enum OffreESEnum {
     ADOPTANT("adoptant", ElasticSearchConstants.BOOLEAN),
     DUREE("duree", ElasticSearchConstants.TEXT),
     REF_EDITEUR("referenceediteur", ElasticSearchConstants.KEYWORD),
+    TYPE("type", ElasticSearchConstants.TEXT),
+    IS3ANS("is3ans", ElasticSearchConstants.BOOLEAN),
 
     // Others Entities ES
     TVA("tvas", ElasticSearchConstants.NESTED),
@@ -23,7 +25,7 @@ public enum OffreESEnum {
     LICENCE("licence", ElasticSearchConstants.NESTED);
 
     /**
-     * Nom du champs
+     * Nom du champ
      */
     String fieldName;
 

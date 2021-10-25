@@ -13,14 +13,15 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.annotations.Setting;
 
-import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+
 
 /**
  * A ArticlePapier.
@@ -56,7 +57,7 @@ public class ArticlePapier implements Serializable {
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String ark;
 
-    @Column(name = "titre")
+    @Column(name = "titre", length = 1024)
     @JsonProperty("TITRE")
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String titre;
@@ -66,7 +67,7 @@ public class ArticlePapier implements Serializable {
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String editeur;
 
-    @Column(name = "auteur", length = 102)
+    @Column(name = "auteur", length = 1024)
     @JsonProperty("AUTEUR")
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String auteur;
@@ -86,7 +87,7 @@ public class ArticlePapier implements Serializable {
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String distributeur;
 
-    @Column(name = "url_couverture")
+    @Column(name = "url_couverture", length = 1024)
     @JsonProperty("URL_COUVERTURE")
     @Field
     private String urlCouverture;
@@ -107,6 +108,11 @@ public class ArticlePapier implements Serializable {
     @JsonProperty("DESCRIPTION")
     @Field
     private String description;
+
+    @Column(name = "type")
+    @JsonProperty("TYPE")
+    @Field
+    private String type;
 
     @OneToMany(mappedBy = "articlePapier", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
@@ -302,6 +308,15 @@ public class ArticlePapier implements Serializable {
         return this;
     }
 
+    public String getType() {  return type; }
+
+    public void setType(String type) { this.type = type; }
+
+    public ArticlePapier type(String type) {
+        this.type = type;
+        return this;
+    }
+
     public Set<Tva> getTvas() {
         return tvas;
     }
@@ -422,7 +437,6 @@ public class ArticlePapier implements Serializable {
         return this;
     }
 
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -458,6 +472,7 @@ public class ArticlePapier implements Serializable {
             ", dateParution='" + getDateParution() + "'" +
             ", prixHT=" + getPrixHT() +
             ", description='" + getDescription() + "'" +
+            ", type='" + getType() + "'" +
             "}";
     }
 }

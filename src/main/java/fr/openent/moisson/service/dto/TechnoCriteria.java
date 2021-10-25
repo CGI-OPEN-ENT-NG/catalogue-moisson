@@ -1,15 +1,17 @@
 package fr.openent.moisson.service.dto;
 
-import fr.openent.moisson.domain.enumeration.Technologie;
-import fr.openent.moisson.domain.enumeration.TypeLicenceGAR;
-import io.github.jhipster.service.Criteria;
-import io.github.jhipster.service.filter.BooleanFilter;
-import io.github.jhipster.service.filter.Filter;
-import io.github.jhipster.service.filter.LongFilter;
-import io.github.jhipster.service.filter.StringFilter;
-
 import java.io.Serializable;
 import java.util.Objects;
+import io.github.jhipster.service.Criteria;
+import fr.openent.moisson.domain.enumeration.Technologie;
+import fr.openent.moisson.domain.enumeration.TypeLicenceGAR;
+import io.github.jhipster.service.filter.BooleanFilter;
+import io.github.jhipster.service.filter.DoubleFilter;
+import io.github.jhipster.service.filter.Filter;
+import io.github.jhipster.service.filter.FloatFilter;
+import io.github.jhipster.service.filter.IntegerFilter;
+import io.github.jhipster.service.filter.LongFilter;
+import io.github.jhipster.service.filter.StringFilter;
 
 /**
  * Criteria class for the {@link fr.openent.moisson.domain.Techno} entity. This class is used
@@ -128,6 +130,8 @@ public class TechnoCriteria implements Serializable, Criteria {
 
     private StringFilter nbMaxSimultConnexions;
 
+    private BooleanFilter messagerie;
+
     private LongFilter articleNumeriqueId;
 
     public TechnoCriteria() {
@@ -168,6 +172,7 @@ public class TechnoCriteria implements Serializable, Criteria {
         this.dispositifDYS = other.dispositifDYS == null ? null : other.dispositifDYS.copy();
         this.nbMaxiInstall = other.nbMaxiInstall == null ? null : other.nbMaxiInstall.copy();
         this.nbMaxSimultConnexions = other.nbMaxSimultConnexions == null ? null : other.nbMaxSimultConnexions.copy();
+        this.messagerie = other.messagerie == null ? null : other.messagerie.copy();
         this.articleNumeriqueId = other.articleNumeriqueId == null ? null : other.articleNumeriqueId.copy();
     }
 
@@ -448,6 +453,14 @@ public class TechnoCriteria implements Serializable, Criteria {
         this.nbMaxSimultConnexions = nbMaxSimultConnexions;
     }
 
+    public BooleanFilter getMessagerie() {
+        return messagerie;
+    }
+
+    public void setMessagerie(BooleanFilter messagerie) {
+        this.messagerie = messagerie;
+    }
+
     public LongFilter getArticleNumeriqueId() {
         return articleNumeriqueId;
     }
@@ -501,6 +514,7 @@ public class TechnoCriteria implements Serializable, Criteria {
             Objects.equals(dispositifDYS, that.dispositifDYS) &&
             Objects.equals(nbMaxiInstall, that.nbMaxiInstall) &&
             Objects.equals(nbMaxSimultConnexions, that.nbMaxSimultConnexions) &&
+            Objects.equals(messagerie, that.messagerie) &&
             Objects.equals(articleNumeriqueId, that.articleNumeriqueId);
     }
 
@@ -541,6 +555,7 @@ public class TechnoCriteria implements Serializable, Criteria {
         dispositifDYS,
         nbMaxiInstall,
         nbMaxSimultConnexions,
+        messagerie,
         articleNumeriqueId
         );
     }
@@ -583,6 +598,7 @@ public class TechnoCriteria implements Serializable, Criteria {
                 (dispositifDYS != null ? "dispositifDYS=" + dispositifDYS + ", " : "") +
                 (nbMaxiInstall != null ? "nbMaxiInstall=" + nbMaxiInstall + ", " : "") +
                 (nbMaxSimultConnexions != null ? "nbMaxSimultConnexions=" + nbMaxSimultConnexions + ", " : "") +
+                (messagerie != null ? "messagerie=" + messagerie + ", " : "") +
                 (articleNumeriqueId != null ? "articleNumeriqueId=" + articleNumeriqueId + ", " : "") +
             "}";
     }

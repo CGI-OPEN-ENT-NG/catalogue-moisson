@@ -1,11 +1,11 @@
-id;ean_libraire;quantite_minimale_achat;prescripteur;libelle;prix_ht;adoptant;duree;reference_editeur
-1;SAS payment b;78988;false;Future-proofed;89145;true;Savings Account Advanced overriding;Borders Buckinghamshire next generation
-2;SteelXXXXXXXX;28381;false;Representative Games;48148;false;Investment Account;Bike
-3;bypassingXXXX;95991;true;mint green bandwidth Facilitator;42038;true;HTTP Bedfordshire;SAS Licensed Wooden Tuna Intelligent
-4;Trinidad and ;59795;false;Antarctica (the territory South of 60 deg S);54496;false;Pants PNG Puerto Rico;redundant
-5;Avon Small Fo;19235;false;24 hour;25347;false;Trafficway;Home Loan Account Kentucky Oklahoma
-6;customizedXXX;58787;false;yellow;82403;true;parsing transmit lime;Streamlined SMTP
-7;Security Alab;88583;false;transmitting functionalities;44106;true;index scalable;Bedfordshire
-8;TastyXXXXXXXX;88378;true;Soft COM;36877;false;task-force;XSS Indiana bus
-9;MarketsXXXXXX;81543;false;Bedfordshire Movies;51121;true;HTTP Re-contextualized indigo;program optimal
-10;real-timeXXXX;53118;true;Auto Loan Account Specialist multi-state;29789;true;Streets;conglomeration maroon Credit Card Account
+id;ean_libraire;quantite_minimale_achat;prescripteur;libelle;prix_ht;adoptant;duree;reference_editeur;type;is_3_ans
+1;SAS payment b;78988;false;Future-proofed;89145;true;Savings Account Advanced overriding;Borders Buckinghamshire next generation;Steel;false
+2;Personal Loan;17927;false;Rubber Bedfordshire;15722;false;bypassing;XSS mint green bandwidth;ADP Optimization HTTP;false
+3;HumanXXXXXXXX;82240;false;Generic Intelligent Metal;80855;true;sky blue;El Salvador;Pants PNG Puerto Rico;false
+4;drive Avon Sm;47367;false;Mouse;28969;false;Computer;SAS Home Loan Account;front-end microchip;false
+5;Delaware Conc;51243;true;Consultant overriding alarm;24995;true;European Unit of Account 9(E.U.A.-9) Security Alabama;Personal Loan Account Shoes;ADP District payment;true
+6;scalable Gran;19903;false;Agent;85728;false;program;24/365 Incredible;Accountability Intranet non-volatile;true
+7;MarketsXXXXXX;81543;false;Bedfordshire Movies;51121;true;HTTP Re-contextualized indigo;program optimal;real-time;true
+8;bluetooth par;65657;false;Cotton synthesizing;32005;false;maximize;Industrial Computers Borders;open system;true
+9;Sausages Alas;63460;false;data-warehouse connect;76351;true;Designer;web-enabled Function-based matrix;Minnesota;true
+10;Fantastic Ass;39172;false;Facilitator;24814;true;Montana Lebanese Pound;Executive Corporate Chilean Peso Unidades de fomento;bus SAS Borders;false

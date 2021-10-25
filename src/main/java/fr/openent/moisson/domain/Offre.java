@@ -71,6 +71,16 @@ public class Offre implements Serializable {
     @Field
     private String referenceEditeur;
 
+    @JsonProperty("TYPE")
+    @Field
+    @Column(name = "type")
+    private String type;
+
+    @JsonProperty("IS3ANS")
+    @Field
+    @Column(name = "is_3_ans")
+    private Boolean is3ans;
+
     @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JsonProperty("TVA")
@@ -210,6 +220,32 @@ public class Offre implements Serializable {
         this.referenceEditeur = referenceEditeur;
         return this;
     }
+    public String getType() {
+        return type;
+    }
+
+    public Offre type(String type) {
+        this.type = type;
+        return this;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Boolean isIs3ans() {
+        return is3ans;
+    }
+
+    public Offre is3ans(Boolean is3ans) {
+        this.is3ans = is3ans;
+        return this;
+    }
+
+    public void setIs3ans(Boolean is3ans) {
+        this.is3ans = is3ans;
+    }
+
 
     public Set<Tva> getTvas() {
         return tvas;
@@ -342,6 +378,8 @@ public class Offre implements Serializable {
             ", adoptant='" + isAdoptant() + "'" +
             ", duree='" + getDuree() + "'" +
             ", referenceEditeur='" + getReferenceEditeur() + "'" +
+            ", type='" + getType() + "'" +
+            ", is3ans='" + isIs3ans() + "'" +
             "}";
     }
 }

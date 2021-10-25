@@ -21,7 +21,7 @@
             <column name="ark" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="titre" type="varchar(255)">
+            <column name="titre" type="varchar(1024)">
                 <constraints nullable="true" />
             </column>
             <column name="editeur" type="varchar(255)">
@@ -36,7 +36,7 @@
             <column name="distributeur" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="url_couverture" type="varchar(255)">
+            <column name="url_couverture" type="varchar(1024)">
                 <constraints nullable="true" />
             </column>
             <column name="url_demo" type="varchar(255)">

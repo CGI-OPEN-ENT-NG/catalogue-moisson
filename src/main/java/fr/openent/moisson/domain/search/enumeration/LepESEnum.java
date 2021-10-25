@@ -19,12 +19,12 @@ public enum LepESEnum {
 
 
     /**
-     * Nom du champs
+     * Nom du champ
      */
     String fieldName;
 
     /**
-     * Type de champs : text, keyword, date, long, boolean, multi-field....
+     * Type de champs : text, keyword, date, long, boolean, multi-field….
      */
     String fieldType;
 

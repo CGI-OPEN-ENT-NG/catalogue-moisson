@@ -10,7 +10,7 @@ public enum ClasseESEnum {
     LIBELLE("libelle", ElasticSearchConstants.MULTI);
 
     /**
-     * Nom du champs
+     * Nom du champ
      */
     String fieldName;
 

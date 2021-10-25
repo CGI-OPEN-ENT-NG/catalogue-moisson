@@ -146,6 +146,10 @@
     {
       "fieldName": "nbMaxSimultConnexions",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "messagerie",
+      "fieldType": "Boolean"
     }
   ],
   "changelogDate": "20201126091754",

@@ -1,10 +1,16 @@
 package fr.openent.moisson.service.dto;
 
-import io.github.jhipster.service.Criteria;
-import io.github.jhipster.service.filter.*;
-
 import java.io.Serializable;
 import java.util.Objects;
+import io.github.jhipster.service.Criteria;
+import io.github.jhipster.service.filter.BooleanFilter;
+import io.github.jhipster.service.filter.DoubleFilter;
+import io.github.jhipster.service.filter.Filter;
+import io.github.jhipster.service.filter.FloatFilter;
+import io.github.jhipster.service.filter.IntegerFilter;
+import io.github.jhipster.service.filter.LongFilter;
+import io.github.jhipster.service.filter.StringFilter;
+import io.github.jhipster.service.filter.BigDecimalFilter;
 
 /**
  * Criteria class for the {@link fr.openent.moisson.domain.Offre} entity. This class is used
@@ -37,6 +43,10 @@ public class OffreCriteria implements Serializable, Criteria {
 
     private StringFilter referenceEditeur;
 
+    private StringFilter type;
+
+    private BooleanFilter is3ans;
+
     private LongFilter tvaId;
 
     private LongFilter lepId;
@@ -58,6 +68,8 @@ public class OffreCriteria implements Serializable, Criteria {
         this.adoptant = other.adoptant == null ? null : other.adoptant.copy();
         this.duree = other.duree == null ? null : other.duree.copy();
         this.referenceEditeur = other.referenceEditeur == null ? null : other.referenceEditeur.copy();
+        this.type = other.type == null ? null : other.type.copy();
+        this.is3ans = other.is3ans == null ? null : other.is3ans.copy();
         this.tvaId = other.tvaId == null ? null : other.tvaId.copy();
         this.lepId = other.lepId == null ? null : other.lepId.copy();
         this.articleNumeriqueId = other.articleNumeriqueId == null ? null : other.articleNumeriqueId.copy();
@@ -141,6 +153,22 @@ public class OffreCriteria implements Serializable, Criteria {
         this.referenceEditeur = referenceEditeur;
     }
 
+    public StringFilter getType() {
+        return type;
+    }
+
+    public void setType(StringFilter type) {
+        this.type = type;
+    }
+
+    public BooleanFilter getIs3ans() {
+        return is3ans;
+    }
+
+    public void setIs3ans(BooleanFilter is3ans) {
+        this.is3ans = is3ans;
+    }
+
     public LongFilter getTvaId() {
         return tvaId;
     }
@@ -193,6 +221,8 @@ public class OffreCriteria implements Serializable, Criteria {
             Objects.equals(adoptant, that.adoptant) &&
             Objects.equals(duree, that.duree) &&
             Objects.equals(referenceEditeur, that.referenceEditeur) &&
+            Objects.equals(type, that.type) &&
+            Objects.equals(is3ans, that.is3ans) &&
             Objects.equals(tvaId, that.tvaId) &&
             Objects.equals(lepId, that.lepId) &&
             Objects.equals(articleNumeriqueId, that.articleNumeriqueId) &&
@@ -211,6 +241,8 @@ public class OffreCriteria implements Serializable, Criteria {
         adoptant,
         duree,
         referenceEditeur,
+        type,
+        is3ans,
         tvaId,
         lepId,
         articleNumeriqueId,
@@ -231,6 +263,8 @@ public class OffreCriteria implements Serializable, Criteria {
                 (adoptant != null ? "adoptant=" + adoptant + ", " : "") +
                 (duree != null ? "duree=" + duree + ", " : "") +
                 (referenceEditeur != null ? "referenceEditeur=" + referenceEditeur + ", " : "") +
+                (type != null ? "type=" + type + ", " : "") +
+                (is3ans != null ? "is3ans=" + is3ans + ", " : "") +
                 (tvaId != null ? "tvaId=" + tvaId + ", " : "") +
                 (lepId != null ? "lepId=" + lepId + ", " : "") +
                 (articleNumeriqueId != null ? "articleNumeriqueId=" + articleNumeriqueId + ", " : "") +

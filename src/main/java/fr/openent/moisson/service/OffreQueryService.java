@@ -1,12 +1,9 @@
 package fr.openent.moisson.service;
 
-import fr.openent.moisson.domain.*;
-import fr.openent.moisson.repository.OffreRepository;
-import fr.openent.moisson.repository.search.OffreSearchRepository;
-import fr.openent.moisson.service.dto.OffreCriteria;
-import fr.openent.moisson.service.dto.OffreDTO;
-import fr.openent.moisson.service.mapper.OffreMapper;
-import io.github.jhipster.service.QueryService;
+import java.util.List;
+
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -15,8 +12,15 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.JoinType;
-import java.util.List;
+import io.github.jhipster.service.QueryService;
+
+import fr.openent.moisson.domain.Offre;
+import fr.openent.moisson.domain.*; // for static metamodels
+import fr.openent.moisson.repository.OffreRepository;
+import fr.openent.moisson.repository.search.OffreSearchRepository;
+import fr.openent.moisson.service.dto.OffreCriteria;
+import fr.openent.moisson.service.dto.OffreDTO;
+import fr.openent.moisson.service.mapper.OffreMapper;
 
 /**
  * Service for executing complex queries for {@link Offre} entities in the database.
@@ -114,6 +118,12 @@ public class OffreQueryService extends QueryService<Offre> {
             }
             if (criteria.getReferenceEditeur() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getReferenceEditeur(), Offre_.referenceEditeur));
+            }
+            if (criteria.getType() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getType(), Offre_.type));
+            }
+            if (criteria.getIs3ans() != null) {
+                specification = specification.and(buildSpecification(criteria.getIs3ans(), Offre_.is3ans));
             }
             if (criteria.getTvaId() != null) {
                 specification = specification.and(buildSpecification(criteria.getTvaId(),

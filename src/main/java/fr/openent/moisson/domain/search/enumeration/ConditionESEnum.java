@@ -11,7 +11,7 @@ public enum ConditionESEnum {
     CONDITIONGRATUITE("conditionGratuite", ElasticSearchConstants.INTEGER);
 
     /**
-     * Nom du champs
+     * Nom du champ
      */
     String fieldName;
 

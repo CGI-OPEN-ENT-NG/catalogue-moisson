@@ -27,6 +27,7 @@ public class MoissonESBuilder {
         articlePapierBuilder.field(ArticlePapierESEnum.DATE_PARUTION.getFieldName(), articlePapier.getDateParution());
         articlePapierBuilder.field(ArticlePapierESEnum.PRIXHT.getFieldName(), articlePapier.getPrixHT());
         articlePapierBuilder.field(ArticlePapierESEnum.DESCRIPTION.getFieldName(), articlePapier.getDescription());
+        articlePapierBuilder.field(ArticlePapierESEnum.TYPE.getFieldName(), articlePapier.getType());
 
         List<Object> Tvas = new ArrayList<>();
         for (Tva tva : articlePapier.getTvas()) {
@@ -101,6 +102,8 @@ public class MoissonESBuilder {
             innerOffres.put(OffreESEnum.ADOPTANT.getFieldName(), offre.isAdoptant());
             innerOffres.put(OffreESEnum.DUREE.getFieldName(), offre.getDuree());
             innerOffres.put(OffreESEnum.REF_EDITEUR.getFieldName(), offre.getReferenceEditeur());
+            innerOffres.put(OffreESEnum.TYPE.getFieldName(), offre.getType());
+            innerOffres.put(OffreESEnum.IS3ANS.getFieldName(), offre.isIs3ans());
 
             List<Object> innerOffreTvas = new ArrayList<>();
             for (Tva tva : offre.getTvas()) {
@@ -185,6 +188,24 @@ public class MoissonESBuilder {
             innerTechno.put(TechnoESEnum.PersonnalisationUserInterface.getFieldName(), techno.isPersonnalisationUserInterface());
             innerTechno.put(TechnoESEnum.ModifContenuEditorial.getFieldName(), techno.isModifContenuEditorial());
             innerTechno.put(TechnoESEnum.DispositifDYS.getFieldName(), techno.isDispositifDYS());
+            innerTechno.put(TechnoESEnum.Messagerie.getFieldName(), techno.isMessagerie());
+
+            innerTechno.put(TechnoESEnum.NiveauRGAA.getFieldName(), techno.getNiveauRGAA());
+            innerTechno.put(TechnoESEnum.NiveauA2RNE.getFieldName(), techno.getNiveauA2RNE());
+            innerTechno.put(TechnoESEnum.ConformeScoLOMFR.getFieldName(), techno.isConformeScoLOMFR());
+            innerTechno.put(TechnoESEnum.ConformeSCORM.getFieldName(), techno.isConformeSCORM());
+            innerTechno.put(TechnoESEnum.ConformeIMS_QTI.getFieldName(), techno.isConformeIMS_QTI());
+            innerTechno.put(TechnoESEnum.ConformexAPI.getFieldName(), techno.isConformexAPI());
+            innerTechno.put(TechnoESEnum.FormatVideo.getFieldName(), techno.getFormatVideo());
+            innerTechno.put(TechnoESEnum.ts_lastModif.getFieldName(), techno.getTs_LastModif());
+            innerTechno.put(TechnoESEnum.ConfigurationMiniNavigateur.getFieldName(), techno.getConfigurationMiniNavigateur());
+            innerTechno.put(TechnoESEnum.ParcoursElevePersonnalise.getFieldName(), techno.isConformexAPI());
+            innerTechno.put(TechnoESEnum.GestionGroupesEleve.getFieldName(), techno.isGestionGroupesEleve());
+            innerTechno.put(TechnoESEnum.PersonnalisationContEnseign.getFieldName(), techno.isPersonnalisationContEnseign());
+            innerTechno.put(TechnoESEnum.EditionFormuleMath.getFieldName(), techno.isEditionFormuleMath());
+            innerTechno.put(TechnoESEnum.CorrectTravailEleveParEnseign.getFieldName(), techno.isCorrectTravailEleveParEnseign());
+            innerTechno.put(TechnoESEnum.SuiviEleve.getFieldName(), techno.isSuiviEleve());
+            innerTechno.put(TechnoESEnum.Commentaire.getFieldName(), techno.getCommentaire());
 
             technos.add(innerTechno);
         }

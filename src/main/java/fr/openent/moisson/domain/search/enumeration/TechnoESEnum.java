@@ -1,11 +1,15 @@
 package fr.openent.moisson.domain.search.enumeration;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.openent.moisson.domain.search.ElasticSearchConstants;
+import org.springframework.data.elasticsearch.annotations.Field;
+
+import javax.persistence.Column;
 
 public enum TechnoESEnum {
 
     /*
-     * CONSTANTES pour TvaESEnum
+     * CONSTANTES pour TechnoESEnum
      */
     ID("id", ElasticSearchConstants.TEXT),
     Technologie("technologie", ElasticSearchConstants.TEXT),
@@ -40,10 +44,27 @@ public enum TechnoESEnum {
     ExportSCORM("exportSCORM", ElasticSearchConstants.BOOLEAN),
     PersonnalisationUserInterface("personnalisationUserInterface", ElasticSearchConstants.BOOLEAN),
     ModifContenuEditorial("modifContenuEditorial", ElasticSearchConstants.BOOLEAN),
-    DispositifDYS("dispositifDYS", ElasticSearchConstants.BOOLEAN);
+    DispositifDYS("dispositifDYS", ElasticSearchConstants.BOOLEAN),
+    Messagerie("messagerie", ElasticSearchConstants.BOOLEAN),
+    NiveauRGAA("niveauRGAA", ElasticSearchConstants.TEXT),
+    NiveauA2RNE("niveauA2RNE", ElasticSearchConstants.INTEGER),
+    ConformeScoLOMFR("conformeScoLOMFR", ElasticSearchConstants.BOOLEAN),
+    ConformeSCORM("conformeSCORM", ElasticSearchConstants.BOOLEAN),
+    ConformeIMS_QTI("conformeIMS_QTI", ElasticSearchConstants.BOOLEAN),
+    ConformexAPI("conformexAPI", ElasticSearchConstants.BOOLEAN),
+    FormatVideo("formatVideo", ElasticSearchConstants.TEXT),
+    ts_lastModif("ts_LastModif", ElasticSearchConstants.LONG),
+    ConfigurationMiniNavigateur("configurationMiniNavigateur", ElasticSearchConstants.TEXT),
+    ParcoursElevePersonnalise("parcoursElevePersonnalise", ElasticSearchConstants.BOOLEAN),
+    GestionGroupesEleve("gestionGroupesEleve", ElasticSearchConstants.BOOLEAN),
+    PersonnalisationContEnseign("personnalisationContEnseign", ElasticSearchConstants.BOOLEAN),
+    EditionFormuleMath("editionFormuleMath", ElasticSearchConstants.BOOLEAN),
+    CorrectTravailEleveParEnseign("correctTravailEleveParEnseign", ElasticSearchConstants.BOOLEAN),
+    SuiviEleve("suiviEleve", ElasticSearchConstants.BOOLEAN),
+    Commentaire("commentaire", ElasticSearchConstants.TEXT);
 
     /**
-     * Nom du champs
+     * Nom du champ
      */
     String fieldName;
 

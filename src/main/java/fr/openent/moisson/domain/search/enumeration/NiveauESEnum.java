@@ -12,7 +12,7 @@ public enum NiveauESEnum {
     CONCEPT("concept", ElasticSearchConstants.KEYWORD);
 
     /**
-     * Nom du champs
+     * Nom du champ
      */
     String fieldName;
 

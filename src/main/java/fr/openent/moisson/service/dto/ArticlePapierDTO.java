@@ -38,6 +38,8 @@ public class ArticlePapierDTO implements Serializable {
 
     private String description;
 
+    private String type;
+
     private Set<TvaDTO> tvas;
 
     private Long disponibiliteId;
@@ -146,6 +148,10 @@ public class ArticlePapierDTO implements Serializable {
         this.description = description;
     }
 
+    public String getType() { return type; }
+
+    public void setType(String type) { this.type = type; }
+
     public Long getDisponibiliteId() {
         return disponibiliteId;
     }
@@ -197,6 +203,7 @@ public class ArticlePapierDTO implements Serializable {
             ", dateParution='" + getDateParution() + "'" +
             ", prixHT=" + getPrixHT() +
             ", description='" + getDescription() + "'" +
+            ", type='" + getType() + "'" +
             ", disponibiliteId=" + getDisponibiliteId() +
             "}";
     }

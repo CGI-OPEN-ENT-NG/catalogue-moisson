@@ -1,15 +1,22 @@
 package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
-import fr.openent.moisson.domain.*;
+import fr.openent.moisson.domain.ArticlePapier;
+import fr.openent.moisson.domain.Tva;
+import fr.openent.moisson.domain.Disponibilite;
+import fr.openent.moisson.domain.Discipline;
+import fr.openent.moisson.domain.Niveau;
 import fr.openent.moisson.repository.ArticlePapierRepository;
 import fr.openent.moisson.repository.search.ArticlePapierSearchRepository;
-import fr.openent.moisson.service.ArticlePapierQueryService;
 import fr.openent.moisson.service.ArticlePapierService;
 import fr.openent.moisson.service.dto.ArticlePapierDTO;
 import fr.openent.moisson.service.mapper.ArticlePapierMapper;
+import fr.openent.moisson.service.dto.ArticlePapierCriteria;
+import fr.openent.moisson.service.ArticlePapierQueryService;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +28,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -82,6 +88,9 @@ public class ArticlePapierResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
+    private static final String DEFAULT_TYPE = "AAAAAAAAAA";
+    private static final String UPDATED_TYPE = "BBBBBBBBBB";
+
     @Autowired
     private ArticlePapierRepository articlePapierRepository;
 
@@ -129,7 +138,8 @@ public class ArticlePapierResourceIT {
             .urlCouverture(DEFAULT_URL_COUVERTURE)
             .dateParution(DEFAULT_DATE_PARUTION)
             .prixHT(DEFAULT_PRIX_HT)
-            .description(DEFAULT_DESCRIPTION);
+            .description(DEFAULT_DESCRIPTION)
+            .type(DEFAULT_TYPE);
         // Add required entity
         Disponibilite disponibilite;
         if (TestUtil.findAll(em, Disponibilite.class).isEmpty()) {
@@ -161,7 +171,8 @@ public class ArticlePapierResourceIT {
             .urlCouverture(UPDATED_URL_COUVERTURE)
             .dateParution(UPDATED_DATE_PARUTION)
             .prixHT(UPDATED_PRIX_HT)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .type(UPDATED_TYPE);
         // Add required entity
         Disponibilite disponibilite;
         if (TestUtil.findAll(em, Disponibilite.class).isEmpty()) {
@@ -207,6 +218,7 @@ public class ArticlePapierResourceIT {
         assertThat(testArticlePapier.getDateParution()).isEqualTo(DEFAULT_DATE_PARUTION);
         assertThat(testArticlePapier.getPrixHT()).isEqualTo(DEFAULT_PRIX_HT);
         assertThat(testArticlePapier.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testArticlePapier.getType()).isEqualTo(DEFAULT_TYPE);
 
         // Validate the id for MapsId, the ids must be same
         assertThat(testArticlePapier.getId()).isEqualTo(testArticlePapier.getDisponibilite().getId());
@@ -244,7 +256,6 @@ public class ArticlePapierResourceIT {
         // Initialize the database
         articlePapierRepository.saveAndFlush(articlePapier);
         int databaseSizeBeforeCreate = articlePapierRepository.findAll().size();
-
 
         // Load the articlePapier
         ArticlePapier updatedArticlePapier = articlePapierRepository.findById(articlePapier.getId()).get();
@@ -297,7 +308,8 @@ public class ArticlePapierResourceIT {
             .andExpect(jsonPath("$.[*].urlCouverture").value(hasItem(DEFAULT_URL_COUVERTURE)))
             .andExpect(jsonPath("$.[*].dateParution").value(hasItem(DEFAULT_DATE_PARUTION.toString())))
             .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)));
     }
 
     @Test
@@ -322,7 +334,8 @@ public class ArticlePapierResourceIT {
             .andExpect(jsonPath("$.urlCouverture").value(DEFAULT_URL_COUVERTURE))
             .andExpect(jsonPath("$.dateParution").value(DEFAULT_DATE_PARUTION.toString()))
             .andExpect(jsonPath("$.prixHT").value(DEFAULT_PRIX_HT.intValue()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE));
     }
 
 
@@ -1284,6 +1297,84 @@ public class ArticlePapierResourceIT {
 
     @Test
     @Transactional
+    public void getAllArticlePapiersByTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        articlePapierRepository.saveAndFlush(articlePapier);
+
+        // Get all the articlePapierList where type equals to DEFAULT_TYPE
+        defaultArticlePapierShouldBeFound("type.equals=" + DEFAULT_TYPE);
+
+        // Get all the articlePapierList where type equals to UPDATED_TYPE
+        defaultArticlePapierShouldNotBeFound("type.equals=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllArticlePapiersByTypeIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        articlePapierRepository.saveAndFlush(articlePapier);
+
+        // Get all the articlePapierList where type not equals to DEFAULT_TYPE
+        defaultArticlePapierShouldNotBeFound("type.notEquals=" + DEFAULT_TYPE);
+
+        // Get all the articlePapierList where type not equals to UPDATED_TYPE
+        defaultArticlePapierShouldBeFound("type.notEquals=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllArticlePapiersByTypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        articlePapierRepository.saveAndFlush(articlePapier);
+
+        // Get all the articlePapierList where type in DEFAULT_TYPE or UPDATED_TYPE
+        defaultArticlePapierShouldBeFound("type.in=" + DEFAULT_TYPE + "," + UPDATED_TYPE);
+
+        // Get all the articlePapierList where type equals to UPDATED_TYPE
+        defaultArticlePapierShouldNotBeFound("type.in=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllArticlePapiersByTypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        articlePapierRepository.saveAndFlush(articlePapier);
+
+        // Get all the articlePapierList where type is not null
+        defaultArticlePapierShouldBeFound("type.specified=true");
+
+        // Get all the articlePapierList where type is null
+        defaultArticlePapierShouldNotBeFound("type.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllArticlePapiersByTypeContainsSomething() throws Exception {
+        // Initialize the database
+        articlePapierRepository.saveAndFlush(articlePapier);
+
+        // Get all the articlePapierList where type contains DEFAULT_TYPE
+        defaultArticlePapierShouldBeFound("type.contains=" + DEFAULT_TYPE);
+
+        // Get all the articlePapierList where type contains UPDATED_TYPE
+        defaultArticlePapierShouldNotBeFound("type.contains=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllArticlePapiersByTypeNotContainsSomething() throws Exception {
+        // Initialize the database
+        articlePapierRepository.saveAndFlush(articlePapier);
+
+        // Get all the articlePapierList where type does not contain DEFAULT_TYPE
+        defaultArticlePapierShouldNotBeFound("type.doesNotContain=" + DEFAULT_TYPE);
+
+        // Get all the articlePapierList where type does not contain UPDATED_TYPE
+        defaultArticlePapierShouldBeFound("type.doesNotContain=" + UPDATED_TYPE);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllArticlePapiersByTvaIsEqualToSomething() throws Exception {
         // Initialize the database
         articlePapierRepository.saveAndFlush(articlePapier);
@@ -1376,7 +1467,8 @@ public class ArticlePapierResourceIT {
             .andExpect(jsonPath("$.[*].urlCouverture").value(hasItem(DEFAULT_URL_COUVERTURE)))
             .andExpect(jsonPath("$.[*].dateParution").value(hasItem(DEFAULT_DATE_PARUTION.toString())))
             .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)));
 
         // Check, that the count call also returns 1
         restArticlePapierMockMvc.perform(get("/api/article-papiers/count?sort=id,desc&" + filter))
@@ -1434,7 +1526,8 @@ public class ArticlePapierResourceIT {
             .urlCouverture(UPDATED_URL_COUVERTURE)
             .dateParution(UPDATED_DATE_PARUTION)
             .prixHT(UPDATED_PRIX_HT)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .type(UPDATED_TYPE);
         ArticlePapierDTO articlePapierDTO = articlePapierMapper.toDto(updatedArticlePapier);
 
         restArticlePapierMockMvc.perform(put("/api/article-papiers")
@@ -1458,6 +1551,7 @@ public class ArticlePapierResourceIT {
         assertThat(testArticlePapier.getDateParution()).isEqualTo(UPDATED_DATE_PARUTION);
         assertThat(testArticlePapier.getPrixHT()).isEqualTo(UPDATED_PRIX_HT);
         assertThat(testArticlePapier.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testArticlePapier.getType()).isEqualTo(UPDATED_TYPE);
 
         // Validate the ArticlePapier in Elasticsearch
         verify(mockArticlePapierSearchRepository, times(1)).save(testArticlePapier);
@@ -1531,6 +1625,7 @@ public class ArticlePapierResourceIT {
             .andExpect(jsonPath("$.[*].urlCouverture").value(hasItem(DEFAULT_URL_COUVERTURE)))
             .andExpect(jsonPath("$.[*].dateParution").value(hasItem(DEFAULT_DATE_PARUTION.toString())))
             .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)));
     }
 }
