@@ -79,6 +79,7 @@ class JsonFileToEntityObjectMapperTest {
         articlePapierBuilder.field(ArticlePapierESEnum.DATE_PARUTION.getFieldName(), articlePapier.getDateParution());
         articlePapierBuilder.field(ArticlePapierESEnum.PRIXHT.getFieldName(), articlePapier.getPrixHT());
         articlePapierBuilder.field(ArticlePapierESEnum.DESCRIPTION.getFieldName(), articlePapier.getDescription());
+        articlePapierBuilder.field(ArticlePapierESEnum.TYPE.getFieldName(), articlePapier.getType());
 
         List<Object> Tvas = new ArrayList<>();
         for (Tva tva : articlePapier.getTvas()) {
@@ -153,6 +154,8 @@ class JsonFileToEntityObjectMapperTest {
             innerOffres.put(OffreESEnum.ADOPTANT.getFieldName(), offre.isAdoptant());
             innerOffres.put(OffreESEnum.DUREE.getFieldName(), offre.getDuree());
             innerOffres.put(OffreESEnum.REF_EDITEUR.getFieldName(), offre.getReferenceEditeur());
+            innerOffres.put(OffreESEnum.TYPE.getFieldName(), offre.getType());
+
 
             List<Object> innerOffreTvas = new ArrayList<>();
             for (Tva tva : offre.getTvas()) {

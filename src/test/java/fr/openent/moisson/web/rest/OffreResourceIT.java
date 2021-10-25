@@ -1,15 +1,22 @@
 package fr.openent.moisson.web.rest;
 
 import fr.openent.moisson.MoissoncatalogueApp;
-import fr.openent.moisson.domain.*;
+import fr.openent.moisson.domain.Offre;
+import fr.openent.moisson.domain.Tva;
+import fr.openent.moisson.domain.Lep;
+import fr.openent.moisson.domain.ArticleNumerique;
+import fr.openent.moisson.domain.Licence;
 import fr.openent.moisson.repository.OffreRepository;
 import fr.openent.moisson.repository.search.OffreSearchRepository;
-import fr.openent.moisson.service.OffreQueryService;
 import fr.openent.moisson.service.OffreService;
 import fr.openent.moisson.service.dto.OffreDTO;
 import fr.openent.moisson.service.mapper.OffreMapper;
+import fr.openent.moisson.service.dto.OffreCriteria;
+import fr.openent.moisson.service.OffreQueryService;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +28,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -69,6 +75,12 @@ public class OffreResourceIT {
     private static final String DEFAULT_REFERENCE_EDITEUR = "AAAAAAAAAA";
     private static final String UPDATED_REFERENCE_EDITEUR = "BBBBBBBBBB";
 
+    private static final String DEFAULT_TYPE = "AAAAAAAAAA";
+    private static final String UPDATED_TYPE = "BBBBBBBBBB";
+
+    private static final Boolean DEFAULT_IS_3_ANS = false;
+    private static final Boolean UPDATED_IS_3_ANS = true;
+
     @Autowired
     private OffreRepository offreRepository;
 
@@ -112,7 +124,9 @@ public class OffreResourceIT {
             .prixHT(DEFAULT_PRIX_HT)
             .adoptant(DEFAULT_ADOPTANT)
             .duree(DEFAULT_DUREE)
-            .referenceEditeur(DEFAULT_REFERENCE_EDITEUR);
+            .referenceEditeur(DEFAULT_REFERENCE_EDITEUR)
+            .type(DEFAULT_TYPE)
+            .is3ans(DEFAULT_IS_3_ANS);
         // Add required entity
         Licence licence;
         if (TestUtil.findAll(em, Licence.class).isEmpty()) {
@@ -140,7 +154,9 @@ public class OffreResourceIT {
             .prixHT(UPDATED_PRIX_HT)
             .adoptant(UPDATED_ADOPTANT)
             .duree(UPDATED_DUREE)
-            .referenceEditeur(UPDATED_REFERENCE_EDITEUR);
+            .referenceEditeur(UPDATED_REFERENCE_EDITEUR)
+            .type(UPDATED_TYPE)
+            .is3ans(UPDATED_IS_3_ANS);
         // Add required entity
         Licence licence;
         if (TestUtil.findAll(em, Licence.class).isEmpty()) {
@@ -182,6 +198,8 @@ public class OffreResourceIT {
         assertThat(testOffre.isAdoptant()).isEqualTo(DEFAULT_ADOPTANT);
         assertThat(testOffre.getDuree()).isEqualTo(DEFAULT_DUREE);
         assertThat(testOffre.getReferenceEditeur()).isEqualTo(DEFAULT_REFERENCE_EDITEUR);
+        assertThat(testOffre.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testOffre.isIs3ans()).isEqualTo(DEFAULT_IS_3_ANS);
 
         // Validate the id for MapsId, the ids must be same
         assertThat(testOffre.getId()).isEqualTo(testOffre.getLicence().getId());
@@ -268,7 +286,9 @@ public class OffreResourceIT {
             .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())))
             .andExpect(jsonPath("$.[*].adoptant").value(hasItem(DEFAULT_ADOPTANT.booleanValue())))
             .andExpect(jsonPath("$.[*].duree").value(hasItem(DEFAULT_DUREE)))
-            .andExpect(jsonPath("$.[*].referenceEditeur").value(hasItem(DEFAULT_REFERENCE_EDITEUR)));
+            .andExpect(jsonPath("$.[*].referenceEditeur").value(hasItem(DEFAULT_REFERENCE_EDITEUR)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
+            .andExpect(jsonPath("$.[*].is3ans").value(hasItem(DEFAULT_IS_3_ANS.booleanValue())));
     }
 
     @Test
@@ -289,7 +309,9 @@ public class OffreResourceIT {
             .andExpect(jsonPath("$.prixHT").value(DEFAULT_PRIX_HT.intValue()))
             .andExpect(jsonPath("$.adoptant").value(DEFAULT_ADOPTANT.booleanValue()))
             .andExpect(jsonPath("$.duree").value(DEFAULT_DUREE))
-            .andExpect(jsonPath("$.referenceEditeur").value(DEFAULT_REFERENCE_EDITEUR));
+            .andExpect(jsonPath("$.referenceEditeur").value(DEFAULT_REFERENCE_EDITEUR))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
+            .andExpect(jsonPath("$.is3ans").value(DEFAULT_IS_3_ANS.booleanValue()));
     }
 
 
@@ -940,6 +962,136 @@ public class OffreResourceIT {
 
     @Test
     @Transactional
+    public void getAllOffresByTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where type equals to DEFAULT_TYPE
+        defaultOffreShouldBeFound("type.equals=" + DEFAULT_TYPE);
+
+        // Get all the offreList where type equals to UPDATED_TYPE
+        defaultOffreShouldNotBeFound("type.equals=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByTypeIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where type not equals to DEFAULT_TYPE
+        defaultOffreShouldNotBeFound("type.notEquals=" + DEFAULT_TYPE);
+
+        // Get all the offreList where type not equals to UPDATED_TYPE
+        defaultOffreShouldBeFound("type.notEquals=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByTypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where type in DEFAULT_TYPE or UPDATED_TYPE
+        defaultOffreShouldBeFound("type.in=" + DEFAULT_TYPE + "," + UPDATED_TYPE);
+
+        // Get all the offreList where type equals to UPDATED_TYPE
+        defaultOffreShouldNotBeFound("type.in=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByTypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where type is not null
+        defaultOffreShouldBeFound("type.specified=true");
+
+        // Get all the offreList where type is null
+        defaultOffreShouldNotBeFound("type.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllOffresByTypeContainsSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where type contains DEFAULT_TYPE
+        defaultOffreShouldBeFound("type.contains=" + DEFAULT_TYPE);
+
+        // Get all the offreList where type contains UPDATED_TYPE
+        defaultOffreShouldNotBeFound("type.contains=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByTypeNotContainsSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where type does not contain DEFAULT_TYPE
+        defaultOffreShouldNotBeFound("type.doesNotContain=" + DEFAULT_TYPE);
+
+        // Get all the offreList where type does not contain UPDATED_TYPE
+        defaultOffreShouldBeFound("type.doesNotContain=" + UPDATED_TYPE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllOffresByIs3ansIsEqualToSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where is3ans equals to DEFAULT_IS_3_ANS
+        defaultOffreShouldBeFound("is3ans.equals=" + DEFAULT_IS_3_ANS);
+
+        // Get all the offreList where is3ans equals to UPDATED_IS_3_ANS
+        defaultOffreShouldNotBeFound("is3ans.equals=" + UPDATED_IS_3_ANS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByIs3ansIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where is3ans not equals to DEFAULT_IS_3_ANS
+        defaultOffreShouldNotBeFound("is3ans.notEquals=" + DEFAULT_IS_3_ANS);
+
+        // Get all the offreList where is3ans not equals to UPDATED_IS_3_ANS
+        defaultOffreShouldBeFound("is3ans.notEquals=" + UPDATED_IS_3_ANS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByIs3ansIsInShouldWork() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where is3ans in DEFAULT_IS_3_ANS or UPDATED_IS_3_ANS
+        defaultOffreShouldBeFound("is3ans.in=" + DEFAULT_IS_3_ANS + "," + UPDATED_IS_3_ANS);
+
+        // Get all the offreList where is3ans equals to UPDATED_IS_3_ANS
+        defaultOffreShouldNotBeFound("is3ans.in=" + UPDATED_IS_3_ANS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllOffresByIs3ansIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        offreRepository.saveAndFlush(offre);
+
+        // Get all the offreList where is3ans is not null
+        defaultOffreShouldBeFound("is3ans.specified=true");
+
+        // Get all the offreList where is3ans is null
+        defaultOffreShouldNotBeFound("is3ans.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllOffresByTvaIsEqualToSomething() throws Exception {
         // Initialize the database
         offreRepository.saveAndFlush(offre);
@@ -1028,7 +1180,9 @@ public class OffreResourceIT {
             .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())))
             .andExpect(jsonPath("$.[*].adoptant").value(hasItem(DEFAULT_ADOPTANT.booleanValue())))
             .andExpect(jsonPath("$.[*].duree").value(hasItem(DEFAULT_DUREE)))
-            .andExpect(jsonPath("$.[*].referenceEditeur").value(hasItem(DEFAULT_REFERENCE_EDITEUR)));
+            .andExpect(jsonPath("$.[*].referenceEditeur").value(hasItem(DEFAULT_REFERENCE_EDITEUR)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
+            .andExpect(jsonPath("$.[*].is3ans").value(hasItem(DEFAULT_IS_3_ANS.booleanValue())));
 
         // Check, that the count call also returns 1
         restOffreMockMvc.perform(get("/api/offres/count?sort=id,desc&" + filter))
@@ -1082,7 +1236,9 @@ public class OffreResourceIT {
             .prixHT(UPDATED_PRIX_HT)
             .adoptant(UPDATED_ADOPTANT)
             .duree(UPDATED_DUREE)
-            .referenceEditeur(UPDATED_REFERENCE_EDITEUR);
+            .referenceEditeur(UPDATED_REFERENCE_EDITEUR)
+            .type(UPDATED_TYPE)
+            .is3ans(UPDATED_IS_3_ANS);
         OffreDTO offreDTO = offreMapper.toDto(updatedOffre);
 
         restOffreMockMvc.perform(put("/api/offres")
@@ -1102,6 +1258,8 @@ public class OffreResourceIT {
         assertThat(testOffre.isAdoptant()).isEqualTo(UPDATED_ADOPTANT);
         assertThat(testOffre.getDuree()).isEqualTo(UPDATED_DUREE);
         assertThat(testOffre.getReferenceEditeur()).isEqualTo(UPDATED_REFERENCE_EDITEUR);
+        assertThat(testOffre.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testOffre.isIs3ans()).isEqualTo(UPDATED_IS_3_ANS);
 
         // Validate the Offre in Elasticsearch
         verify(mockOffreSearchRepository, times(1)).save(testOffre);
@@ -1171,6 +1329,8 @@ public class OffreResourceIT {
             .andExpect(jsonPath("$.[*].prixHT").value(hasItem(DEFAULT_PRIX_HT.intValue())))
             .andExpect(jsonPath("$.[*].adoptant").value(hasItem(DEFAULT_ADOPTANT.booleanValue())))
             .andExpect(jsonPath("$.[*].duree").value(hasItem(DEFAULT_DUREE)))
-            .andExpect(jsonPath("$.[*].referenceEditeur").value(hasItem(DEFAULT_REFERENCE_EDITEUR)));
+            .andExpect(jsonPath("$.[*].referenceEditeur").value(hasItem(DEFAULT_REFERENCE_EDITEUR)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
+            .andExpect(jsonPath("$.[*].is3ans").value(hasItem(DEFAULT_IS_3_ANS.booleanValue())));
     }
 }

@@ -1,14 +1,9 @@
 package fr.openent.moisson.service;
 
-import fr.openent.moisson.domain.ArticleNumerique_;
-import fr.openent.moisson.domain.Techno;
-import fr.openent.moisson.domain.Techno_;
-import fr.openent.moisson.repository.TechnoRepository;
-import fr.openent.moisson.repository.search.TechnoSearchRepository;
-import fr.openent.moisson.service.dto.TechnoCriteria;
-import fr.openent.moisson.service.dto.TechnoDTO;
-import fr.openent.moisson.service.mapper.TechnoMapper;
-import io.github.jhipster.service.QueryService;
+import java.util.List;
+
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -17,8 +12,15 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.JoinType;
-import java.util.List;
+import io.github.jhipster.service.QueryService;
+
+import fr.openent.moisson.domain.Techno;
+import fr.openent.moisson.domain.*; // for static metamodels
+import fr.openent.moisson.repository.TechnoRepository;
+import fr.openent.moisson.repository.search.TechnoSearchRepository;
+import fr.openent.moisson.service.dto.TechnoCriteria;
+import fr.openent.moisson.service.dto.TechnoDTO;
+import fr.openent.moisson.service.mapper.TechnoMapper;
 
 /**
  * Service for executing complex queries for {@link Techno} entities in the database.
@@ -191,6 +193,9 @@ public class TechnoQueryService extends QueryService<Techno> {
             }
             if (criteria.getNbMaxSimultConnexions() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getNbMaxSimultConnexions(), Techno_.nbMaxSimultConnexions));
+            }
+            if (criteria.getMessagerie() != null) {
+                specification = specification.and(buildSpecification(criteria.getMessagerie(), Techno_.messagerie));
             }
             if (criteria.getArticleNumeriqueId() != null) {
                 specification = specification.and(buildSpecification(criteria.getArticleNumeriqueId(),

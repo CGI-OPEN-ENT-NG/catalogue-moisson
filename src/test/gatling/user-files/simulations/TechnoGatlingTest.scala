@@ -105,6 +105,7 @@ class TechnoGatlingTest extends Simulation {
                 , "dispositifDYS":null
                 , "nbMaxiInstall":"SAMPLE_TEXT"
                 , "nbMaxSimultConnexions":"SAMPLE_TEXT"
+                , "messagerie":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_techno_url"))).exitHereIfFailed

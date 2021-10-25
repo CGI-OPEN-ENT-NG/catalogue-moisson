@@ -21,13 +21,13 @@
             <column name="ark" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="titre" type="varchar(255)">
+            <column name="titre" type="varchar(1024)">
                 <constraints nullable="true" />
             </column>
             <column name="editeur" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auteur" type="varchar(255)">
+            <column name="auteur" type="varchar(1024)">
                 <constraints nullable="true" />
             </column>
             <column name="reference_editeur" type="varchar(255)">
@@ -39,7 +39,7 @@
             <column name="distributeur" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="url_couverture" type="varchar(255)">
+            <column name="url_couverture" type="varchar(1024)">
                 <constraints nullable="true" />
             </column>
             <column name="date_parution" type="datetime">
@@ -48,7 +48,7 @@
             <column name="prix_ht" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
-            <column name="description" type="varchar(255)">
+            <column name="description" type="varchar(65000)">
                 <constraints nullable="true" />
             </column>
             <column name="type" type="varchar(255)">

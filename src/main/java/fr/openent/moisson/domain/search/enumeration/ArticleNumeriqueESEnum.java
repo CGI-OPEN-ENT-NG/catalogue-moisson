@@ -33,7 +33,7 @@ public enum ArticleNumeriqueESEnum {
     DISPONIBILITE("disponibilite", ElasticSearchConstants.NESTED);
 
     /**
-     * Nom du champs
+     * Nom du champ
      */
     String fieldName;
 

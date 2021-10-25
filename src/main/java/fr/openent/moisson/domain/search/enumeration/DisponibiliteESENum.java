@@ -14,7 +14,7 @@ public enum DisponibiliteESENum {
     VALEUR("valeur", ElasticSearchConstants.KEYWORD);
 
     /**
-     * Nom du champs
+     * Nom du champ
      */
     String fieldName;
 

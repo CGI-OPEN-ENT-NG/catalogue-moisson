@@ -57,7 +57,7 @@ public class ArticlePapier implements Serializable {
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String ark;
 
-    @Column(name = "titre")
+    @Column(name = "titre", length = 1024)
     @JsonProperty("TITRE")
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String titre;
@@ -67,7 +67,7 @@ public class ArticlePapier implements Serializable {
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String editeur;
 
-    @Column(name = "auteur", length = 102)
+    @Column(name = "auteur", length = 1024)
     @JsonProperty("AUTEUR")
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String auteur;
@@ -87,7 +87,7 @@ public class ArticlePapier implements Serializable {
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String distributeur;
 
-    @Column(name = "url_couverture")
+    @Column(name = "url_couverture", length = 1024)
     @JsonProperty("URL_COUVERTURE")
     @Field
     private String urlCouverture;
@@ -109,9 +109,9 @@ public class ArticlePapier implements Serializable {
     @Field
     private String description;
 
+    @Column(name = "type")
     @JsonProperty("TYPE")
     @Field
-    @Column(name = "type")
     private String type;
 
     @OneToMany(mappedBy = "articlePapier", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)

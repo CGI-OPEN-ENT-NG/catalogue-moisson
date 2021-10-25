@@ -11,6 +11,9 @@ public enum DisponibiliteEnum {
     EN_COURS_D_IMPRESSION("En cours d'impression"),
     EN_COURS_DE_REIMPRESSION("En cours de réimpression"),
     NON_DISPONIBLE_PROVISOIREMENT("Non disponible provisoirement"),
+    NON_JUSQU_A_EPUISEMENT_DES_STOCKS("Disponible jusqu'à épuisement des stocks"),
+    MANQUE_SANS_DATE("Manque sans date"),
+    NON_DISPONIBLE_A_LONG_TERME("Non disponible à long terme"),
     EPUISE("Epuisé"),
     A_PARAITRE("À paraître"),
     TRUE("true"),
@@ -20,7 +23,7 @@ public enum DisponibiliteEnum {
     private String value;
 
     DisponibiliteEnum(String value) {
-        this.value=value;
+        this.value = value;
     }
 
     public String getValue() {
@@ -29,4 +32,5 @@ public enum DisponibiliteEnum {
 
     public void setValue(String value) {
         this.value = value;
-    }}
+    }
+}

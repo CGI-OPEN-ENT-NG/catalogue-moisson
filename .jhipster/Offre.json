@@ -66,6 +66,14 @@
     {
       "fieldName": "referenceEditeur",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "is3ans",
+      "fieldType": "Boolean"
     }
   ],
   "changelogDate": "20201126093844",

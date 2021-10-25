@@ -8,7 +8,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum PublicCible {
     ELEVE("Elève"),
     ENSEIGNANT("Enseignant"),
-    ELEVE_ET_ENSEIGNANT("Elève, Enseignant");
+    ELEVE_ET_ENSEIGNANT("Elève, Enseignant"),
+    ETABLISSEMENT("Etablissement");
 
     @JsonValue
     private String value;

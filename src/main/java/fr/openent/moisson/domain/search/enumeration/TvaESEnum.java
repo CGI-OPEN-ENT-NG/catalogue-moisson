@@ -11,7 +11,7 @@ public enum TvaESEnum {
     TAUX("taux", ElasticSearchConstants.SCALED_FLOAT),
     POURCENT("pourcent", ElasticSearchConstants.SCALED_FLOAT);
     /**
-     * Nom du champs
+     * Nom du champ
      */
     String fieldName;
 

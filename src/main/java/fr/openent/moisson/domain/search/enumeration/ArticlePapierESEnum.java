@@ -20,6 +20,7 @@ public enum ArticlePapierESEnum {
     URL_COUVERTURE("urlcouverture", ElasticSearchConstants.KEYWORD),
     DATE_PARUTION("dateparution", ElasticSearchConstants.DATE),
     PRIXHT("prixht", ElasticSearchConstants.SCALED_FLOAT),
+    TYPE("type", ElasticSearchConstants.TEXT),
 
     // Others Entities ES
     TVA("tvas", ElasticSearchConstants.NESTED),

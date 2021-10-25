@@ -1,6 +1,6 @@
 package fr.openent.moisson.service.dto;
 
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  * A DTO for the {@link fr.openent.moisson.domain.Offre} entity.
  */
 public class OffreDTO implements Serializable {
-
+    
     private Long id;
 
     @Size(min = 13, max = 13)
@@ -28,11 +28,15 @@ public class OffreDTO implements Serializable {
 
     private String referenceEditeur;
 
+    private String type;
+
+    private Boolean is3ans;
+
 
     private Long articleNumeriqueId;
 
     private Long licenceId;
-
+    
     public Long getId() {
         return id;
     }
@@ -105,6 +109,22 @@ public class OffreDTO implements Serializable {
         this.referenceEditeur = referenceEditeur;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Boolean isIs3ans() {
+        return is3ans;
+    }
+
+    public void setIs3ans(Boolean is3ans) {
+        this.is3ans = is3ans;
+    }
+
     public Long getArticleNumeriqueId() {
         return articleNumeriqueId;
     }
@@ -151,6 +171,8 @@ public class OffreDTO implements Serializable {
             ", adoptant='" + isAdoptant() + "'" +
             ", duree='" + getDuree() + "'" +
             ", referenceEditeur='" + getReferenceEditeur() + "'" +
+            ", type='" + getType() + "'" +
+            ", is3ans='" + isIs3ans() + "'" +
             ", articleNumeriqueId=" + getArticleNumeriqueId() +
             ", licenceId=" + getLicenceId() +
             "}";

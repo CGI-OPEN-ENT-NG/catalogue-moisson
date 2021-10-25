@@ -80,6 +80,8 @@ class OffreGatlingTest extends Simulation {
                 , "adoptant":null
                 , "duree":"SAMPLE_TEXT"
                 , "referenceEditeur":"SAMPLE_TEXT"
+                , "type":"SAMPLE_TEXT"
+                , "is3ans":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_offre_url"))).exitHereIfFailed
