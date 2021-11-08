@@ -8,6 +8,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.Setting;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -23,6 +24,7 @@ import java.util.Set;
 @Table(name = "offre")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 // @org.springframework.data.elasticsearch.annotations.Document(indexName = "offre")
+@Setting(settingPath = "/settings/settings.json")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Offre implements Serializable {
 
@@ -72,7 +74,7 @@ public class Offre implements Serializable {
     private String referenceEditeur;
 
     @JsonProperty("TYPE")
-    @Field
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     @Column(name = "type")
     private String type;
 

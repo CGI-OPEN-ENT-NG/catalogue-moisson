@@ -111,7 +111,7 @@ public class ArticlePapier implements Serializable {
 
     @Column(name = "type")
     @JsonProperty("TYPE")
-    @Field
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String type;
 
     @OneToMany(mappedBy = "articlePapier", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)

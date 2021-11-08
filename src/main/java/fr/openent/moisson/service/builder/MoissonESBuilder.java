@@ -234,7 +234,7 @@ public class MoissonESBuilder {
         List<Object> classes = new ArrayList<>();
         for (Classe classe : articleNumerique.getClasses()) {
             Map<String, Object> innerClasse = new HashMap<>();
-            innerClasse.put(NiveauESEnum.LIBELLE.getFieldName(), classe.getLibelle());
+            innerClasse.put(ClasseESEnum.LIBELLE.getFieldName(), classe.getLibelle());
             classes.add(innerClasse);
         }
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.CLASSE.getFieldName(), classes.toArray());
