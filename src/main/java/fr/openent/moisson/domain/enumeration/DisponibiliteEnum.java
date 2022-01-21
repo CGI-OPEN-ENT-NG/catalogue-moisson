@@ -17,7 +17,8 @@ public enum DisponibiliteEnum {
     EPUISE("Epuisé"),
     A_PARAITRE("À paraître"),
     TRUE("true"),
-    FALSE("false");
+    FALSE("false"),
+    NONE("");
 
     @JsonValue
     private String value;
