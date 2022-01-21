@@ -109,7 +109,7 @@ public class ArticleNumerique implements Serializable {
     private String eanPapier;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "public_cible")
+    @Column(name = "public_cible", columnDefinition = "default 'Elève, Enseignant'")
     @JsonProperty("PUBLIC")
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private PublicCible publiccible;

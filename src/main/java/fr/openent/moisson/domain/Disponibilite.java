@@ -50,7 +50,7 @@ public class Disponibilite implements Serializable {
     private Boolean commandable;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "valeur")
+    @Column(name = "valeur", columnDefinition = "default 'false'")
     @JsonProperty("VALEUR")
     @Field
     private DisponibiliteEnum valeur;

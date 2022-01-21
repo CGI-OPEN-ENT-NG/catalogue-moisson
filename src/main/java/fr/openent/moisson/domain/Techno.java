@@ -32,7 +32,7 @@ public class Techno implements Serializable {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "technologie")
+    @Column(name = "technologie", columnDefinition = "default 'Windows'")
     @JsonProperty("Technologie")
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private Technologie technologie;
@@ -59,7 +59,7 @@ public class Techno implements Serializable {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "type_licence_gar", nullable = false)
+    @Column(name = "type_licence_gar", columnDefinition = "default 'non transferable'", nullable = false)
     @JsonProperty("TypeLicenceGAR")
     @Field
     private TypeLicenceGAR typeLicenceGAR;
