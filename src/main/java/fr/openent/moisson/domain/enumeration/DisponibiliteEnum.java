@@ -11,6 +11,7 @@ public enum DisponibiliteEnum {
     NON_Disponible("Non Disponible"),
     ARRET_DEFINITIF("Arrêt définitif"),
     PRODUIT_NON_CONCERNE_PAR_CE_MARCHE("Produit non concerné par ce marché"),
+    PRECOMMANDE("Précommande"),
     EN_COURS_D_IMPRESSION("En cours d'impression"),
     EN_COURS_DE_REIMPRESSION("En cours de réimpression"),
     NON_DISPONIBLE_PROVISOIREMENT("Non disponible provisoirement"),
