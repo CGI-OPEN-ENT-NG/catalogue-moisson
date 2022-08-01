@@ -21,6 +21,7 @@ public enum DisponibiliteEnum {
     EPUISE("Epuisé"),
     A_PARAITRE("À paraître"),
     A_REPARAITRE("À reparaître"),
+    ARRET_DE_COMMERCIALISATION("Arrêt de commercialisation"),
     TRUE("true"),
     FALSE("false"),
     NONE("");
