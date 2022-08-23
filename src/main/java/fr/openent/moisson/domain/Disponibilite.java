@@ -49,11 +49,11 @@ public class Disponibilite implements Serializable {
     @Field
     private Boolean commandable;
 
-    @Enumerated(EnumType.STRING)
+    // @Enumerated(EnumType.STRING)
     @Column(name = "valeur")
     @JsonProperty("VALEUR")
     @Field
-    private DisponibiliteEnum valeur;
+    private String valeur;
 
     @OneToOne(mappedBy = "disponibilite")
     @JsonIgnore
@@ -111,15 +111,15 @@ public class Disponibilite implements Serializable {
         this.commandable = commandable;
     }
 
-    public DisponibiliteEnum getValeur() {
+    public String getValeur() {
         return valeur;
     }
 
-    public void setValeur(DisponibiliteEnum valeur) {
+    public void setValeur(String valeur) {
         this.valeur = valeur;
     }
 
-    public Disponibilite valeur(DisponibiliteEnum valeur) {
+    public Disponibilite valeur(String valeur) {
         this.valeur = valeur;
         return this;
     }

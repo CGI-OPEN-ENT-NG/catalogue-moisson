@@ -31,11 +31,11 @@ public class Techno implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
+    // @Enumerated(EnumType.STRING)
     @Column(name = "technologie")
     @JsonProperty("Technologie")
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
-    private Technologie technologie;
+    private String technologie;
 
     @Column(name = "version_reader")
     @JsonProperty("VersionReader")
@@ -297,15 +297,15 @@ public class Techno implements Serializable {
         this.id = id;
     }
 
-    public Technologie getTechnologie() {
+    public String getTechnologie() {
         return technologie;
     }
 
-    public void setTechnologie(Technologie technologie) {
+    public void setTechnologie(String technologie) {
         this.technologie = technologie;
     }
 
-    public Techno technologie(Technologie technologie) {
+    public Techno technologie(String technologie) {
         this.technologie = technologie;
         return this;
     }

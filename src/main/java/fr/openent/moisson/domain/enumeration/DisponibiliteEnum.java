@@ -16,6 +16,7 @@ public enum DisponibiliteEnum {
     NON_DISPONIBLE_A_LONG_TERME("Non disponible à long terme"),
     EPUISE("Epuisé"),
     A_PARAITRE("À paraître"),
+    PRECOMMANDE("Précommande"),
     TRUE("true"),
     FALSE("false");
 

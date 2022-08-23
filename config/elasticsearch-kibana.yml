@@ -1,0 +1,29 @@
+version: '3.3'
+services:
+  moissoncatalogue-elasticsearch:
+    container_name: moissoncatalogue-elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    volumes:
+      - ~/volumes/moissoncatalogue/elasticsearch/:/usr/share/elasticsearch/data/
+    ports:
+      # Pour accéder de l’extérieur sur un navigateur http://localhost:9201/
+      - 9201:9200
+      - 9301:9300
+    environment:
+      - ES_JAVA_OPTS=-Xms1024m -Xmx1024m
+      - discovery.type=single-node
+  moissoncatalogue-kibana:
+    container_name: moissoncatalogue-kibana
+    image: docker.elastic.co/kibana/kibana:7.10.1
+    volumes:
+      - ~/volumes/moissoncatalogue/kibana/:/usr/share/kibana/data/
+    ports:
+      # Pour accéder de l’extérieur sur un navigateur localhost:5602/app/dev_tools#/console
+      - 5602:5601
+    environment:
+      # http://moissoncatalogue-elasticsearch:9200 pour accéder de l'intérier
+      # Connection au service moissoncatalogue-elasticsearch
+      # sur le port interne 9200
+      - ELASTICSEARCH_HOSTS=http://moissoncatalogue-elasticsearch:9200
+    depends_on:
+      - moissoncatalogue-elasticsearch

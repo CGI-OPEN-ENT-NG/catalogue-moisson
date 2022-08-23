@@ -66,16 +66,20 @@ Le répertoire de base est le répertoire de lacement du fichier ".jar".
 
 Si les fichiers sont créés dans les deux répertoires, le répertoire config/ (1) à la précédence sur le répertoire de base (2), ce sont donc les paramètres du fichier du répertoire config/ qui seront pris en compte
 
-Si répertoire config:
+Si répertoire config :
 
 ----
-répertoire de base:
+Répertoire de base:
     /chemin/de/repertoire/de/base/
-répertoire de config:
+Répertoire de config:
     /chemin/de/repertoire/de/base/config
+
+Exemple :
+    Chemin de base : /home/jean-marc/projets/catalogue-idf/moissoncatalogue-backend-jwt/moissoncatalogue/
+    Répertoire de config : /home/jean-marc/projets/catalogue-idf/moissoncatalogue-backend-jwt/moissoncatalogue/config
 ----
 
-Remarque : si aucun des deux répertoires n’est créé, l’application est lancée en "localhost" sur le port "808"
+Remarque : si aucun des deux répertoires n’est créé, l’application est lancée en "localhost" sur le port "8080"
 
 === Modification du comportement par défaut
 
@@ -99,7 +103,7 @@ Ou relative par exemple
 
 === Base de données
 
-Dans le cas d’utilisation avec une instance postgres Il faut modifier le nom d’hôte at éventuellement le port :
+Dans le cas d’utilisation avec une instance postgres. Il faut modifier le nom d’hôte at éventuellement le port :
 
 ----
 datasource:
@@ -114,13 +118,13 @@ datasource:
 
 Il est possible de changer le mot de passe au sein du fichier.
 
-Si le mot de passe est changé, Il faut, le changer également dans le script d’initialisation de la base avant de le jour (voir explication dans création de la base de données ci-après) :
+Si le mot de passe est changé. Il faut, le changer également dans le script d’initialisation de la base avant de démarrer (voir explication dans création de la base de données ci-après) :
 
 ----
 V0__init_user_role_database.sql
 ----
 
-remplacer le mot de passe "catalogue" :
+Remplacer le mot de passe "catalogue" :
 
 ----
 CREATE ROLE usercatalogue LOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION PASSWORD 'catalogue';
@@ -132,7 +136,7 @@ par le NOUVEAU_MOT_DE_PASSE :
 CREATE ROLE usercatalogue LOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION PASSWORD 'NOUVEAU_MOT_DE_PASSE';
 ----
 
-Remarque : Dans le cas d’utilisation avec postgres sous la forme de conteneur docker Il ne faut pas modifier le nom d’hôte, mais éventuellement le port pour le mettre en correspondance avec le fichier postgres.yaml :
+Remarque : Dans le cas d’utilisation avec postgres sous la forme de conteneur docker. Il ne faut pas modifier le nom d’hôte, mais éventuellement le port pour le mettre en correspondance avec le fichier postgres.yaml :
 
 ----
 Si dans le fichier postgresql.yml
@@ -154,10 +158,10 @@ uris: localhost:9200
 # password: admin
 ----
 
-Remarque : Dans le cas d’utilisation avec postgres sous la forme de conteneur docker Il ne faut pas modifier le nom d’hôte, mais éventuellement le port pour le mettre en correspondance avec le fichier elasticsearch.yml :
+Remarque : Dans le cas d’utilisation avec postgres sous la forme de conteneur docker. Il ne faut pas modifier le nom d’hôte, mais éventuellement le port pour le mettre en correspondance avec le fichier elasticsearch.yml :
 
 ----
-Si dans le fichier pelasticsearch.yml
+Si dans le fichier elasticsearch.yml
     ports:
       - 9201:9200
 Dans le fichier application-prod.yml
@@ -176,7 +180,7 @@ liquibase:
   url: jdbc:postgresql://localhost:5432/moissoncatalogue
 ----
 
-Remarque : Dans le cas d’utilisation avec postgres sous la forme de conteneur docker Il ne faut pas modifier le nom d’hôte, mais éventuellement le port pour le mettre en correspondance avec le fichier postgresql.yaml :
+Remarque : Dans le cas d’utilisation avec postgres sous la forme de conteneur docker. Il ne faut pas modifier le nom d’hôte, mais éventuellement le port pour le mettre en correspondance avec le fichier postgresql.yaml :
 
 ----
 Si dans le fichier postgresql.yml
@@ -246,7 +250,7 @@ https://docs.docker.com/compose/install/
 
 ==== Création du conteneur
 
-Au préalable, il est préférable de créer un volume afin de conserver les données lors de l’arrêt du conteneur
+Au préalable, il est préférable de créer un volume afin de conserver les données lors de l’arrêt du conteneur.
 Il faut, dans ce cas, dé-commenter les lignes du fichier docker-compose postgresql.yml fourni et remplacer :
 
 ----
@@ -277,7 +281,7 @@ Après avoir remplacé les bons paramètres, il faut lancer la commande suivante
 docker-compose -f postgresql.yml up -d
 ----
 
-le paramètre -d permet de lancer l'instance de docker en background
+Le paramètre -d permet de lancer l’instance de docker en background
 
 ===== Connexion au conteneur
 
@@ -315,7 +319,7 @@ docker-compose -f postgresql.yml down
 
 Comme pour la base il est possible de créer un docker :
 
-Il est préférable de créer un volume afin de conserver les données lors de l’arrêt du conteneur
+Il est préférable de créer un volume afin de conserver les données lors de l’arrêt du conteneur.
 Il faut, dans ce cas, dé-commenter les lignes du fichier docker-compose elasticsearch.yml fourni et remplacer :
 
 ----
@@ -339,7 +343,7 @@ Un fichier docker-compose est fourni et après avoir remplacé les bons paramèt
 docker-compose -f elasticsearch.yml up -d
 ----
 
-Le paramètre -d permet de lancer l'instance de docker en background
+Le paramètre -d permet de lancer l’instance de docker en background
 
 === Arrêt au conteneur
 
@@ -383,9 +387,9 @@ Les Apis étant sécurisées il faut s’authentifier pour y accéder.
 
 Il existe deux utilisateurs qui permettent de s’identifier :
 
-. l’utilisateur "admin" avec le password "admin" par défaut qui possède les roles ROLE_USER et ROLE_ADMIN
+. L’utilisateur "admin" avec le password "admin" par défaut qui possède les roles ROLE_USER et ROLE_ADMIN
 
-. l’utilisateur "user" avec le password "user" par défaut qui possède le role ROLE_USER
+. L’utilisateur "user" avec le password "user" par défaut qui possède le role ROLE_USER
 
 L’administrateur "admin" peut accéder aux apis en lecture écriture et suppression.
 
@@ -502,7 +506,7 @@ Remplacer _localhost:8080_ par le bon _host_ et le bon _port_.
 
 === Lancer la sauvegarde des json en base de donnée.
 
-Les paramètres de sauvegarde sont num, pap ou all, ils doivent être ajoutés à la find du endpoint :
+Les paramètres de sauvegarde sont num, pap ou all, ils doivent être ajoutés à la fin de l’endpoint :
 
 ----
 TOKEN=$(curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/authenticate | jq -r '.id_token')
@@ -796,3 +800,47 @@ Validate : valide le schéma de base de données actuel par rapport aux migratio
 Repair : réparations de la table de métadonnées.
 Clean : supprime tous les objets dans un schéma configuré. Tous les objets de base de données sont supprimés. Bien sûr, vous ne devez jamais utiliser clean sur une base de données de production.
 ----
+
+
+
+== Kibana
+En développement
+
+=== Création du conteneur
+
+Il est préférable de créer un volume afin de conserver les données lors de l’arrêt du conteneur.
+Il faut, dans ce cas, dé-commenter les lignes du fichier docker-compose kibana.yml fourni et remplacer :
+
+----
+~/volumes/moissoncatalogue/kibana/
+----
+
+par le chemin du volume
+
+Après avoir créé le répertoire et modifier le propriétaire
+
+----
+sudo mkdir -p ~/volumes/moissoncatalogue/kibana/
+sudo chown -R 1000:1000 ~/volumes/moissoncatalogue/kibana/
+----
+
+=== Connexion au conteneur
+
+Un fichier docker-compose est fourni et après avoir remplacé les bons paramètres, il faut lancer la commande suivante dans le meme répertoire que ce fichier :
+
+----
+docker-compose -f elasticsearch-kibana.yml up -d
+----
+
+Le paramètre -d permet de lancer l’instance de docker en background
+
+=== Arrêt au conteneur
+
+Pour arrêter le conteneur :
+
+----
+docker-compose -f kibana.yml down
+----
+
+TOKEN=$(curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8085/api/authenticate | jq -r '.id_token')
+curl -X POST -H 'Accept: application/json' -H "Authorization: Bearer $TOKEN" http://localhost:8085/api/json/pap

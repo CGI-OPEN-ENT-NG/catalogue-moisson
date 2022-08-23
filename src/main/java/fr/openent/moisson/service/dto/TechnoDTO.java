@@ -9,10 +9,10 @@ import fr.openent.moisson.domain.enumeration.TypeLicenceGAR;
  * A DTO for the {@link fr.openent.moisson.domain.Techno} entity.
  */
 public class TechnoDTO implements Serializable {
-    
+
     private Long id;
 
-    private Technologie technologie;
+    private String technologie;
 
     private String versionReader;
 
@@ -83,7 +83,7 @@ public class TechnoDTO implements Serializable {
 
 
     private Long articleNumeriqueId;
-    
+
     public Long getId() {
         return id;
     }
@@ -92,11 +92,11 @@ public class TechnoDTO implements Serializable {
         this.id = id;
     }
 
-    public Technologie getTechnologie() {
+    public String getTechnologie() {
         return technologie;
     }
 
-    public void setTechnologie(Technologie technologie) {
+    public void setTechnologie(String technologie) {
         this.technologie = technologie;
     }
 
