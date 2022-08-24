@@ -22,8 +22,7 @@ public class TechnoDTO implements Serializable {
 
     private Boolean availableViaGAR;
 
-    @NotNull
-    private TypeLicenceGAR typeLicenceGAR;
+    private String typeLicenceGAR;
 
     private Boolean canUseOffline;
 
@@ -132,11 +131,11 @@ public class TechnoDTO implements Serializable {
         this.availableViaGAR = availableViaGAR;
     }
 
-    public TypeLicenceGAR getTypeLicenceGAR() {
+    public String getTypeLicenceGAR() {
         return typeLicenceGAR;
     }
 
-    public void setTypeLicenceGAR(TypeLicenceGAR typeLicenceGAR) {
+    public void setTypeLicenceGAR(String typeLicenceGAR) {
         this.typeLicenceGAR = typeLicenceGAR;
     }
 
