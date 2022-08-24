@@ -268,7 +268,7 @@ public class JsonEntityServiceImpl implements JsonEntityService {
         String stringDuration = String.format("%d minutes et %02d secondes %n", duration.toMinutes(), duration.minusMinutes(duration.toMinutes()).getSeconds());
         String message = resultPap != 0 ? resultPap + " articles papiers créés " : "";
         message += resultNum != 0 ? resultNum + " articles numériques créés "  : "";
-        message += " en " + stringDuration;
+        message += "en " + stringDuration;
         log.debug(message);
     }
 }
