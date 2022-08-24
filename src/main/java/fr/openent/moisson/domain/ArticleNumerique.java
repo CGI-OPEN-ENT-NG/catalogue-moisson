@@ -36,7 +36,7 @@ public class ArticleNumerique implements Serializable {
     private Long id;
 
     @NaturalId
-    @Size(min = 13, max = 13)
+    //@Size(min = 13, max = 13)
     @Column(name = "ean", length = 13)
     @JsonProperty("EAN")
     @Field
@@ -108,7 +108,7 @@ public class ArticleNumerique implements Serializable {
     @Field
     private String eanPapier;
 
-    @Enumerated(EnumType.STRING)
+   // @Enumerated(EnumType.STRING)
     @Column(name = "public_cible", columnDefinition = "default 'Elève, Enseignant'")
     @JsonProperty("PUBLIC")
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")

@@ -31,7 +31,7 @@ public class Techno implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
+    // @Enumerated(EnumType.STRING)
     @Column(name = "technologie", columnDefinition = "default 'Windows'")
     @JsonProperty("Technologie")
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")

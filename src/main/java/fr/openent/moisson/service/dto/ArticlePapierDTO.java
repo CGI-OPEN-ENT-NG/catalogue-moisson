@@ -13,7 +13,7 @@ public class ArticlePapierDTO implements Serializable {
 
     private Long id;
 
-    @Size(min = 13, max = 13)
+    //@Size(min = 13, max = 13)
     private String ean;
 
     private String ark;

@@ -64,7 +64,7 @@ public class TechnoCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private TechnologieFilter technologie;
+    private StringFilter technologie;
 
     private StringFilter versionReader;
 
@@ -74,7 +74,7 @@ public class TechnoCriteria implements Serializable, Criteria {
 
     private BooleanFilter availableViaGAR;
 
-    private TypeLicenceGARFilter typeLicenceGAR;
+    private StringFilter typeLicenceGAR;
 
     private BooleanFilter canUseOffline;
 
@@ -189,11 +189,11 @@ public class TechnoCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public TechnologieFilter getTechnologie() {
+    public StringFilter getTechnologie() {
         return technologie;
     }
 
-    public void setTechnologie(TechnologieFilter technologie) {
+    public void setTechnologie(StringFilter technologie) {
         this.technologie = technologie;
     }
 
@@ -229,11 +229,11 @@ public class TechnoCriteria implements Serializable, Criteria {
         this.availableViaGAR = availableViaGAR;
     }
 
-    public TypeLicenceGARFilter getTypeLicenceGAR() {
+    public StringFilter getTypeLicenceGAR() {
         return typeLicenceGAR;
     }
 
-    public void setTypeLicenceGAR(TypeLicenceGARFilter typeLicenceGAR) {
+    public void setTypeLicenceGAR(StringFilter typeLicenceGAR) {
         this.typeLicenceGAR = typeLicenceGAR;
     }
 

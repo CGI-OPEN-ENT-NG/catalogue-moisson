@@ -1,6 +1,7 @@
 package fr.openent.moisson.service.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.openent.moisson.config.ApplicationProperties;
 import fr.openent.moisson.domain.ArticleNumerique;
@@ -9,6 +10,8 @@ import fr.openent.moisson.domain.Lep;
 import fr.openent.moisson.domain.Offre;
 import fr.openent.moisson.repository.ArticleNumeriqueRepository;
 import fr.openent.moisson.repository.ArticlePapierRepository;
+import fr.openent.moisson.repository.search.ArticleNumeriqueSearchRepository;
+import fr.openent.moisson.repository.search.ArticlePapierSearchRepository;
 import fr.openent.moisson.service.JsonEntityService;
 import fr.openent.moisson.service.builder.MoissonESBuilder;
 import org.elasticsearch.ElasticsearchException;
@@ -23,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -43,15 +47,24 @@ public class JsonEntityServiceImpl implements JsonEntityService {
 
     private final ArticlePapierRepository articlePapierRepository;
     private final ArticleNumeriqueRepository articleNumeriqueRepository;
+
+    private final ArticlePapierSearchRepository articlePapierSearchRepository;
+
+    private final ArticleNumeriqueSearchRepository articleNumeriqueSearchRepository;
+
     private final ApplicationProperties applicationProperties;
     private final RestHighLevelClient elasticsearchClient;
 
     public JsonEntityServiceImpl(ArticlePapierRepository articlePapierRepository,
                                  ArticleNumeriqueRepository articleNumeriqueRepository,
+                                 ArticlePapierSearchRepository articlePapierSearchRepository,
+                                 ArticleNumeriqueSearchRepository articleNumeriqueSearchRepository,
                                  ApplicationProperties applicationProperties,
                                  RestHighLevelClient elasticsearchClient) {
         this.articlePapierRepository = articlePapierRepository;
         this.articleNumeriqueRepository = articleNumeriqueRepository;
+        this.articlePapierSearchRepository = articlePapierSearchRepository;
+        this.articleNumeriqueSearchRepository = articleNumeriqueSearchRepository;
         this.applicationProperties = applicationProperties;
         this.elasticsearchClient = elasticsearchClient;
     }
@@ -73,6 +86,8 @@ public class JsonEntityServiceImpl implements JsonEntityService {
     public Integer jacksonToArticlePapier() throws IOException {
         AtomicInteger counter = new AtomicInteger(0);
         ObjectMapper objectMapper = new ObjectMapper();
+        // Si propriétés inconnues continue
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         List<ArticlePapier> articlePapiers;
         if(urlArticlePapier.startsWith("http://") || urlArticlePapier.startsWith("https://")){
             InputStream inputStream = getJsonFromUrl(urlArticlePapier);
@@ -82,10 +97,13 @@ public class JsonEntityServiceImpl implements JsonEntityService {
                 new TypeReference<>() {});
         }
 
+        articlePapierRepository.deleteAll();
+        articlePapierSearchRepository.deleteAll();
         // La relation est bidirectionnelle, il est logique que chaque côté de la relation soit mappé à l’autre,
         // il faut avoir une référence de chaque côté de l'autre côté
         articlePapiers.forEach(articlePapier ->
             {
+                if (!StringUtils.hasLength( articlePapier.getEan())) return;
                 Optional<ArticlePapier> existArticlePapier = articlePapierRepository.findByEan(articlePapier.getEan());
                 existArticlePapier.ifPresent(presentPapier -> {
                     articlePapierRepository.deleteById(presentPapier.getId());
@@ -114,6 +132,8 @@ public class JsonEntityServiceImpl implements JsonEntityService {
     public Integer jacksonToArticleNumerique() throws IOException {
         AtomicInteger counter = new AtomicInteger(0);
         ObjectMapper objectMapper = new ObjectMapper();
+        // Si propriétés inconnues continue
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         List<ArticleNumerique> articleNumeriques;
         if(urlArticleNumerique.startsWith("http://") || urlArticleNumerique.startsWith("https://")){
             InputStream inputStream = getJsonFromUrl(urlArticleNumerique);
@@ -122,9 +142,11 @@ public class JsonEntityServiceImpl implements JsonEntityService {
             articleNumeriques = objectMapper.readValue(new File("src/test/resources/json/articles_numeriques.json"),
                 new TypeReference<>() {});
         }
-
+        articleNumeriqueRepository.deleteAll();
+        articleNumeriqueSearchRepository.deleteAll();
         articleNumeriques.forEach(articleNumerique ->
             {
+                if (!StringUtils.hasLength( articleNumerique.getEan())) return;
                 Optional<ArticleNumerique> existArticleNumerique = articleNumeriqueRepository.findByEan(articleNumerique.getEan());
                 existArticleNumerique.ifPresent(presentNumerique -> {
                     articleNumeriqueRepository.deleteById(presentNumerique.getId());
@@ -165,7 +187,7 @@ public class JsonEntityServiceImpl implements JsonEntityService {
 
             int status = httpURLConnection.getResponseCode();
             log.debug("url : " + url + " et status : " + status);
-            log.debug("location : " + httpURLConnection.getHeaderField("location"));
+            // log.debug("location : " + httpURLConnection.getHeaderField("location"));
             boolean redirect = false;
             if (status != HttpURLConnection.HTTP_OK) {
                 if (status == HttpURLConnection.HTTP_MOVED_TEMP || status == HttpURLConnection.HTTP_MOVED_PERM
@@ -235,14 +257,18 @@ public class JsonEntityServiceImpl implements JsonEntityService {
      */
     @Scheduled(cron = "0 0 6 ? * *")
     void moissonJson() throws IOException {
+        log.debug("Request to save Json File for type : all");
         LocalTime startTime = LocalTime.now();
-        Integer result;
-        result = jacksonToArticlePapier();
-        result += jacksonToArticleNumerique();
+        Integer resultPap = 0;
+        Integer resultNum = 0;
+        resultPap = jacksonToArticlePapier();
+        resultNum = jacksonToArticleNumerique();
         LocalTime endTime = LocalTime.now();
         Duration duration = Duration.between(startTime, endTime);
         String stringDuration = String.format("%d minutes et %02d secondes %n", duration.toMinutes(), duration.minusMinutes(duration.toMinutes()).getSeconds());
-        String message =  result + " articles créés en " + stringDuration;
+        String message = resultPap != 0 ? resultPap + " articles papiers créés " : "";
+        message += resultNum != 0 ? resultNum + " articles numériques créés "  : "";
+        message += "en " + stringDuration;
         log.debug(message);
     }
 }

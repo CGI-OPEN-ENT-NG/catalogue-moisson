@@ -46,7 +46,7 @@ public class DisponibiliteCriteria implements Serializable, Criteria {
 
     private BooleanFilter commandable;
 
-    private DisponibiliteEnumFilter valeur;
+    private StringFilter valeur;
 
     private LongFilter articlePapierId;
 
@@ -102,11 +102,11 @@ public class DisponibiliteCriteria implements Serializable, Criteria {
         this.commandable = commandable;
     }
 
-    public DisponibiliteEnumFilter getValeur() {
+    public StringFilter getValeur() {
         return valeur;
     }
 
-    public void setValeur(DisponibiliteEnumFilter valeur) {
+    public void setValeur(StringFilter valeur) {
         this.valeur = valeur;
     }
 
