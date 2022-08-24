@@ -18,7 +18,7 @@ public class DisponibiliteDTO implements Serializable {
 
     private Boolean commandable;
 
-    private DisponibiliteEnum valeur;
+    private String valeur;
 
 
     public Long getId() {
@@ -53,11 +53,11 @@ public class DisponibiliteDTO implements Serializable {
         this.commandable = commandable;
     }
 
-    public DisponibiliteEnum getValeur() {
+    public String getValeur() {
         return valeur;
     }
 
-    public void setValeur(DisponibiliteEnum valeur) {
+    public void setValeur(String valeur) {
         this.valeur = valeur;
     }
 

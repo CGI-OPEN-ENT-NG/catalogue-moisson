@@ -108,11 +108,11 @@ public class ArticleNumerique implements Serializable {
     @Field
     private String eanPapier;
 
-    @Enumerated(EnumType.STRING)
+    // @Enumerated(EnumType.STRING)
     @Column(name = "public_cible")
     @JsonProperty("PUBLIC")
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
-    private PublicCible publiccible;
+    private String publiccible;
 
     @OneToMany(mappedBy = "articleNumerique", cascade = CascadeType.ALL, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
@@ -356,16 +356,16 @@ public class ArticleNumerique implements Serializable {
         this.description = description;
     }
 
-    public PublicCible getPubliccible() {
+    public String getPubliccible() {
         return publiccible;
     }
 
-    public ArticleNumerique publiccible(PublicCible publiccible) {
+    public ArticleNumerique publiccible(String publiccible) {
         this.publiccible = publiccible;
         return this;
     }
 
-    public void setPubliccible(PublicCible publiccible) {
+    public void setPubliccible(String publiccible) {
         this.publiccible = publiccible;
     }
 

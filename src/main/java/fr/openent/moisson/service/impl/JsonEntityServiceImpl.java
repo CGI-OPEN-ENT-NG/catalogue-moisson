@@ -76,15 +76,13 @@ public class JsonEntityServiceImpl implements JsonEntityService {
         List<ArticlePapier> articlePapiers;
         if(urlArticlePapier.startsWith("http://") || urlArticlePapier.startsWith("https://")){
             InputStream inputStream = getJsonFromUrl(urlArticlePapier);
-            articlePapiers = objectMapper.readValue(inputStream, new TypeReference<>() {
-            });
+            articlePapiers = objectMapper.readValue(inputStream, new TypeReference<>() {});
         } else {
             articlePapiers = objectMapper.readValue(new File("src/test/resources/json/articles_papiers.json"),
-                new TypeReference<>() {
-                });
+                new TypeReference<>() {});
         }
 
-        // La relation est bidirectionnelle, il est logique que chaque côté de la relation soit mappé à l'autre,
+        // La relation est bidirectionnelle, il est logique que chaque côté de la relation soit mappé à l’autre,
         // il faut avoir une référence de chaque côté de l'autre côté
         articlePapiers.forEach(articlePapier ->
             {
@@ -119,12 +117,10 @@ public class JsonEntityServiceImpl implements JsonEntityService {
         List<ArticleNumerique> articleNumeriques;
         if(urlArticleNumerique.startsWith("http://") || urlArticleNumerique.startsWith("https://")){
             InputStream inputStream = getJsonFromUrl(urlArticleNumerique);
-            articleNumeriques = objectMapper.readValue(inputStream, new TypeReference<>() {
-            });
+            articleNumeriques = objectMapper.readValue(inputStream, new TypeReference<>() {});
         } else {
             articleNumeriques = objectMapper.readValue(new File("src/test/resources/json/articles_numeriques.json"),
-                new TypeReference<>() {
-                });
+                new TypeReference<>() {});
         }
 
         articleNumeriques.forEach(articleNumerique ->

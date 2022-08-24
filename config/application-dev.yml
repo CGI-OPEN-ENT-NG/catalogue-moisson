@@ -82,9 +82,9 @@ spring:
     rest:
       # A modifier si autre
       uris: localhost:9200
-      # A modifier si il y a une authentification ne pas décommenter sinon car l'appliaction ne démarre pas
-      # username: admin
-      # password: admin
+      # A modifier si il y a une authentification ne pas décommenter sinon car l'application ne démarre pas
+      username: elastic
+      password: changeme
 server:
   port: 8089
 

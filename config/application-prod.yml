@@ -49,20 +49,20 @@ spring:
     show-sql: false
   data:
     jest:
-      uri: http://localhost:9200
+      uri: http://localhost:9201
   # see https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-nosql.html#boot-features-connecting-to-elasticsearch-jest
   elasticsearch:
     rest:
       # A modifier
-      uris: localhost:9200
-      # A modifier si il y a une authentification ne pas décommenter sinon car l'appliaction ne démarre pas
-      # username: admin
-      # password: admin
+      uris: localhost:9201
+      # A modifier si il y a une authentification ne pas décommenter sinon car application ne démarre pas
+      # username: elastic
+      # password: changeme
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
     contexts: prod
-    # Domaine (nom d'hôte à modifier, par défaut : localhost) et port éventuellement mais généralement c'est le port par défaut.
-    # Ne pas modifier le nom de la base  : moissoncatalogue
+    # Domaine (nom d’hôte à modifier, par défaut : localhost) et port éventuellement, mais généralement, c’est le port par défaut.
+    # Ne pas modifier le nom de la base : moissoncatalogue
     url: jdbc:postgresql://localhost:5432/moissoncatalogue
   mail:
     host: localhost

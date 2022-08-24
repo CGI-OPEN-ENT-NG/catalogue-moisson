@@ -9,7 +9,7 @@ import fr.openent.moisson.domain.enumeration.PublicCible;
  * A DTO for the {@link fr.openent.moisson.domain.ArticleNumerique} entity.
  */
 public class ArticleNumeriqueDTO implements Serializable {
-    
+
     private Long id;
 
     @Size(min = 13, max = 13)
@@ -39,13 +39,13 @@ public class ArticleNumeriqueDTO implements Serializable {
 
     private String description;
 
-    private PublicCible publiccible;
+    private String publiccible;
 
     private String eanPapier;
 
 
     private Long disponibiliteId;
-    
+
     public Long getId() {
         return id;
     }
@@ -158,11 +158,11 @@ public class ArticleNumeriqueDTO implements Serializable {
         this.description = description;
     }
 
-    public PublicCible getPubliccible() {
+    public String getPubliccible() {
         return publiccible;
     }
 
-    public void setPubliccible(PublicCible publiccible) {
+    public void setPubliccible(String publiccible) {
         this.publiccible = publiccible;
     }
 

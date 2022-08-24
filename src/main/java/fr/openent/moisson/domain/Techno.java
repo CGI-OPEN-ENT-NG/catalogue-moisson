@@ -31,11 +31,11 @@ public class Techno implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
+    // @Enumerated(EnumType.STRING)
     @Column(name = "technologie")
     @JsonProperty("Technologie")
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
-    private Technologie technologie;
+    private String technologie;
 
     @Column(name = "version_reader")
     @JsonProperty("VersionReader")
@@ -57,12 +57,11 @@ public class Techno implements Serializable {
     @Field
     private Boolean availableViaGAR;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
+    // @Enumerated(EnumType.STRING)
     @Column(name = "type_licence_gar", nullable = false)
     @JsonProperty("TypeLicenceGAR")
     @Field
-    private TypeLicenceGAR typeLicenceGAR;
+    private String typeLicenceGAR;
 
     @Column(name = "can_use_offline")
     @JsonProperty("CanUseOffline")
@@ -297,15 +296,15 @@ public class Techno implements Serializable {
         this.id = id;
     }
 
-    public Technologie getTechnologie() {
+    public String getTechnologie() {
         return technologie;
     }
 
-    public void setTechnologie(Technologie technologie) {
+    public void setTechnologie(String technologie) {
         this.technologie = technologie;
     }
 
-    public Techno technologie(Technologie technologie) {
+    public Techno technologie(String technologie) {
         this.technologie = technologie;
         return this;
     }
@@ -362,15 +361,15 @@ public class Techno implements Serializable {
         this.availableViaGAR = availableViaGAR;
     }
 
-    public TypeLicenceGAR getTypeLicenceGAR() {
+    public String getTypeLicenceGAR() {
         return typeLicenceGAR;
     }
 
-    public void setTypeLicenceGAR(TypeLicenceGAR typeLicenceGAR) {
+    public void setTypeLicenceGAR(String typeLicenceGAR) {
         this.typeLicenceGAR = typeLicenceGAR;
     }
 
-    public Techno typeLicenceGAR(TypeLicenceGAR typeLicenceGAR) {
+    public Techno typeLicenceGAR(String typeLicenceGAR) {
         this.typeLicenceGAR = typeLicenceGAR;
         return this;
     }

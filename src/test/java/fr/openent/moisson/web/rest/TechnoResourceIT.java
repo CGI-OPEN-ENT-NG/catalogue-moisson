@@ -47,8 +47,8 @@ import fr.openent.moisson.domain.enumeration.TypeLicenceGAR;
 @WithMockUser
 public class TechnoResourceIT {
 
-    private static final Technologie DEFAULT_TECHNOLOGIE = Technologie.WINDOWS;
-    private static final Technologie UPDATED_TECHNOLOGIE = Technologie.MAC_OS;
+    private static final String DEFAULT_TECHNOLOGIE = Technologie.WINDOWS.getValue();
+    private static final String UPDATED_TECHNOLOGIE = Technologie.MAC_OS.getValue();
 
     private static final String DEFAULT_VERSION_READER = "AAAAAAAAAA";
     private static final String UPDATED_VERSION_READER = "BBBBBBBBBB";
@@ -62,8 +62,8 @@ public class TechnoResourceIT {
     private static final Boolean DEFAULT_AVAILABLE_VIA_GAR = false;
     private static final Boolean UPDATED_AVAILABLE_VIA_GAR = true;
 
-    private static final TypeLicenceGAR DEFAULT_TYPE_LICENCE_GAR = TypeLicenceGAR.TRANSFERABLE;
-    private static final TypeLicenceGAR UPDATED_TYPE_LICENCE_GAR = TypeLicenceGAR.NON_TRANFERABLE;
+    private static final String DEFAULT_TYPE_LICENCE_GAR = TypeLicenceGAR.TRANSFERABLE.getValue();
+    private static final String UPDATED_TYPE_LICENCE_GAR = TypeLicenceGAR.NON_TRANFERABLE.getValue();
 
     private static final Boolean DEFAULT_CAN_USE_OFFLINE = false;
     private static final Boolean UPDATED_CAN_USE_OFFLINE = true;
@@ -415,7 +415,7 @@ public class TechnoResourceIT {
             .andExpect(jsonPath("$.[*].nbMaxSimultConnexions").value(hasItem(DEFAULT_NB_MAX_SIMULT_CONNEXIONS)))
             .andExpect(jsonPath("$.[*].messagerie").value(hasItem(DEFAULT_MESSAGERIE.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getTechno() throws Exception {
