@@ -49,8 +49,8 @@ public class Disponibilite implements Serializable {
     @Field
     private Boolean commandable;
 
-    // @Enumerated(EnumType.STRING)
-    @Column(name = "valeur")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "valeur", columnDefinition = "default 'false'")
     @JsonProperty("VALEUR")
     @Field
     private String valeur;

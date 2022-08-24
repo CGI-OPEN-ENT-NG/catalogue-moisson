@@ -31,8 +31,8 @@ public class Techno implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    // @Enumerated(EnumType.STRING)
-    @Column(name = "technologie")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "technologie", columnDefinition = "default 'Windows'")
     @JsonProperty("Technologie")
     @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
     private String technologie;
@@ -58,8 +58,7 @@ public class Techno implements Serializable {
     private Boolean availableViaGAR;
 
     // @Enumerated(EnumType.STRING)
-    @Column(name = "type_licence_gar", nullable = false)
-    @JsonProperty("TypeLicenceGAR")
+    @Column(name = "type_licence_gar", columnDefinition = "default 'non transferable'", nullable = false)    @JsonProperty("TypeLicenceGAR")
     @Field
     private String typeLicenceGAR;
 
