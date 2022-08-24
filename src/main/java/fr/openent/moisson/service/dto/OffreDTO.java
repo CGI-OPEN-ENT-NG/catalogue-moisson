@@ -8,10 +8,10 @@ import java.math.BigDecimal;
  * A DTO for the {@link fr.openent.moisson.domain.Offre} entity.
  */
 public class OffreDTO implements Serializable {
-    
+
     private Long id;
 
-    @Size(min = 13, max = 13)
+   // @Size(min = 13, max = 13)
     private String eanLibraire;
 
     private Integer quantiteMinimaleAchat;
@@ -36,7 +36,7 @@ public class OffreDTO implements Serializable {
     private Long articleNumeriqueId;
 
     private Long licenceId;
-    
+
     public Long getId() {
         return id;
     }

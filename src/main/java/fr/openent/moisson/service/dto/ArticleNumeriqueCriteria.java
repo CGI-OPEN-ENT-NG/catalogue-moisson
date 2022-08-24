@@ -72,7 +72,7 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
 
     private StringFilter description;
 
-    private PublicCibleFilter publiccible;
+    private StringFilter publiccible;
 
     private StringFilter eanPapier;
 
@@ -233,11 +233,11 @@ public class ArticleNumeriqueCriteria implements Serializable, Criteria {
         this.description = description;
     }
 
-    public PublicCibleFilter getPubliccible() {
+    public StringFilter getPubliccible() {
         return publiccible;
     }
 
-    public void setPubliccible(PublicCibleFilter publiccible) {
+    public void setPubliccible(StringFilter publiccible) {
         this.publiccible = publiccible;
     }
 

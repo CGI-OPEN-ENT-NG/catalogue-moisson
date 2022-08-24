@@ -48,21 +48,22 @@ public class JsonEntityResource {
     public ResponseEntity<String> createEntities(@PathVariable String typeArticle) throws URISyntaxException, IOException {
         log.debug("REST request to save Json File for type : {}", typeArticle);
         LocalTime startTime = LocalTime.now();
-        Integer result = 0;
+        Integer resultPap = 0;
+        Integer resultNum = 0;
         if (Stream.of("pap", "num", "all").anyMatch(s -> s.equalsIgnoreCase(typeArticle)))
         {
             switch (typeArticle.toLowerCase()) {
                 case "pap":
-                    result = jsonEntityService.jacksonToArticlePapier();
+                    resultPap = jsonEntityService.jacksonToArticlePapier();
                     break;
 
                 case "num":
-                    result = jsonEntityService.jacksonToArticleNumerique();
+                    resultNum = jsonEntityService.jacksonToArticleNumerique();
                     break;
 
                 case "all": {
-                    result = jsonEntityService.jacksonToArticlePapier();
-                    result += jsonEntityService.jacksonToArticleNumerique();
+                    resultPap = jsonEntityService.jacksonToArticlePapier();
+                    resultNum = jsonEntityService.jacksonToArticleNumerique();
                 }
                 break;
                 default:
@@ -72,7 +73,9 @@ public class JsonEntityResource {
         LocalTime endTime = LocalTime.now();
         Duration duration = Duration.between(startTime, endTime);
         String stringDuration = String.format("%d minutes et %02d secondes %n", duration.toMinutes(), duration.minusMinutes(duration.toMinutes()).getSeconds());
-        String message =  result + " articles créés en " + stringDuration;
+        String message = resultPap != 0 ? resultPap + " articles papiers créés " : "";
+        message += resultNum != 0 ? resultNum + " articles numériques créés "  : "";
+        message += " en " + stringDuration;        log.debug(message);
         return ResponseEntity.created(new URI("/api/json/" + typeArticle))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, message))
             .body(message);
