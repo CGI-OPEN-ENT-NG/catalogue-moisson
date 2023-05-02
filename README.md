@@ -4,13 +4,23 @@ This application was generated using JHipster 6.10.5, you can find documentation
 
 ## Development
 
-To start your application in the dev profile, run:
+To launch the environment locally, you can do
 
+- If it's the first time:
+```
+./build.sh init logs
+```
+- Otherwise:
 ```
 ./build.sh start logs
 ```
 
-For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
+You can change the PostGres and ElasticSearch port variables by creating the .env.dev file
+
+To start harvesting manually you must run the following command:
+```
+./build.sh manualLaunch
+```
 
 ### Doing API-First development using openapi-generator
 
@@ -34,7 +44,7 @@ To build the final jar and optimize the moissoncatalogue application for product
 
 ```
 
-./build.sh compile
+./mvnw -Pprod clean verify
 
 
 ```

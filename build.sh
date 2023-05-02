@@ -1,3 +1,5 @@
+#!/bin/bash
+
 case `uname -s` in
   MINGW*)
     USER_UID=1000
@@ -12,31 +14,38 @@ case `uname -s` in
 esac
 
 logs () {
-    docker-compose logs -f
+    docker-compose -f docker-compose.dev.yml logs -f
 }
 
 init () {
-    docker-compose --env-file .env.dev up -d maven
+    if [ ! -f .env.dev ]; then
+      touch .env.dev
+      echo "File .env.dev created successfully!"
+    else
+      echo "File .env.dev already exists."
+    fi
+
+    docker-compose -f docker-compose.dev.yml --env-file .env.dev up -d maven
     sleep 15
     curl -XPUT "http://localhost:9200/articlenumerique/_settings" -H 'Content-Type: application/json' -d'{"index" : {"max_result_window" : 100000}}'
     curl -XPUT "http://localhost:9200/articlenumerique/_settings" -H 'Content-Type: application/json' -d'{"index" : {"max_result_window" : 100000}}'
 }
 
 start () {
-    docker-compose --env-file .env.dev up -d maven
+    docker-compose -f docker-compose.dev.yml --env-file .env.dev up -d maven
 }
 
 stop () {
-    docker-compose --env-file .env.dev stop
+    docker-compose -f docker-compose.dev.yml --env-file .env.dev stop
 }
 
 compile () {
-    docker-compose --env-file .env.dev run --rm --no-deps maven ./mvnw -Pprod -Dmaven.test.skip=true clean verify
+    docker-compose -f docker-compose.dev.yml --env-file .env.dev run --rm --no-deps maven ./mvnw -Pprod -Dmaven.test.skip=true clean verify
 }
 
 manualLaunch () {
     TOKEN_DATA=$(docker exec -it moisson-crre curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8085/api/authenticate)
-    ID_TOKEN=$(echo $TOKEN_DATA | sed -n 's/.*"id_token":"\([^"]*\).*/\1/p')
+    ID_TOKEN=$(echo "$TOKEN_DATA" | sed -n 's/.*"id_token":"\([^"]*\).*/\1/p')
 
     docker exec -it moisson-crre curl -X POST -H 'Accept: application/json' -H "Authorization: Bearer $ID_TOKEN" http://localhost:8085/api/json/all
 }
