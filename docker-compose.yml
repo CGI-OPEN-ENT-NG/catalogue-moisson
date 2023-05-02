@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+  maven:
+    container_name: moisson-crre
+    image: maven:3.8.6-openjdk-11
+    network_mode: host
+    working_dir: /home/maven/project
+    privileged: true
+    volumes:
+      - ./:/home/maven/project
+      - ~/.m2/:/root/.m2
+    depends_on:
+      - elasticsearch
+      - postgresql
+    environment:
+      - POSTGRES_HOST_PORT=${POSTGRES_HOST_PORT:-5432}
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    command: "./mvnw"
+  elasticsearch:
+    container_name: moisson-crre-elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.3
+    restart: on-failure
+    volumes:
+      - ../workspace/DUMP/elasticsearch/:/usr/share/elasticsearch/data/
+    ports:
+      - ${ES_API_HOST_PORT:-9200}:9200
+      - ${ES_PROTOCOL_HOST_PORT:-9300}:9300
+    environment:
+      - 'ES_JAVA_OPTS=-Xms1024m -Xmx1024m'
+      - 'discovery.type=single-node'
+  postgresql:
+    container_name: moisson-crre-postgresql
+    image: postgres:12.4
+    restart: on-failure
+    volumes:
+      - ../workspace/DUMP/postgres14:/home/backups
+    environment:
+      - POSTGRES_USER=usercatalogue
+      - POSTGRES_PASSWORD=catalogue
+      - POSTGRES_DB=moissoncatalogue
+    ports:
+      - ${POSTGRES_HOST_PORT:-5432}:5432

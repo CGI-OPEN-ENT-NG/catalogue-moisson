@@ -7,7 +7,7 @@ This application was generated using JHipster 6.10.5, you can find documentation
 To start your application in the dev profile, run:
 
 ```
-./mvnw
+./build.sh start logs
 ```
 
 For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
@@ -34,7 +34,7 @@ To build the final jar and optimize the moissoncatalogue application for product
 
 ```
 
-./mvnw -Pprod clean verify
+./build.sh compile
 
 
 ```
