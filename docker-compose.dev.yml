@@ -19,7 +19,7 @@ services:
       ## 172.17.0.1 corresponds to the ip of the host machine.
       ## Obtainable with ip route show | awk '/docker/{print $9}'
       - "host.docker.internal:172.17.0.1"
-    command: "./mvnw -Dmaven.test.skip=true"
+    command: "./mvnw -Dmaven.test.skip=true -Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8002'"
   elasticsearch:
     container_name: moisson-crre-elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:7.16.3

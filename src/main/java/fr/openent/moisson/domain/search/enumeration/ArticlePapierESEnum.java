@@ -21,6 +21,7 @@ public enum ArticlePapierESEnum {
     DATE_PARUTION("dateparution", ElasticSearchConstants.DATE),
     PRIXHT("prixht", ElasticSearchConstants.SCALED_FLOAT),
     TYPE("type", ElasticSearchConstants.TEXT),
+    BOOKSELLER("bookseller", ElasticSearchConstants.KEYWORD),
 
     // Others Entities ES
     TVA("tvas", ElasticSearchConstants.NESTED),

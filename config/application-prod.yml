@@ -152,6 +152,7 @@ application:
   libraire:
     urlArticlePapier: ''
     urlArticleNumerique: ''
+    name: 'LDE'
   indices:
     indexArticleNumerique: 'articlenumerique'
     indexArticlePapier: 'articlepapier'

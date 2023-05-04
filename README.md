@@ -21,6 +21,7 @@ To start harvesting manually you must run the following command:
 ```
 ./build.sh manualLaunch
 ```
+You can debug your spring application on port 8002 by default.
 
 ### Doing API-First development using openapi-generator
 

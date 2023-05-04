@@ -28,6 +28,7 @@ public class MoissonESBuilder {
         articlePapierBuilder.field(ArticlePapierESEnum.PRIXHT.getFieldName(), articlePapier.getPrixHT());
         articlePapierBuilder.field(ArticlePapierESEnum.DESCRIPTION.getFieldName(), articlePapier.getDescription());
         articlePapierBuilder.field(ArticlePapierESEnum.TYPE.getFieldName(), articlePapier.getType());
+        articlePapierBuilder.field(ArticlePapierESEnum.BOOKSELLER.getFieldName(), articlePapier.getBookseller());
 
         List<Object> Tvas = new ArrayList<>();
         for (Tva tva : articlePapier.getTvas()) {
@@ -89,6 +90,7 @@ public class MoissonESBuilder {
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.ACCESSIBLE_ENT.getFieldName(), articleNumerique.isAccessibleENT());
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.EAN_PAPIER.getFieldName(), articleNumerique.getEanPapier());
         articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.PUBLIC_CIBLE.getFieldName(), articleNumerique.getPubliccible());
+        articleNumeriqueBuilder.field(ArticleNumeriqueESEnum.BOOKSELLER.getFieldName(), articleNumerique.getBookseller());
 
 
         List<Object> offres = new ArrayList<>();

@@ -24,6 +24,7 @@ public enum ArticleNumeriqueESEnum {
     EAN_PAPIER("eanpapier", ElasticSearchConstants.KEYWORD),
     CLASSE("classes", ElasticSearchConstants.KEYWORD),
     PUBLIC_CIBLE("publiccible", ElasticSearchConstants.KEYWORD),
+    BOOKSELLER("bookseller", ElasticSearchConstants.KEYWORD),
 
     // Others Entities ES
     DISCIPLINE("disciplines", ElasticSearchConstants.NESTED),

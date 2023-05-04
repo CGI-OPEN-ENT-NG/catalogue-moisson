@@ -143,6 +143,10 @@ public class ArticlePapier implements Serializable {
     @Transient
     private BigDecimal prixTTC = BigDecimal.ZERO;
 
+    @Column(name = "bookseller")
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
+    private String bookseller;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -434,6 +438,15 @@ public class ArticlePapier implements Serializable {
     public ArticlePapier removeNiveau(Niveau niveau) {
         this.niveaus.remove(niveau);
         niveau.setArticlePapier(null);
+        return this;
+    }
+
+    public String getBookseller() {
+        return bookseller;
+    }
+
+    public ArticlePapier setBookseller(String library) {
+        this.bookseller = library;
         return this;
     }
 

@@ -1,14 +1,12 @@
 package fr.openent.moisson.domain;
 
 import com.fasterxml.jackson.annotation.*;
-import fr.openent.moisson.domain.enumeration.PublicCible;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.data.elasticsearch.annotations.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -150,6 +148,10 @@ public class ArticleNumerique implements Serializable {
     @JsonProperty("DISPONIBILITE")
     @Field(type = FieldType.Nested)
     private Disponibilite disponibilite;
+
+    @Column(name = "bookseller")
+    @Field(type = FieldType.Keyword, normalizer = "lower_normalizer")
+    private String bookseller;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -493,6 +495,15 @@ public class ArticleNumerique implements Serializable {
 
     public void setTechnos(Set<Techno> technos) {
         this.technos = technos;
+    }
+
+    public String getBookseller() {
+        return bookseller;
+    }
+
+    public ArticleNumerique setBookseller(String library) {
+        this.bookseller = library;
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

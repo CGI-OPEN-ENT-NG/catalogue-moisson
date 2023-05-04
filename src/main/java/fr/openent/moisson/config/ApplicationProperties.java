@@ -59,11 +59,13 @@ public class ApplicationProperties {
     public static class Libraire {
         private final String urlArticlePapier;
         private final String urlArticleNumerique;
+        private final String name;
 
         public Libraire(String urlArticlePapier,
-                        String urlArticleNumerique) {
+                        String urlArticleNumerique, String name) {
             this.urlArticlePapier = urlArticlePapier;
             this.urlArticleNumerique = urlArticleNumerique;
+            this.name = name;
         }
 
         public String getUrlArticlePapier() {
@@ -72,6 +74,10 @@ public class ApplicationProperties {
 
         public String getUrlArticleNumerique() {
             return urlArticleNumerique;
+        }
+
+        public String getName() {
+            return name;
         }
     }
 

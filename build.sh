@@ -26,9 +26,11 @@ init () {
     fi
 
     docker-compose -f docker-compose.dev.yml --env-file .env.dev up -d maven
-    sleep 15
+    echo "Waiting 60s for starting spring application"
+    sleep 60
     curl -XPUT "http://localhost:9200/articlenumerique/_settings" -H 'Content-Type: application/json' -d'{"index" : {"max_result_window" : 100000}}'
-    curl -XPUT "http://localhost:9200/articlenumerique/_settings" -H 'Content-Type: application/json' -d'{"index" : {"max_result_window" : 100000}}'
+    curl -XPUT "http://localhost:9200/articlepapier/_settings" -H 'Content-Type: application/json' -d'{"index" : {"max_result_window" : 100000}}'
+    echo "Finish init"
 }
 
 start () {

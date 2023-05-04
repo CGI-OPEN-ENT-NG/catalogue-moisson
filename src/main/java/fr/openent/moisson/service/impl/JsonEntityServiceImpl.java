@@ -71,6 +71,7 @@ public class JsonEntityServiceImpl implements JsonEntityService {
 
     String urlArticlePapier;
     String urlArticleNumerique;
+    String booksellerName;
     String indexArticlePapier;
     String indexArticleNumerique;
 
@@ -78,6 +79,7 @@ public class JsonEntityServiceImpl implements JsonEntityService {
     public void initParam() {
         urlArticlePapier = applicationProperties.getLibraire().getUrlArticlePapier();
         urlArticleNumerique = applicationProperties.getLibraire().getUrlArticleNumerique();
+        booksellerName = applicationProperties.getLibraire().getName();
         indexArticlePapier = applicationProperties.getIndices().getIndexArticlePapier();
         indexArticleNumerique = applicationProperties.getIndices().getIndexArticleNumerique();
     }
@@ -104,6 +106,8 @@ public class JsonEntityServiceImpl implements JsonEntityService {
         articlePapiers.forEach(articlePapier ->
             {
                 if (!StringUtils.hasLength( articlePapier.getEan())) return;
+                articlePapier.setBookseller(booksellerName);
+
                 Optional<ArticlePapier> existArticlePapier = articlePapierRepository.findByEan(articlePapier.getEan());
                 existArticlePapier.ifPresent(presentPapier -> {
                     articlePapierRepository.deleteById(presentPapier.getId());
@@ -147,6 +151,8 @@ public class JsonEntityServiceImpl implements JsonEntityService {
         articleNumeriques.forEach(articleNumerique ->
             {
                 if (!StringUtils.hasLength( articleNumerique.getEan())) return;
+                articleNumerique.setBookseller(booksellerName);
+
                 Optional<ArticleNumerique> existArticleNumerique = articleNumeriqueRepository.findByEan(articleNumerique.getEan());
                 existArticleNumerique.ifPresent(presentNumerique -> {
                     articleNumeriqueRepository.deleteById(presentNumerique.getId());

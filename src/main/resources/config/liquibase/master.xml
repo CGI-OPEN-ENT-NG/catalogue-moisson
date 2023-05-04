@@ -38,6 +38,7 @@
     <include file="config/liquibase/changelog/20201126095206_added_entity_constraints_ArticlePapier.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20201126102500_added_entity_constraints_ArticleNumerique.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210406131936_added_entity_constraints_Classe.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230504135330_added_bookseller_column.xml" relativeToChangelogFile="false"/>
 
     <!-- Moisson will add liquibase constraints changelogs here -->
     <!-- Moisson will add incremental liquibase changelogs here -->
