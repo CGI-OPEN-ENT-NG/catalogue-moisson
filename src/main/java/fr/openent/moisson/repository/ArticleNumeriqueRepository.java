@@ -4,6 +4,7 @@ import fr.openent.moisson.domain.ArticleNumerique;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -15,4 +16,7 @@ import java.util.Optional;
 public interface ArticleNumeriqueRepository extends JpaRepository<ArticleNumerique, Long>, JpaSpecificationExecutor<ArticleNumerique> {
 
     Optional<ArticleNumerique> findByEan(String ean);
+
+    @Transactional
+    void deleteByBookseller(String bookseller);
 }

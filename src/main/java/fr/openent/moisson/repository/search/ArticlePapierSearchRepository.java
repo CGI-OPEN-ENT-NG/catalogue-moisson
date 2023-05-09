@@ -8,4 +8,5 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  * Spring Data Elasticsearch repository for the {@link ArticlePapier} entity.
  */
 public interface ArticlePapierSearchRepository extends ElasticsearchRepository<ArticlePapier, Long> {
+    void deleteByBookseller(String bookseller);
 }

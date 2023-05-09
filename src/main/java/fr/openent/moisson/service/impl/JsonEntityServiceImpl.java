@@ -99,8 +99,8 @@ public class JsonEntityServiceImpl implements JsonEntityService {
                 new TypeReference<>() {});
         }
 
-        articlePapierRepository.deleteAll();
-        articlePapierSearchRepository.deleteAll();
+        articlePapierRepository.deleteByBookseller(booksellerName);
+        articlePapierSearchRepository.deleteByBookseller(booksellerName);
         // La relation est bidirectionnelle, il est logique que chaque côté de la relation soit mappé à l’autre,
         // il faut avoir une référence de chaque côté de l'autre côté
         articlePapiers.forEach(articlePapier ->
@@ -146,8 +146,8 @@ public class JsonEntityServiceImpl implements JsonEntityService {
             articleNumeriques = objectMapper.readValue(new File("src/test/resources/json/articles_numeriques.json"),
                 new TypeReference<>() {});
         }
-        articleNumeriqueRepository.deleteAll();
-        articleNumeriqueSearchRepository.deleteAll();
+        articleNumeriqueRepository.deleteByBookseller(booksellerName);
+        articleNumeriqueSearchRepository.deleteByBookseller(booksellerName);
         articleNumeriques.forEach(articleNumerique ->
             {
                 if (!StringUtils.hasLength( articleNumerique.getEan())) return;
