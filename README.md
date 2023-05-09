@@ -23,6 +23,18 @@ To start harvesting manually you must run the following command:
 ```
 You can debug your spring application on port 8002 by default.
 
+### Migrate
+
+When you create a new table for example, you must update the sql database. To do this after creating your model using javax.persistence annotations, you can do:
+- To create the migration file
+```
+./build.sh diff
+```
+- To apply unapplied migration files to your database
+```
+./build.sh update
+```
+
 ### Doing API-First development using openapi-generator
 
 [OpenAPI-Generator]() is configured for this application. You can generate API code from the `src/main/resources/swagger/api.yml` definition file by running:

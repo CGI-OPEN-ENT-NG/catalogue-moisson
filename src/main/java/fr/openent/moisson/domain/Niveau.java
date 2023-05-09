@@ -46,12 +46,12 @@ public class Niveau implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "niveaus", allowSetters = true)
-    @JoinColumn(name = "article_numerique_id", nullable = false)
+    @JoinColumn(name = "article_numerique_id")
     private ArticleNumerique articleNumerique;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "niveaus", allowSetters = true)
-    @JoinColumn(name = "article_papier_id", nullable = false)
+    @JoinColumn(name = "article_papier_id")
     private ArticlePapier articlePapier;
 
 

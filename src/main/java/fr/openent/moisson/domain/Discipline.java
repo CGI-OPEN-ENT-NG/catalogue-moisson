@@ -46,12 +46,12 @@ public class Discipline implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "disciplines", allowSetters = true)
-    @JoinColumn(name = "article_numerique_id", nullable = false)
+    @JoinColumn(name = "article_numerique_id")
     private ArticleNumerique articleNumerique;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "disciplines", allowSetters = true)
-    @JoinColumn(name = "article_papier_id", nullable = false)
+    @JoinColumn(name = "article_papier_id")
     private ArticlePapier articlePapier;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

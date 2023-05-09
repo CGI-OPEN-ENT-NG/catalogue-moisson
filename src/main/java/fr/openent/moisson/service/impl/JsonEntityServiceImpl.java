@@ -117,6 +117,7 @@ public class JsonEntityServiceImpl implements JsonEntityService {
                         e.printStackTrace();
                     }
                 });
+                articlePapier.setId(Long.valueOf(articlePapier.getEan()));
                 articlePapier.getTvas().forEach(articlePapier::addTva);
                 articlePapier.getNiveaus().forEach(articlePapier::addNiveau);
                 articlePapier.getDisciplines().forEach(articlePapier::addDiscipline);
@@ -170,6 +171,7 @@ public class JsonEntityServiceImpl implements JsonEntityService {
                     offre.getTvas().forEach(offre::addTva);
                     articleNumerique.addOffre(offre);
                 }
+                articleNumerique.setId(Long.valueOf(articleNumerique.getEan()));
                 articleNumerique.getNiveaus().forEach(articleNumerique::addNiveau);
                 articleNumerique.getClasses().forEach(articleNumerique::addClasse);
                 articleNumerique.getDisciplines().forEach(articleNumerique::addDiscipline);

@@ -28,7 +28,6 @@ public class Lep implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NaturalId
     @Column(name = "ean")
     @JsonProperty("EAN")
     @Field

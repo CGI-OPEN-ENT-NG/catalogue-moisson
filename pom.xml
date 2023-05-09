@@ -87,8 +87,8 @@
         <javassist.version>3.27.0-GA</javassist.version>
         <!-- The liquibase version should match the one managed by
         https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies/${spring-boot.version} -->
-        <liquibase.version>4.2.2</liquibase.version>
-        <liquibase-hibernate5.version>3.8</liquibase-hibernate5.version>
+        <liquibase.version>4.21.1</liquibase.version>
+        <liquibase-hibernate5.version>4.1.1</liquibase-hibernate5.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <jaxb-runtime.version>2.3.3</jaxb-runtime.version>
         <archunit-junit5.version>0.14.1</archunit-junit5.version>
@@ -789,14 +789,16 @@
                         <changeLogFile>./src/main/resources/config/liquibase/master.xml</changeLogFile>
                         <diffChangeLogFile>./src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                         <driver>org.postgresql.Driver</driver>
-                        <url>jdbc:postgresql://localhost:5432/moissoncatalogue</url>
+                        <url>jdbc:postgresql://localhost:${POSTGRES_HOST_PORT}/moissoncatalogue</url>
                         <defaultSchemaName></defaultSchemaName>
                         <username>usercatalogue</username>
                         <password>catalogue</password>
                         <referenceUrl>hibernate:spring:fr.openent.moisson.domain?dialect=io.github.jhipster.domain.util.FixedPostgreSQL10Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
+                        <referenceDriver>liquibase.ext.hibernate.database.connection.HibernateDriver</referenceDriver>
                         <verbose>true</verbose>
                         <logging>debug</logging>
                         <contexts>!test</contexts>
+                        <diffTypes>catalogs,tables,functions,views,columns,indexes,foreignkeys,primarykeys,uniqueconstraints,data,storedprocedures,triggers,databasepackage,databasepackagebody</diffTypes>
                     </configuration>
                     <dependencies>
                         <dependency>

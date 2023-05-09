@@ -44,11 +44,11 @@ public class Tva implements Serializable {
     // Eager par défaut mettre donc lazy pour éviter récupération offre
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "tvas", allowSetters = true)
-    @JoinColumn(name = "offre_id", nullable = false)
+    @JoinColumn(name = "offre_id")
     private Offre offre;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "article_papier_id", nullable = false)
+    @JoinColumn(name = "article_papier_id")
     @JsonIgnoreProperties(value = "tvas", allowSetters = true)
     private ArticlePapier articlePapier;
 

@@ -34,6 +34,8 @@ init () {
 }
 
 start () {
+    docker-compose -f docker-compose.dev.yml --env-file .env.dev run --rm --no-deps maven ./mvnw clean
+    sleep 3
     docker-compose -f docker-compose.dev.yml --env-file .env.dev up -d maven
 }
 
@@ -50,6 +52,22 @@ manualLaunch () {
     ID_TOKEN=$(echo "$TOKEN_DATA" | sed -n 's/.*"id_token":"\([^"]*\).*/\1/p')
 
     docker exec -it moisson-crre curl -X POST -H 'Accept: application/json' -H "Authorization: Bearer $ID_TOKEN" http://localhost:8085/api/json/all
+}
+
+diff () {
+    if docker ps | grep -q "moisson-crre"; then
+      docker exec -it moisson-crre mvn clean compile liquibase:diff
+    else
+      docker-compose -f docker-compose.dev.yml --env-file .env.dev run --rm --no-deps maven mvn clean compile liquibase:diff
+    fi
+}
+
+update () {
+    if docker ps | grep -q "moisson-crre"; then
+      docker exec -it moisson-crre mvn clean compile liquibase:update
+    else
+      docker-compose -f docker-compose.dev.yml --env-file .env.dev run --rm --no-deps maven mvn clean compile liquibase:update
+    fi
 }
 
 for param in "$@"
@@ -72,6 +90,12 @@ do
             ;;
         manualLaunch)
             manualLaunch
+            ;;
+        diff)
+            diff
+            ;;
+        update)
+            update
             ;;
         *)
             echo "Invalid argument : $param"

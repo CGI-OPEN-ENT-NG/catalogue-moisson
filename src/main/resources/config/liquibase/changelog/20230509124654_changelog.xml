@@ -1,0 +1,307 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="root (generated)" id="1683636438383-1">
+        <createTable tableName="article_numerique">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="article_numeriquePK"/>
+            </column>
+            <column name="accessible_ent" type="BOOLEAN"/>
+            <column name="ark" type="VARCHAR(255)"/>
+            <column name="auteur" type="VARCHAR(1024)"/>
+            <column name="bookseller" type="VARCHAR(255)"/>
+            <column name="collection" type="VARCHAR(255)"/>
+            <column name="compatible_gar" type="BOOLEAN"/>
+            <column name="date_parution" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="description" type="VARCHAR(65000)"/>
+            <column name="distributeur" type="VARCHAR(255)"/>
+            <column name="ean" type="VARCHAR(13)"/>
+            <column name="ean_papier" type="VARCHAR(255)"/>
+            <column name="editeur" type="VARCHAR(255)"/>
+            <column defaultValue="Elève, Enseignant" name="public_cible" type="VARCHAR(255)"/>
+            <column name="titre" type="VARCHAR(1024)"/>
+            <column name="url_couverture" type="VARCHAR(1024)"/>
+            <column name="url_demo" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-2">
+        <createTable tableName="article_papier">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="article_papierPK"/>
+            </column>
+            <column name="ark" type="VARCHAR(255)"/>
+            <column name="auteur" type="VARCHAR(1024)"/>
+            <column name="bookseller" type="VARCHAR(255)"/>
+            <column name="collection" type="VARCHAR(255)"/>
+            <column name="date_parution" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="description" type="VARCHAR(65000)"/>
+            <column name="distributeur" type="VARCHAR(255)"/>
+            <column name="ean" type="VARCHAR(13)"/>
+            <column name="editeur" type="VARCHAR(255)"/>
+            <column name="prix_ht" type="numeric(21, 2)"/>
+            <column name="reference_editeur" type="VARCHAR(255)"/>
+            <column name="titre" type="VARCHAR(1024)"/>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="url_couverture" type="VARCHAR(1024)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-3">
+        <createTable tableName="classe">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="classePK"/>
+            </column>
+            <column name="libelle" type="VARCHAR(255)"/>
+            <column name="article_numerique_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-4">
+        <createTable tableName="condition">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="conditionPK"/>
+            </column>
+            <column name="condition_gratuite" type="INTEGER"/>
+            <column name="gratuite" type="INTEGER"/>
+            <column name="lep_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-5">
+        <createTable tableName="discipline">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="disciplinePK"/>
+            </column>
+            <column name="concept" type="VARCHAR(255)"/>
+            <column name="libelle" type="VARCHAR(255)"/>
+            <column name="terme" type="VARCHAR(255)"/>
+            <column name="article_numerique_id" type="BIGINT"/>
+            <column name="article_papier_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-6">
+        <createTable tableName="disponibilite">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="disponibilitePK"/>
+            </column>
+            <column name="commandable" type="BOOLEAN"/>
+            <column name="commentaire" type="VARCHAR(255)"/>
+            <column name="date_disponibilite" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column defaultValue="false" name="valeur" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-7">
+        <createTable tableName="lep">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="lepPK"/>
+            </column>
+            <column name="description" type="VARCHAR(65000)"/>
+            <column name="duree" type="VARCHAR(255)"/>
+            <column name="ean" type="VARCHAR(255)"/>
+            <column name="titre" type="VARCHAR(255)"/>
+            <column name="offre_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-8">
+        <createTable tableName="licence">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="licencePK"/>
+            </column>
+            <column name="valeur" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-9">
+        <createTable tableName="moisson_persistent_audit_event">
+            <column autoIncrement="true" name="event_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="moisson_persistent_audit_eventPK"/>
+            </column>
+            <column name="event_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="event_type" type="VARCHAR(255)"/>
+            <column name="principal" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-10">
+        <createTable tableName="moisson_persistent_audit_evt_data">
+            <column name="event_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="value" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-11">
+        <createTable tableName="niveau">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="niveauPK"/>
+            </column>
+            <column name="concept" type="VARCHAR(255)"/>
+            <column name="libelle" type="VARCHAR(255)"/>
+            <column name="terme" type="VARCHAR(255)"/>
+            <column name="article_numerique_id" type="BIGINT"/>
+            <column name="article_papier_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-12">
+        <createTable tableName="offre">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="offrePK"/>
+            </column>
+            <column name="adoptant" type="BOOLEAN"/>
+            <column name="duree" type="VARCHAR(255)"/>
+            <column name="ean_libraire" type="VARCHAR(13)"/>
+            <column name="is_3_ans" type="BOOLEAN"/>
+            <column name="libelle" type="VARCHAR(255)"/>
+            <column name="prescripteur" type="BOOLEAN"/>
+            <column name="prix_ht" type="numeric(21, 2)"/>
+            <column name="quantite_minimale_achat" type="INTEGER"/>
+            <column name="reference_editeur" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="article_numerique_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-13">
+        <createTable tableName="techno">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="technoPK"/>
+            </column>
+            <column name="annotations" type="BOOLEAN"/>
+            <column name="assignation_taches_eleves" type="BOOLEAN"/>
+            <column name="available_hors_ent" type="BOOLEAN"/>
+            <column name="available_via_ent" type="BOOLEAN"/>
+            <column name="available_via_gar" type="BOOLEAN"/>
+            <column name="can_use_offline" type="BOOLEAN"/>
+            <column name="capture_image" type="BOOLEAN"/>
+            <column name="commentaire" type="VARCHAR(255)"/>
+            <column name="configuration_mini_navigateur" type="VARCHAR(255)"/>
+            <column name="configuration_mini_os" type="VARCHAR(255)"/>
+            <column name="conforme_ims_qti" type="BOOLEAN"/>
+            <column name="conforme_scorm" type="BOOLEAN"/>
+            <column name="conforme_sco_lomfr" type="BOOLEAN"/>
+            <column name="conformex_api" type="BOOLEAN"/>
+            <column name="correct_travail_eleve_par_enseign" type="BOOLEAN"/>
+            <column name="corriges_pour_enseignants" type="BOOLEAN"/>
+            <column name="creation_cours" type="BOOLEAN"/>
+            <column name="deploiement_masse" type="BOOLEAN"/>
+            <column name="dispositif_dys" type="BOOLEAN"/>
+            <column name="edition_formule_math" type="BOOLEAN"/>
+            <column name="exercices_auto_corriges" type="BOOLEAN"/>
+            <column name="exercices_interactifs" type="BOOLEAN"/>
+            <column name="export_cle_usb" type="BOOLEAN"/>
+            <column name="export_document" type="BOOLEAN"/>
+            <column name="export_reponses_eleves" type="BOOLEAN"/>
+            <column name="export_scorm" type="BOOLEAN"/>
+            <column name="fonctions_recherche" type="BOOLEAN"/>
+            <column name="format_video" type="VARCHAR(255)"/>
+            <column name="gestion_groupes_eleve" type="BOOLEAN"/>
+            <column name="import_document" type="BOOLEAN"/>
+            <column name="marque_page" type="BOOLEAN"/>
+            <column name="messagerie" type="BOOLEAN"/>
+            <column name="modif_contenu_editorial" type="BOOLEAN"/>
+            <column name="nb_max_simult_connexions" type="VARCHAR(255)"/>
+            <column name="nb_maxi_install" type="VARCHAR(255)"/>
+            <column name="need_flash" type="BOOLEAN"/>
+            <column name="niveau_a_2_rne" type="INTEGER"/>
+            <column name="niveau_rgaa" type="VARCHAR(255)"/>
+            <column name="one_clic" type="BOOLEAN"/>
+            <column name="parcours_eleve_personnalise" type="BOOLEAN"/>
+            <column name="partage_contenu_eleves" type="BOOLEAN"/>
+            <column name="personnalisation_cont_enseign" type="BOOLEAN"/>
+            <column name="personnalisation_user_interface" type="BOOLEAN"/>
+            <column name="suivi_eleve" type="BOOLEAN"/>
+            <column defaultValue="Windows" name="technologie" type="VARCHAR(255)"/>
+            <column name="ts_last_modif" type="BIGINT"/>
+            <column defaultValue="non transferable" name="type_licence_gar" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version_reader" type="VARCHAR(255)"/>
+            <column name="web_adaptatif" type="BOOLEAN"/>
+            <column name="zoom" type="BOOLEAN"/>
+            <column name="article_numerique_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-14">
+        <createTable tableName="tva">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tvaPK"/>
+            </column>
+            <column name="pourcent" type="numeric(21, 2)"/>
+            <column name="taux" type="numeric(21, 2)"/>
+            <column name="article_papier_id" type="BIGINT"/>
+            <column name="offre_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-15">
+        <addUniqueConstraint columnNames="email" constraintName="UC_MOISSON_USEREMAIL_COL" tableName="moisson_user"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-16">
+        <addUniqueConstraint columnNames="login" constraintName="UC_MOISSON_USERLOGIN_COL" tableName="moisson_user"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-17">
+        <addUniqueConstraint columnNames="ean" constraintName="UK_q0lhdehgtcryq2u8x7lsenpxt" tableName="article_papier"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-18">
+        <addUniqueConstraint columnNames="ean" constraintName="UK_sj975fpxjieqilom71xi3xsmy" tableName="article_numerique"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-19">
+        <addForeignKeyConstraint baseColumnNames="lep_id" baseTableName="condition" constraintName="FK140jbfiivjp9e85yrxk5xe10h" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="lep" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-20">
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="moisson_persistent_audit_evt_data" constraintName="FK289mq18h2h6ryhj329d43yewc" deferrable="false" initiallyDeferred="false" referencedColumnNames="event_id" referencedTableName="moisson_persistent_audit_event" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-21">
+        <addForeignKeyConstraint baseColumnNames="offre_id" baseTableName="tva" constraintName="FK500q87fawdrh15ymfp0mvwb4i" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="offre" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-22">
+        <addForeignKeyConstraint baseColumnNames="offre_id" baseTableName="lep" constraintName="FK9m1t4iqiuomeeqth4rtp1uj71" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="offre" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-23">
+        <addForeignKeyConstraint baseColumnNames="article_numerique_id" baseTableName="techno" constraintName="FKbv6bwbu9jpyt2ljq7t00ydulh" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="article_numerique" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-24">
+        <addForeignKeyConstraint baseColumnNames="article_numerique_id" baseTableName="discipline" constraintName="FKcrm8asxx66jv9674lmwas23fo" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="article_numerique" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-25">
+        <addForeignKeyConstraint baseColumnNames="article_numerique_id" baseTableName="offre" constraintName="FKd0lei2vusrkw5syyeushk981j" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="article_numerique" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-26">
+        <addForeignKeyConstraint baseColumnNames="article_papier_id" baseTableName="niveau" constraintName="FKdmxecgm7fd5rtv0jmjykqyqpd" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="article_papier" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-27">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="moisson_user_authority" constraintName="FKf3yfm4ohic4dnb0tx41ap9ejc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="moisson_user" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-28">
+        <addForeignKeyConstraint baseColumnNames="article_papier_id" baseTableName="tva" constraintName="FKfqchtbs90lreum6wx8xj7nm8p" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="article_papier" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-29">
+        <addForeignKeyConstraint baseColumnNames="authority_name" baseTableName="moisson_user_authority" constraintName="FKgacub4xvjojhdcfds25gt9d0f" deferrable="false" initiallyDeferred="false" referencedColumnNames="name" referencedTableName="moisson_authority" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-30">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="article_papier" constraintName="FKo2beo29w1ai24hra70uy5vuy2" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="disponibilite" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-31">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="offre" constraintName="FKod1192xb0xp9dx2313aus9tdw" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="licence" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-32">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="article_numerique" constraintName="FKp95orye8f3j80fx9c2lgbn4tj" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="disponibilite" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-33">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="lep" constraintName="FKpf9abtxuo22ctj6nqd2tes4dc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="licence" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-34">
+        <addForeignKeyConstraint baseColumnNames="article_numerique_id" baseTableName="niveau" constraintName="FKq56k5u49ebd8f307k81ivkhr0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="article_numerique" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-35">
+        <addForeignKeyConstraint baseColumnNames="article_papier_id" baseTableName="discipline" constraintName="FKs2oqbviidb15gd2dkogc6fgps" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="article_papier" validate="true"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1683636438383-36">
+        <addForeignKeyConstraint baseColumnNames="article_numerique_id" baseTableName="classe" constraintName="FKtohg4ge68uuktbibv8b5tn8wg" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="article_numerique" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
