@@ -155,6 +155,14 @@ For more information refer to [Using Docker and Docker-Compose][], this page als
 
 To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
 
+## First installation for CRRE
+
+When we launch harvesting for the first time, we will create the 2 elastic search indexes.
+Following this, you must launch the following two requests on the elastics search
+* curl -XPUT " {ElasticSearch_IP}/articlenumerique/_settings" -H 'Content-Type: application/json' -d'{"index" : {"max_result_window" : 100000}}'
+* curl -XPUT "{ElasticSearch_IP}/articlepapier/_settings" -H 'Content-Type: application/json' -d'{"index" : {"max_result_window" : 100000}}'
+
+
 [jhipster homepage and latest documentation]: https://www.jhipster.tech
 [jhipster 6.10.5 archive]: https://www.jhipster.tech/documentation-archive/v6.10.5
 [using jhipster in development]: https://www.jhipster.tech/documentation-archive/v6.10.5/development/
